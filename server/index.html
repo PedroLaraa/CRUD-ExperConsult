@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- DEV by PL =) -->
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+    <link rel="manifest" href="./site.webmanifest">
+    <title>EXPER CONSULT</title>
+</head>
+<body>
+    <div class="container">
+        <header id="header"> <!-- CABEÇALHO/MENU SUPERIOR-->
+            <nav>
+                <a class="logo" href="/">Exper Consult</a>
+                <ul class="nav-list">
+                    <li><a href="#header">Início</a></li>
+                    <li><a href="/">Categorias</a></li>
+                    <li><a href="mailto:pedroalveslara@gmail.com">Suporte</a></li>
+                    <div class="search-box">
+                            <input search="content" class="search-txt" id="pesquisar" type="search" value="" placeholder="Buscar..." onchange="busca()">
+                            <a class="search-btn" href="/"></a>
+                            <i class="fas fa-search"></i>
+                    </div>
+                </ul>
+            </nav>
+        </header>
+        <div id="home"> <!-- PÁGINA INICIAL -->
+            <div class="img-home">
+                <img src="./imagens/logo-exper-pi.png">
+            </div>
+        </div>
+        <div id="sidebar"> <!-- MENU HAMBURGUER -->
+            <div class="hamburger">
+                <div class="line" id="line1"></div>
+                <div class="line" id="line2"></div>
+                <div class="line" id="line3"></div>
+                <span>fechar</span>
+            </div>
+        </div>
+        <aside class="sidebar">
+            <nav>
+                <ul class="menu">
+                    <li class="menu-item"><a href="#home" class="menu-link">Home</a></li>
+                    <li class="menu-item" id="abrir-setores"><a class="menu-link">Setores</a></li>
+                        <ul class="setores"> <!-- SETORES DEPARADOS EM LISTA -->
+                            <li class="menu-setores"><a href="#abate" class="menu-link-cat">Abate</a></li>
+                            <li class="menu-setores"><a href="#desossa" class="menu-link-cat">Desossa</a></li>
+                            <li class="menu-setores"><a href="#embalagem" class="menu-link-cat">Embalagem</a></li>
+                            <li class="menu-setores"><a href="#porcionamento" class="menu-link-cat">Porcionamento</a></li>
+                            <li class="menu-setores"><a href="#fatiamento" class="menu-link-cat">Fatiamento</a></li>
+                            <li class="menu-setores"><a href="#hamburguer" class="menu-link-cat">Hamburguer</a></li>
+                            <li class="menu-setores"><a href="#massas" class="menu-link-cat">Massas</a></li>
+                            <li class="menu-setores"><a href="#salsicha" class="menu-link-cat">Salsicha</a></li>
+                            <li class="menu-setores"><a href="#temperados" class="menu-link-cat">Temperados</a></li>
+                            <li class="menu-setores"><a href="#charque" class="menu-link-cat">Charque</a></li>
+                            <li class="menu-setores"><a href="#higienizacao" class="menu-link-cat">Higienizacao</a></li>
+                            <li class="menu-setores"><a href="#massas-presunto" class="menu-link-cat">Massas Presunto</a></li>
+                        </ul>
+                    <li class="menu-item"><a href="#contato" class="menu-link">Suporte:</a></li>
+                    <li class="menu-item"><a class="email">pedroalveslara@gmail.com</a></li>
+                </ul>
+            </nav>
+            <div class="social-media">
+                <a href="https://www.instagram.com/experconsult/"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/company/exper-consult-ltda/"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </aside>
+        <div id="barra">
+            <div class="branca">
+                <img src="./imagens/abstrate-branco-4a7e08644a-1920_x_995.jpg" alt="abstrato">
+                <p id="abate">
+                    Abate
+                </p>
+            </div>
+        </div>
+        <ul id="equipamentos"> <!-- CONTEÚDO DA PÁGINA -->
+            <div id="content"> 
+                <div class="corpo-infos">
+                    <img class="img-infos" src="./imagens/atordoador-pneumatico.png" alt="Atordoador pneumático">
+                    <ul class="nav-infos">
+                        <div class="equipamento">
+                            <h3>Atordoador pneumático sem injeção de ar </h3>
+                            <br>
+                        </div>
+                        <div class="desc-equipamento">
+                            <p class="modelo">
+                                Modelo: USS - 1
+                            </p>
+                            <p class="potencia">
+                                Potência: N / A
+                            </p>
+                            <p class="fabricante">
+                                Fabricante: JARVIS
+                            </p> 
+                            <p class="capacidade">
+                                Capacidade: N / A 
+                            </p>
+                            <p class="consumo">
+                                Consumo - Pneumático:<br>41 litros / acionamento
+                            </p>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </ul>
+        <footer id ="footer"> <!-- RODAPÉ DA PÁGINA -->
+            <div class="footer-content">
+                <p>
+                    Copyright &copy 2022, Exper Consult
+                </p>
+                <div id="contato" class="social-list">
+                    <ul>
+                        <li><a href="https://www.instagram.com/experconsult/"><i class="fab fa-instagram"></i></a></li>
+                        <li><a href="https://www.linkedin.com/company/exper-consult-ltda/"><i class="fab fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="topo">
+                <a href="#header">▲</a>
+            </div>
+        </footer>
+    </div>
+</body>
+<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+<script src="./script.js"></script>
+<script src="./sistema_de_busca.js"></script>
+</html>

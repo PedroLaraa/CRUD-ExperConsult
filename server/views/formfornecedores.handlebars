@@ -1,0 +1,34 @@
+<form action="/fornecedorcadastrado" method="POST" enctype="multipart/form-data" style="padding: 1rem;">
+    <p>Nome do fornecedor: <input type="text" name="fornec_fornecedornome"></p>
+    <hr style=" width:40rem; height: .5rem;"></hr>
+    <p>Razão social: <input type="text" name="fornec_razaosocial"></p>
+    <hr style=" width:40rem; height: .5rem;"></hr>
+    <p>Site: <input type="text" name="fornec_site"></p>
+    <hr style=" width:40rem; height: .5rem;"></hr>
+    <p>Telefone: <input type="text" name="fornec_telefone"></p>
+    <hr style=" width:40rem; height: .5rem;"></hr>
+    <p>Email: <input type="text" name="fornec_email"></p>
+    <hr style=" width:40rem; height: .5rem;"></hr>
+    <p>Empresa intermediária (Nome): <input type="text" name="fornec_empint_nome"></p>
+    <hr style=" width:40rem; height: .5rem;"></hr>
+    <p>Empresa intermediária (Razão social): <input type="text" name="fornec_empint_razaosocial"></p>
+    <hr style=" width:40rem; height: .5rem;"></hr>
+    <p>Empresa intermediária (Site): <input type="text" name="fornec_empint_site"></p>
+    <hr style=" width:40rem; height: .5rem;"></hr>
+    <p>Empresa intermediária (Telefone): <input type="text" name="fornec_empint_telefone"></p>
+    <hr style=" width:40rem; height: .5rem;"></hr>
+    <p>Empresa intermediária (Email): <input type="text" name="fornec_empint_email"></p>
+    <hr style=" width:40rem; height: .5rem;"></hr>
+    <p>Representante da empresa: <input type="text" name="fornec_representante"></p>  <!--FIXME on database--> 
+    <hr style=" width:40rem; height: .5rem;"></hr>
+    <div class="input-group">
+    <div class="custom-file">
+    <input type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" name="fornec_foto">
+    <label class="custom-file-label" for="inputGroupFile04"></label>
+    </div>
+    </div>
+    <hr style=" width:40rem; height: .5rem;"></hr>
+    <div class="input-group-append">
+    <button type="submit">Cadastrar!</button>
+    </div>
+</form>
