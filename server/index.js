@@ -14,6 +14,8 @@ const res = require('express/lib/response')
 const req = require('express/lib/request')
 const multer = require('multer')
 var cors = require('cors');
+const PostFornecRel = require('./models/PostFornecRel')
+const PostRepRel = require('./models/PostRepRel')
 
 // PUBLIC
     app.use((req, res, next) => {
@@ -84,6 +86,7 @@ var cors = require('cors');
     })
 
     // INSERT FORNECEDORES
+
     app.post('/fornecedorcadastrado', upload.single('fornec_foto'), async function(req, res){
         
         const dataToInsert = {
@@ -96,8 +99,10 @@ var cors = require('cors');
             fornec_empint_site: req.body.fornec_empint_site,
             fornec_empint_telefone: req.body.fornec_empint_telefone,
             fornec_empint_email: req.body.fornec_empint_email,
+            fornec_representante_situacao: req.body.fornec_representante_situacao,
+            fornec_representante: req.body.fornec_representante,
             fornec_foto: req.file.filename
-        };
+        }
 
         try {
             const dbResponse = await PostFornec.create(dataToInsert);
@@ -136,7 +141,7 @@ var cors = require('cors');
 
     app.get('/cadastro-representante', function(req, res){
         res.render('formrepresentantes')
-    })
+    });
 
     // INSERT REPRESENTANTES
     app.post('/representantecadastrado', upload.single('representante_imagem'), async function(req, res){
@@ -166,9 +171,9 @@ var cors = require('cors');
 
     app.get('/equipamentos', (req, res) => {
         res.render('consultaequipamentos')
-    })
+    });
 
 app.listen(1212, function(){
     console.log('SERVIDOR RODANDO')
-})
+});
 

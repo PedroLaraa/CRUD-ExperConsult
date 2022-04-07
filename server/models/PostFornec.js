@@ -34,6 +34,9 @@ const PostFornec = db.sequelize.define('fornecedores',{
     fornec_representante_situacao: {
         type: db.Sequelize.STRING
     },
+    fornec_representante: {
+        type: db.Sequelize.INTEGER
+    },
     fornec_foto: {
         type: db.Sequelize.STRING
     }

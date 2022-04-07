@@ -1,4 +1,6 @@
 <form action="/fornecedorcadastrado" method="POST" enctype="multipart/form-data" style="padding: 1rem;">
+    <p style="text-transform: uppercase;">Obs: Caso não tenha a informação, favor inserir "n/a" !!!</p>
+    <hr style=" width:40rem; height: .5rem;"></hr>
     <p>Nome do fornecedor: <input type="text" name="fornec_fornecedornome"></p>
     <hr style=" width:40rem; height: .5rem;"></hr>
     <p>Razão social: <input type="text" name="fornec_razaosocial"></p>
@@ -19,7 +21,9 @@
     <hr style=" width:40rem; height: .5rem;"></hr>
     <p>Empresa intermediária (Email): <input type="text" name="fornec_empint_email"></p>
     <hr style=" width:40rem; height: .5rem;"></hr>
-    <p>Representante da empresa: <input type="text" name="fornec_representante"></p>  <!--FIXME on database--> 
+    <p>Representante do fornecedor (Nº ID): <input type="text" name="fornec_representante"></p> 
+    <hr style=" width:40rem; height: .5rem;"></hr>
+    <p>Situação do representante: <input type="text" name="fornec_representante_situacao"></p> 
     <hr style=" width:40rem; height: .5rem;"></hr>
     <div class="input-group">
     <div class="custom-file">
