@@ -9,16 +9,25 @@ const Post = db.sequelize.define('descricao_equipamentos',{
     desceqp_modelo: {
         type: db.Sequelize.STRING
     },
-    desceqp_fabricante: {
+    id_fornecedor: {
         type: db.Sequelize.STRING
     },
-    desceqp_capacidade: {
+    desceqp_capacidadeprod: {
         type: db.Sequelize.STRING
     },
-    desceqp_potencia : {
+    desceqp_consumoene: {
         type: db.Sequelize.STRING
     },
-    desceqp_consumo: {
+    desceqp_consumotipo: {
+        type: db.Sequelize.STRING
+    },
+    desceqp_comentario: {
+        type: db.Sequelize.STRING
+    },
+    desceqp_precoeqp: {
+        type: db.Sequelize.STRING
+    },
+    desceqp_dataultpreco: {
         type: db.Sequelize.STRING
     },
     desceqp_imagem: {

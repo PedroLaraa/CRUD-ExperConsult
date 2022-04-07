@@ -14,8 +14,6 @@ const res = require('express/lib/response')
 const req = require('express/lib/request')
 const multer = require('multer')
 var cors = require('cors');
-const PostFornecRel = require('./models/PostFornecRel')
-const PostRepRel = require('./models/PostRepRel')
 
 // PUBLIC
     app.use((req, res, next) => {
@@ -45,12 +43,24 @@ const PostRepRel = require('./models/PostRepRel')
 // ROUTES
 
     // TEST IMG
+    
+    app.get('/list-infos', async (req, res) =>{ // TODO ADICIONAR MAIS INFOS A ESSE GET
+        await PostRep.findAll()
+        .then((representante_nome) =>{
+            return res.json({
+                representante_nome,
+                url: "http://localhost:1212/representantecadastrado"
+            }) 
+        }).catch(() =>{
+            res.render('erro')
+        })
+    })
 
     app.get('/list-img', async (req, res) =>{
-        await Post.findAll()
-        .then((desceqp_imagem, desceqp_nomeeqp) =>{
+        await PostRep.findAll()
+        .then((representante_imagem) =>{
             return res.json({
-                desceqp_imagem,
+                representante_imagem,
                 url: "http://localhost:1212/files/"
             }) 
         }).catch(() =>{
@@ -82,7 +92,7 @@ const PostRepRel = require('./models/PostRepRel')
     // REGISTER FORNECEDOR
 
     app.get('/cadastro-fornecedor', function(req, res){
-        res.render('formfornecedores')
+        res.render('formfornecedores', {PostRep: PostRep})
     })
 
     // INSERT FORNECEDORES
@@ -100,7 +110,7 @@ const PostRepRel = require('./models/PostRepRel')
             fornec_empint_telefone: req.body.fornec_empint_telefone,
             fornec_empint_email: req.body.fornec_empint_email,
             fornec_representante_situacao: req.body.fornec_representante_situacao,
-            fornec_representante: req.body.fornec_representante,
+            representante_id: req.body.representante_id,
             fornec_foto: req.file.filename
         }
 
@@ -121,10 +131,13 @@ const PostRepRel = require('./models/PostRepRel')
         const dataToInsert = {
             desceqp_nomeeqp: req.body.desceqp_nomeeqp,
             desceqp_modelo: req.body.desceqp_modelo,
-            desceqp_fabricante: req.body.desceqp_fabricante,
-            desceqp_capacidade: req.body.desceqp_capacidade,
-            desceqp_potencia: req.body.desceqp_potencia,
-            desceqp_consumo: req.body.desceqp_consumo,
+            id_fornecedor: req.body.id_fornecedor,
+            desceqp_capacidadeprod: req.body.desceqp_capacidadeprod,
+            desceqp_consumoene: req.body.desceqp_consumoene,
+            desceqp_consumotipo: req.body.desceqp_consumotipo,
+            desceqp_comentario: req.body.desceqp_comentario,
+            desceqp_precoeqp: req.body.desceqp_precoeqp,
+            desceqp_dataultpreco: req.body.desceqp_dataultpreco,
             desceqp_imagem: req.file.filename
         };
 
@@ -147,6 +160,7 @@ const PostRepRel = require('./models/PostRepRel')
     app.post('/representantecadastrado', upload.single('representante_imagem'), async function(req, res){
         
         const dataToInsert = {
+            fornecedor_id: req.body.fornecedor_id,
             representante_nome: req.body.representante_nome,
             representante_telefone: req.body.representante_telefone,
             representante_site: req.body.representante_site,

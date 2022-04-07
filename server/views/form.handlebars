@@ -1,17 +1,24 @@
 <form action="/equipamentocadastrado" method="POST" enctype="multipart/form-data" style="padding: 1rem;">
     <p style="text-transform: uppercase;">Obs: Caso não tenha a informação, favor inserir "n/a" !!!</p>
     <hr style=" width:40rem; height: .5rem;"></hr>
+    <p>Fabricante (NºID): <input type="text" name="id_fornecedor" ></p>
+    <hr style=" width:40rem; height: .5rem;"></hr>
     <p>Nome do equipamento: <input type="text" name="desceqp_nomeeqp"></p>
     <hr style=" width:40rem; height: .5rem;"></hr>
-    <p>Modelo :<input type="text" name="desceqp_modelo"></p>
+    <p>Modelo : <input type="text" name="desceqp_modelo"></p>
     <hr style=" width:40rem; height: .5rem;"></hr>
-    <p>Fabricante: <input type="text" name="desceqp_fabricante"></p>
+    <p>Capacidade: <input type="text" name="desceqp_capacidadeprod"></p>
     <hr style=" width:40rem; height: .5rem;"></hr>
-    <p>Capacidade: <input type="text" name="desceqp_capacidade"></p>
+    <p>Consumo energético (Kw): <input type="text" name="desceqp_consumoene"></p>
     <hr style=" width:40rem; height: .5rem;"></hr>
-    <p>Potência: <input type="text" name="desceqp_potencia"></p>
+    <p>Tipo de Consumo: <input type="text" name="desceqp_consumotipo"></p>
     <hr style=" width:40rem; height: .5rem;"></hr>
-    <p>Consumo: <input type="text" name="desceqp_consumo"></p>
+    <p>Preço do equipamento: <input type="text" name="desceqp_precoeqp"></p>
+    <hr style=" width:40rem; height: .5rem;"></hr>
+    <p>Data do valor acima: <input type="text" name="desceqp_dataultpreco"></p>
+    <hr style=" width:40rem; height: .5rem;"></hr>
+    <p>Comentários sobre equipamento:</p>
+    <textarea name="desceqp_comentario" cols="50" rows="5"></textarea>
     <hr style=" width:40rem; height: .5rem;"></hr>
     <div class="input-group">
     <div class="custom-file">
@@ -24,3 +31,21 @@
     <button type="submit">Cadastrar!</button>
     </div>
 </form>
+
+<style>
+    input{
+        border-radius: .3rem;
+        border-color:rgb(0, 0, 0) ;
+        background-color: rgb(240, 239, 239);
+    }
+    p{
+        font-size: 1.1rem;
+        font-family: 'Courier New', Courier, monospace;
+    }
+
+    textarea{
+        border-radius: .3rem;
+        border-color:rgb(0, 0, 0) ;
+        background-color: rgb(240, 239, 239);
+    }
+</style>
