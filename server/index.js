@@ -14,6 +14,7 @@ const res = require('express/lib/response')
 const req = require('express/lib/request')
 const multer = require('multer')
 var cors = require('cors');
+const db = require('./models/db')
 
 // PUBLIC
     app.use((req, res, next) => {
@@ -30,7 +31,6 @@ var cors = require('cors');
     // TEMPLATE ENGINE
         app.engine('handlebars', handlebars.engine({defaultLayout: 'main',  runtimeOptions: {
             allowProtoPropertiesByDefault: true,
-    
             allowProtoMethodsByDefault: true,
         }}))
         app.set("view engine", "handlebars")
@@ -44,15 +44,13 @@ var cors = require('cors');
 
     // TEST IMG
     
-    app.get('/list-infos', async (req, res) =>{ // TODO ADICIONAR MAIS INFOS A ESSE GET
+    app.get('/list-infos', async(req, res) => {
         await PostRep.findAll()
-        .then((representante_nome) =>{
+        .then((values) => {
             return res.json({
-                representante_nome,
-                url: "http://localhost:1212/representantecadastrado"
-            }) 
-        }).catch(() =>{
-            res.render('erro')
+                values,
+                url: "https://localhost:1212/representantecadastrado"
+            })
         })
     })
 

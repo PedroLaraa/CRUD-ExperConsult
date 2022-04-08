@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
+import { Routes } from "react-router-dom";
 
 import api from './config/configApi';
 
-function App() {  
+function App() {
 
   const [data, setData] = useState([]);
   const [url, setUrl] = useState('');
+  const [listInfosRep, setListInfosRep] = useState([]);
+  
 
-  const getInfos = async () => { //FIXME FAZER FUNCIONAR A EXIBIÇÃO NO FRONT
-    console.log(data)
-    await api.get("/list-infos")
+  const getImages = async (res, req) => {
+    await api.get("list-img")
     .then((response) => {
       setData(response.data.representante_imagem)
       setUrl(response.data.url) 
@@ -18,35 +20,32 @@ function App() {
     })
   }
 
-  useEffect(() => {
-    getImages();
-  },[]); 
+  console.log(listInfosRep)
 
-  const getImages = async () => {
-    console.log(data)
-    await api.get("/list-img")
+  const getInfos = async (res, req) => {
+    await api.get('list-infos')
     .then((response) => {
-      setData(response.data.representante_imagem)
-      setUrl(response.data.url) 
+      setListInfosRep(response.data);
     }).catch((err) => {
       console.log(err);
+    })
+    await api.get('list-img')
+    .then((response) => {
+      setUrl(response.data.url)
+    }).catch((err) => {
+      console.log(err)
     })
   }
 
   useEffect(() => {
-    getImages();
+    getImages()
+    getInfos()
   },[]);  
 
   return (
-    <div>
-      <h1>Lista Equipamentos</h1>
-      {data.map(representante_imagem =>(
-        <div key={representante_imagem.id}>
-          <img src={url + representante_imagem.representante_imagem} alt= {representante_imagem.id} width='20%'></img>
-          <hr></hr>
-        </div>
-      ))}
 
+    <div>
+      <Routes />
     </div>
   );
 }
