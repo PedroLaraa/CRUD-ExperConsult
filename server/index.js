@@ -15,6 +15,7 @@ const req = require('express/lib/request')
 const multer = require('multer')
 var cors = require('cors');
 const db = require('./models/db')
+const { json } = require('body-parser')
 
 // PUBLIC
     app.use((req, res, next) => {
@@ -40,25 +41,63 @@ const db = require('./models/db')
     app.use(bodyParser.urlencoded({extended: false}))
     app.use(bodyParser.json())
 
-// ROUTES
-
-    // TEST IMG
+// ROUTES FOR FRONT END
     
+    // ROUTE OF REPRESENTANTE
+
     app.get('/list-infos', async(req, res) => {
         await PostRep.findAll()
         .then((values) => {
             return res.json({
                 values,
-                url: "https://localhost:1212/representantecadastrado"
+                url: "https://localhost:1212/representantecadastrado/"
             })
         })
     })
+
+    // ROUTE OF FORNECEDOR
+    
+    app.get('/list-infosfornecedor', async (req, res) => {
+        await PostFornec.findAll()
+        .then((values) => {
+            return res.json({
+                values,
+                url: "https://localhost:1212/fornecedorcadastrado/"
+            })
+        })
+    })
+
+    // ROUTE OF IMG
 
     app.get('/list-img', async (req, res) =>{
         await PostRep.findAll()
         .then((representante_imagem) =>{
             return res.json({
                 representante_imagem,
+                url: "http://localhost:1212/files/"
+            }) 
+        }).catch(() =>{
+            res.render('erro')
+        })
+    })
+
+    app.get('/list-imgf', async (req, res) =>{
+        await PostFornec.findAll()
+        .then((fornec_foto) =>{
+            return res.json({
+                fornec_foto,
+                url: "http://localhost:1212/files/"
+            }) 
+        }).catch(() =>{
+            res.render('erro')
+        })
+    })
+
+    app.get('/list-imgd', async (req, res) =>{
+        await PostRep.findAll()
+        .then((desceqp_imagem) =>{
+            return res.json({
+                desceqp_imagem,
                 url: "http://localhost:1212/files/"
             }) 
         }).catch(() =>{
