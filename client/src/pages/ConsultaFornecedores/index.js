@@ -1,7 +1,8 @@
-import { Axios } from "axios";
 import React, { useEffect, useState } from "react";
 
 import api from '../../config/configApi';
+
+import parStyle from "../css/paragrafo";
 
 const axios = require('axios')
 
@@ -43,11 +44,12 @@ function ConsultaFornecedores(){
         getInfosFornec()
     }, []);
 
+
     return(
         <div>
             {data.map(value => (
                 <div key={value.id}>
-                    <p>Nome do fornecedor: {value.fornec_fornecedornome + ''}</p>
+                    <p style={parStyle}>Nome do fornecedor: {value.fornec_fornecedornome + ''}</p>
                     <p>ID da empresa: {value.id}</p>
                     <p>Razão social: {value.fornec_razaosocial + ''}</p>
                     <p>Telefone: {value.fornec_telefone + ''}</p>
