@@ -4,6 +4,8 @@ import api from '../../config/configApi';
 
 import parStyle from "../css/paragrafo";
 
+import ConsultaRepresentantes from "../ConsultaRepresentante";
+
 const axios = require('axios')
 
 function ConsultaFornecedores(){
@@ -22,8 +24,8 @@ function ConsultaFornecedores(){
         })
     }
 
-    console.log(listInfosFornec)
-
+    
+    
     const getInfosFornec = async (req, res) =>{
         await api.get('list-infosfornecedor')
         .then((response) => {
@@ -39,9 +41,41 @@ function ConsultaFornecedores(){
         })
     }
 
+    const [listInfosRep, setListInfosRep] = useState();
+
+    const getImages = async (res, req) => {
+    await api.get("list-img")
+    .then((response) => {
+        setData(response.data.representante_imagem)
+        setUrl(response.data.url) 
+    }).catch((err) => {
+        console.log(err);
+    })
+    }
+
+
+    const getInfos = async (res, req) => {
+    await api.get('list-infos')
+    .then((response) => {
+        setListInfosRep(response.data);
+    }).catch((err) => {
+        console.log(err);
+        })
+        await api.get('list-img')
+        .then((response) => {
+        setUrl(response.data.url)
+        }).catch((err) => {
+        console.log(err)
+        })
+    }
+
+    console.log(listInfosRep) //FIXME retornar no front os dados do rep
+
+
     useEffect(() => {
         getImagesFornec()
         getInfosFornec()
+        getInfos()
     }, []);
 
 
@@ -61,11 +95,12 @@ function ConsultaFornecedores(){
                     <p>Empresa intermediária (email): {value.fornec_empint_email + ''}</p>
                     <p>Empresa intermediária (site): {value.fornec_empint_site + ''}</p>
                     <p>Representante do fornecedor (situação): {value.fornec_representante_situacao + ''}</p>
-                    <p>ID do representante: {value.representante_id + ''}</p>
+                    <p>Nome: {value.nome_representante}</p>
                     <img src={url + value.fornec_foto} alt={value.fornec_foto.id} width='25%'></img>
                     <hr></hr>
                 </div>
             ))}
+            
         </div>
     )
 }
