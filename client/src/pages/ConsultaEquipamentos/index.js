@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 
 import api from '../../config/configApi';
 
+import paragrafoStyle from "../paragrafo";
+
+import imagemEqpStyle from "../imagemEqp";
+
 function ConsultaEquipamentos(){
     const [data, setData] = useState([]);
     const [url, setUrl] = useState('');
@@ -44,16 +48,20 @@ function ConsultaEquipamentos(){
         <div>
         {data.map(value => (
             <div key={value.id}>
-                <p>Nome do equipamento: {value.desceqp_nomeeqp + ''}</p>
-                <p>Modelo: {value.desceqp_modelo + ''}</p>
-                <p>Consumo energético: {value.desceqp_consumoene + ''}</p>
-                <p>Tipo de consumo: {value.desceqp_consumotipo+ ''}</p>
-                <p>Preço: {value.desceqp_precoeqp+ ''}</p>
-                <p>Data do último preço: {value.desceqp_dataultpreco+ ''}</p>
-                <p>Capacidade produtiva: {value.desceqp_capacidadeprod + ''}</p>
-                <p>Comentários sobre equipamento: {value.desceqp_comentario+ ''}</p>
-                <p>Fornecedor: {value.id_fornecedor + ''}</p>
-                <img src={url + value.desceqp_imagem} alt={value.desceqp_imagem.id} width='25%'></img>
+                <div>
+                    <img src={url + value.desceqp_imagem} alt={value.desceqp_imagem.id} style={imagemEqpStyle}></img>
+                </div>
+                <div style={paragrafoStyle}>
+                    <p>Nome do equipamento: {value.desceqp_nomeeqp + ''}</p>
+                    <p>Modelo: {value.desceqp_modelo + ''}</p>
+                    <p>Consumo energético: {value.desceqp_consumoene + ''}</p>
+                    <p>Tipo de consumo: {value.desceqp_consumotipo+ ''}</p>
+                    <p>Preço: {value.desceqp_precoeqp+ ''}</p>
+                    <p>Data do último preço: {value.desceqp_dataultpreco+ ''}</p>
+                    <p>Capacidade produtiva: {value.desceqp_capacidadeprod + ''}</p>
+                    <p>Comentários sobre equipamento: {value.desceqp_comentario+ ''}</p>
+                    <p>Fornecedor: {value.id_fornecedor + ''}</p>   
+                </div>         
             </div>
             ))}
         </div>

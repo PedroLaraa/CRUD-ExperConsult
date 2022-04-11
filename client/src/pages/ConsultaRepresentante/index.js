@@ -4,7 +4,7 @@ import api from '../../config/configApi';
 
 import paragrafoStyle from "../paragrafo";
 
-import imagemStyle from "../imagem";
+import imagemRepStyle from "../imagemRep";
 
 const ConsultaRepresentantes = () => {
     const [data, setData] = useState([]);
@@ -48,7 +48,7 @@ const ConsultaRepresentantes = () => {
             <div key={value.id}>
                 <div style={paragrafoStyle}>
                     <div>
-                        <img src={url + value.representante_imagem} alt={value.representante_imagem.id} style={imagemStyle} ></img>
+                        <img src={url + value.representante_imagem} alt={value.representante_imagem.id} style={imagemRepStyle} ></img>
                     </div>
                     <p>Nome: {value.representante_nome + ''}</p>
                     <p>Telefone: {value.representante_telefone + ''}</p>

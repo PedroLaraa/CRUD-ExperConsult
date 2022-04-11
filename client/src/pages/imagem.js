@@ -1,10 +1,10 @@
-const imagemStyle = {
-    width: '70vw',
+const imagemFornecStyle = {
+    width: '50vw',
     height: '65vh',
     position: 'relative',
     float: 'left',
-    paddingRight: '5rem',
+    padding: '2rem',
 }
 
-module.exports = imagemStyle
+module.exports = imagemFornecStyle
 
