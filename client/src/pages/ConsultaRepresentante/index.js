@@ -4,7 +4,7 @@ import api from '../../config/configApi';
 
 import paragrafoStyle from "../paragrafo";
 
-import imagemRepStyle from "../imagemRep";
+import imagemRepStyle, { height } from "../imagemRep";
 
 const ConsultaRepresentantes = () => {
     const [data, setData] = useState([]);
