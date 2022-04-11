@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 
 import api from '../../config/configApi';
 
+import paragrafoStyle from "../paragrafo";
+
+import imagemStyle from "../imagem";
+
 const ConsultaRepresentantes = () => {
     const [data, setData] = useState([]);
     const [url, setUrl] = useState('');
@@ -16,8 +20,6 @@ const ConsultaRepresentantes = () => {
         console.log(err);
     })
     }
-
-    console.log(listInfosRep)
 
     const getInfos = async (res, req) => {
     await api.get('list-infos')
@@ -44,15 +46,19 @@ const ConsultaRepresentantes = () => {
         <div>
         {data.map(value => (
             <div key={value.id}>
-                <p>Nome: {value.representante_nome + ''}</p>
-                <p>Telefone: {value.representante_telefone + ''}</p>
-                <p>Comentários: {value.representante_comentarios + ''}</p>
-                <p>Representa: {value.representante_empresasrep + ''}</p>
-                <p>Site: {value.representante_site + ''}</p>
-                <p>Estados de atuação: {value.representante_estadoatuacao + ''}</p>
-                <p>ID do representante: {value.id + ''}</p>
-                <img src={url + value.representante_imagem} alt={value.representante_imagem.id} width='25%'></img>
-                <hr></hr>
+                <div style={paragrafoStyle}>
+                    <div>
+                        <img src={url + value.representante_imagem} alt={value.representante_imagem.id} style={imagemStyle} ></img>
+                    </div>
+                    <p>Nome: {value.representante_nome + ''}</p>
+                    <p>Telefone: {value.representante_telefone + ''}</p>
+                    <p>Comentários: {value.representante_comentarios + ''}</p>
+                    <p>Representa: {value.representante_empresasrep + ''}</p>
+                    <p>Site: {value.representante_site + ''}</p>
+                    <p>Estados de atuação: {value.representante_estadoatuacao + ''}</p>
+                    <p>ID do representante: {value.id + ''}</p>
+                </div>
+                <hr style={{opacity: '0'}} />
             </div>
             ))}
         </div>

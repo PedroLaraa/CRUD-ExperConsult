@@ -41,9 +41,9 @@ const { json } = require('body-parser')
     app.use(bodyParser.urlencoded({extended: false}))
     app.use(bodyParser.json())
 
-// ROUTES FOR FRONT END
+// ROUTES FOR FRONT END INFOS
     
-    // ROUTE OF REPRESENTANTE
+    // ROUTE OF REPRESENTANTE INFOS
 
     app.get('/list-infos', async(req, res) => {
         await PostRep.findAll()
@@ -55,7 +55,7 @@ const { json } = require('body-parser')
         })
     })
 
-    // ROUTE OF FORNECEDOR
+    // ROUTE OF FORNECEDOR INFOS
     
     app.get('/list-infosfornecedor', async (req, res) => {
         await PostFornec.findAll()
@@ -67,7 +67,21 @@ const { json } = require('body-parser')
         })
     })
 
-    // ROUTE OF IMG
+    // ROUTE OF EQUIPMENT INFOS
+
+    app.get('/list-infoseqp', async (req, res) => {
+        await Post.findAll()
+        .then((values) => {
+            return res.json({
+                values,
+                url: "https://localhost:1212/equipamentocadastrado/"
+            })
+        })
+    })
+
+// ROUTES FOR FRONT END INFOS
+
+    // ROUTE OF IMG REPRESENTANTE
 
     app.get('/list-img', async (req, res) =>{
         await PostRep.findAll()
@@ -81,6 +95,8 @@ const { json } = require('body-parser')
         })
     })
 
+    // ROUTE OF IMG FORNECEDOR
+
     app.get('/list-imgf', async (req, res) =>{
         await PostFornec.findAll()
         .then((fornec_foto) =>{
@@ -93,8 +109,10 @@ const { json } = require('body-parser')
         })
     })
 
+    // ROUTE OF IMG EQUIPMENTS
+
     app.get('/list-imgd', async (req, res) =>{
-        await PostRep.findAll()
+        await Post.findAll()
         .then((desceqp_imagem) =>{
             return res.json({
                 desceqp_imagem,
