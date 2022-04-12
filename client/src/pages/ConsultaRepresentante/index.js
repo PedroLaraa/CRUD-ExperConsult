@@ -1,17 +1,21 @@
+// IMPORTA FUNÇÕES, API's, E O REACT
+
 import React, { useEffect, useState } from "react";
 
 import api from '../../config/configApi';
 
-import paragrafoStyle from "../paragrafo";
+import paragrafoStyle from "../css/paragrafo";
 
-import imagemRepStyle, { height } from "../imagemRep";
+import imagemRepStyle from "../css/imagemRep"
+
+// FUNÇÃO PARA CONSULTA DE DADOS DOS EQUIPAMENTOS
 
 const ConsultaRepresentantes = () => {
-    const [data, setData] = useState([]);
-    const [url, setUrl] = useState('');
-    const [listInfosRep, setListInfosRep] = useState([]);
+    const [data, setData] = useState([]); // DEFINE O DATABASE
+    const [url, setUrl] = useState(''); // DEFINE AS URL's
+    const [listInfosRep, setListInfosRep] = useState([]); // DEFINE UMA LISTA DAS INFOS
 
-    const getImages = async (res, req) => {
+    const getImages = async (res, req) => { // REQUISIÇÃO DAS IMAGENS
     await api.get("list-img")
     .then((response) => {
         setData(response.data.representante_imagem)
@@ -21,7 +25,7 @@ const ConsultaRepresentantes = () => {
     })
     }
 
-    const getInfos = async (res, req) => {
+    const getInfos = async (res, req) => { // REQUISIÇÃO DAS INFORMAÇÕES DE EQUIPAMENTOS
     await api.get('list-infos')
     .then((response) => {
         setListInfosRep(response.data);
@@ -36,7 +40,7 @@ const ConsultaRepresentantes = () => {
         })
     }
 
-    useEffect(() => {
+    useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
         getImages()
         getInfos()
     },[]);  
@@ -44,7 +48,7 @@ const ConsultaRepresentantes = () => {
     return (
 
         <div>
-        {data.map(value => (
+        {data.map(value => ( // MAPEIA O DATABASE E PEGA AS INFOS REQUISITADAS
             <div key={value.id}>
                 <div style={paragrafoStyle}>
                     <div>
@@ -65,4 +69,5 @@ const ConsultaRepresentantes = () => {
     )
 }
 
+// EXPORTA A FUNÇÃO PARA USO NAS ROTAS
 export default ConsultaRepresentantes;

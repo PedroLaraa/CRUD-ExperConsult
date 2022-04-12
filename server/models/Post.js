@@ -1,6 +1,8 @@
+// IMPORTA O SEQUELIZE DO DB PARA ENVIAR DADOS
 const db = require('./db')
 
-// DB INSERT DESCRIPTION EQUIPMENT
+// Post() = Insere dados na table
+// DEFINE A TABLE PARA INSERÇÃO DE DADOS E OS TIPOS DE DADOS DE CADA COLUMN
 
 const Post = db.sequelize.define('descricao_equipamentos',{
     desceqp_nomeeqp: {
@@ -35,4 +37,5 @@ const Post = db.sequelize.define('descricao_equipamentos',{
     }
 })
 
+// EXPORTA A FUNÇÃO Post()
 module.exports = Post

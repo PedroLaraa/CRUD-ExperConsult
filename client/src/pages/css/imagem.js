@@ -1,3 +1,5 @@
+// CSS PARA APLICAR EM IMAGENS DOS FORNECEDORES
+
 const imagemFornecStyle = {
     width: '50vw',
     height: '65vh',
@@ -6,5 +8,6 @@ const imagemFornecStyle = {
     padding: '2rem',
 }
 
-module.exports = imagemFornecStyle
+// EXPORTA O CSS PARA USO GERAL
+export default imagemFornecStyle
 

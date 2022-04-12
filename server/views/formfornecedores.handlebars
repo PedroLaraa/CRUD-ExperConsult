@@ -1,3 +1,9 @@
+<!--
+    FORMULÁRIO PARA ENVIO DE DADOS PRO DB 
+    O NAME SE REFERE A UMA COLUMN DO BD
+    MANTER ESSE PADRÃO PARA FACILITAR ENTENDIMENTO
+-->
+
 <form action="/fornecedorcadastrado" method="POST" enctype="multipart/form-data" style="padding: 1rem;" autocomplete="off" id="formulario">
     <p style="text-transform: uppercase;">Obs: Caso não tenha a informação, favor inserir "n/a" !!!</p>
     <hr style=" width:40rem; height: .5rem;"></hr>
@@ -37,16 +43,20 @@
     </div>
 </form>
 
+<!-- ESTILIZAÇÃO PARA FORM -->
+
 <style>
 
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
     input{
         border-radius: .3rem;
         border-color:rgb(0, 0, 0) ;
         background-color: rgb(240, 239, 239);
     }
     p{
-        font-size: 1.1rem;
-        font-family: 'Courier New', Courier, monospace;
+        font-size: 1.5rem;
+        font-family: 'Patrick Hand', sans-serif;
     }
     
 </style>

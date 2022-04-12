@@ -1,9 +1,11 @@
+// CSS PARA APLICAR NOS PARÁGRAFOS
+
 const paragrafoStyle = {
     fontSize: '1.4rem',
     fontFamily: 'Gotham',
     border: '.3rem solid rgb(168,208,213)',
     borderRadius: '1rem',
-    
 }
 
-module.exports = paragrafoStyle
+// EXPORTA A FUNÇÃO PARA USO GERAL
+export default paragrafoStyle

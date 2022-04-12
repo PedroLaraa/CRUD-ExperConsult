@@ -1,19 +1,22 @@
+// IMPORTA FUNÇÕES, API's, E O REACT
+
 import React, { useEffect, useState } from "react";
 
 import api from '../../config/configApi';
 
-import paragrafoStyle from "../paragrafo";
+import paragrafoStyle from "../css/paragrafo";
 
-import imagemStyle from "../imagem";
+import imagemFornecStyle from "../css/imagem";
+
+// FUNÇÃO PARA CONSULTA DE DADOS DOS FORNECEDORES
 
 function ConsultaFornecedores(){
 
-    const [data, setData] = useState([]);
-    const [url, setUrl] = useState('');
-    const [listInfosFornec, setListInfosFornec] = useState([]);
-    const [listInfosRep, setListInfosRep] = useState([]);
+    const [data, setData] = useState([]); // DEFINE O DATABASE
+    const [url, setUrl] = useState(''); // DEFINE AS URL's
+    const [listInfosFornec, setListInfosFornec] = useState([]); // DEFINE UMA LISTA DAS INFOS
 
-    const getImagesFornec = async (req, res) => {
+    const getImagesFornec = async (req, res) => { // REQUISIÇÃO DAS IMAGENS
         await api.get('list-imgf')
         .then((response) =>{
         setData(response.data.fornec_foto)
@@ -25,7 +28,7 @@ function ConsultaFornecedores(){
 
     
     
-    const getInfosFornec = async (req, res) =>{
+    const getInfosFornec = async (req, res) =>{ // REQUISIÇÃO DAS INFORMAÇÕES DE EQUIPAMENTOS
         await api.get('list-infosfornecedor')
         .then((response) => {
         setListInfosFornec(response.data)
@@ -40,7 +43,7 @@ function ConsultaFornecedores(){
         })
     }
 
-    useEffect(() => {
+    useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
         getImagesFornec()
         getInfosFornec()
     }, []);
@@ -48,11 +51,11 @@ function ConsultaFornecedores(){
     return(
         
         <div>
-            {data.map(value => (
+            {data.map(value => ( // MAPEIA O DATABASE E PEGA AS INFOS REQUISITADAS
                 <div key={value.id}>
                     <div style={paragrafoStyle}>
                         <div>
-                            <img src={url + value.fornec_foto} alt={value.fornec_foto.id} style = {imagemStyle} ></img>
+                            <img src={url + value.fornec_foto} alt={value.fornec_foto.id} style = {imagemFornecStyle} ></img>
                         </div>
                         <p> Nome do fornecedor: {value.fornec_fornecedornome + ''}</p>
                         <p>ID da empresa: {value.id}</p>
@@ -75,5 +78,6 @@ function ConsultaFornecedores(){
         </div>
     )
 }
+
 
 export default ConsultaFornecedores;

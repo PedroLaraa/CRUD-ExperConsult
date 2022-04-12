@@ -1,15 +1,21 @@
+// IMPORTA O REACR E REACT ROUTER DOOM
+
 import React from "react";
 
 import {BrowserRouter, Routes ,Route} from 'react-router-dom';
+
+// IMPORTA FUNÇÕES COM AS 
 
 import ConsultaFornecedores from './pages/ConsultaFornecedores';
 import ConsultaRepresentante from './pages/ConsultaRepresentante';
 import ConsultaEquipamentos from './pages/ConsultaEquipamentos';
 
+// CRIA AS ROTA DE NAVEGAÇÃO DE BROWSER
+
 function Rotas(){
-    return(
+    return( // PATH = CAMINHO; ELEMENT = O QUE VAI SER RENDERIZADO;
         <BrowserRouter>
-            <Routes>
+            <Routes> 
                 <Route path="/representantes" element={<ConsultaRepresentante/>} exact ></Route>
                 <Route path="/fornecedores" element={<ConsultaFornecedores/>} ></Route>
                 <Route path="/equipamentos" element={<ConsultaEquipamentos/>} ></Route>
@@ -18,4 +24,5 @@ function Rotas(){
     )
 };
 
+// EXPORTA AS ROTAS PARA USO NO App()
 export default Rotas;

@@ -1,3 +1,5 @@
+// CSS PARA APLICAR EM IMAGENS DOS EQUIPAMENTOS
+
 const imagemEqpStyle = {
     width: '45vw',
     height: '50vh',
@@ -6,5 +8,5 @@ const imagemEqpStyle = {
     padding: '2rem',
 }
 
-module.exports = imagemEqpStyle
+export default imagemEqpStyle
 

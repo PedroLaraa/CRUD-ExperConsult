@@ -1,4 +1,8 @@
+// IMPORTA O SEQUELIZE DO DB PARA ENVIAR DADOS
 const db = require('./db')
+
+// PostRep() = Insere dados na table
+// DEFINE A TABLE PARA INSERÇÃO DE DADOS E OS TIPOS DE DADOS DE CADA COLUMN
 
 const PostRep = db.sequelize.define('representantes_fornecedores',{
     representante_nome: {
@@ -27,4 +31,5 @@ const PostRep = db.sequelize.define('representantes_fornecedores',{
     }
 })
 
+// EXPORTA A FUNÇÃO PostRep()
 module.exports = PostRep

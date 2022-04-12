@@ -1,4 +1,8 @@
+// IMPORTA O SEQUELIZE DO DB PARA ENVIAR DADOS
 const db = require('./db')
+
+// PostFornec() = Insere dados na table
+// DEFINE A TABLE PARA INSERÇÃO DE DADOS E OS TIPOS DE DADOS DE CADA COLUMN
 
 const PostFornec = db.sequelize.define('fornecedores',{
     fornec_fornecedornome: {
@@ -42,4 +46,5 @@ const PostFornec = db.sequelize.define('fornecedores',{
     }
 })
 
+// EXPORTA A FUNÇÃO PostFornec()
 module.exports = PostFornec
