@@ -4,6 +4,10 @@
     MANTER ESSE PADRÃO PARA FACILITAR ENTENDIMENTO
 -->
 
+{{#each values}}
+    <h1>Opa {{id}}</h1> <!-- FIXME NÃO ESTÁ LENDO OS DADOS -->
+{{/each}}
+
 <form action="/representantecadastrado" method="POST" enctype="multipart/form-data" style="padding: 1rem;" autocomplete="off">
     <p style="text-transform: uppercase;">Obs: Caso não tenha a informação, favor inserir "n/a" !!!</p>
     <hr style=" width:40rem; height: .5rem;"></hr>
@@ -17,10 +21,15 @@
     <hr style=" width:40rem; height: .5rem;"></hr>
     <p>Comentários sobre: <input type="text" name="representante_comentarios"></p>
     <hr style=" width:40rem; height: .5rem;"></hr>
-    <p>Empresas responsável: <input type="text" name="representante_empresasrep"></p>
-    <hr style=" width:40rem; height: .5rem;"></hr>
-    <p>Nº ID da empresa: <input type="text" name="fornecedor_id"></p>
-    <hr style=" width:40rem; height: .5rem;"></hr>
+    <div class="input-group mb-3">
+    <div class="input-group-prepend">
+        <label class="input-group-text" for="inputGroupSelect01">Opções</label>
+    </div>
+    <select class="custom-select" id="inputGroupSelect01">
+        <option selected>Escolher...</option>
+        <option value="1"> Opa</option>
+    </select>
+    </div>
     <div class="input-group">
     <div class="custom-file">
     <input type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" name="representante_imagem">

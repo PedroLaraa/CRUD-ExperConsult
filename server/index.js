@@ -67,6 +67,12 @@ const { json } = require('body-parser')
         })
     })
 
+    app.get('/fornecedorcadastrado', (req, res) => {
+        PostFornec.findAll().then(values => {
+            res.render('formrepresentantes', {values: values})
+        })
+    })
+
     // ROUTE OF EQUIPMENT INFOS
 
     app.get('/list-infoseqp', async (req, res) => {
@@ -147,7 +153,7 @@ const { json } = require('body-parser')
     // REGISTER FORNECEDOR
 
     app.get('/cadastro-fornecedor', function(req, res){
-        res.render('formfornecedores', {PostRep: PostRep})
+        res.render('formfornecedores')
     })
 
     // INSERT FORNECEDORES
@@ -159,13 +165,6 @@ const { json } = require('body-parser')
             fornec_razaosocial: req.body.fornec_razaosocial,
             fornec_telefone: req.body.fornec_telefone,
             fornec_email: req.body.fornec_email,
-            fornec_empint_nome: req.body.fornec_empint_nome,
-            fornec_empint_razaosocial: req.body.fornec_empint_razaosocial,
-            fornec_empint_site: req.body.fornec_empint_site,
-            fornec_empint_telefone: req.body.fornec_empint_telefone,
-            fornec_empint_email: req.body.fornec_empint_email,
-            fornec_representante_situacao: req.body.fornec_representante_situacao,
-            representante_id: req.body.representante_id,
             fornec_foto: req.file.filename
         }
 
@@ -215,7 +214,6 @@ const { json } = require('body-parser')
     app.post('/representantecadastrado', upload.single('representante_imagem'), async function(req, res){
         
         const dataToInsert = {
-            fornecedor_id: req.body.fornecedor_id,
             representante_nome: req.body.representante_nome,
             representante_telefone: req.body.representante_telefone,
             representante_site: req.body.representante_site,
