@@ -67,12 +67,16 @@ const { json } = require('body-parser')
         })
     })
 
+
+    // Lista os fornecedores no Form Handlebars dos representantes
     app.get('/cadastro-representante', (req, res) => {
         PostFornec.findAll().then(fornecedores => {
             res.render('formrepresentantes', {fornecedores: fornecedores})
         })
     })
 
+
+    // Lista os fornecedores no Form Handlebars dos equipamentos
     app.get('/cadastro-equipamentos', (req, res) => {
         PostFornec.findAll().then(fornecedores => {
             res.render('form', {fornecedores: fornecedores})
@@ -135,6 +139,8 @@ const { json } = require('body-parser')
         })
     })
 
+    //ROTAS GERAIS
+
     // HOMEPAGE
 
     app.get('', function(req, res){
@@ -152,6 +158,7 @@ const { json } = require('body-parser')
     })
 
     // REGISTER EQUIPMENT
+
     app.get('/cadastro-equipamentos', function(req, res){
         res.render('form')
     })
@@ -162,7 +169,13 @@ const { json } = require('body-parser')
         res.render('formfornecedores')
     })
 
-    // INSERT FORNECEDORES
+    app.get('/cadastro-representante', function(req, res){
+        res.render('formrepresentantes')
+    });
+
+// ROTAS DE CADASTROS E POSTS
+
+    // INSERT INFOS FORNECEDORES
 
     app.post('/fornecedorcadastrado', upload.single('fornec_foto'), async function(req, res){
 
@@ -185,9 +198,9 @@ const { json } = require('body-parser')
             }
     });
 
-    // INSERT INFOS IN DATABASE
 
-    // INSERT EQUIPMENT
+    // INSERT INFOS EQUIPMENT
+
     app.post('/equipamentocadastrado', upload.single('desceqp_imagem'), async function(req, res){
 
         const dataToInsert = {
@@ -213,13 +226,8 @@ const { json } = require('body-parser')
         }
     });
 
-    // REGISTER REPRESENTANTE
-
-    app.get('/cadastro-representante', function(req, res){
-        res.render('formrepresentantes')
-    });
-
     // INSERT REPRESENTANTES
+
     app.post('/representantecadastrado', upload.single('representante_imagem'), async function(req, res){
         
         const dataToInsert = {
@@ -232,7 +240,7 @@ const { json } = require('body-parser')
             representante_status: req.body.representante_status,
             representante_imagem: req.file.filename
         };
-
+        
         try {
             const dbResponse = await PostRep.create(dataToInsert);
             res.redirect('/cadastro-representante');
@@ -242,13 +250,7 @@ const { json } = require('body-parser')
         }
     });
 
-    // CONSULTAS
-
-    // CONSULTA EQUIPMENT
-
-    app.get('/equipamentos', (req, res) => {
-        res.render('consultaequipamentos')
-    });
+    // PORTA QUE O BACK-END ESTÁ SENDO EXECUTADO
 
 app.listen(1212, function(){
     console.log('SERVIDOR RODANDO')

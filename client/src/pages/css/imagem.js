@@ -1,8 +1,8 @@
 // CSS PARA APLICAR EM IMAGENS DOS FORNECEDORES
 
 const imagemFornecStyle = {
-    width: '50vw',
-    height: '65vh',
+    width: '35vw',
+    height: '25vh',
     position: 'relative',
     float: 'left',
     padding: '2rem',
