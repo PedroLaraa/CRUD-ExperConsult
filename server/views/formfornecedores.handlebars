@@ -5,9 +5,22 @@
 -->
 
 <form action="/fornecedorcadastrado" method="POST" enctype="multipart/form-data" style="padding: 1rem;" autocomplete="off" id="formulario">
-    <p style="text-transform: uppercase;">Obs: Caso não tenha a informação, favor inserir "n/a" !!!</p>
+    <p style="text-transform: uppercase;">▶ Caso não tenha a informação, favor inserir "n/a" !!!</p>
+    <p style="text-transform: uppercase;">▶ Campos marcados com "*" são obrigatórios !!!</p>
     <hr style=" width:40rem; height: .5rem;"></hr>
-    <p>Nome do fornecedor: <input type="text" name="fornec_fornecedornome"></p>
+        <p>*Fornecedor final ou intermediário: </p>
+        <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <label class="input-group-text" for="inputGroupSelect01">Tipo</label>
+        </div>
+        <select class="custom-select" id="inputGroupSelect01" name="fornec_nivelfornecedor">
+            <option selected>Escolher...</option>
+            <option value='Final'>Final</option>
+            <option value='Intermediário'>Intermediário</option>
+        </select>
+        </div>
+    <hr style=" width:40rem; height: .5rem;"></hr>
+    <p>*Nome do fornecedor: <input type="text" name="fornec_fornecedornome"></p>
     <hr style=" width:40rem; height: .5rem;"></hr>
     <p>Razão social: <input type="text" name="fornec_razaosocial"></p>
     <hr style=" width:40rem; height: .5rem;"></hr>
@@ -17,6 +30,7 @@
     <hr style=" width:40rem; height: .5rem;"></hr>
     <p>Email: <input type="text" name="fornec_email"></p>
     <hr style=" width:40rem; height: .5rem;"></hr>
+    <p>Upload de imagem: </p>
     <div class="input-group">
     <div class="custom-file">
     <input type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" name="fornec_foto">

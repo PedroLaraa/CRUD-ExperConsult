@@ -55,12 +55,12 @@ const ConsultaRepresentantes = () => {
                         <img src={url + value.representante_imagem} alt={value.representante_imagem.id} style={imagemRepStyle} ></img>
                     </div>
                     <p>Nome: {value.representante_nome + ''}</p>
+                    <p>Representa: {value.representante_empresasrep + ''}</p>
                     <p>Telefone: {value.representante_telefone + ''}</p>
                     <p>Comentários: {value.representante_comentarios + ''}</p>
-                    <p>Representa: {value.representante_empresasrep + ''}</p>
                     <p>Site: {value.representante_site + ''}</p>
                     <p>Estados de atuação: {value.representante_estadoatuacao + ''}</p>
-                    <p>ID do representante: {value.id + ''}</p>
+                    <p>Status: {value.representante_status}</p>
                 </div>
                 <hr style={{opacity: '0'}} />
             </div>

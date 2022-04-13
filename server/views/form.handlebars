@@ -5,9 +5,21 @@
 -->
 
 <form action="/equipamentocadastrado" method="POST" enctype="multipart/form-data" style="padding: 1rem;" autocomplete="off">
-    <p style="text-transform: uppercase;">Obs: Caso não tenha a informação, favor inserir "n/a" !!!</p>
+    <p style="text-transform: uppercase;">▶ Caso não tenha a informação, favor inserir "n/a" !!!</p>
+    <p style="text-transform: uppercase;">▶ Campos marcados com "*" são obrigatórios !!!</p>
     <hr style=" width:40rem; height: .5rem;"></hr>
-    <p>Fornecedor (NºID): <input type="text" name="id_fornecedor" ></p>
+        <p>*Representa qual fornecedor: </p>
+        <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <label class="input-group-text" for="inputGroupSelect01">Fornecedores</label>
+        </div>
+        <select class="custom-select" id="inputGroupSelect01" name="id_fornecedor">
+            <option selected>Escolher...</option>
+            {{#each fornecedores}}
+            <option value={{fornec_fornecedornome}}>{{fornec_fornecedornome}}</option>
+            {{/each}}
+        </select>
+        </div>
     <hr style=" width:40rem; height: .5rem;"></hr>
     <p>Nome do equipamento: <input type="text" name="desceqp_nomeeqp"></p>
     <hr style=" width:40rem; height: .5rem;"></hr>
@@ -26,6 +38,7 @@
     <p>Comentários sobre equipamento:</p>
     <textarea name="desceqp_comentario" cols="50" rows="5"></textarea>
     <hr style=" width:40rem; height: .5rem;"></hr>
+    <p>Upload de imagem: </p>
     <div class="input-group">
     <div class="custom-file">
     <input type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" name="desceqp_imagem">

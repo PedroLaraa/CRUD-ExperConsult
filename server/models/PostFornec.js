@@ -22,6 +22,9 @@ const PostFornec = db.sequelize.define('fornecedores',{
     },
     fornec_foto: {
         type: db.Sequelize.STRING
+    },
+    fornec_nivelfornecedor: {
+        type: db.Sequelize.STRING
     }
 })
 

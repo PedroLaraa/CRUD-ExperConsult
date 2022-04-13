@@ -56,6 +56,7 @@ function ConsultaEquipamentos(){
                     <div>
                         <img src={url + value.desceqp_imagem} alt={value.desceqp_imagem.id} style={imagemEqpStyle}></img>
                     </div>
+                    <p>Fornecedor: {value.id_fornecedor + ''}</p>   
                     <p>Nome do equipamento: {value.desceqp_nomeeqp + ''}</p>
                     <p>Modelo: {value.desceqp_modelo + ''}</p>
                     <p>Consumo energético: {value.desceqp_consumoene + ''}</p>
@@ -64,7 +65,6 @@ function ConsultaEquipamentos(){
                     <p>Data do último preço: {value.desceqp_dataultpreco+ ''}</p>
                     <p>Capacidade produtiva: {value.desceqp_capacidadeprod + ''}</p>
                     <p>Comentários sobre equipamento: {value.desceqp_comentario+ ''}</p>
-                    <p>Fornecedor: {value.id_fornecedor + ''}</p>   
                 </div>         
             </div>
             ))}

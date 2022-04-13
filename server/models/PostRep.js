@@ -26,6 +26,9 @@ const PostRep = db.sequelize.define('representantes_fornecedores',{
     representante_imagem: {
         type: db.Sequelize.STRING
     },
+    representante_status: {
+        type: db.Sequelize.STRING
+    },
     fornecedor_id: {
         type: db.Sequelize.INTEGER
     }

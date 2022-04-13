@@ -34,6 +34,9 @@ const Post = db.sequelize.define('descricao_equipamentos',{
     },
     desceqp_imagem: {
         type: db.Sequelize.STRING
+    },
+    desceqp_pdf:{
+        type: db.Sequelize.STRING
     }
 })
 

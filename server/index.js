@@ -67,9 +67,15 @@ const { json } = require('body-parser')
         })
     })
 
-    app.get('/fornecedorcadastrado', (req, res) => {
-        PostFornec.findAll().then(values => {
-            res.render('formrepresentantes', {values: values})
+    app.get('/cadastro-representante', (req, res) => {
+        PostFornec.findAll().then(fornecedores => {
+            res.render('formrepresentantes', {fornecedores: fornecedores})
+        })
+    })
+
+    app.get('/cadastro-equipamentos', (req, res) => {
+        PostFornec.findAll().then(fornecedores => {
+            res.render('form', {fornecedores: fornecedores})
         })
     })
 
@@ -159,30 +165,33 @@ const { json } = require('body-parser')
     // INSERT FORNECEDORES
 
     app.post('/fornecedorcadastrado', upload.single('fornec_foto'), async function(req, res){
-        
-        const dataToInsert = {
-            fornec_fornecedornome: req.body.fornec_fornecedornome,
-            fornec_razaosocial: req.body.fornec_razaosocial,
-            fornec_telefone: req.body.fornec_telefone,
-            fornec_email: req.body.fornec_email,
-            fornec_foto: req.file.filename
-        }
 
-        try {
-            const dbResponse = await PostFornec.create(dataToInsert);
-            res.redirect('/cadastro-fornecedor');
-        } catch (ex) {
-            console.error(ex);
-            res.render('erro');
-        }
+            const dataToInsert = {
+                fornec_nivelfornecedor: req.body.fornec_nivelfornecedor,
+                fornec_fornecedornome: req.body.fornec_fornecedornome,
+                fornec_razaosocial: req.body.fornec_razaosocial,
+                fornec_telefone: req.body.fornec_telefone,
+                fornec_email: req.body.fornec_email,
+                fornec_site: req.body.fornec_site,
+                fornec_foto: req.file.filename
+            }
+
+            try {
+                const dbResponse = await PostFornec.create(dataToInsert);
+                res.redirect('/cadastro-fornecedor');
+            } catch (ex) {
+                console.error(ex);
+                res.render('erro');
+            }
     });
 
     // INSERT INFOS IN DATABASE
 
     // INSERT EQUIPMENT
     app.post('/equipamentocadastrado', upload.single('desceqp_imagem'), async function(req, res){
-        
+
         const dataToInsert = {
+            fornec_nivelfornecedor: req.body.fornec_nivelfornecedor,
             desceqp_nomeeqp: req.body.desceqp_nomeeqp,
             desceqp_modelo: req.body.desceqp_modelo,
             id_fornecedor: req.body.id_fornecedor,
@@ -192,7 +201,7 @@ const { json } = require('body-parser')
             desceqp_comentario: req.body.desceqp_comentario,
             desceqp_precoeqp: req.body.desceqp_precoeqp,
             desceqp_dataultpreco: req.body.desceqp_dataultpreco,
-            desceqp_imagem: req.file.filename
+            desceqp_imagem: req.file.filename,
         };
 
         try {
@@ -220,6 +229,7 @@ const { json } = require('body-parser')
             representante_estadoatuacao: req.body.representante_estadoatuacao,
             representante_comentarios: req.body.representante_comentarios,
             representante_empresasrep: req.body.representante_empresasrep,
+            representante_status: req.body.representante_status,
             representante_imagem: req.file.filename
         };
 
