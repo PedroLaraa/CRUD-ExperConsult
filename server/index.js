@@ -201,7 +201,10 @@ const { json } = require('body-parser')
 
     // INSERT INFOS EQUIPMENT
 
-    app.post('/equipamentocadastrado', upload.single('desceqp_imagem'), async function(req, res){
+    const files = ['desceqp_imagem', 'desceqp_pdf']
+
+    app.post('/equipamentocadastrado', upload.fields([{name: 'desceqp_imagem' , maxCount: 1}, {
+        name: 'desceqp_pdf', maxCount: 1}]), async function(req, res){
 
         const dataToInsert = {
             fornec_nivelfornecedor: req.body.fornec_nivelfornecedor,
@@ -214,7 +217,8 @@ const { json } = require('body-parser')
             desceqp_comentario: req.body.desceqp_comentario,
             desceqp_precoeqp: req.body.desceqp_precoeqp,
             desceqp_dataultpreco: req.body.desceqp_dataultpreco,
-            desceqp_imagem: req.file.filename,
+            desceqp_imagem: req.files['desceqp_imagem'][0].filename,
+            desceqp_pdf: req.files['desceqp_pdf'][0].filename,
         };
 
         try {

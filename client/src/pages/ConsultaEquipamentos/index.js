@@ -56,6 +56,7 @@ function ConsultaEquipamentos(){
                     <div>
                         <img src={url + value.desceqp_imagem} alt={value.desceqp_imagem.id} style={imagemEqpStyle}></img>
                     </div>
+                    <a href={url + value.desceqp_pdf} download='pdf' style={{color: 'red'}} >DOWNLOAD PDF</a>
                     <p>Fornecedor: {value.id_fornecedor + ''}</p>   
                     <p>Nome do equipamento: {value.desceqp_nomeeqp + ''}</p>
                     <p>Modelo: {value.desceqp_modelo + ''}</p>

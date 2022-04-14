@@ -4,10 +4,15 @@
     MANTER ESSE PADRÃO PARA FACILITAR ENTENDIMENTO
 -->
 
-<form action="/fornecedorcadastrado" method="POST" enctype="multipart/form-data" style="padding: 1rem;" autocomplete="off" id="formulario">
+<head>
+    <link rel="stylesheet" href="../css/style.css" type="text/css">
+</head>
+
+<form action="/fornecedorcadastrado" method="POST" enctype="multipart/form-data" style="padding: 1rem;" autocomplete="off">
+    <h1>Cadastro de fornecedor</h1>
     <p style="text-transform: uppercase;">▶ Caso não tenha a informação, favor inserir "n/a" !!!</p>
     <p style="text-transform: uppercase;">▶ Campos marcados com "*" são obrigatórios !!!</p>
-    <hr style=" width:40rem; height: .5rem;"></hr>
+    <hr></hr>
         <p>*Fornecedor final ou intermediário: </p>
         <div class="input-group mb-3">
         <div class="input-group-prepend">
@@ -19,17 +24,17 @@
             <option value='Intermediário'>Intermediário</option>
         </select>
         </div>
-    <hr style=" width:40rem; height: .5rem;"></hr>
-    <p>*Nome do fornecedor: <input type="text" name="fornec_fornecedornome"></p>
-    <hr style=" width:40rem; height: .5rem;"></hr>
-    <p>Razão social: <input type="text" name="fornec_razaosocial"></p>
-    <hr style=" width:40rem; height: .5rem;"></hr>
-    <p>Site: <input type="text" name="fornec_site"></p>
-    <hr style=" width:40rem; height: .5rem;"></hr>
-    <p>Telefone: <input type="text" name="fornec_telefone"></p>
-    <hr style=" width:40rem; height: .5rem;"></hr>
-    <p>Email: <input type="text" name="fornec_email"></p>
-    <hr style=" width:40rem; height: .5rem;"></hr>
+    <hr></hr>
+    <p>*Nome do fornecedor: </p><input type="text" name="fornec_fornecedornome">
+    <hr></hr>
+    <p>Razão social: </p><input type="text" name="fornec_razaosocial">
+    <hr></hr>
+    <p>Site: </p><input type="text" name="fornec_site">
+    <hr></hr>
+    <p>Telefone: </p><input type="text" name="fornec_telefone">
+    <hr></hr>
+    <p>Email: </p><input type="text" name="fornec_email">
+    <hr></hr>
     <p>Upload de imagem: </p>
     <div class="input-group">
     <div class="custom-file">
@@ -37,26 +42,8 @@
     <label class="custom-file-label" for="inputGroupFile04"></label>
     </div>
     </div>
-    <hr style=" width:40rem; height: .5rem;"></hr>
-    <div class="input-group-append">
+    <hr></hr>
+    <div class="input-group-append" id="cadastrar">
     <button type="submit">Cadastrar!</button>
     </div>
 </form>
-
-<!-- ESTILIZAÇÃO PARA FORM -->
-
-<style>
-
-    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
-    input{
-        border-radius: .3rem;
-        border-color:rgb(0, 0, 0) ;
-        background-color: rgb(240, 239, 239);
-    }
-    p{
-        font-size: 1.5rem;
-        font-family: 'Patrick Hand', sans-serif;
-    }
-    
-</style>

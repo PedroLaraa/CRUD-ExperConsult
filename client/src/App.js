@@ -10,7 +10,7 @@ function App() {
 
   return (
 
-    <div style={{backgroundColor: "rgb(189,214,57)", padding:'.5rem'}}>
+    <div>
       <Rotas>
       </Rotas>
     </div>

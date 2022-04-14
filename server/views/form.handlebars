@@ -3,11 +3,15 @@
     O NAME SE REFERE A UMA COLUMN DO BD
     MANTER ESSE PADRÃO PARA FACILITAR ENTENDIMENTO
 -->
+<head>
+    <link rel="stylesheet" href="../css/style.css" type="text/css">
+</head>
 
-<form action="/equipamentocadastrado" method="POST" enctype="multipart/form-data" style="padding: 1rem;" autocomplete="off">
+<form action="/equipamentocadastrado" method="POST" enctype="multipart/form-data" style="padding: 1rem;">
+    <h1>Cadastro de equipamento</h1>
     <p style="text-transform: uppercase;">▶ Caso não tenha a informação, favor inserir "n/a" !!!</p>
     <p style="text-transform: uppercase;">▶ Campos marcados com "*" são obrigatórios !!!</p>
-    <hr style=" width:40rem; height: .5rem;"></hr>
+    <hr ></hr>
         <p>*Representa qual fornecedor: </p>
         <div class="input-group mb-3">
         <div class="input-group-prepend">
@@ -20,24 +24,25 @@
             {{/each}}
         </select>
         </div>
-    <hr style=" width:40rem; height: .5rem;"></hr>
-    <p>Nome do equipamento: <input type="text" name="desceqp_nomeeqp"></p>
-    <hr style=" width:40rem; height: .5rem;"></hr>
-    <p>Modelo : <input type="text" name="desceqp_modelo"></p>
-    <hr style=" width:40rem; height: .5rem;"></hr>
-    <p>Capacidade: <input type="text" name="desceqp_capacidadeprod"></p>
-    <hr style=" width:40rem; height: .5rem;"></hr>
-    <p>Consumo energético (Kw): <input type="text" name="desceqp_consumoene"></p>
-    <hr style=" width:40rem; height: .5rem;"></hr>
-    <p>Tipo de Consumo: <input type="text" name="desceqp_consumotipo"></p>
-    <hr style=" width:40rem; height: .5rem;"></hr>
-    <p>Preço do equipamento: <input type="text" name="desceqp_precoeqp"></p>
-    <hr style=" width:40rem; height: .5rem;"></hr>
-    <p>Data do valor acima: <input type="text" name="desceqp_dataultpreco"></p>
-    <hr style=" width:40rem; height: .5rem;"></hr>
+    <hr ></hr>
+    <p>Nome do equipamento: </p>
+    <input type="text" name="desceqp_nomeeqp">
+    <hr ></hr>
+    <p>Modelo: </p><input type="text" name="desceqp_modelo">
+    <hr ></hr>
+    <p>Capacidade: </p><input type="text" name="desceqp_capacidadeprod">
+    <hr ></hr>
+    <p>Consumo energético (Kw): </p><input type="text" name="desceqp_consumoene">
+    <hr ></hr>
+    <p>Tipo de Consumo: </p><input type="text" name="desceqp_consumotipo">
+    <hr ></hr>
+    <p>Preço do equipamento: </p><input type="text" name="desceqp_precoeqp">
+    <hr ></hr>
+    <p>Data do valor acima: </p><input type="text" name="desceqp_dataultpreco">
+    <hr ></hr>
     <p>Comentários sobre equipamento:</p>
     <textarea name="desceqp_comentario" cols="50" rows="5"></textarea>
-    <hr style=" width:40rem; height: .5rem;"></hr>
+    <hr ></hr>
     <p>Upload de imagem: </p>
     <div class="input-group">
     <div class="custom-file">
@@ -45,33 +50,18 @@
     <label class="custom-file-label" for="inputGroupFile04"></label>
     </div>
     </div>
-    <hr style=" width:40rem; height: .5rem;"></hr>
-    <div class="input-group-append">
-    <button type="submit">Cadastrar!</button>
+    <hr ></hr>
+    <p>Upload de pdf: </p>
+    <div class="input-group">
+    <div class="custom-file">
+    <input type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" name="desceqp_pdf">
+    <label class="custom-file-label" for="inputGroupFile04"></label>
+    </div>
+    </div>
+    <hr ></hr>
+    <div class="input-group-append" id="cadastrar">
+        <button type="submit">Cadastrar!</button>
     </div>
 </form>
 
 <!-- ESTILIZAÇÃO PARA FORM -->
-
-<style>
-
-    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
-
-    input{
-        border-radius: .3rem;
-        border-color:rgb(0, 0, 0) ;
-        background-color: rgb(240, 239, 239);
-    }
-    p{
-        font-size: 1.5rem;
-        font-family: 'Patrick Hand', sans-serif;
-    }
-
-    textarea{
-        border-radius: .3rem;
-        border-color:rgb(0, 0, 0) ;
-        background-color: rgb(240, 239, 239);
-    }
-    
-</style>
