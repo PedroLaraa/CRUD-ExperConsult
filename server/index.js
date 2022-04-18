@@ -217,8 +217,8 @@ const { json } = require('body-parser')
             desceqp_comentario: req.body.desceqp_comentario,
             desceqp_precoeqp: req.body.desceqp_precoeqp,
             desceqp_dataultpreco: req.body.desceqp_dataultpreco,
-            desceqp_imagem: req.files['desceqp_imagem'][0].filename,
-            desceqp_pdf: req.files['desceqp_pdf'][0].filename,
+            desceqp_imagem:req.files['desceqp_imagem'][0].filename,
+            desceqp_pdf:req.files['desceqp_pdf'][0].filename
         };
 
         try {
@@ -229,6 +229,14 @@ const { json } = require('body-parser')
             res.render('erro');
         }
     });
+
+    app.get('/deletar-equipamento/:id', (req, res) => {
+        Post.destroy({where : {'id': req.params.id}}).then(() => {
+            res.send("Equipamento deletado!")
+        }).catch((erro) => {
+            res.send("Não foi possível deletar!")
+        })
+    })
 
     // INSERT REPRESENTANTES
 

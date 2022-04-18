@@ -40,7 +40,9 @@ function ConsultaEquipamentos(){
         })
     }
 
-    console.log(data)
+    const deletarEquipamento = async (req, res) =>{
+        await api.get('deletar-equipamento/id')
+    }
 
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
         getImages()
@@ -66,6 +68,7 @@ function ConsultaEquipamentos(){
                     <p>Data do último preço: {value.desceqp_dataultpreco+ ''}</p>
                     <p>Capacidade produtiva: {value.desceqp_capacidadeprod + ''}</p>
                     <p>Comentários sobre equipamento: {value.desceqp_comentario+ ''}</p>
+                    <a href={deletarEquipamento()}><button>Deletar</button></a>
                 </div>         
             </div>
             ))}
