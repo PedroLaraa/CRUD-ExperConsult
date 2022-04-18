@@ -49,7 +49,7 @@ function ConsultaFornecedores(){
     }, []);
 
     return(
-        
+
         <div>
             {data.map(value => ( // MAPEIA O DATABASE E PEGA AS INFOS REQUISITADAS
                 <div key={value.id}>
