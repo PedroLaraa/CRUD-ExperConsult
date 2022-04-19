@@ -8,6 +8,7 @@ import paragrafoStyle from "../css/paragrafo";
 
 import imagemRepStyle from "../css/imagemRep"
 
+
 // FUNÇÃO PARA CONSULTA DE DADOS DOS EQUIPAMENTOS
 
 const ConsultaRepresentantes = () => {

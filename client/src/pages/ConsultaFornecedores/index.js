@@ -8,6 +8,7 @@ import paragrafoStyle from "../css/paragrafo";
 
 import imagemFornecStyle from "../css/imagem";
 
+
 // FUNÇÃO PARA CONSULTA DE DADOS DOS FORNECEDORES
 
 function ConsultaFornecedores(){
@@ -46,6 +47,7 @@ function ConsultaFornecedores(){
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
         getImagesFornec()
         getInfosFornec()
+
     }, []);
 
     return(
@@ -71,6 +73,5 @@ function ConsultaFornecedores(){
         </div>
     )
 }
-
 
 export default ConsultaFornecedores;

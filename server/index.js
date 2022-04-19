@@ -83,18 +83,6 @@ const { json } = require('body-parser')
         })
     })
 
-    // ROUTE OF EQUIPMENT INFOS
-
-    app.get('/list-infoseqp', async (req, res) => {
-        await Post.findAll()
-        .then((values) => {
-            return res.json({
-                values,
-                url: "https://localhost:1212/equipamentocadastrado/"
-            })
-        })
-    })
-
 // ROUTES FOR FRONT END INFOS
 
     // ROUTE OF IMG REPRESENTANTE
@@ -127,13 +115,13 @@ const { json } = require('body-parser')
 
     // ROUTE OF IMG EQUIPMENTS
 
-    app.get('/list-imgd', async (req, res) =>{
+    app.get('/list-infosequipamentos', async (req, res) =>{
         await Post.findAll()
-        .then((desceqp_imagem) =>{
+        .then((value) =>{
             return res.json({
-                desceqp_imagem,
+                value,
                 url: "http://localhost:1212/files/"
-            }) 
+            })
         }).catch(() =>{
             res.render('erro')
         })

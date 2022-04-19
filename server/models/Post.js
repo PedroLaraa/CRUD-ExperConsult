@@ -1,6 +1,8 @@
 // IMPORTA O SEQUELIZE DO DB PARA ENVIAR DADOS
 const db = require('./db')
 
+const PostFornec = require('./PostFornec')
+
 // Post() = Insere dados na table
 // DEFINE A TABLE PARA INSERÇÃO DE DADOS E OS TIPOS DE DADOS DE CADA COLUMN
 
@@ -38,6 +40,10 @@ const Post = db.sequelize.define('descricao_equipamentos',{
     desceqp_pdf:{
         type: db.Sequelize.STRING
     }
+})
+
+PostFornec.hasMany(Post, {
+    foreignKey: 'fornecedor_idfk'
 })
 
 // EXPORTA A FUNÇÃO Post()

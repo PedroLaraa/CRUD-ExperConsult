@@ -13,70 +13,41 @@ import imagemEqpStyle from "../css/imagemEqp";
 function ConsultaEquipamentos(){
     const [data, setData] = useState([]); // DEFINE O DATABASE
     const [url, setUrl] = useState(''); // DEFINE AS URL's
-    const [listInfosEqp, setListInfosEqp] = useState([]); // DEFINE UMA LISTA DAS INFOS
-    const [search, setSearch] = useState('');
 
-    function handleSearch(e){
-        setSearch(e.target.value)
-    }
-
-    const getImages = async (res, req) => { // REQUISIÇÃO DAS IMAGENS
-    await api.get("list-imgd")
+    
+    const getInfosEqp = async (res, req) => { // REQUISIÇÃO DAS IMAGENS
+    await api.get("list-infosequipamentos")
     .then((response) => {
-        setData(response.data.desceqp_imagem)
+        setData(response.data.value)
         setUrl(response.data.url) 
     }).catch((err) => {
         console.log(err);
     })
     }
 
-    const getInfos = async (res, req) => { // REQUISIÇÃO DAS INFORMAÇÕES DE EQUIPAMENTOS
-    await api.get('list-infoseqp')
-    .then((response) => {
-        setListInfosEqp(response.data);
-    }).catch((err) => {
-        console.log(err);
-        })
+    function handleFiltrarResultados(e) {
+        e.preventDefault()
+        console.log('Dando certo!')
     }
 
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
-        getImages()
-        getInfos()
-    },[]);  
+        getInfosEqp()
+    },[]); 
 
-    return (
-
-        // FIXME MECANISMO DE BUSCA NÃO FUNCIONANDO
+    return ( // FIXME NÃOO ESTÁ RENDERIZANDO O HTML
 
         <div>
-            <form>
-                <input 
-                    type='search' 
-                    name="search" 
-                    id="search" 
-                    onChange={handleSearch} 
-                />
-                <button type="submit">Filtrar...</button>
-            </form>
-            {data.map(value => ( // MAPEIA O DATABASE E PEGA AS INFOS REQUISITADAS
-                <div key={value.id}>
-                    <div style={paragrafoStyle}>
-                        <div>
-                            <img src={url + value.desceqp_imagem} alt={value.desceqp_imagem.id} style={imagemEqpStyle}></img>
-                        </div>
-                        <a href={url + value.desceqp_pdf} download='pdf' style={{color: 'red'}} >DOWNLOAD PDF</a>
-                        <p>Fornecedor: {value.id_fornecedor + ''}</p>   
-                        <p>Nome do equipamento: {value.desceqp_nomeeqp + ''}</p>
-                        <p>Modelo: {value.desceqp_modelo + ''}</p>
-                        <p>Consumo energético: {value.desceqp_consumoene + ''}</p>
-                        <p>Tipo de consumo: {value.desceqp_consumotipo+ ''}</p>
-                        <p>Preço: {value.desceqp_precoeqp+ ''}</p>
-                        <p>Data do último preço: {value.desceqp_dataultpreco+ ''}</p>
-                        <p>Capacidade produtiva: {value.desceqp_capacidadeprod + ''}</p>
-                        <p>Comentários sobre equipamento: {value.desceqp_comentario+ ''}</p>
-                    </div>         
+            {data.map (value => (
+                <div key={value.id_fornecedor}> 
+                    <form onSubmit={handleFiltrarResultados}>
+                        <button
+                        type="submit"
+                        value={value.id_fornecedor}
+                        >{value.id_fornecedor}
+                        </button>
+                    </form>
                 </div>
-                ))}
+        ))}
         </div>
     )
 }
