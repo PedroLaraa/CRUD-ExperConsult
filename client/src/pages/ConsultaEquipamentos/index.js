@@ -8,6 +8,10 @@ import paragrafoStyle from "../css/paragrafo";
 
 import imagemEqpStyle from "../css/imagemEqp";
 
+import FiltraEquipamentos from "../components/botaoDeConsulta";
+
+import RetornoEquipamentos from "../components/equipamentosRender";
+
 // FUNÇÃO PARA CONSULTA DE DADOS DOS EQUIPAMENTOS
 
 function ConsultaEquipamentos(){
@@ -25,11 +29,6 @@ function ConsultaEquipamentos(){
     })
     }
 
-    function handleFiltrarResultados(e) {
-        e.preventDefault()
-        console.log('Dando certo!')
-    }
-
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
         getInfosEqp()
     },[]); 
@@ -37,17 +36,8 @@ function ConsultaEquipamentos(){
     return ( // FIXME NÃOO ESTÁ RENDERIZANDO O HTML
 
         <div>
-            {data.map (value => (
-                <div key={value.id_fornecedor}> 
-                    <form onSubmit={handleFiltrarResultados}>
-                        <button
-                        type="submit"
-                        value={value.id_fornecedor}
-                        >{value.id_fornecedor}
-                        </button>
-                    </form>
-                </div>
-        ))}
+            <FiltraEquipamentos />
+                
         </div>
     )
 }
