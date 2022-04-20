@@ -31,22 +31,16 @@ function FiltraEquipamentos(){
     function dataFilter() {
         data.map(value => {
             if(value.id_fornecedor === qualFornec){
-                setData([
-                    ...data,
-                    {
-                        id_fornecedor: qualFornec
-                    }
-                ])
+                return data
             }
         })
     }
 
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
         getInfosEqp()
-        dataFilter()
     },[]);
 
-    return ( // FIXME NÃOO ESTÁ RENDERIZANDO O HTML
+    return (
 
         <div>
             {data.map (value => (
@@ -57,16 +51,12 @@ function FiltraEquipamentos(){
                         console.log(qualFornec)
                     }}>
                         <button
-                        id="valorFornecedor"
                         type="submit"
                         value={value.id_fornecedor}
                         onClick={dataFilter}
                         >{value.id_fornecedor}
                         </button>
                     </form>
-                    <ul>
-                        <li>{value.id_fornecedor}</li>
-                    </ul>
                 </div>
             ))}
         </div>
