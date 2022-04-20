@@ -16,7 +16,8 @@ function FiltraEquipamentos(){
     const [data, setData] = useState([]); // DEFINE O DATABASE
     const [url, setUrl] = useState(''); // DEFINE AS URL's
 
-    const qualFornec = []
+    const [fornecedor, setFornecedor] = useState();
+    const [pesquisarFornecedor, setPesquisarFornecedor] = useState()
     
     const getInfosEqp = async (res, req) => { // REQUISIÇÃO DAS IMAGENS
     await api.get("list-infosequipamentos")
@@ -28,12 +29,10 @@ function FiltraEquipamentos(){
     })
     }
 
-    function dataFilter() {
-        data.map(value => {
-            if(value.id_fornecedor === qualFornec){
-                return data
-            }
-        })
+    function handleFiltrar(e){
+        e.preventDefault()
+        setPesquisarFornecedor(fornecedor)
+        console.log(fornecedor)
     }
 
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
@@ -43,22 +42,29 @@ function FiltraEquipamentos(){
     return (
 
         <div>
-            {data.map (value => (
-                <div key={value.id_fornecedor}> 
-                    <form onSubmit={(e) => {
-                        e.preventDefault()
-                        qualFornec.push(value.id_fornecedor)
-                        console.log(qualFornec)
-                    }}>
-                        <button
-                        type="submit"
-                        value={value.id_fornecedor}
-                        onClick={dataFilter}
-                        >{value.id_fornecedor}
-                        </button>
-                    </form>
+            <form>
+                <input
+                type='search'
+                placeholder="Fornecedor:"
+                onChange={(e) => setFornecedor(e.target.value)}
+                >
+                </input>
+                <button
+                    type="submit"
+                    onClick={handleFiltrar}
+                >
+                    Filtrar...
+                </button>
+            </form>
+            {pesquisarFornecedor && ( //FIXME NÃO ESTÁ FILTRANDO OS VALORES TENTAR USAR O .FILTER()
+                <div>
+                    {data.map(value => (
+                    <div key={value.id_fornecedor}>    
+                        <h1>{value.id_fornecedor}</h1>
+                    </div>
+                    ))}
                 </div>
-            ))}
+                )}
         </div>
     )
 }

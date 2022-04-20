@@ -37,7 +37,7 @@ function ConsultaEquipamentos(){
 
         <div>
             <FiltraEquipamentos />
-                <RetornoEquipamentos />
+                
         </div>
     )
 }
