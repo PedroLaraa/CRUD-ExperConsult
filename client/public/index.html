@@ -43,7 +43,7 @@
         <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
             <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="http://localhost:1212/home">Home</a>
+                <a id="topo" class="nav-link" href="http://localhost:1212/home">Home</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="http://localhost:1212/suporte">Suporte</a>
@@ -82,12 +82,6 @@
                 </div>
             </li>
             </ul>
-            <div class="">
-                <form class="form-inline d-sm-flex " id="pesquisa">
-                    <input class="form-control mr-sm-2 " type="search" placeholder="Pesquisar" aria-label="Pesquisar">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
-                </form>
-            </div>
         </div>
     </nav>
 
@@ -148,6 +142,9 @@
         <a class="text-dark" href="https://www.experconsult.com.br">Exper Consult Ltda</a>
     </div>
     <!-- Copyright -->
+        <div class="topo">
+            <a href="#topo">▲</a>
+        </div>
     </footer>
     </body>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -192,6 +189,24 @@
         border: 0px;
         width: 18rem;
     }
+
+    .topo{
+    position: fixed;
+    right: 3rem;
+    bottom: 3rem;
+    width: 2rem;
+    height: 2rem;
+    background-color: rgb(179,100,148);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.5rem;
+    
+}
+.topo a{
+    color: rgb(189,214,57);
+    font-size: 1.5rem;
+}
     
 </style>
 

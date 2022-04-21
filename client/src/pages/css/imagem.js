@@ -9,5 +9,4 @@ const imagemFornecStyle = {
 }
 
 // EXPORTA O CSS PARA USO GERAL
-export default imagemFornecStyle
-
+export default imagemFornecStyle;

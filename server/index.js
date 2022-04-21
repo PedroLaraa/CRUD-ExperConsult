@@ -189,8 +189,6 @@ const { json } = require('body-parser')
 
     // INSERT INFOS EQUIPMENT
 
-    const files = ['desceqp_imagem', 'desceqp_pdf']
-
     app.post('/equipamentocadastrado', upload.fields([{name: 'desceqp_imagem' , maxCount: 1}, {
         name: 'desceqp_pdf', maxCount: 1}]), async function(req, res){
 
@@ -217,14 +215,6 @@ const { json } = require('body-parser')
             res.render('erro');
         }
     });
-
-    app.get('/deletar-equipamento/:id', (req, res) => {
-        Post.destroy({where : {'id': req.params.id}}).then(() => {
-            res.send("Equipamento deletado!")
-        }).catch((erro) => {
-            res.send("Não foi possível deletar!")
-        })
-    })
 
     // INSERT REPRESENTANTES
 

@@ -4,19 +4,19 @@ import React, { useEffect, useState } from "react";
 
 import api from '../../config/configApi';
 
-import paragrafoStyle from "../css/paragrafo"; 
-
-import imagemEqpStyle from "../css/imagemEqp";
+import paragrafoStyle from "../css/paragrafo";
 
 import formStyle from "../css/formStyle";
 
 import inputStyle from "../css/inputStyle";
 
+import imagemFornecStyle from "../css/imagem";
+
 import containerStyle from "../css/container";
 
 // FUNÇÃO PARA CONSULTA DE DADOS DOS EQUIPAMENTOS
 
-function FiltraEquipamentos(){
+function FiltraFornecedores(){
     
     const [data, setData] = useState([]); // DEFINE O DATABASE
     const [url, setUrl] = useState(''); // DEFINE AS URL's
@@ -24,14 +24,14 @@ function FiltraEquipamentos(){
     const [fornecedor, setFornecedor] = useState('');
     const [pesquisarFornecedor, setPesquisarFornecedor] = useState('')
     
-    const getInfosEqp = async (res, req) => { // REQUISIÇÃO DAS IMAGENS
-    await api.get("list-infosequipamentos")
-    .then((response) => {
-        setData(response.data.value)
-        setUrl(response.data.url) 
-    }).catch((err) => {
-        console.log(err);
-    })
+    const getImagesFornec = async (req, res) => { // REQUISIÇÃO DAS IMAGENS
+        await api.get('list-imgf')
+        .then((response) =>{
+        setData(response.data.fornec_foto)
+        setUrl(response.data.url)
+        }).catch((err) => {
+        console.log(err)
+        })
     }
 
     function handleFiltrar(e){
@@ -42,10 +42,10 @@ function FiltraEquipamentos(){
 
     const busca = pesquisarFornecedor.toLowerCase()
 
-    var dataFiltrado = data.filter(v => v.id_fornecedor.toLowerCase().includes(busca))
+    var dataFiltrado = data.filter(v => v.fornec_fornecedornome.toLowerCase().includes(busca))
 
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
-        getInfosEqp()
+        getImagesFornec()
     },[pesquisarFornecedor]);
 
     return (
@@ -72,24 +72,20 @@ function FiltraEquipamentos(){
             {pesquisarFornecedor && ( 
                 <div>
                     {dataFiltrado.map(value => (
-                    <div key={value.id_fornecedor}> 
-                        <div style={containerStyle}>   
+                    <div key={value.fornec_fornecedornome}>
+                        <div style={containerStyle}>    
                             <div style={paragrafoStyle}>
                                 <div>
-                                    <img src={url + value.desceqp_imagem} alt={value.desceqp_imagem.id} style={imagemEqpStyle}></img>
+                                    <img src={url + value.fornec_foto} alt={value.fornec_foto.id} style = {imagemFornecStyle} ></img>
                                 </div>
-                                <a href={url + value.desceqp_pdf} download='pdf' style={{color: 'red'}}>DOWNLOAD PDF ⤓</a>
-                                <p>Fornecedor: {value.id_fornecedor} </p>  
-                                <p>Nome do equipamento: {value.desceqp_nomeeqp + ''}</p>
-                                <p>Modelo: {value.desceqp_modelo + ''}</p>
-                                <p>Consumo energético: {value.desceqp_consumoene + ''}</p>
-                                <p>Tipo de consumo: {value.desceqp_consumotipo+ ''}</p>
-                                <p>Preço: {value.desceqp_precoeqp+ ''}</p>
-                                <p>Data do último preço: {value.desceqp_dataultpreco+ ''}</p>
-                                <p>Capacidade produtiva: {value.desceqp_capacidadeprod + ''}</p>
-                                <p>Comentários sobre equipamento: {value.desceqp_comentario+ ''}</p>
+                                <p>Nome do fornecedor: {value.fornec_fornecedornome + ''}</p>
+                                <p>Tipo de fornecedor: {value.fornec_nivelfornecedor + ''}</p>
+                                <p>Razão social: {value.fornec_razaosocial + ''}</p>
+                                <p>Telefone: {value.fornec_telefone + ''}</p>
+                                <p>Email: {value.fornec_email + ''}</p>
+                                <p>Site: {value.fornec_site + ''}</p>
                             </div>
-                        </div>        
+                        </div>
                     </div>
                     ))}
                 </div>
@@ -99,4 +95,4 @@ function FiltraEquipamentos(){
 }
 
 // EXPORTA A FUNÇÃO PARA USO NAS ROTAS
-export default FiltraEquipamentos;
+export default FiltraFornecedores;

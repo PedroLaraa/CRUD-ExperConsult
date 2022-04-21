@@ -4,9 +4,7 @@ import React, { useEffect, useState } from "react";
 
 import api from '../../config/configApi';
 
-import paragrafoStyle from "../css/paragrafo";
-
-import imagemFornecStyle from "../css/imagem";
+import FiltraFornecedores from "../components/botaoConsulta";
 
 
 // FUNÇÃO PARA CONSULTA DE DADOS DOS FORNECEDORES
@@ -52,25 +50,7 @@ function ConsultaFornecedores(){
 
     return(
 
-        <div>
-            {data.map(value => ( // MAPEIA O DATABASE E PEGA AS INFOS REQUISITADAS
-                <div key={value.id}>
-                    <div style={paragrafoStyle}>
-                        <div>
-                            <img src={url + value.fornec_foto} alt={value.fornec_foto.id} style = {imagemFornecStyle} ></img>
-                        </div>
-                        <p>Nome do fornecedor: {value.fornec_fornecedornome + ''}</p>
-                        <p>Tipo de fornecedor: {value.fornec_nivelfornecedor + ''}</p>
-                        <p>Razão social: {value.fornec_razaosocial + ''}</p>
-                        <p>Telefone: {value.fornec_telefone + ''}</p>
-                        <p>Email: {value.fornec_email + ''}</p>
-                        <p>Site: {value.fornec_site + ''}</p>
-                    </div>
-                    <hr style={{opacity: '0'}} />
-                </div>
-            ))}
-            
-        </div>
+        <FiltraFornecedores />
     )
 }
 
