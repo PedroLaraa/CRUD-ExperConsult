@@ -174,7 +174,7 @@ const { json } = require('body-parser')
                 fornec_telefone: req.body.fornec_telefone,
                 fornec_email: req.body.fornec_email,
                 fornec_site: req.body.fornec_site,
-                fornec_foto: (typeof req.file.filename !== 'undefined') ? req.file.filename : '',
+                fornec_foto: (typeof req.file !== 'undefined') ? req.file.filename : '',
             }
 
             try {
@@ -204,7 +204,7 @@ const { json } = require('body-parser')
             desceqp_precoeqp: req.body.desceqp_precoeqp,
             desceqp_dataultpreco: req.body.desceqp_dataultpreco,
             desceqp_imagem: (typeof req.files.desceqp_imagem !== 'undefined') ? req.files['desceqp_imagem'][0].filename: '',
-            desceqp_pdf: (typeof req.files.desceqp_pdf !== 'undefined') ? req.files['desceqp_pdf'][0].filename: ''
+            desceqp_pdf: (typeof req.files.desceqp_pdf !== 'undefined') ? req.files['desceqp_pdf'][0].filename: '',
         };
 
         try {
@@ -228,7 +228,7 @@ const { json } = require('body-parser')
             representante_comentarios: req.body.representante_comentarios,
             representante_empresasrep: req.body.representante_empresasrep,
             representante_status: req.body.representante_status,
-            representante_imagem: (typeof req.file.filename !== 'undefined') ? req.file.filename : '',
+            representante_imagem: (typeof req.file !== 'undefined') ? req.file.filename : '',
         };
         
         try {
