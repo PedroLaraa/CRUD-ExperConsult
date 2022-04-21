@@ -37,7 +37,6 @@ function FiltraRepresentantes(){
     function handleFiltrar(e){
         e.preventDefault()
         setPesquisarFornecedor(fornecedor)
-        console.log(fornecedor)
     }
 
     const busca = pesquisarFornecedor.toLowerCase()
@@ -51,7 +50,7 @@ function FiltraRepresentantes(){
     return (
 
         <div>
-            <div style={containerStyle}>
+            <div style={{padding: '2rem'}}>
                 <form style={formStyle}>
                     <input
                     style={inputStyle}
@@ -72,7 +71,7 @@ function FiltraRepresentantes(){
             {pesquisarFornecedor && ( 
                 <div style={containerStyle}>
                     {dataFiltrado.map(value => (
-                    <div key={value.id_fornecedor}> 
+                    <div key={value.id}> 
                         <div>
                             <div style={paragrafoStyle}>
                                 <div>

@@ -37,7 +37,6 @@ function FiltraFornecedores(){
     function handleFiltrar(e){
         e.preventDefault()
         setPesquisarFornecedor(fornecedor)
-        console.log(fornecedor)
     }
 
     const busca = pesquisarFornecedor.toLowerCase()
@@ -51,7 +50,7 @@ function FiltraFornecedores(){
     return (
 
         <div>
-            <div style={containerStyle}>
+            <div style={{padding: '2rem'}}>
                 <form style={formStyle} >
                     <input
                     style={inputStyle}
@@ -72,7 +71,7 @@ function FiltraFornecedores(){
             {pesquisarFornecedor && ( 
                 <div>
                     {dataFiltrado.map(value => (
-                    <div key={value.fornec_fornecedornome}>
+                    <div key={value.id}>
                         <div style={containerStyle}>    
                             <div style={paragrafoStyle}>
                                 <div>

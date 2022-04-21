@@ -37,7 +37,6 @@ function FiltraEquipamentos(){
     function handleFiltrar(e){
         e.preventDefault()
         setPesquisarFornecedor(fornecedor)
-        console.log(fornecedor)
     }
 
     const busca = pesquisarFornecedor.toLowerCase()
@@ -51,7 +50,7 @@ function FiltraEquipamentos(){
     return (
 
         <div>
-            <div style={containerStyle}>
+            <div style={{padding: '2rem'}}>
                 <form style={formStyle} >
                     <input
                     style={inputStyle}
@@ -72,10 +71,10 @@ function FiltraEquipamentos(){
             {pesquisarFornecedor && ( 
                 <div>
                     {dataFiltrado.map(value => (
-                    <div key={value.id_fornecedor}> 
+                    <div key={value.id}> 
                         <div style={containerStyle}>   
                             <div style={paragrafoStyle}>
-                                <div>
+                                <div >
                                     <img src={url + value.desceqp_imagem} alt={value.desceqp_imagem.id} style={imagemEqpStyle}></img>
                                 </div>
                                 <a href={url + value.desceqp_pdf} download='pdf' style={{color: 'red'}}>DOWNLOAD PDF ⤓</a>
