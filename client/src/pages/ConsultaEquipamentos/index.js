@@ -2,20 +2,14 @@
 
 import React, { useEffect, useState } from "react";
 
-import api from '../../config/configApi';
-
-import paragrafoStyle from "../css/paragrafo";
-
-import imagemEqpStyle from "../css/imagemEqp";
-
-import FiltraEquipamentos from "../components/botaoDeConsulta";
+import FiltraEquipamentos from "../components/ConsultaEquipamentos";
 
 
 // FUNÇÃO PARA CONSULTA DE DADOS DOS EQUIPAMENTOS
 
 function ConsultaEquipamentos(){
 
-    return ( // FIXME NÃOO ESTÁ RENDERIZANDO O HTML
+    return ( 
 
         <div>
             <FiltraEquipamentos />

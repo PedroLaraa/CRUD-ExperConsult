@@ -27,21 +27,21 @@ function FiltraEquipamentos(){
     const getInfosEqp = async (res, req) => { // REQUISIÇÃO DAS IMAGENS
     await api.get("list-infosequipamentos")
     .then((response) => {
-        setData(response.data.value)
-        setUrl(response.data.url) 
+        setData(response.data.value);
+        setUrl(response.data.url) ;
     }).catch((err) => {
         console.log(err);
     })
     }
 
     function handleFiltrar(e){
-        e.preventDefault()
-        setPesquisarFornecedor(fornecedor)
+        e.preventDefault();
+        setPesquisarFornecedor(fornecedor);
     }
 
-    const busca = pesquisarFornecedor.toLowerCase()
+    const busca = pesquisarFornecedor.toLowerCase();
 
-    var dataFiltrado = data.filter(v => v.id_fornecedor.toLowerCase().includes(busca))
+    var dataFiltrado = data.filter(v => v.id_fornecedor.toLowerCase().includes(busca));
 
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
         getInfosEqp()
@@ -68,7 +68,7 @@ function FiltraEquipamentos(){
                     </button>
                 </form>
             </div>
-            {pesquisarFornecedor && ( 
+            {pesquisarFornecedor && (
                 <div>
                     {dataFiltrado.map(value => (
                     <div key={value.id}> 

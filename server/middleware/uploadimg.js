@@ -9,7 +9,6 @@ module.exports = (multer({ // EXPORTA A FUNCTION E COLOCA O DESTINO DO ARQUIVO
         },
         filename: (req, file, cb) => { // TRANSFORMA O NOME DO ARQUIVO P/ NÃO REPETIR
             cb(null, file.fieldname + Date.now().toString() + '_' + file.originalname) 
-
         }
     })
 }))

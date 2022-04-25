@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 
-import FiltraRepresentantes from "../components/botaoConsultaRep";
+import FiltraRepresentantes from "../components/ConsultaRepresentantes";
 
 
 // FUNÇÃO PARA CONSULTA DE DADOS DOS EQUIPAMENTOS

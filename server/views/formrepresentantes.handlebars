@@ -8,14 +8,14 @@
     <link rel="stylesheet" href="../css/style.css" type="text/css">
 </head>
 
-    <form action="/representantecadastrado" method="POST" enctype="multipart/form-data" style="padding: 1rem;" autocomplete="off">
+    <form action="/representantecadastrado" method="POST" enctype="multipart/form-data" style="padding: 1rem;" autocomplete="off" onsubmit="return alerta()">
         <h1> Cadastro de representante</h1>
         <p style="text-transform: uppercase;">▶ Caso não tenha a informação, favor inserir "n/a" !!!</p>
         <p style="text-transform: uppercase;">▶ Campos marcados com "*" são obrigatórios !!!</p>
         <hr></hr>
         <p>*Nome do representante: </p><input type="text" name="representante_nome">
         <hr></hr>
-        <p>Telefone: </p><input type="text" name="representante_telefone">
+        <p>Telefone: </p><input type="number" name="representante_telefone">
         <hr></hr>
         <p>Site: </p><input type="text" name="representante_site">
         <hr></hr>
@@ -24,17 +24,21 @@
         <p>Comentários sobre: </p><input type="text" name="representante_comentarios">
         <hr></hr>
         <p>*Representa qual fornecedor: </p>
-        <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <label class="input-group-text" for="inputGroupSelect01">Fornecedores</label>
-        </div>
-        <select class="custom-select" id="inputGroupSelect01" name="representante_empresasrep">
-            <option selected>Escolher...</option>
-            {{#each fornecedores}}
-            <option value={{fornec_fornecedornome}}>{{fornec_fornecedornome}}</option>
-            {{/each}}
-        </select>
-        </div>
+            <div class="dropdown ">
+                <button class="btn btn-secondary dropdown-toggle bg-light text-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Fornecedores:
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    {{#each fornecedores}}
+                        <div class="form-check">
+                        <input name="representante_empresasrep" class="form-check-input" value="{{fornec_fornecedornome}}" type="checkbox" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            {{fornec_fornecedornome}}
+                        </label>
+                        </div>
+                    {{/each}}
+                </div>
+            </div>
         <hr></hr>
         <p>*Status atual do representante: </p>
         <div class="input-group mb-3">
@@ -49,15 +53,13 @@
         </select>
         </div>
         <hr></hr>
-        <p>Upload de imagem ⇪: </p>
-        <div class="input-group">
-        <div class="custom-file">
-        <input type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" name="representante_imagem">
-        <label class="custom-file-label" for="inputGroupFile04"></label>
-        </div>
-        </div>
-        <hr></hr>
         <div class="input-group-append" id="cadastrar">
         <button type="submit">Cadastrar!</button>
         </div>
     </form>
+
+    <script>
+        alerta = () => {
+            alert('Cadastrado com sucesso!')
+        }
+    </script>

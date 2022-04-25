@@ -14,6 +14,8 @@ import imagemFornecStyle from "../css/imagem";
 
 import containerStyle from "../css/container";
 
+import FormDialog from "../../dialog/dialog";
+
 // FUNÇÃO PARA CONSULTA DE DADOS DOS EQUIPAMENTOS
 
 function FiltraFornecedores(){
@@ -23,6 +25,8 @@ function FiltraFornecedores(){
 
     const [fornecedor, setFornecedor] = useState('');
     const [pesquisarFornecedor, setPesquisarFornecedor] = useState('')
+
+    const [open, setOpen] = React.useState(false);
     
     const getImagesFornec = async (req, res) => { // REQUISIÇÃO DAS IMAGENS
         await api.get('list-imgf')
@@ -42,6 +46,10 @@ function FiltraFornecedores(){
     const busca = pesquisarFornecedor.toLowerCase()
 
     var dataFiltrado = data.filter(v => v.fornec_fornecedornome.toLowerCase().includes(busca))
+
+    function handleClickEdit(){
+        setOpen(true);
+    }
 
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
         getImagesFornec()
@@ -83,6 +91,19 @@ function FiltraFornecedores(){
                                 <p>Telefone: {value.fornec_telefone + ''}</p>
                                 <p>Email: {value.fornec_email + ''}</p>
                                 <p>Site: {value.fornec_site + ''}</p>
+                                <button onClick={() => handleClickEdit()} >Editar...</button>
+                                <FormDialog open={open} setOpen={setOpen} 
+                                fornec_fornecedornome={value.fornec_fornecedornome}
+                                fornec_nivelfornecedor={value.fornec_nivelfornecedor}
+                                fornec_razaosocial={value.fornec_razaosocial}
+                                fornec_telefone={value.fornec_telefone}
+                                fornec_email={value.fornec_email}
+                                fornec_site={value.fornec_site}
+                                data={value.data}
+                                setData={value.setData}
+                                id={value.id}
+
+                                />
                             </div>
                         </div>
                     </div>

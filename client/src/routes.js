@@ -16,9 +16,9 @@ function Rotas(){
     return( // PATH = CAMINHO; ELEMENT = O QUE VAI SER RENDERIZADO;
         <BrowserRouter>
             <Routes> 
-                <Route path="/representantes" element={<ConsultaRepresentante/>} exact ></Route>
-                <Route path="/fornecedores" element={<ConsultaFornecedores/>} ></Route>
-                <Route path="/equipamentos" element={<ConsultaEquipamentos/>} ></Route>
+                <Route path="/representantes" element={<ConsultaRepresentante />} exact ></Route>
+                <Route path="/fornecedores" element={<ConsultaFornecedores />} ></Route>
+                <Route path="/equipamentos" element={<ConsultaEquipamentos />} ></Route>
             </Routes>
         </BrowserRouter>
     )

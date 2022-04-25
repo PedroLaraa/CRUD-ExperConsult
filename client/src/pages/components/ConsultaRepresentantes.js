@@ -6,8 +6,6 @@ import api from '../../config/configApi';
 
 import paragrafoStyle from "../css/paragrafo"; 
 
-import imagemRepStyle from "../css/imagemRep";
-
 import formStyle from "../css/formStyle";
 
 import inputStyle from "../css/inputStyle";
@@ -24,7 +22,7 @@ function FiltraRepresentantes(){
     const [fornecedor, setFornecedor] = useState('');
     const [pesquisarFornecedor, setPesquisarFornecedor] = useState('')
     
-    const getImages = async (res, req) => { // REQUISIÇÃO DAS IMAGENS
+    const getInfosRepresentante = async (res, req) => { // REQUISIÇÃO DAS IMAGENS
         await api.get("list-img")
         .then((response) => {
             setData(response.data.representante_imagem)
@@ -41,10 +39,10 @@ function FiltraRepresentantes(){
 
     const busca = pesquisarFornecedor.toLowerCase()
 
-    var dataFiltrado = data.filter(v => v.representante_empresasrep.toLowerCase().includes(busca))
+    var dataFiltrado = data.filter(v => v.representante_nome.toLowerCase().includes(busca))
 
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
-        getImages()
+        getInfosRepresentante()
     },[]);
 
     return (
@@ -55,7 +53,7 @@ function FiltraRepresentantes(){
                     <input
                     style={inputStyle}
                     type='search'
-                    placeholder="Fornecedor:"
+                    placeholder="Representante:"
                     onChange={(e) => setFornecedor(e.target.value)}
                     >
                     </input>
@@ -74,9 +72,6 @@ function FiltraRepresentantes(){
                     <div key={value.id}> 
                         <div>
                             <div style={paragrafoStyle}>
-                                <div>
-                                    <img src={url + value.representante_imagem} alt={value.representante_imagem.id} style={imagemRepStyle} ></img>
-                                </div>
                                 <p>Nome: {value.representante_nome + ''}</p>
                                 <p>Representa: {value.representante_empresasrep + ''}</p>
                                 <p>Telefone: {value.representante_telefone + ''}</p>

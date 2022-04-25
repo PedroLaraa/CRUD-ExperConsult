@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../css/style.css" type="text/css">
 </head>
 
-<form action="/fornecedorcadastrado" method="POST" enctype="multipart/form-data" style="padding: 1rem;" autocomplete="off">
+<form action="/fornecedorcadastrado" method="POST" enctype="multipart/form-data" style="padding: 1rem;" autocomplete="off" onsubmit="return alerta()" >
     <h1>Cadastro de fornecedor</h1>
     <p style="text-transform: uppercase;">▶ Caso não tenha a informação, favor inserir "n/a" !!!</p>
     <p style="text-transform: uppercase;">▶ Campos marcados com "*" são obrigatórios !!!</p>
@@ -47,3 +47,9 @@
     <button type="submit">Cadastrar!</button>
     </div>
 </form>
+
+<script>
+    alerta = () => {
+        alert('Cadastrado com sucesso!')
+    }
+</script>

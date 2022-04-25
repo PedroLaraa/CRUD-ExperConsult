@@ -4,6 +4,8 @@ const db = require('./db')
 // PostRep() = Insere dados na table
 // DEFINE A TABLE PARA INSERÇÃO DE DADOS E OS TIPOS DE DADOS DE CADA COLUMN
 
+var ok = ''
+
 const PostRep = db.sequelize.define('representantes_fornecedores',{
     representante_nome: {
         type: db.Sequelize.STRING
@@ -21,10 +23,7 @@ const PostRep = db.sequelize.define('representantes_fornecedores',{
         type: db.Sequelize.STRING
     },
     representante_empresasrep: {
-        type: db.Sequelize.STRING
-    },
-    representante_imagem: {
-        type: db.Sequelize.STRING
+        type: db.Sequelize.JSON
     },
     representante_status: {
         type: db.Sequelize.STRING

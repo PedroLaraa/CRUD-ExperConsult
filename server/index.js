@@ -1,21 +1,37 @@
-// VAR DECLARATION ZONE
 
 const express = require('express')
+
 const app = express()
+
 const handlebars = require('express-handlebars')
+
 const bodyParser = require('body-parser')
+
 const post = require ('./models/Post')
+
 const Post = require('./models/Post')
+
 const PostFornec = require('./models/PostFornec')
+
 const PostRep = require('./models/PostRep')
+
 const path = require('path')
+
 const upload = require('./middleware/uploadimg')
+
 const res = require('express/lib/response')
+
 const req = require('express/lib/request')
+
 const multer = require('multer')
+
 var cors = require('cors');
+
 const db = require('./models/db')
+
 const { json } = require('body-parser')
+
+const mysql = require('mysql2')
 
 // PUBLIC
     app.use((req, res, next) => {
@@ -25,6 +41,7 @@ const { json } = require('body-parser')
         app.use(cors());
         next();
     });
+
     app.use(express.static(path.join(__dirname, 'public')))
     app.use('/files', express.static(path.resolve(__dirname, 'public', 'img')))
 
@@ -42,31 +59,6 @@ const { json } = require('body-parser')
     app.use(bodyParser.json())
 
 // ROUTES FOR FRONT END INFOS
-    
-    // ROUTE OF REPRESENTANTE INFOS
-
-    app.get('/list-infos', async(req, res) => {
-        await PostRep.findAll()
-        .then((values) => {
-            return res.json({
-                values,
-                url: "https://localhost:1212/representantecadastrado/"
-            })
-        })
-    })
-
-    // ROUTE OF FORNECEDOR INFOS
-    
-    app.get('/list-infosfornecedor', async (req, res) => {
-        await PostFornec.findAll()
-        .then((values) => {
-            return res.json({
-                values,
-                url: "https://localhost:1212/fornecedorcadastrado/"
-            })
-        })
-    })
-
 
     // Lista os fornecedores no Form Handlebars dos representantes
     app.get('/cadastro-representante', (req, res) => {
@@ -186,6 +178,30 @@ const { json } = require('body-parser')
             }
     });
 
+    app.put('/fornecedoreditado', async function(req, res){
+
+        const dataToInsert = {
+            fornec_fornecedornome: req.body.fornec_fornecedornome,
+            fornec_nivelfornecedor: req.body.fornec_nivelfornecedor,
+            fornec_razaosocial: req.body.fornec_razaosocial,
+            fornec_telefone: req.body.fornec_telefone,
+            fornec_email: req.body.fornec_email,
+            fornec_site: req.body.fornec_site,
+            id: req.body.id
+        }
+
+        let SQL = 'UPDATE fornecedores SET fornec_nivelfornecedor=?,fornec_fornecedornome=?,fornec_razaosocial=?,fornec_telefone=?,fornec_email=?,fornec_site=?,updatedAt=? WHERE id = ?';
+
+        try{ //FIXME NÃO ESTÁ FAZENDO O EDIT
+            db.query(SQL, [dataToInsert], (err, result) => {
+                if(err) console.log(err)
+                else res.send(result)
+        })
+        }catch{
+            console.log('Erro!')
+        }
+    });
+
 
     // INSERT INFOS EQUIPMENT
 
@@ -226,9 +242,8 @@ const { json } = require('body-parser')
             representante_site: req.body.representante_site,
             representante_estadoatuacao: req.body.representante_estadoatuacao,
             representante_comentarios: req.body.representante_comentarios,
-            representante_empresasrep: req.body.representante_empresasrep,
+            representante_empresasrep: req.body.representante_empresasrep + ''.replace('["]', ''), // Remove elementos
             representante_status: req.body.representante_status,
-            representante_imagem: (typeof req.file !== 'undefined') ? req.file.filename : '',
         };
         
         try {
