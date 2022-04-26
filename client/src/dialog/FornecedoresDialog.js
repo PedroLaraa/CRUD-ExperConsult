@@ -1,3 +1,4 @@
+// TODO ADICIONAR OPÇÕES DE EDIT E DELETE PARA TODOS CAMPOS !!!
 
 import React, {useState} from 'react';
 
@@ -34,7 +35,7 @@ export default function FormDialog(value) {
     });
 
     const handleEditFornecedor = () => {
-        api.put('fornecedoreditado', {
+        api.put('fornecedor-editado', {
             fornec_fornecedornome: editValue.fornec_fornecedornome,
             fornec_nivelfornecedor: editValue.fornec_nivelfornecedor,
             fornec_razaosocial: editValue.fornec_razaosocial,
@@ -46,10 +47,8 @@ export default function FormDialog(value) {
             id: editValue.id 
         });
         handleClose();
-    }
-
-    const handleClickOpen = () => {
-        value.setOpen(true);
+        alert('Editado com sucesso!')
+        document.location.reload(true)
     };
 
     const handleClose = () => {
@@ -61,11 +60,18 @@ export default function FormDialog(value) {
             ...prevValues,
             [value.target.id]: value.target.value,
         }));
+    };
+
+    const handleDelete = () => {
+        api.delete(`fornecedor-deletado/${editValue.id}`)
+        handleClose();
+        alert('Deletado com sucesso!')
+        document.location.reload(true)
     }
 
     return (
             <Dialog open={value.open} onClose={handleClose}>
-                <DialogTitle>Editar</DialogTitle>
+                <DialogTitle>Editar: </DialogTitle>
                 <DialogContent>
                     <TextField
                         autoFocus
@@ -84,6 +90,7 @@ export default function FormDialog(value) {
                         id="fornec_nivelfornecedor"
                         label="Nível fornecedor: "
                         defaultValue={value.fornec_nivelfornecedor}
+                        onChange={handleChangeValue}
                         type="text"
                         fullWidth
                         variant="standard"
@@ -94,6 +101,7 @@ export default function FormDialog(value) {
                         id="fornec_razaosocial"
                         label="Razão social: "
                         defaultValue={value.fornec_razaosocial}
+                        onChange={handleChangeValue}
                         type="text"
                         fullWidth
                         variant="standard"
@@ -104,7 +112,8 @@ export default function FormDialog(value) {
                         id="fornec_telefone"
                         label="Telefone: "
                         defaultValue={value.fornec_telefone}
-                        type="text"
+                        onChange={handleChangeValue}
+                        type="number"
                         fullWidth
                         variant="standard"
                     />
@@ -114,6 +123,7 @@ export default function FormDialog(value) {
                         id="fornec_email"
                         label="Email: "
                         defaultValue={value.fornec_email}
+                        onChange={handleChangeValue}
                         type="text"
                         fullWidth
                         variant="standard"
@@ -124,13 +134,14 @@ export default function FormDialog(value) {
                         id="fornec_site"
                         label="Site: "
                         defaultValue={value.fornec_site}
+                        onChange={handleChangeValue}
                         type="text"
                         fullWidth
                         variant="standard"
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>Excluir</Button>
+                    <Button style={{color: 'red', position: 'relative', right: '20rem'}} onClick={handleDelete}>Excluir</Button>
                     <Button onClick={handleClose}>Cancelar</Button>
                     <Button onClick={handleEditFornecedor}>Salvar</Button>
                 </DialogActions>

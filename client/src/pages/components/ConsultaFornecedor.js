@@ -14,7 +14,9 @@ import imagemFornecStyle from "../css/imagem";
 
 import containerStyle from "../css/container";
 
-import FormDialog from "../../dialog/dialog";
+import FormDialog from "../../dialog/FornecedoresDialog";
+
+import botaoStyle from "../css/botaoEdit";
 
 // FUNÇÃO PARA CONSULTA DE DADOS DOS EQUIPAMENTOS
 
@@ -91,7 +93,7 @@ function FiltraFornecedores(){
                                 <p>Telefone: {value.fornec_telefone + ''}</p>
                                 <p>Email: {value.fornec_email + ''}</p>
                                 <p>Site: {value.fornec_site + ''}</p>
-                                <button onClick={() => handleClickEdit()} >Editar...</button>
+                                <button style={botaoStyle} onClick={() => handleClickEdit()} >Editar...</button>
                                 <FormDialog open={open} setOpen={setOpen} 
                                 fornec_fornecedornome={value.fornec_fornecedornome}
                                 fornec_nivelfornecedor={value.fornec_nivelfornecedor}

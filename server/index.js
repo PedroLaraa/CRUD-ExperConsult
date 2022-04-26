@@ -155,7 +155,7 @@ const mysql = require('mysql2')
 
 // ROTAS DE CADASTROS E POSTS
 
-    // INSERT INFOS FORNECEDORES
+    // ROTA - FORM INFOS FORNECEDORES
 
     app.post('/fornecedorcadastrado', upload.single('fornec_foto'), async function(req, res){
 
@@ -178,28 +178,43 @@ const mysql = require('mysql2')
             }
     });
 
-    app.put('/fornecedoreditado', (req, res) =>{
+    // ROTA - EDITA INFOS DOS FORNECEDORES
 
-        const dataToInsert = {
+    app.put('/fornecedor-editado', async function(req, res){
+
+        const dataToInsert ={
             fornec_fornecedornome: req.body.fornec_fornecedornome,
             fornec_nivelfornecedor: req.body.fornec_nivelfornecedor,
             fornec_razaosocial: req.body.fornec_razaosocial,
             fornec_telefone: req.body.fornec_telefone,
             fornec_email: req.body.fornec_email,
             fornec_site: req.body.fornec_site,
-            id: req.body.id
         }
 
-        let SQL = 'UPDATE fornecedores SET fornec_nivelfornecedor=?,fornec_fornecedornome=?,fornec_razaosocial=?,fornec_telefone=?,fornec_email=?,fornec_site=?,updatedAt=? WHERE id = ?';
-
-            db.query(SQL, [dataToInsert], (err, result) => {
-                if(err) console.log(err)
-                else res.send(result)
-        })
+        const {id} = req.body
+        
+        try{
+            const dbResponse = await PostFornec.update(dataToInsert, {
+                where: {
+                    id: id
+                }
+            })
+        } catch (ex) {
+            console.error(ex);
+            res.render('erro')
+        }
+        
     });
 
+    app.delete('/fornecedor-deletado/:id', async function(req, res) {
 
-    // INSERT INFOS EQUIPMENT
+        const {id} = req.params
+
+        const dbResponse = await PostFornec.destroy({where:{id: id}})
+    })
+
+
+    // ROTA - FORM INFOS EQUIPAMENTOS
 
     app.post('/equipamentocadastrado', upload.fields([{name: 'desceqp_imagem' , maxCount: 1}, {
         name: 'desceqp_pdf', maxCount: 1}]), async function(req, res){
@@ -227,6 +242,45 @@ const mysql = require('mysql2')
             res.render('erro');
         }
     });
+
+    // ROTA - EDITAR EQUIPAMENTO
+
+    app.put('/equipamento-editado', async function(req, res){
+
+        const dataToInsert ={
+            id_fornecedor: req.body.id_fornecedor,
+            desceqp_nomeeqp: req.body.desceqp_nomeeqp,
+            desceqp_modelo: req.body.desceqp_modelo,
+            desceqp_consumoene: req.body.desceqp_consumoene,
+            desceqp_consumotipo: req.body.desceqp_consumotipo,
+            desceqp_precoeqp: req.body.desceqp_precoeqp,
+            desceqp_dataultpreco: req.body.desceqp_dataultpreco,
+            desceqp_capacidadeprod: req.body.desceqp_capacidadeprod,
+            desceqp_comentario: req.body.desceqp_comentario,
+        }
+
+        const {id} = req.body
+        
+        try{
+            const dbResponse = await Post.update(dataToInsert, {
+                where: {
+                    id: id
+                }
+            })
+        } catch (ex) {
+            console.error(ex);
+            res.render('erro')
+        }
+        
+    });
+
+    app.delete('/equipamento-deletado/:id', async function(req, res) {
+
+        const {id} = req.params
+
+        const dbResponse = await Post.destroy({where:{id: id}})
+    })
+
 
     // INSERT REPRESENTANTES
 

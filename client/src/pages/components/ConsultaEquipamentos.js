@@ -14,6 +14,11 @@ import inputStyle from "../css/inputStyle";
 
 import containerStyle from "../css/container";
 
+import FormDialog from "../../dialog/EquipamentosDialog";
+
+import botaoStyle from "../css/botaoEdit";
+
+
 // FUNÇÃO PARA CONSULTA DE DADOS DOS EQUIPAMENTOS
 
 function FiltraEquipamentos(){
@@ -23,6 +28,8 @@ function FiltraEquipamentos(){
 
     const [fornecedor, setFornecedor] = useState('');
     const [pesquisarFornecedor, setPesquisarFornecedor] = useState('')
+
+    const [open, setOpen] = React.useState(false);
     
     const getInfosEqp = async (res, req) => { // REQUISIÇÃO DAS IMAGENS
     await api.get("list-infosequipamentos")
@@ -32,6 +39,10 @@ function FiltraEquipamentos(){
     }).catch((err) => {
         console.log(err);
     })
+    }
+
+    function handleClickEdit(){
+        setOpen(true);
     }
 
     function handleFiltrar(e){
@@ -87,6 +98,20 @@ function FiltraEquipamentos(){
                                 <p>Data do último preço: {value.desceqp_dataultpreco+ ''}</p>
                                 <p>Capacidade produtiva: {value.desceqp_capacidadeprod + ''}</p>
                                 <p>Comentários sobre equipamento: {value.desceqp_comentario+ ''}</p>
+                                <button onClick={() => handleClickEdit()} >Editar...</button>
+                                <FormDialog open={open} setOpen={setOpen}
+                                id_fornecedor = {value.id_fornecedor} 
+                                desceqp_nomeeqp = {value.desceqp_nomeeqp}
+                                desceqp_modelo = {value.desceqp_modelo} 
+                                desceqp_consumoene = {value.desceqp_consumoene}
+                                desceqp_consumotipo = {value.desceqp_consumotipo}
+                                desceqp_precoeqp = {value.desceqp_precoeqp}
+                                desceqp_dataultpreco = {value.desceqp_dataultpreco}
+                                desceqp_capacidadeprod = {value.desceqp_capacidadeprod}
+                                desceqp_comentario = {value.desceqp_comentario}
+                                id={value.id} 
+                                />
+
                             </div>
                         </div>        
                     </div>
