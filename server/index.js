@@ -178,7 +178,7 @@ const mysql = require('mysql2')
             }
     });
 
-    app.put('/fornecedoreditado', async function(req, res){
+    app.put('/fornecedoreditado', (req, res) =>{
 
         const dataToInsert = {
             fornec_fornecedornome: req.body.fornec_fornecedornome,
@@ -192,14 +192,10 @@ const mysql = require('mysql2')
 
         let SQL = 'UPDATE fornecedores SET fornec_nivelfornecedor=?,fornec_fornecedornome=?,fornec_razaosocial=?,fornec_telefone=?,fornec_email=?,fornec_site=?,updatedAt=? WHERE id = ?';
 
-        try{ //FIXME NÃO ESTÁ FAZENDO O EDIT
             db.query(SQL, [dataToInsert], (err, result) => {
                 if(err) console.log(err)
                 else res.send(result)
         })
-        }catch{
-            console.log('Erro!')
-        }
     });
 
 
