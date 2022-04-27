@@ -45,13 +45,13 @@ function FiltraFornecedores(){
         setPesquisarFornecedor(fornecedor)
     }
 
-    const busca = pesquisarFornecedor.toLowerCase()
-
-    var dataFiltrado = data.filter(v => v.fornec_fornecedornome.toLowerCase().includes(busca))
-
     function handleClickEdit(){
         setOpen(true);
     }
+
+    const busca = pesquisarFornecedor.toLowerCase()
+
+    var dataFiltrado = data.filter(v => v.fornec_fornecedornome.toLowerCase().includes(busca))
 
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
         getImagesFornec()

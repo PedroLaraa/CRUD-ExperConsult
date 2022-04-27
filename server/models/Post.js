@@ -42,9 +42,5 @@ const Post = db.sequelize.define('descricao_equipamentos',{
     }
 })
 
-PostFornec.hasMany(Post, {
-    foreignKey: 'fornecedor_idfk'
-})
-
 // EXPORTA A FUNÇÃO Post()
 module.exports = Post

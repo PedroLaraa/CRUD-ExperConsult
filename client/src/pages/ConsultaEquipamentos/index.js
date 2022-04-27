@@ -11,12 +11,9 @@ import FormDialog from "../../dialog/EquipamentosDialog";
 function ConsultaEquipamentos(){
 
     return ( 
-
-        <div>
             <FiltraEquipamentos>
                 <FormDialog />
             </FiltraEquipamentos>
-        </div>
     )
 }
 
