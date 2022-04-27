@@ -15,6 +15,8 @@ const PostFornec = require('./models/PostFornec')
 
 const PostRep = require('./models/PostRep')
 
+const PostClientes = require('./models/PostClientes')
+
 const path = require('path')
 
 const upload = require('./middleware/uploadimg')
@@ -33,7 +35,8 @@ const { json } = require('body-parser')
 
 const mysql = require('mysql2')
 
-// PUBLIC
+    // PERMITE ACESSO DO BROWSER AO SISTEMA
+
     app.use((req, res, next) => {
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
@@ -42,11 +45,13 @@ const mysql = require('mysql2')
         next();
     });
 
+    // DEFINE AS CONSULTAS DE ARQUIVOS PARA PASTA PUBLIC
+
     app.use(express.static(path.join(__dirname, 'public')))
     app.use('/files', express.static(path.resolve(__dirname, 'public', 'img')))
 
 // CONFIGS OF HANDLEBARS
-    // TEMPLATE ENGINE
+    // TEMPLATE ENGINE MAIN HANDLEBARS
         app.engine('handlebars', handlebars.engine({defaultLayout: 'main',  runtimeOptions: {
             allowProtoPropertiesByDefault: true,
             allowProtoMethodsByDefault: true,
@@ -54,7 +59,7 @@ const mysql = require('mysql2')
         app.set("view engine", "handlebars")
         
 
-// CONFIGS OD BODY PARSER
+// CONFIGS DO BODY PARSER
     app.use(bodyParser.urlencoded({extended: false}))
     app.use(bodyParser.json())
 
@@ -75,49 +80,6 @@ const mysql = require('mysql2')
         })
     })
 
-// ROUTES FOR FRONT END INFOS
-
-    // ROUTE OF IMG REPRESENTANTE
-
-    app.get('/list-img', async (req, res) =>{
-        await PostRep.findAll()
-        .then((representante_imagem) =>{
-            return res.json({
-                representante_imagem,
-                url: "http://experconsult:1212/files/"
-            }) 
-        }).catch(() =>{
-            res.render('erro')
-        })
-    })
-
-    // ROUTE OF IMG FORNECEDOR
-
-    app.get('/list-imgf', async (req, res) =>{
-        await PostFornec.findAll()
-        .then((fornec_foto) =>{
-            return res.json({
-                fornec_foto,
-                url: "http://experconsult:1212/files/"
-            }) 
-        }).catch(() =>{
-            res.render('erro')
-        })
-    })
-
-    // ROUTE OF IMG EQUIPMENTS
-
-    app.get('/list-infosequipamentos', async (req, res) =>{
-        await Post.findAll()
-        .then((value) =>{
-            return res.json({
-                value,
-                url: "http://experconsult:1212/files/"
-            })
-        }).catch(() =>{
-            res.render('erro')
-        })
-    })
 
     //ROTAS GERAIS
 
@@ -137,25 +99,17 @@ const mysql = require('mysql2')
         res.render('suporte')
     })
 
-    // REGISTER EQUIPMENT
+// ROTAS DE CRUD
 
-    app.get('/cadastro-equipamentos', function(req, res){
-        res.render('form')
-    })
 
-    // REGISTER FORNECEDOR
+    // FORNECEDORES:
+
+
+    // ROTA - RENDERIZA FORMULÁRIO DE REGISTRO DOS FORNECEDORES
 
     app.get('/cadastro-fornecedor', function(req, res){
         res.render('formfornecedores')
     })
-
-    app.get('/cadastro-representante', function(req, res){
-        res.render('formrepresentantes')
-    });
-
-// ROTAS DE CADASTROS E POSTS
-
-    // ROTA - FORM INFOS / CRIA FORNECEDORES
 
     app.post('/fornecedorcadastrado', upload.single('fornec_foto'), async function(req, res){
 
@@ -178,7 +132,7 @@ const mysql = require('mysql2')
             }
     });
 
-    // ROTA - EDITA INFOS DOS FORNECEDORES
+    // ROTA - EDITAR FORNECEDORES
 
     app.put('/fornecedor-editado', async function(req, res){
 
@@ -215,8 +169,31 @@ const mysql = require('mysql2')
         const dbResponse = await PostFornec.destroy({where:{id: id}})
     })
 
+    // ROTA - RECEBE REQ DO FRONT(INFOS FORNECEDORES)
 
-    // ROTA - FORM INFOS EQUIPAMENTOS
+    app.get('/list-imgf', async (req, res) =>{
+        await PostFornec.findAll()
+        .then((fornec_foto) =>{
+            return res.json({
+                fornec_foto,
+                url: "http://experconsult:1212/files/"
+            }) 
+        }).catch(() =>{
+            res.render('erro')
+        })
+    })
+
+
+    //EQUIPAMENTOS:
+
+
+    // ROTA - RENDERIZA FORMULÁRIO DE REGISTRO DOS EQUIPAMENTOS
+
+    app.get('/cadastro-equipamentos', function(req, res){
+        res.render('form')
+    })
+
+    // ROTA - REGISTRAR EQUIPAMENTOS
 
     app.post('/equipamentocadastrado', upload.fields([{name: 'desceqp_imagem' , maxCount: 1}, {
         name: 'desceqp_pdf', maxCount: 1}]), async function(req, res){
@@ -276,6 +253,8 @@ const mysql = require('mysql2')
         
     });
 
+    // ROTA - DELETAR EQUIPAMENTO
+
     app.delete('/equipamento-deletado/:id', async function(req, res) {
 
         const {id} = req.params
@@ -283,8 +262,31 @@ const mysql = require('mysql2')
         const dbResponse = await Post.destroy({where:{id: id}})
     })
 
+    // ROTA - RECEBE REQ DO FRONT (INFOS EQUIPAMENTOS)
 
-    // INSERT REPRESENTANTES
+    app.get('/list-infosequipamentos', async (req, res) =>{
+        await Post.findAll()
+        .then((value) =>{
+            return res.json({
+                value,
+                url: "http://experconsult:1212/files/"
+            })
+        }).catch(() =>{
+            res.render('erro')
+        })
+    })
+
+
+    //REPRESENTANTES:
+
+
+    // ROTA - RENDERIZA FORMULÁRIO DE REGISTRO DOS REPRESENTANTES 
+
+    app.get('/cadastro-representante', function(req, res){
+        res.render('formrepresentantes')
+    });
+
+    // ROTA - REGISTRAR REPRESENTANTES
 
     app.post('/representantecadastrado', upload.single('representante_imagem'), async function(req, res){
         
@@ -306,6 +308,8 @@ const mysql = require('mysql2')
             res.render('erro');
         }
     });
+
+    // ROTA - EDITAR REPRESENTANTE
 
     app.put('/representante-editado', async function(req, res){
 
@@ -333,7 +337,7 @@ const mysql = require('mysql2')
         
     });
 
-    // ROTA - DELETA FORNECEDORES
+    // ROTA - DELETAR REPRESENTANTE
 
     app.delete('/representante-deletado/:id', async function(req, res) {
 
@@ -341,6 +345,47 @@ const mysql = require('mysql2')
 
         const dbResponse = await PostRep.destroy({where:{id: id}})
     })
+
+    // ROTA - RECEBE REQ DO FRONT (INFOS REPRESENTANTES)
+
+    app.get('/list-img', async (req, res) =>{
+        await PostRep.findAll()
+        .then((representante_imagem) =>{
+            return res.json({
+                representante_imagem,
+                url: "http://experconsult:1212/files/"
+            }) 
+        }).catch(() =>{
+            res.render('erro')
+        })
+    })
+
+
+    //CLIENTES:
+
+
+    // ROTA - CRIA CLIENTE
+    
+    // TODO - CRIAR CRUD DOS CLIENTES:
+    // FORMULÁRIO, RETORNO DOS DADOS NO FRONT, EDIÇÃO E EXCLUSÃO DOS DADOS...
+
+    app.post('/clientecadastrado', upload.single('clientes_logo'), async (req, res) => {
+
+        const dataToInsert = {
+            clientes_razaosocial:  req.body.clientes_razaosocial ,
+            clientes_nomefantasia:  req.body.clientes_nomefantasia ,
+            clientes_apelido:  req.body.clientes_apelido ,
+            clientes_cnpj:  req.body.clientes_cnpj ,
+            clientes_endereco:  req.body.clientes_endereco ,
+            clientes_premissasDeProjeto:  req.body.clientes_premissasDeProjeto ,
+            clientes_ie:  req.body.clientes_ie ,
+            clientes_nomeResponsavel:  req.body.clientes_nomeResponsavel ,
+            clientes_telefone:  req.body.clientes_telefone ,
+            clientes_email:  req.body.clientes_email ,
+            clientes_logo:  req.body.clientes_logo ,
+        }
+    })
+
 
     // PORTA QUE O BACK-END ESTÁ SENDO EXECUTADO
 

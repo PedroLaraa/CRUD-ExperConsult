@@ -4,41 +4,41 @@ const db = require('./db')
 // Post() = Insere dados na table
 // DEFINE A TABLE PARA INSERÇÃO DE DADOS E OS TIPOS DE DADOS DE CADA COLUMN
 
-const Post = db.sequelize.define('descricao_equipamentos',{
-    desceqp_nomeeqp: {
+const PostClientes = db.sequelize.define('clientes_obras',{
+    clientes_razaosocial: {
         type: db.Sequelize.STRING
     },
-    desceqp_modelo: {
+    clientes_nomefantasia: {
         type: db.Sequelize.STRING
     },
-    id_fornecedor: {
+    clientes_apelido: {
         type: db.Sequelize.STRING
     },
-    desceqp_capacidadeprod: {
+    clientes_cnpj: {
         type: db.Sequelize.STRING
     },
-    desceqp_consumoene: {
+    clientes_endereco: {
         type: db.Sequelize.STRING
     },
-    desceqp_consumotipo: {
+    clientes_premissasDeProjeto: {
         type: db.Sequelize.STRING
     },
-    desceqp_comentario: {
+    clientes_ie: {
         type: db.Sequelize.STRING
     },
-    desceqp_precoeqp: {
+    clientes_nomeResponsavel: {
         type: db.Sequelize.STRING
     },
-    desceqp_dataultpreco: {
+    clientes_telefone: {
         type: db.Sequelize.STRING
     },
-    desceqp_imagem: {
+    clientes_email: {
         type: db.Sequelize.STRING
     },
-    desceqp_pdf:{
+    clientes_logo: {
         type: db.Sequelize.STRING
     }
 })
 
 // EXPORTA A FUNÇÃO Post()
-module.exports = Post
+module.exports = PostClientes
