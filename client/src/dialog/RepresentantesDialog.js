@@ -76,6 +76,7 @@ export default function FormDialog(value) {
                 <DialogContent>
                     <TextField
                         autoFocus
+                        autoComplete='off'
                         margin="dense"
                         id="representante_nome"
                         label="Nome do representante: "
@@ -87,6 +88,7 @@ export default function FormDialog(value) {
                     />
                     <TextField
                         autoFocus
+                        autoComplete='off'
                         margin="dense"
                         id="representante_empresasrep"
                         label="Empresas que representa: "
@@ -98,6 +100,7 @@ export default function FormDialog(value) {
                     />
                     <TextField
                         autoFocus
+                        autoComplete='off'
                         margin="dense"
                         id="representante_telefone"
                         label="Telefone: "
@@ -109,6 +112,7 @@ export default function FormDialog(value) {
                     />
                     <TextField
                         autoFocus
+                        autoComplete='off'
                         margin="dense"
                         id="representante_comentarios"
                         label="Comentários sobre representante: "
@@ -120,6 +124,7 @@ export default function FormDialog(value) {
                     />
                     <TextField
                         autoFocus
+                        autoComplete='off'
                         margin="dense"
                         id="representante_site"
                         label="Site: "
@@ -131,6 +136,7 @@ export default function FormDialog(value) {
                     />
                     <TextField
                         autoFocus
+                        autoComplete='off'
                         margin="dense"
                         id="representante_estadoatuacao"
                         label="Estados de atuação: "
@@ -142,6 +148,7 @@ export default function FormDialog(value) {
                     />
                     <TextField
                         autoFocus
+                        autoComplete='off'
                         margin="dense"
                         id="representante_status"
                         label="Status (Ativo, Inativo, Indefinido): "

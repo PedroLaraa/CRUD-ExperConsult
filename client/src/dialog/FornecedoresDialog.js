@@ -71,9 +71,10 @@ export default function FormDialog(value) {
     return (
             <Dialog open={value.open} onClose={handleClose}>
                 <DialogTitle>Editar: </DialogTitle>
-                <DialogContent>
+                <DialogContent >
                     <TextField
                         autoFocus
+                        autoComplete='off'
                         margin="dense"
                         id="fornec_fornecedornome"
                         label="Nome do fornecedor: "
@@ -85,6 +86,7 @@ export default function FormDialog(value) {
                     />
                     <TextField
                         autoFocus
+                        autoComplete='off'
                         margin="dense"
                         id="fornec_nivelfornecedor"
                         label="Nível fornecedor: "
@@ -96,6 +98,7 @@ export default function FormDialog(value) {
                     />
                     <TextField
                         autoFocus
+                        autoComplete='off'
                         margin="dense"
                         id="fornec_razaosocial"
                         label="Razão social: "
@@ -107,6 +110,7 @@ export default function FormDialog(value) {
                     />
                     <TextField
                         autoFocus
+                        autoComplete='off'
                         margin="dense"
                         id="fornec_telefone"
                         label="Telefone: "
@@ -118,6 +122,7 @@ export default function FormDialog(value) {
                     />
                     <TextField
                         autoFocus
+                        autoComplete='off'
                         margin="dense"
                         id="fornec_email"
                         label="Email: "

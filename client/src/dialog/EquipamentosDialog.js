@@ -81,6 +81,7 @@ export default function FormDialog(value) {
                 <DialogContent>
                     <TextField
                         autoFocus
+                        autoComplete='off'
                         margin="dense"
                         id="id_fornecedor"
                         label="Nome do fornecedor: "
@@ -92,6 +93,7 @@ export default function FormDialog(value) {
                     />
                     <TextField
                         autoFocus
+                        autoComplete='off'
                         margin="dense"
                         id="desceqp_nomeeqp"
                         label="Nome do equipamento: "
@@ -103,6 +105,7 @@ export default function FormDialog(value) {
                     />
                     <TextField
                         autoFocus
+                        autoComplete='off'
                         margin="dense"
                         id="desceqp_modelo"
                         label="Modelo: "
@@ -114,6 +117,7 @@ export default function FormDialog(value) {
                     />
                     <TextField
                         autoFocus
+                        autoComplete='off'
                         margin="dense"
                         id="desceqp_consumoene"
                         label="Consumo energético: "
@@ -125,6 +129,7 @@ export default function FormDialog(value) {
                     />
                     <TextField
                         autoFocus
+                        autoComplete='off'
                         margin="dense"
                         id="desceqp_consumotipo"
                         label="Tipoo de consumo: "
@@ -136,6 +141,7 @@ export default function FormDialog(value) {
                     />
                     <TextField
                         autoFocus
+                        autoComplete='off'
                         margin="dense"
                         id="desceqp_precoeqp"
                         label="Preço do equipamento: "
@@ -147,6 +153,7 @@ export default function FormDialog(value) {
                     />
                     <TextField
                         autoFocus
+                        autoComplete='off'
                         margin="dense"
                         id="desceqp_dataultpreco"
                         label="Data do preço: "
@@ -158,6 +165,7 @@ export default function FormDialog(value) {
                     />
                     <TextField
                         autoFocus
+                        autoComplete='off'
                         margin="dense"
                         id="desceqp_capacidadeprod"
                         label="Capacidade produtiva: "
@@ -169,6 +177,7 @@ export default function FormDialog(value) {
                     />
                     <TextField
                         autoFocus
+                        autoComplete='off'
                         margin="dense"
                         id="desceqp_comentario"
                         label="Comentários sobre equipamento: "
