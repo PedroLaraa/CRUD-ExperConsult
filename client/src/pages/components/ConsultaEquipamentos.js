@@ -56,7 +56,7 @@ function FiltraEquipamentos(){
 
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
         getInfosEqp()
-    },[pesquisarFornecedor]);
+    },[]);
 
     return (
 

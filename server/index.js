@@ -84,7 +84,7 @@ const mysql = require('mysql2')
         .then((representante_imagem) =>{
             return res.json({
                 representante_imagem,
-                url: "http://localhost:1212/files/"
+                url: "http://experconsult:1212/files/"
             }) 
         }).catch(() =>{
             res.render('erro')
@@ -98,7 +98,7 @@ const mysql = require('mysql2')
         .then((fornec_foto) =>{
             return res.json({
                 fornec_foto,
-                url: "http://localhost:1212/files/"
+                url: "http://experconsult:1212/files/"
             }) 
         }).catch(() =>{
             res.render('erro')
@@ -112,7 +112,7 @@ const mysql = require('mysql2')
         .then((value) =>{
             return res.json({
                 value,
-                url: "http://localhost:1212/files/"
+                url: "http://experconsult:1212/files/"
             })
         }).catch(() =>{
             res.render('erro')
@@ -155,7 +155,7 @@ const mysql = require('mysql2')
 
 // ROTAS DE CADASTROS E POSTS
 
-    // ROTA - FORM INFOS FORNECEDORES
+    // ROTA - FORM INFOS / CRIA FORNECEDORES
 
     app.post('/fornecedorcadastrado', upload.single('fornec_foto'), async function(req, res){
 
@@ -205,6 +205,8 @@ const mysql = require('mysql2')
         }
         
     });
+
+    // ROTA - DELETA FORNECEDORES
 
     app.delete('/fornecedor-deletado/:id', async function(req, res) {
 
@@ -304,6 +306,41 @@ const mysql = require('mysql2')
             res.render('erro');
         }
     });
+
+    app.put('/representante-editado', async function(req, res){
+
+        const dataToInsert = {
+            representante_nome: req.body.representante_nome,
+            representante_telefone: req.body.representante_telefone,
+            representante_site: req.body.representante_site,
+            representante_estadoatuacao: req.body.representante_estadoatuacao,
+            representante_comentarios: req.body.representante_comentarios,
+            representante_empresasrep: req.body.representante_empresasrep + ''.replace('["]', ''), // Remove elementos
+            representante_status: req.body.representante_status,
+        };
+        const {id} = req.body
+        
+        try{
+            const dbResponse = await PostRep.update(dataToInsert, {
+                where: {
+                    id: id
+                }
+            })
+        } catch (ex) {
+            console.error(ex);
+            res.render('erro')
+        }
+        
+    });
+
+    // ROTA - DELETA FORNECEDORES
+
+    app.delete('/representante-deletado/:id', async function(req, res) {
+
+        const {id} = req.params
+
+        const dbResponse = await PostRep.destroy({where:{id: id}})
+    })
 
     // PORTA QUE O BACK-END ESTÁ SENDO EXECUTADO
 

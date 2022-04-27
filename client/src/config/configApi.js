@@ -3,5 +3,5 @@
 import axios from "axios";
 
 export default axios.create({
-    baseURL: "http://localhost:1212/"
+    baseURL: "http://192.168.10.172:1212/"
 });
