@@ -1,0 +1,55 @@
+<!--
+    FORMULÁRIO PARA ENVIO DE DADOS PRO DB 
+    O NAME SE REFERE A UMA COLUMN DO BD
+    MANTER ESSE PADRÃO PARA FACILITAR ENTENDIMENTO
+-->
+
+<head>
+    <link rel="stylesheet" href="../css/style.css" type="text/css">
+</head>
+
+<form action="/clientecadastrado" method="POST" enctype="multipart/form-data" autocomplete="off" style="padding: 1rem;" onsubmit="return alerta()" >
+    <h1>Cadastro de cliente</h1>
+    <p style="text-transform: uppercase;">▶ Caso não tenha a informação, favor inserir "n/a" !!!</p>
+    <p style="text-transform: uppercase;">▶ Campos marcados com "*" são obrigatórios !!!</p>
+    <hr ></hr>
+    <p>*Razão social: </p><input type="text" name="clientes_razaosocial">
+    <hr ></hr>
+    <p>Nome fantasia: </p><input type="text" name="clientes_nomefantasia">
+    <hr ></hr>
+    <p>Apelido: </p><input type="text" name="clientes_apelido">
+    <hr ></hr>
+    <p>*CNPJ: </p><input type="text" name="clientes_cnpj">
+    <hr ></hr>
+    <p>*Endereço: </p><input type="text" placeholder="País, Estado, Cidade, Bairro, Rua, Número, CEP:" name="clientes_endereco">
+    <hr ></hr>
+    <p>*IE: </p><input type="text" name="clientes_ie">
+    <hr ></hr>
+    <p>*Responsável pelo cliente: </p><input type="text" name="clientes_nomeResponsavel">
+    <hr ></hr>
+    <p>*Telefone (Responsável): </p><input type="text" name="clientes_telefone">
+    <hr ></hr>
+    <p>*Email (Responsável): </p><input type="text" name="clientes_email">
+    <hr ></hr>
+    <p>*Premissas de projeto:</p><textarea name="clientes_premissasDeProjeto" cols="75" rows="5"></textarea>
+    <hr ></hr>
+    <p>Upload de imagem ⇪: </p>
+    <div class="input-group">
+    <div class="custom-file">
+    <input type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" name="clientes_logo">
+    <label class="custom-file-label" for="inputGroupFile04"></label>
+    </div>
+    </div>
+    <hr ></hr>
+    <div class="input-group-append" id="cadastrar">
+        <button type="submit">Cadastrar!</button>
+    </div>
+</form>
+
+<script>
+    alerta = () => {
+        alert('Cadastrado com sucesso!')
+    }
+</script>
+
+<!-- ESTILIZAÇÃO PARA FORM -->

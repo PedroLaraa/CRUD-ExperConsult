@@ -109,6 +109,8 @@ function FiltraEquipamentos(){
                                 desceqp_dataultpreco = {value.desceqp_dataultpreco}
                                 desceqp_capacidadeprod = {value.desceqp_capacidadeprod}
                                 desceqp_comentario = {value.desceqp_comentario}
+                                data={value.data}
+                                setData={value.setData}
                                 id={value.id} 
                                 />
 

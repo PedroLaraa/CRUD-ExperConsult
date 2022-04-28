@@ -288,7 +288,7 @@ const mysql = require('mysql2')
 
     // ROTA - REGISTRAR REPRESENTANTES
 
-    app.post('/representantecadastrado', upload.single('representante_imagem'), async function(req, res){
+    app.post('/representantecadastrado', async function(req, res){
         
         const dataToInsert = {
             representante_nome: req.body.representante_nome,
@@ -369,6 +369,10 @@ const mysql = require('mysql2')
     // TODO - CRIAR CRUD DOS CLIENTES:
     // FORMULÁRIO, RETORNO DOS DADOS NO FRONT, EDIÇÃO E EXCLUSÃO DOS DADOS...
 
+    app.get('/cadastro-clientes', function(req, res){
+        res.render('formClientes')
+    });
+
     app.post('/clientecadastrado', upload.single('clientes_logo'), async (req, res) => {
 
         const dataToInsert = {
@@ -377,15 +381,71 @@ const mysql = require('mysql2')
             clientes_apelido:  req.body.clientes_apelido ,
             clientes_cnpj:  req.body.clientes_cnpj ,
             clientes_endereco:  req.body.clientes_endereco ,
-            clientes_premissasDeProjeto:  req.body.clientes_premissasDeProjeto ,
-            clientes_ie:  req.body.clientes_ie ,
-            clientes_nomeResponsavel:  req.body.clientes_nomeResponsavel ,
+            clientes_premissasDeProjeto:  req.body.clientes_premissasDeProjeto + '' ,
+            clientes_ie:  req.body.clientes_ie,
+            clientes_nomeResponsavel:  req.body.clientes_nomeResponsavel + '',
             clientes_telefone:  req.body.clientes_telefone ,
             clientes_email:  req.body.clientes_email ,
-            clientes_logo:  req.body.clientes_logo ,
+            clientes_logo: (typeof req.file !== 'undefined') ? req.file.filename : '',
+        };
+        try {
+            const dbResponse = await PostClientes.create(dataToInsert);
+            res.redirect('/cadastro-clientes');
+        } catch (ex) {
+            console.error(ex);
+            res.render('erro');
         }
     })
 
+    app.put('/cliente-editado', async function(req, res){
+
+        const dataToInsert = {
+            clientes_razaosocial: req.body.clientes_razaosocial,
+            clientes_nomefantasia: req.body.clientes_nomefantasia,
+            clientes_apelido: req.body.clientes_apelido,
+            clientes_cnpj: req.body.clientes_cnpj,
+            clientes_endereco: req.body.clientes_endereco,
+            clientes_premissasDeProjeto: req.body.clientes_premissasDeProjeto,
+            clientes_ie: req.body.clientes_ie,
+            clientes_nomeResponsavel: req.body.clientes_nomeResponsavel,
+            clientes_telefone: req.body.clientes_telefone,
+            clientes_email: req.body.clientes_email,
+        };
+        const {id} = req.body
+        
+        try{
+            const dbResponse = await PostClientes.update(dataToInsert, {
+                where: {
+                    id: id
+                }
+            })
+        } catch (ex) {
+            console.error(ex);
+            res.render('erro')
+        }
+        
+    });
+
+    app.delete('/cliente-deletado/:id', async function(req, res) {
+
+        const {id} = req.params
+
+        const dbResponse = await PostClientes.destroy({where:{id: id}})
+    })
+
+    // ROTA - RECEBE REQ DO FRONT (INFOS CLIENTES)
+
+    app.get('/list-infosClientes', async (req, res) =>{
+        await PostClientes.findAll()
+        .then((clientes_logo) =>{
+            return res.json({
+                clientes_logo,
+                url: "http://experconsult:1212/files/"
+            }) 
+        }).catch(() =>{
+            res.render('erro')
+        })
+    })
 
     // PORTA QUE O BACK-END ESTÁ SENDO EXECUTADO
 
