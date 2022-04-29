@@ -17,6 +17,8 @@ const PostRep = require('./models/PostRep')
 
 const PostClientes = require('./models/PostClientes')
 
+const PostToDo = require('./models/PostToDo')
+
 const path = require('path')
 
 const upload = require('./middleware/uploadimg')
@@ -82,16 +84,6 @@ const mysql = require('mysql2')
 
 
     //ROTAS GERAIS
-
-    // HOMEPAGE
-
-    app.get('', function(req, res){
-        res.render('home')
-    })
-
-    app.get('/home', function(req, res){
-        res.render('home')
-    })
 
     // SUPORTE
 
@@ -443,6 +435,23 @@ const mysql = require('mysql2')
                 url: "http://experconsult:1212/files/"
             }) 
         }).catch(() =>{
+            res.render('erro')
+        })
+    })
+
+    app.get('/list-infosTodo', async (req, res) =>{
+        await PostToDo.findAll({
+            include: [{
+                attributes: ['clientes_apelido'],
+                model: PostClientes
+            }] 
+        })
+        .then((value) => {
+            res.json({
+                value,
+                url: "http://experconsult:1212/files/"
+            })
+        }).catch(() => {
             res.render('erro')
         })
     })

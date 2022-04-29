@@ -10,6 +10,7 @@ import ConsultaFornecedores from './pages/ConsultaFornecedores';
 import ConsultaRepresentante from './pages/ConsultaRepresentante';
 import ConsultaEquipamentos from './pages/ConsultaEquipamentos';
 import ConsultaClientes from "./pages/ConsultaClientes";
+import DashBoard from "./pages/DashBoardHome";
 
 // CRIA AS ROTA DE NAVEGAÇÃO DE BROWSER
 
@@ -21,6 +22,7 @@ function Rotas(){
                 <Route path="/fornecedores" element={<ConsultaFornecedores />} ></Route>
                 <Route path="/equipamentos" element={<ConsultaEquipamentos />} ></Route>
                 <Route path="/clientes" element={<ConsultaClientes />}></Route>
+                <Route path="/dashboard" element={<DashBoard />}></Route>
             </Routes>
         </BrowserRouter>
     )

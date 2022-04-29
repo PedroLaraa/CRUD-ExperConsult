@@ -1,6 +1,8 @@
 // IMPORTA O SEQUELIZE DO DB PARA ENVIAR DADOS
 const db = require('./db')
 
+const PostToDo = require('./PostToDo')
+
 // Post() = Insere dados na table
 // DEFINE A TABLE PARA INSERÇÃO DE DADOS E OS TIPOS DE DADOS DE CADA COLUMN
 
@@ -39,6 +41,9 @@ const PostClientes = db.sequelize.define('clientes_obras',{
         type: db.Sequelize.STRING
     }
 })
+
+PostToDo.belongsTo(PostClientes, {foreignKey: 'idCliente'})
+
 
 // EXPORTA A FUNÇÃO Post()
 module.exports = PostClientes
