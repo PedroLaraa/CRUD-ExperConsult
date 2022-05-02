@@ -50,7 +50,7 @@ const mysql = require('mysql2')
     // DEFINE AS CONSULTAS DE ARQUIVOS PARA PASTA PUBLIC
 
     app.use(express.static(path.join(__dirname, 'public')))
-    app.use('/files', express.static(path.resolve(__dirname, 'public', 'img')))
+    app.use('/files', express.static(path.resolve(__dirname, 'public', 'upload')))
 
 // CONFIGS OF HANDLEBARS
     // TEMPLATE ENGINE MAIN HANDLEBARS
@@ -280,7 +280,7 @@ const mysql = require('mysql2')
 
     // ROTA - REGISTRAR REPRESENTANTES
 
-    app.post('/representantecadastrado', async function(req, res){
+    app.post('/representantecadastrado', upload.single('representante_imagem'), async function(req, res){
         
         const dataToInsert = {
             representante_nome: req.body.representante_nome,
@@ -291,13 +291,15 @@ const mysql = require('mysql2')
             representante_empresasrep: req.body.representante_empresasrep + ''.replace('["]', ''), // Remove elementos
             representante_status: req.body.representante_status,
         };
-        
+
         try {
+            console.log(dataToInsert)
             const dbResponse = await PostRep.create(dataToInsert);
             res.redirect('/cadastro-representante');
         } catch (ex) {
+            console.log(dataToInsert)
             console.error(ex);
-            res.render('erro');
+            res.render('erro', ex);
         }
     });
 
@@ -311,9 +313,10 @@ const mysql = require('mysql2')
             representante_site: req.body.representante_site,
             representante_estadoatuacao: req.body.representante_estadoatuacao,
             representante_comentarios: req.body.representante_comentarios,
-            representante_empresasrep: req.body.representante_empresasrep + ''.replace('["]', ''), // Remove elementos
+            representante_empresasrep: req.body.representante_empresasrep + ''.replaceAll('["]', ''), // Remove elementos
             representante_status: req.body.representante_status,
         };
+        
         const {id} = req.body
         
         try{
@@ -358,9 +361,6 @@ const mysql = require('mysql2')
 
     // ROTA - CRIA CLIENTE
     
-    // TODO - CRIAR CRUD DOS CLIENTES:
-    // FORMULÁRIO, RETORNO DOS DADOS NO FRONT, EDIÇÃO E EXCLUSÃO DOS DADOS...
-
     app.get('/cadastro-clientes', function(req, res){
         res.render('formClientes')
     });
