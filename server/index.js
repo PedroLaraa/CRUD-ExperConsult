@@ -115,13 +115,20 @@ const mysql = require('mysql2')
                 fornec_foto: (typeof req.file !== 'undefined') ? req.file.filename : '',
             }
 
-            try {
-                const dbResponse = await PostFornec.create(dataToInsert);
-                res.redirect('/cadastro-fornecedor');
-            } catch (ex) {
-                console.error(ex);
-                res.render('erro');
-            }
+            const nomeFornecedor = await PostFornec.findAll({attributes: ['fornec_fornecedornome']})
+            const fornec_fornecedornome = req.body.fornec_fornecedornome
+
+                try {
+                    if(nomeFornecedor.map((v) =>(v.fornec_fornecedornome).toLowerCase()) != fornec_fornecedornome.toLowerCase()){
+                        const dbResponse = await PostFornec.create(dataToInsert);
+                        res.redirect('/cadastro-fornecedor');
+                    }else{
+                        res.json('Fornecedor já cadastrado no sistema!')
+                    }
+                } catch (ex) {
+                    console.error(ex);
+                    res.render('erro');
+                }
     });
 
     // ROTA - EDITAR FORNECEDORES
@@ -201,18 +208,26 @@ const mysql = require('mysql2')
             desceqp_comentario: req.body.desceqp_comentario,
             desceqp_precoeqp: req.body.desceqp_precoeqp,
             desceqp_dataultpreco: req.body.desceqp_dataultpreco,
+            desceqp_marca: req.body.desceqp_marca,
             desceqp_imagem: (typeof req.files.desceqp_imagem !== 'undefined') ? req.files['desceqp_imagem'][0].filename: '',
             desceqp_pdf: (typeof req.files.desceqp_pdf !== 'undefined') ? req.files['desceqp_pdf'][0].filename: '',
         };
 
-        try {
-            const dbResponse = await Post.create(dataToInsert);
-            res.redirect('/cadastro-equipamentos');
-        } catch (ex) {
-            console.error(ex);
-            res.render('erro');
-        }
-    });
+        const nomeEquipamento = await Post.findAll({attributes: ['desceqp_nomeeqp']})
+        const desceqp_nomeeqp = req.body.desceqp_nomeeqp
+
+            try {
+                if(nomeEquipamento.map((v) =>(v.desceqp_nomeeqp).toLowerCase()) != desceqp_nomeeqp.toLowerCase()){
+                    const dbResponse = await Post.create(dataToInsert);
+                    res.redirect('/cadastro-equipamento');
+                }else{
+                    res.json('Equipamento já cadastrado no sistema!')
+                }
+            } catch (ex) {
+                console.error(ex);
+                res.render('erro');
+            }
+});
 
     // ROTA - EDITAR EQUIPAMENTO
 
@@ -292,16 +307,21 @@ const mysql = require('mysql2')
             representante_status: req.body.representante_status,
         };
 
-        try {
-            console.log(dataToInsert)
-            const dbResponse = await PostRep.create(dataToInsert);
-            res.redirect('/cadastro-representante');
-        } catch (ex) {
-            console.log(dataToInsert)
-            console.error(ex);
-            res.render('erro', ex);
-        }
-    });
+        const nomeRepresentante = await PostRep.findAll({attributes: ['representante_nome']})
+        const representante_nome = req.body.representante_nome
+
+            try {
+                if(nomeRepresentante.map((v) =>(v.representante_nome)) != representante_nome){
+                    const dbResponse = await PostRep.create(dataToInsert);
+                    res.redirect('/cadastro-representante');
+                }else{
+                    res.json('Representante já cadastrado no sistema!')
+                }
+            } catch (ex) {
+                console.error(ex);
+                res.render('erro');
+            }
+});
 
     // ROTA - EDITAR REPRESENTANTE
 
@@ -371,7 +391,7 @@ const mysql = require('mysql2')
             clientes_razaosocial:  req.body.clientes_razaosocial ,
             clientes_nomefantasia:  req.body.clientes_nomefantasia ,
             clientes_apelido:  req.body.clientes_apelido ,
-            clientes_cnpj:  req.body.clientes_cnpj ,
+            clientes_cnpj:  req.body.clientes_cnpj,
             clientes_endereco:  req.body.clientes_endereco ,
             clientes_premissasDeProjeto:  req.body.clientes_premissasDeProjeto + '' ,
             clientes_ie:  req.body.clientes_ie,
@@ -380,14 +400,25 @@ const mysql = require('mysql2')
             clientes_email:  req.body.clientes_email ,
             clientes_logo: (typeof req.file !== 'undefined') ? req.file.filename : '',
         };
-        try {
-            const dbResponse = await PostClientes.create(dataToInsert);
-            res.redirect('/cadastro-clientes');
-        } catch (ex) {
-            console.error(ex);
-            res.render('erro');
-        }
-    })
+
+        const cnpjCliente = await PostClientes.findAll({attributes: ['clientes_cnpj']})
+        const clientes_cnpj = req.body.clientes_cnpj
+
+        console.log(cnpjCliente.map((v) =>(v.clientes_cnpj)))
+        console.log(clientes_cnpj)
+
+            try {
+                if(cnpjCliente.map((v) =>(v.clientes_cnpj)) != clientes_cnpj){
+                    const dbResponse = await PostClientes.create(dataToInsert);
+                    res.redirect('/cadastro-clientes');
+                }else{
+                    res.json('Cliente já cadastrado no sistema!')
+                }
+            } catch (ex) {
+                console.error(ex);
+                res.render('erro');
+            }
+});
 
     app.put('/cliente-editado', async function(req, res){
 

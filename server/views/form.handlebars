@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../css/style.css" type="text/css">
 </head>
 
-<form action="/equipamentocadastrado" method="POST" enctype="multipart/form-data" autocomplete="off" style="padding: 1rem;" onsubmit="return alerta()" >
+<form action="/equipamentocadastrado" method="POST" enctype="multipart/form-data" autocomplete="off" style="padding: 1rem;">
     <h1>Cadastro de equipamento</h1>
     <p style="text-transform: uppercase;">▶ Caso não tenha a informação, favor inserir "n/a" !!!</p>
     <p style="text-transform: uppercase;">▶ Campos marcados com "*" são obrigatórios !!!</p>
@@ -19,6 +19,19 @@
             <label class="input-group-text" for="inputGroupSelect01">Fornecedores</label>
         </div>
         <select class="custom-select" id="inputGroupSelect01" name="id_fornecedor">
+            <option selected>Escolher...</option>
+            {{#each fornecedores}}
+            <option value={{fornec_fornecedornome}}>{{fornec_fornecedornome}}</option>
+            {{/each}}
+        </select>
+        </div>
+    <hr ></hr>
+            <p>*Marca do equipamento: </p>
+        <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <label class="input-group-text" for="inputGroupSelect01">Marcas</label>
+        </div>
+        <select class="custom-select" id="inputGroupSelect01" name="desceqp_marca">
             <option selected>Escolher...</option>
             {{#each fornecedores}}
             <option value={{fornec_fornecedornome}}>{{fornec_fornecedornome}}</option>

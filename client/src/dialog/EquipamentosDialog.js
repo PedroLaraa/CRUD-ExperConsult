@@ -1,4 +1,3 @@
-// TODO ADICIONAR OPÇÕES DE EDIT E DELETE PARA TODOS CAMPOS !!!
 
 import React, {useState} from 'react';
 
@@ -32,6 +31,7 @@ export default function FormDialog(value) {
         desceqp_dataultpreco: value.desceqp_dataultpreco,
         desceqp_capacidadeprod: value.desceqp_capacidadeprod,
         desceqp_comentario: value.desceqp_comentario,
+        desceqp_marca: value.desceqp_marca,
         data: value.data,
         setData: value.setData,
         id: value.id    
@@ -48,6 +48,7 @@ export default function FormDialog(value) {
             desceqp_dataultpreco: editValue.desceqp_dataultpreco,
             desceqp_capacidadeprod: editValue.desceqp_capacidadeprod,
             desceqp_comentario: editValue.desceqp_comentario,
+            desceqp_marca: editValue.desceqp_marca,
             data: editValue.data,
             setData: editValue.setData,
             id: editValue.id 
@@ -110,6 +111,18 @@ export default function FormDialog(value) {
                         id="desceqp_modelo"
                         label="Modelo: "
                         defaultValue={value.desceqp_modelo}
+                        onChange={handleChangeValue}
+                        type="text"
+                        fullWidth
+                        variant="standard"
+                    />
+                    <TextField
+                        autoFocus
+                        autoComplete='off'
+                        margin="dense"
+                        id="desceqp_marca"
+                        label="Marca: "
+                        defaultValue={value.desceqp_marca}
                         onChange={handleChangeValue}
                         type="text"
                         fullWidth

@@ -92,6 +92,7 @@ function FiltraEquipamentos(){
                                 <p>Fornecedor: {value.id_fornecedor} </p>  
                                 <p>Nome do equipamento: {value.desceqp_nomeeqp + ''}</p>
                                 <p>Modelo: {value.desceqp_modelo + ''}</p>
+                                <p>Marca: {value.desceqp_marca + ''}</p>
                                 <p>Consumo energético: {value.desceqp_consumoene + ''}</p>
                                 <p>Tipo de consumo: {value.desceqp_consumotipo+ ''}</p>
                                 <p>Preço: {value.desceqp_precoeqp+ ''}</p>
@@ -109,6 +110,7 @@ function FiltraEquipamentos(){
                                 desceqp_dataultpreco = {value.desceqp_dataultpreco}
                                 desceqp_capacidadeprod = {value.desceqp_capacidadeprod}
                                 desceqp_comentario = {value.desceqp_comentario}
+                                desceqp_marca = {value.desceqp_marca}
                                 data={value.data}
                                 setData={value.setData}
                                 id={value.id} 

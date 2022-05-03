@@ -41,22 +41,49 @@ function FiltraClientes() {
             })
     }
 
+
     function handleClickEdit() {
         setOpen(true);
     }
 
     function handleFiltrar(e) {
+        
+        setPesquisarCliente(clientes)
+
         e.preventDefault();
-        setPesquisarCliente(clientes);
+        
+        
+        if(verificacaoDeBusca == false){
+                alert('Nada encontrado!')
+            }
     }
+
+    function atualizaVerificacao(){
+        if(clientes){
+            verificacaoDeBusca = true
+        }
+    }
+
+    function defClientes(e){
+        setClientes(e.target.value)
+    }
+
+    function handleAtualizaCV(e){
+        defClientes(e)
+        atualizaVerificacao()
+    }
+
+    //FIXME verificação de busca não atualiza ao mudar valor de clientes
 
     const busca = pesquisarCliente.toLowerCase();
 
-    var dataFiltrado = data.filter(v => v.clientes_razaosocial.toLowerCase().includes(busca));
+    const dataFiltrado = data.filter(v => v.clientes_razaosocial.toLowerCase().includes(busca));
+
+    const verificacaoDeBusca = data.some(el => dataFiltrado.map((value) => (value)).includes(el))
 
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
         getInfosCliente()
-    }, [pesquisarCliente]);
+    }, []);
 
     return (
 
@@ -66,8 +93,8 @@ function FiltraClientes() {
                     <input
                         style={inputStyle}
                         type='search'
-                        placeholder="Cliente:"
-                        onChange={(e) => setClientes(e.target.value)}
+                        placeholder="Razão social:"
+                        onChange={(e) => handleAtualizaCV(e)}
                     >
                     </input>
                     <button
