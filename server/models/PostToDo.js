@@ -16,6 +16,9 @@ const PostToDo = db.sequelize.define('todo_clientes',{
     idCliente: {
         type: db.Sequelize.INTEGER
     },
+    todo_autor: {
+        type: db.Sequelize.STRING
+    }
 })
 
 // EXPORTA A FUNÇÃO Post()
