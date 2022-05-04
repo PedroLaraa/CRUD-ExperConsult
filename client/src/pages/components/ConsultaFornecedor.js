@@ -51,11 +51,21 @@ function FiltraFornecedores() {
 
     const busca = pesquisarFornecedor.toLowerCase()
 
-    var dataFiltrado = data.filter(v => v.fornec_fornecedornome.toLowerCase().includes(busca))
+    const dataFiltrado = data.filter(v => v.fornec_fornecedornome.toLowerCase().includes(busca))
+
+    const verificacaoDeBusca = data.some(el => dataFiltrado.map((value) => (value)).includes(el))
 
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
         getImagesFornec()
-    }, [pesquisarFornecedor]);
+    }, []);
+
+    useEffect(() => {
+        if(pesquisarFornecedor){
+            if(verificacaoDeBusca === false || fornecedor === ''){
+                alert('Resultado da busca não encontrado!')
+            }
+        }
+    }, [pesquisarFornecedor])
 
     return (
 

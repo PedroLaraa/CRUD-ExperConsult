@@ -49,11 +49,22 @@ function FiltraRepresentantes() {
 
     const busca = pesquisarFornecedor.toLowerCase()
 
-    var dataFiltrado = data.filter(v => v.representante_nome.toLowerCase().includes(busca))
+    const dataFiltrado = data.filter(v => v.representante_nome.toLowerCase().includes(busca))
+
+    const verificacaoDeBusca = data.some(el => dataFiltrado.map((value) => (value)).includes(el))
 
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
         getInfosRepresentante()
     }, []);
+
+    useEffect(() => {
+        if(pesquisarFornecedor){
+            if(verificacaoDeBusca === false || fornecedor === ''){
+                alert('Resultado da busca não encontrado!')
+            }
+        }
+    }, [pesquisarFornecedor])
+
 
     return (
 

@@ -52,11 +52,21 @@ function FiltraEquipamentos(){
 
     const busca = pesquisarFornecedor.toLowerCase();
 
-    var dataFiltrado = data.filter(v => v.id_fornecedor.toLowerCase().includes(busca));
+    const dataFiltrado = data.filter(v => v.id_fornecedor.toLowerCase().includes(busca));
+
+    const verificacaoDeBusca = data.some(el => dataFiltrado.map((value) => (value)).includes(el))
 
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
         getInfosEqp()
     },[]);
+
+    useEffect(() => {
+        if(pesquisarFornecedor){
+            if(verificacaoDeBusca === false || fornecedor === ''){
+                alert('Resultado da busca não encontrado!')
+            }
+        }
+    }, [pesquisarFornecedor])
 
     return (
 
@@ -99,7 +109,7 @@ function FiltraEquipamentos(){
                                 <p>Data do último preço: {value.desceqp_dataultpreco+ ''}</p>
                                 <p>Capacidade produtiva: {value.desceqp_capacidadeprod + ''}</p>
                                 <p>Comentários sobre equipamento: {value.desceqp_comentario+ ''}</p>
-                                <button onClick={() => handleClickEdit()} >Editar...</button>
+                                <button style={botaoStyle} onClick={() => handleClickEdit()} >Editar...</button>
                                 <FormDialog open={open} setOpen={setOpen}
                                 id_fornecedor = {value.id_fornecedor} 
                                 desceqp_nomeeqp = {value.desceqp_nomeeqp}

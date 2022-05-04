@@ -47,33 +47,10 @@ function FiltraClientes() {
     }
 
     function handleFiltrar(e) {
-        
         setPesquisarCliente(clientes)
 
         e.preventDefault();
-        
-        
-        if(verificacaoDeBusca == false){
-                alert('Nada encontrado!')
-            }
     }
-
-    function atualizaVerificacao(){
-        if(clientes){
-            verificacaoDeBusca = true
-        }
-    }
-
-    function defClientes(e){
-        setClientes(e.target.value)
-    }
-
-    function handleAtualizaCV(e){
-        defClientes(e)
-        atualizaVerificacao()
-    }
-
-    //FIXME verificação de busca não atualiza ao mudar valor de clientes
 
     const busca = pesquisarCliente.toLowerCase();
 
@@ -85,6 +62,14 @@ function FiltraClientes() {
         getInfosCliente()
     }, []);
 
+    useEffect(() => {
+        if(pesquisarCliente){
+            if(verificacaoDeBusca === false || clientes === ''){
+                alert('Resultado da busca não encontrado!')
+            }
+        }
+    }, [pesquisarCliente])
+
     return (
 
         <div>
@@ -94,7 +79,7 @@ function FiltraClientes() {
                         style={inputStyle}
                         type='search'
                         placeholder="Razão social:"
-                        onChange={(e) => handleAtualizaCV(e)}
+                        onChange={(e) => setClientes(e.target.value)}
                     >
                     </input>
                     <button
@@ -125,7 +110,7 @@ function FiltraClientes() {
                                     <p>Telefone (Respoonsável): {value.clientes_telefone + ''}</p>
                                     <p>Email (Responsável): {value.clientes_email + ''}</p>
                                     <p>Premissas de projeto: {value.clientes_premissasDeProjeto + ''}</p>
-                                    <button onClick={() => handleClickEdit()} >Editar...</button>
+                                    <button style={botaoStyle} onClick={() => handleClickEdit()} >Editar...</button>
                                     <FormDialog open={open} setOpen={setOpen}
                                         clientes_razaosocial={value.clientes_razaosocial}
                                         clientes_nomefantasia={value.clientes_nomefantasia}
