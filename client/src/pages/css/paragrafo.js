@@ -4,7 +4,7 @@ const paragrafoStyle = {
     paddingTop:'.4rem',
     fontSize: '1.3rem',
     fontFamily: 'JetBrains Mono',
-    border: '.3rem solid rgb(168,208,213)',
+    border: '.3rem solid #A9D2D7',
     borderRadius: '1rem',
 }
 
