@@ -2,7 +2,7 @@
 
 const inputStyle = {
     backgroundColor: 'whitesmoke',
-    fontFamily: 'JetBrains Mono',
+    fontFamily: 'Raleway',
     fontSize: '1rem',
     border: '3px solid rgb(179,100,148)',
     borderRadius: '.5rem',
