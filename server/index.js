@@ -404,10 +404,7 @@ const mysql = require('mysql2')
         const cnpjCliente = await PostClientes.findAll({attributes: ['clientes_cnpj']})
         const clientes_cnpj = req.body.clientes_cnpj
 
-        console.log(cnpjCliente.map((v) =>(v.clientes_cnpj)))
-        console.log(clientes_cnpj)
-
-            try {
+        try {
                 if(cnpjCliente.map((v) =>(v.clientes_cnpj)) != clientes_cnpj){
                     const dbResponse = await PostClientes.create(dataToInsert);
                     res.redirect('/cadastro-clientes');
@@ -470,10 +467,26 @@ const mysql = require('mysql2')
         })
     })
 
+    app.post('/todo-cadastrado', async (req, res) => {
+        const dataToInsert = {
+            todo_dataConclusao: req.body.todo_dataConclusao,
+            todo_eventos: req.body.todo_eventos,
+            todo_autor: req.body.todo_autor,
+            idCliente: req.body.cliente_id
+        }
+
+        try{
+            const dbResponse = await PostToDo.create(dataToInsert)
+            res.redirect('expertestes:3000/dashboard')
+        }catch{
+            res.render('erro')
+        }
+    })
+
     app.get('/list-infosTodo', async (req, res) =>{
         await PostToDo.findAll({
             include: [{
-                attributes: ['clientes_apelido'],
+                attributes: ['clientes_apelido', 'id'],
                 model: PostClientes
             }] 
         })

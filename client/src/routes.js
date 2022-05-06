@@ -23,6 +23,7 @@ function Rotas(){
                 <Route path="/equipamentos" element={<ConsultaEquipamentos />} ></Route>
                 <Route path="/clientes" element={<ConsultaClientes />}></Route>
                 <Route path="/dashboard" element={<DashBoard />}></Route>
+                <Route path="/" element={<DashBoard />}></Route>
             </Routes>
         </BrowserRouter>
     )
