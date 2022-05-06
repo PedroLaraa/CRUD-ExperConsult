@@ -45,9 +45,7 @@ function DashBoardInterface() {
 
     //FIXME FILTRO DE NOMES NÃO ESTÁ FUNCIONANDO!
 
-    const nomesFiltrados = data.map().reduce((un, it) => {
-        return un.includes(it) ? un : [...un, it]
-    })
+    const nomesFiltrados = data.map(v => JSON.stringify(v.clientes_obra.clientes_apelido).replaceAll('"', '').toLowerCase())
 
     console.log(nomesFiltrados)
 
