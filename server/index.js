@@ -175,7 +175,7 @@ const mysql = require('mysql2')
         .then((fornec_foto) =>{
             return res.json({
                 fornec_foto,
-                url: "http://experconsult:1212/files/"
+                url: "http://192.168.10.228:1212/files/"
             }) 
         }).catch(() =>{
             res.render('erro')
@@ -276,7 +276,7 @@ const mysql = require('mysql2')
         .then((value) =>{
             return res.json({
                 value,
-                url: "http://experconsult:1212/files/"
+                url: "http://192.168.10.228:1212/files/"
             })
         }).catch(() =>{
             res.render('erro')
@@ -368,7 +368,7 @@ const mysql = require('mysql2')
         .then((representante_imagem) =>{
             return res.json({
                 representante_imagem,
-                url: "http://experconsult:1212/files/"
+                url: "http://192.168.10.228:1212/files/"
             }) 
         }).catch(() =>{
             res.render('erro')
@@ -460,7 +460,7 @@ const mysql = require('mysql2')
         .then((clientes_logo) =>{
             return res.json({
                 clientes_logo,
-                url: "http://experconsult:1212/files/"
+                url: "http://192.168.10.228:1212/files/"
             }) 
         }).catch(() =>{
             res.render('erro')
@@ -477,10 +477,40 @@ const mysql = require('mysql2')
 
         try{
             const dbResponse = await PostToDo.create(dataToInsert)
-            res.redirect('expertestes:3000/dashboard')
+            res.redirect('192.168.10.228:3000/dashboard')
         }catch{
             res.render('erro')
         }
+    })
+
+    app.put('/todo-editado', async function(req, res){
+
+        const dataToInsert = {
+            todo_dataConclusao: req.body.todo_dataConclusao,
+            todo_eventos: req.body.todo_eventos,
+            todo_autor: req.body.todo_autor,
+        };
+
+        const {todo_id} = req.body
+        
+        try{
+            const dbResponse = await PostToDo.update(dataToInsert, {
+                where: {
+                    id: todo_id
+                }
+            })
+        } catch (ex) {
+            console.error(ex);
+            res.render('erro')
+        }
+        
+    });
+
+    app.delete('/todo-deletado/:id', async function(req, res) {
+
+        const {id} = req.params
+
+        const dbResponse = await PostToDo.destroy({where:{id: id}})
     })
 
     app.get('/list-infosTodo', async (req, res) =>{
@@ -493,7 +523,7 @@ const mysql = require('mysql2')
         .then((value) => {
             res.json({
                 value,
-                url: "http://experconsult:1212/files/"
+                url: "http://192.168.10.228:1212/files/"
             })
         }).catch(() => {
             res.render('erro')

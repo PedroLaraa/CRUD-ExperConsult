@@ -85,7 +85,7 @@ export default function FormDialog(value) {
                         autoComplete='off'
                         margin="dense"
                         id="clientes_razaosocial"
-                        label="Nome do fornecedor: "
+                        label="Razão social: "
                         defaultValue={value.clientes_razaosocial}
                         onChange={handleChangeValue}
                         type="text"
@@ -97,7 +97,7 @@ export default function FormDialog(value) {
                         autoComplete='off'
                         margin="dense"
                         id="clientes_nomefantasia"
-                        label="Nome do equipamento: "
+                        label="Nome fantasia: "
                         defaultValue={value.clientes_nomefantasia}
                         onChange={handleChangeValue}
                         type="text"
@@ -109,7 +109,7 @@ export default function FormDialog(value) {
                         autoComplete='off'
                         margin="dense"
                         id="clientes_apelido"
-                        label="Modelo: "
+                        label="Apelido: "
                         defaultValue={value.clientes_apelido}
                         onChange={handleChangeValue}
                         type="text"
@@ -121,7 +121,7 @@ export default function FormDialog(value) {
                         autoComplete='off'
                         margin="dense"
                         id="clientes_cnpj"
-                        label="Consumo energético: "
+                        label="CNPJ: "
                         defaultValue={value.clientes_cnpj}
                         onChange={handleChangeValue}
                         type="text"
@@ -133,7 +133,7 @@ export default function FormDialog(value) {
                         autoComplete='off'
                         margin="dense"
                         id="clientes_endereco"
-                        label="Tipoo de consumo: "
+                        label="Endereço: "
                         defaultValue={value.clientes_endereco}
                         onChange={handleChangeValue}
                         type="text"
@@ -145,7 +145,7 @@ export default function FormDialog(value) {
                         autoComplete='off'
                         margin="dense"
                         id="clientes_email"
-                        label="Preço do equipamento: "
+                        label="Email: "
                         defaultValue={value.clientes_email}
                         onChange={handleChangeValue}
                         type="text"
@@ -157,7 +157,7 @@ export default function FormDialog(value) {
                         autoComplete='off'
                         margin="dense"
                         id="clientes_ie"
-                        label="Data do preço: "
+                        label="IE: "
                         defaultValue={value.clientes_ie}
                         onChange={handleChangeValue}
                         type="text"
@@ -169,7 +169,7 @@ export default function FormDialog(value) {
                         autoComplete='off'
                         margin="dense"
                         id="clientes_nomeResponsavel"
-                        label="Capacidade produtiva: "
+                        label="Responsável: "
                         defaultValue={value.clientes_nomeResponsavel}
                         onChange={handleChangeValue}
                         type="text"
@@ -181,7 +181,7 @@ export default function FormDialog(value) {
                         autoComplete='off'
                         margin="dense"
                         id="clientes_telefone"
-                        label="Comentários sobre equipamento: "
+                        label="Telefone: "
                         defaultValue={value.clientes_telefone}
                         onChange={handleChangeValue}
                         type="text"
@@ -193,7 +193,7 @@ export default function FormDialog(value) {
                         autoComplete='off'
                         margin="dense"
                         id="clientes_premissasDeProjeto"
-                        label="Comentários sobre equipamento: "
+                        label="Premissas de projeto: "
                         defaultValue={value.clientes_premissasDeProjeto}
                         onChange={handleChangeValue}
                         type="text"

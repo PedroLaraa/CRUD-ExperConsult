@@ -21,27 +21,23 @@ import { SliderValueLabel } from '@mui/material';
 
 import api from '../config/configApi';
 
-export default function FormDialog(value) {
+export default function FormDialogEdit(value) {
 
     const [editValue,setEditValue] = useState({
-        todo_dataConclusao: value.todo_dataConclusao,
+        todo_dataConclusao: value.updatedAt,
         todo_eventos: value.todo_eventos,
         todo_autor: value.todo_autor,
-        cliente_id: value.cliente_id,
+        todo_id: value.todo_id,
         data: value.data,
         setData: value.setData,
-        id: value.id    
     });
 
-    const [data, setData] = useState([]);
-    const [url, setUrl] = useState('');
-
     const handleCriarEvento = () => {
-        api.post('todo-cadastrado', {
-            todo_dataConclusao: editValue.todo_dataConclusao,
+        api.put('todo-editado', {
+            todo_dataConclusao: editValue.updatedAt,
             todo_eventos: editValue.todo_eventos,
             todo_autor: editValue.todo_autor,
-            cliente_id: editValue.cliente_id,
+            todo_id: editValue.todo_id,
             data: editValue.data,
             setData: editValue.setData,
         });
@@ -49,16 +45,6 @@ export default function FormDialog(value) {
         alert('Cadastrado com sucesso!')
         document.location.reload(true)
     };
-
-    const getInfosTodo = async (req, res) => {
-        api.get('list-infosTodo')
-            .then((response) => {
-                setData(response.data.value)
-                setUrl(response.data.url)
-            }).catch((err) => {
-                console.log(err)
-            })
-    }
 
     const handleClose = () => {
         value.setOpen(false);
@@ -70,6 +56,13 @@ export default function FormDialog(value) {
             [value.target.id]: value.target.value,
         }));
     };
+
+    const handleDelete = () => {
+        api.delete(`todo-deletado/${editValue.todo_id}`)
+        handleClose();
+        alert('Deletado com sucesso!')
+        document.location.reload(true)
+    }
 
     return (
             <Dialog open={value.open} onClose={handleClose}>
@@ -97,10 +90,23 @@ export default function FormDialog(value) {
                         fullWidth
                         variant="standard"
                     />
+                    <TextField
+                        defaultValue={value.todo_id}
+                        autoFocus
+                        autoComplete='off'
+                        margin="dense"
+                        id="todo_id"
+                        label="ID: "
+                        onChange={handleChangeValue}
+                        type="text"
+                        fullWidth
+                        variant="standard"
+                    />
                 </DialogContent>
                 <DialogActions>
+                <Button style={{color: 'red', position: 'relative', right: '15rem'}} onClick={handleDelete}>Excluir</Button>
                     <Button onClick={handleClose}>Cancelar</Button>
-                    <Button onClick={handleCriarEvento}>Cadastrar Evento</Button>
+                    <Button onClick={handleCriarEvento}>Salvar Evento</Button>
                 </DialogActions>
             </Dialog>
     );
