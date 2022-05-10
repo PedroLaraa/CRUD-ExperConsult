@@ -1,5 +1,9 @@
 
-// FIXME BOTÃO DE EDITAR COM FORMDIALOG NÃO FUNCIONA (PASSA O ID ERRADO)
+//TODO TENTAR SETAR VALORES PADRÕES 
+
+//TODO ALTERAR OS DEMAIS SISTEMAS DE EDIT E DELETE COMO O NOVO (PRINCIPAL A RESOLVER)
+
+//TODO GERAR UM POST NO TODO_CLIENTES AUTOMATICAMENTE QUANDO UM NOVO CLIENTE FOR CADASTRADO    
 
 import React, { useEffect, useState } from "react";
 
@@ -13,7 +17,6 @@ import FormDialog from "../../dialog/ClientesToDo";
 
 import cabecalhoTableDashboard from "../css/cabecalhoTableDashboard";
 
-import FormDialogEdit from "../../dialog/ClientesTodoEdit";
 //list-infosTodo
 
 function DashBoardInterface() {
@@ -95,7 +98,7 @@ function DashBoardInterface() {
                     ))}
                 </div>
                 {clientes && (
-                    <div className="col-8 overflow-auto"
+                    <div className="col-8 overflow-auto vh-100"
                         style={{ maxHeight: "40rem", width: "55rem", paddingLeft: "2rem" }}
                     >
                         <div className="d-flex d-inline justify-content-around p-3">
@@ -111,16 +114,13 @@ function DashBoardInterface() {
                                 style={cabecalhoTableDashboard}
                                 className="container row text-uppercase m-0"
                             >
-                                <div className="col-1 ">
-                                    <p>ID:</p>
-                                </div>
-                                <div className="col-3 ">
+                                <div className="col-2 ">
                                     <p>Data:</p>
                                 </div>
-                                <div className="col-6 ">
+                                <div className="col-8 ">
                                     <p>Evento:</p>
                                 </div>
-                                <div className="col-2 ">
+                                <div className="col-1 ">
                                     <p>Autor:</p>
                                 </div>
                             </div>
@@ -144,19 +144,13 @@ function DashBoardInterface() {
                                         style={paragrafoDashboardStyle}
                                         className="row justify-content-md-center"
                                     >
-                                        <div className="col-1 col-md-1 ">
-                                            <p>{value.id}</p>
+                                        <div className="col-1 col-md-2 ">
+                                            <p>{value.updatedAt.split('-').reverse().join('/')}</p>
                                         </div>
                                         <div className="col-1">
                                             <p style={{ background: 'rgba(50,50,50,0.5)', height: '13.6rem', width: '.5rem', border: "1px solid whitesmoke", borderRadius: "1rem" }} />
                                         </div>
-                                        <div className="col-2 col-md-2 ">
-                                            <p>{value.createdAt.split('-').reverse().join('/')}</p>
-                                        </div>
-                                        <div className="col-1">
-                                            <p style={{ background: 'rgba(50,50,50,0.5)', height: '13.6rem', width: '.5rem', border: "1px solid whitesmoke", borderRadius: "1rem" }} />
-                                        </div>
-                                        <div className="col-4 col-md-4">
+                                        <div className="col-4 col-md-6">
                                             <p>{value.todo_eventos}</p>
                                         </div>
                                         <div className="col-1">
@@ -167,24 +161,9 @@ function DashBoardInterface() {
                                         </div>
                                     </div>
                                     <div className="p-2 d-flex d-inline justify-content-around">
-                                        <button
-                                            onClick={() => handleClickEdit()}
-                                            className="btn btn-outline-dark"
-                                        >Editar
-                                        </button>
+                                        <a className="btn btn-outline-dark" href={`edit-evento/${value.id}`}>Editar</a>
                                     </div>
                                 </div>
-                                <FormDialogEdit
-                                    open={openDialog2}
-                                    setOpen={setOpenDialog2}
-                                    todo_eventos={value.todo_eventos}
-                                    todo_autor={value.todo_autor}
-                                    todo_dataConclusao={value.todo_dataConclusao}
-                                    todo_id={value.id}
-                                    updatedAt={value.updatedAt}
-                                    data={value.data}
-                                    setData={value.setData}
-                                />
                             </div>
                         ))}
                     </div>

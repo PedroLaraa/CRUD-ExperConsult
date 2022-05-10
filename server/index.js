@@ -467,6 +467,8 @@ const mysql = require('mysql2')
         })
     })
 
+    // ROTA - FAZ OS CADASTROS DOS EVENTOS NO BD
+
     app.post('/todo-cadastrado', async (req, res) => {
         const dataToInsert = {
             todo_dataConclusao: req.body.todo_dataConclusao,
@@ -483,20 +485,21 @@ const mysql = require('mysql2')
         }
     })
 
+    // ROTA - FAZ O EDIT DOS EVENTOS
+
     app.put('/todo-editado', async function(req, res){
 
         const dataToInsert = {
-            todo_dataConclusao: req.body.todo_dataConclusao,
             todo_eventos: req.body.todo_eventos,
             todo_autor: req.body.todo_autor,
         };
 
-        const {todo_id} = req.body
+        const {id} = req.body
         
         try{
             const dbResponse = await PostToDo.update(dataToInsert, {
                 where: {
-                    id: todo_id
+                    id: id
                 }
             })
         } catch (ex) {
@@ -506,12 +509,16 @@ const mysql = require('mysql2')
         
     });
 
+    // ROTA - DELETA O EVENTO PELO ID
+
     app.delete('/todo-deletado/:id', async function(req, res) {
 
         const {id} = req.params
 
         const dbResponse = await PostToDo.destroy({where:{id: id}})
     })
+
+    // ROTA - RECEBE UMA REQ DO FRONT E ENVIA DADOS
 
     app.get('/list-infosTodo', async (req, res) =>{
         await PostToDo.findAll({
