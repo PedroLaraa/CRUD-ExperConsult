@@ -2,8 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 
-import FormDialog from "../../dialog/ClientesDialog";
-
 import FiltraClientes from "../components/ConsultaClientes";
 
 // FUNÇÃO PARA CONSULTA DE DADOS DOS CLIENTES
@@ -11,9 +9,7 @@ import FiltraClientes from "../components/ConsultaClientes";
 function ConsultaClientes(){
 
     return ( 
-            <FiltraClientes>
-                <FormDialog />
-            </FiltraClientes>
+        <FiltraClientes />
     )
 }
 

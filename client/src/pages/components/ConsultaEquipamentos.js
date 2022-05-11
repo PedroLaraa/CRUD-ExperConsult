@@ -14,8 +14,6 @@ import inputStyle from "../css/inputStyle";
 
 import containerStyle from "../css/container";
 
-import FormDialog from "../../dialog/EquipamentosDialog";
-
 import botaoStyle from "../css/botaoEdit";
 
 
@@ -109,23 +107,9 @@ function FiltraEquipamentos(){
                                 <p>Data do último preço: {value.desceqp_dataultpreco+ ''}</p>
                                 <p>Capacidade produtiva: {value.desceqp_capacidadeprod + ''}</p>
                                 <p>Comentários sobre equipamento: {value.desceqp_comentario+ ''}</p>
-                                <button style={botaoStyle} onClick={() => handleClickEdit()} >Editar...</button>
-                                <FormDialog open={open} setOpen={setOpen}
-                                id_fornecedor = {value.id_fornecedor} 
-                                desceqp_nomeeqp = {value.desceqp_nomeeqp}
-                                desceqp_modelo = {value.desceqp_modelo} 
-                                desceqp_consumoene = {value.desceqp_consumoene}
-                                desceqp_consumotipo = {value.desceqp_consumotipo}
-                                desceqp_precoeqp = {value.desceqp_precoeqp}
-                                desceqp_dataultpreco = {value.desceqp_dataultpreco}
-                                desceqp_capacidadeprod = {value.desceqp_capacidadeprod}
-                                desceqp_comentario = {value.desceqp_comentario}
-                                desceqp_marca = {value.desceqp_marca}
-                                data={value.data}
-                                setData={value.setData}
-                                id={value.id} 
-                                />
-
+                            </div>
+                            <div className="p-2 d-flex d-inline justify-content-around">
+                                <a className="btn btn-outline-dark" href={`edit-equipamento/${value.id}`}>Editar</a>
                             </div>
                         </div>        
                     </div>

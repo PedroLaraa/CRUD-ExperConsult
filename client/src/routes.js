@@ -18,6 +18,14 @@ import DashBoard from "./pages/DashBoardHome";
 
 import Eventos from "./pages/DashBoardHome/eventos";
 
+import EditarFornecedor from "./pages/ConsultaFornecedores/fornecedoresEdit";
+
+import EditarEquipamentos from "./pages/ConsultaEquipamentos/equipamentosEdit";
+
+import EditarRepresentante from "./pages/ConsultaRepresentante/fornecedorEdit";
+
+import EditarCliente from "./pages/ConsultaClientes/editClientes";
+
 // CRIA AS ROTA DE NAVEGAÇÃO DE BROWSER
 
 function Rotas(){
@@ -31,6 +39,10 @@ function Rotas(){
                 <Route path="/clientes" element={<ConsultaClientes />}></Route>
                 <Route path="/dashboard" element={<DashBoard />}></Route>
                 <Route path="/edit-evento/:id" element={<Eventos />}></Route>
+                <Route path="/edit-fornecedor/:id" element={<EditarFornecedor />}></Route>
+                <Route path="/edit-equipamento/:id" element={<EditarEquipamentos />}></Route>
+                <Route path="/edit-representante/:id" element={<EditarRepresentante />}></Route>
+                <Route path="/edit-cliente/:id" element={<EditarCliente />}></Route>
             </Routes>
         </BrowserRouter>
     )

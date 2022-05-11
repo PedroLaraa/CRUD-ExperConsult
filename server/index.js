@@ -219,7 +219,7 @@ const mysql = require('mysql2')
             try {
                 if(nomeEquipamento.map((v) =>(v.desceqp_nomeeqp).toLowerCase()) != desceqp_nomeeqp.toLowerCase()){
                     const dbResponse = await Post.create(dataToInsert);
-                    res.redirect('/cadastro-equipamento');
+                    res.redirect('/cadastro-equipamentos');
                 }else{
                     res.json('Equipamento já cadastrado no sistema!')
                 }
@@ -333,7 +333,7 @@ const mysql = require('mysql2')
             representante_site: req.body.representante_site,
             representante_estadoatuacao: req.body.representante_estadoatuacao,
             representante_comentarios: req.body.representante_comentarios,
-            representante_empresasrep: req.body.representante_empresasrep + ''.replaceAll('["]', ''), // Remove elementos
+            representante_empresasrep: req.body.representante_empresasrep + ''.replaceAll('["/]', ''), // Remove elementos
             representante_status: req.body.representante_status,
         };
         

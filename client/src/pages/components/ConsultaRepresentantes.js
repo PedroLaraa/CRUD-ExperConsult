@@ -14,8 +14,6 @@ import containerStyle from "../css/container";
 
 import botaoStyle from "../css/botaoEdit";
 
-import FormDialog from "../../dialog/RepresentantesDialog";
-
 // FUNÇÃO PARA CONSULTA DE DADOS DOS EQUIPAMENTOS
 
 function FiltraRepresentantes() {
@@ -100,19 +98,9 @@ function FiltraRepresentantes() {
                                     <p>Site: {value.representante_site + ''}</p>
                                     <p>Estados de atuação: {value.representante_estadoatuacao + ''}</p>
                                     <p>Status: {value.representante_status}</p>
-                                    <button style={botaoStyle} onClick={() => handleClickEdit()} >Editar...</button>
-                                    <FormDialog open={open} setOpen={setOpen}
-                                        representante_nome={value.representante_nome}
-                                        representante_empresasrep={value.representante_empresasrep}
-                                        representante_telefone={value.representante_telefone}
-                                        representante_comentarios={value.representante_comentarios}
-                                        representante_site={value.representante_site}
-                                        representante_estadoatuacao={value.representante_estadoatuacao}
-                                        representante_status={value.representante_status}
-                                        data={value.data}
-                                        setData={value.setData}
-                                        id={value.id}
-                                    />
+                                    <div className="p-2 d-flex d-inline justify-content-around">
+                                        <a className="btn btn-outline-dark" href={`edit-representante/${value.id}`}>Editar</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

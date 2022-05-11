@@ -1,8 +1,6 @@
 
 //TODO TENTAR SETAR VALORES PADRÕES 
 
-//TODO ALTERAR OS DEMAIS SISTEMAS DE EDIT E DELETE COMO O NOVO (PRINCIPAL A RESOLVER)
-
 //TODO GERAR UM POST NO TODO_CLIENTES AUTOMATICAMENTE QUANDO UM NOVO CLIENTE FOR CADASTRADO    
 
 import React, { useEffect, useState } from "react";
@@ -28,8 +26,6 @@ function DashBoardInterface() {
     const [pesquisarCliente, setPesquisarCliente] = useState('')
 
     const [openDialog1, setOpenDialog1] = useState(false);
-
-    const [openDialog2, setOpenDialog2] = useState(false);
 
     const getInfosTodo = async (req, res) => {
         api.get('list-infosTodo')
@@ -63,12 +59,6 @@ function DashBoardInterface() {
     function handleClickAdd() {
         setOpenDialog1(true);
     }
-
-    function handleClickEdit() {
-        setOpenDialog2(true);
-    }
-
-
 
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
         getInfosTodo()

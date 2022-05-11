@@ -14,8 +14,6 @@ import imagemFornecStyle from "../css/imagem";
 
 import containerStyle from "../css/container";
 
-import FormDialog from "../../dialog/FornecedoresDialog";
-
 import botaoStyle from "../css/botaoEdit";
 
 // FUNÇÃO PARA CONSULTA DE DADOS DOS EQUIPAMENTOS
@@ -27,8 +25,6 @@ function FiltraFornecedores() {
 
     const [fornecedor, setFornecedor] = useState('');
     const [pesquisarFornecedor, setPesquisarFornecedor] = useState('')
-
-    const [open, setOpen] = React.useState(false);
 
     const getImagesFornec = async (req, res) => { // REQUISIÇÃO DAS IMAGENS
         await api.get('list-imgf')
@@ -43,10 +39,6 @@ function FiltraFornecedores() {
     function handleFiltrar(e) {
         e.preventDefault()
         setPesquisarFornecedor(fornecedor)
-    }
-
-    function handleClickEdit() {
-        setOpen(true);
     }
 
     const busca = pesquisarFornecedor.toLowerCase()
@@ -103,19 +95,9 @@ function FiltraFornecedores() {
                                     <p>Telefone: {value.fornec_telefone + ''}</p>
                                     <p>Email: {value.fornec_email + ''}</p>
                                     <p>Site: {value.fornec_site + ''}</p>
-                                    <button style={botaoStyle} onClick={() => handleClickEdit()} >Editar...</button>
-                                    <FormDialog open={open} setOpen={setOpen}
-                                        fornec_fornecedornome={value.fornec_fornecedornome}
-                                        fornec_nivelfornecedor={value.fornec_nivelfornecedor}
-                                        fornec_razaosocial={value.fornec_razaosocial}
-                                        fornec_telefone={value.fornec_telefone}
-                                        fornec_email={value.fornec_email}
-                                        fornec_site={value.fornec_site}
-                                        data={value.data}
-                                        setData={value.setData}
-                                        id={value.id}
-
-                                    />
+                                    <div className="p-2 d-flex d-inline justify-content-around">
+                                        <a className="btn btn-outline-dark" href={`edit-fornecedor/${value.id}`}>Editar</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

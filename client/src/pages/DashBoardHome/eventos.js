@@ -40,9 +40,9 @@ function Eventos(){
         setValues({...values, [name]: value})
     }
 
-    function handleSubmit(req, res){
+    function handleSubmit(){
         api.put('todo-editado', values);
-        alert('Cadastrado com sucesso!');
+        alert('Editado com sucesso!');
         document.location.reload(true);
     };
 

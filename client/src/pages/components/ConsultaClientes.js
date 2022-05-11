@@ -14,8 +14,6 @@ import inputStyle from "../css/inputStyle";
 
 import containerStyle from "../css/container";
 
-import FormDialog from "../../dialog/ClientesDialog";
-
 import botaoStyle from "../css/botaoEdit";
 
 
@@ -29,8 +27,6 @@ function FiltraClientes() {
     const [clientes, setClientes] = useState('');
     const [pesquisarCliente, setPesquisarCliente] = useState('')
 
-    const [open, setOpen] = React.useState(false);
-
     const getInfosCliente = async (res, req) => { // REQUISIÇÃO DAS IMAGENS
         await api.get("list-infosClientes")
             .then((response) => {
@@ -39,11 +35,6 @@ function FiltraClientes() {
             }).catch((err) => {
                 console.log(err);
             })
-    }
-
-
-    function handleClickEdit() {
-        setOpen(true);
     }
 
     function handleFiltrar(e) {
@@ -110,22 +101,9 @@ function FiltraClientes() {
                                     <p>Telefone (Respoonsável): {value.clientes_telefone + ''}</p>
                                     <p>Email (Responsável): {value.clientes_email + ''}</p>
                                     <p>Premissas de projeto: {value.clientes_premissasDeProjeto + ''}</p>
-                                    <button style={botaoStyle} onClick={() => handleClickEdit()} >Editar...</button>
-                                    <FormDialog open={open} setOpen={setOpen}
-                                        clientes_razaosocial={value.clientes_razaosocial}
-                                        clientes_nomefantasia={value.clientes_nomefantasia}
-                                        clientes_apelido={value.clientes_apelido}
-                                        clientes_cnpj={value.clientes_cnpj}
-                                        clientes_endereco={value.clientes_endereco}
-                                        clientes_premissasDeProjeto={value.clientes_premissasDeProjeto}
-                                        clientes_ie={value.clientes_ie}
-                                        clientes_nomeResponsavel={value.clientes_nomeResponsavel}
-                                        clientes_telefone={value.clientes_telefone}
-                                        clientes_email={value.clientes_email}
-                                        data={value.data}
-                                        setData={value.setData}
-                                        id={value.id}
-                                    />
+                                    <div className="p-2 d-flex d-inline justify-content-around">
+                                        <a className="btn btn-outline-dark" href={`edit-cliente/${value.id}`}>Editar</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
