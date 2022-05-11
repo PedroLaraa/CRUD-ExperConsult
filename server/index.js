@@ -19,6 +19,8 @@ const PostClientes = require('./models/PostClientes')
 
 const PostToDo = require('./models/PostToDo')
 
+const PostPredios = require('./models/PostPredios')
+
 const path = require('path')
 
 const upload = require('./middleware/uploadimg')
@@ -522,6 +524,47 @@ const mysql = require('mysql2')
 
     app.get('/list-infosTodo', async (req, res) =>{
         await PostToDo.findAll({
+            include: [{
+                attributes: ['predios_nomeDosPredios', 'id'],
+                model: PostPredios
+            }] 
+        })
+        .then((value) => {
+            res.json({
+                value,
+                url: "http://192.168.10.228:1212/files/"
+            })
+        }).catch((err) => {
+            console.log(err)
+            res.render('erro')
+        })
+    })
+
+    app.post('/predio-cadastrado', async (req, res) => {
+        const dataToInsert = {
+            predios_nomeDosPredios: req.body.predios_nomeDosPredios,
+            predios_clientes: req.body.predios_clientes,
+        }
+
+        try{
+            const dbResponse = await PostPredios.create(dataToInsert)
+            res.redirect('192.168.10.228:3000/dashboard')
+        }catch{
+            res.render('erro')
+        }
+    })
+
+    //FIXME REQUISIÇÕES PARA FRONT ESTÃO RETORNANDO VALORES ERRADOS (PREDIOS E TODO)
+
+    app.delete('/predio-deletado/:id', async function(req, res) {
+
+        const {id} = req.params
+
+        const dbResponse = await PostPredios.destroy({where:{id: id}})
+    })
+
+    app.get('/list-infospredios', async (req, res) =>{
+        await PostPredios.findAll({
             include: [{
                 attributes: ['clientes_apelido', 'id'],
                 model: PostClientes
