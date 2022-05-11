@@ -76,7 +76,7 @@ function DashBoardInterface() {
 
     return (
         <div
-            className="container">
+            className="container vh-100">
             <div className="row vh-100 position-relative p-2 pt-5 d-flex justify-content-center">
                 <div
                     className="list-group col-4 overflow-auto"
