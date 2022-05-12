@@ -7,7 +7,7 @@ import api from '../../config/configApi';
 
 import { useNavigate } from "react-router-dom";
 
-function Eventos(){
+function Setores(){
 
     const {id} = useParams()
 
@@ -16,7 +16,7 @@ function Eventos(){
     const navigate = useNavigate();
 
     useEffect(() =>{
-        api.get('list-infosTodo')
+        api.get('list-infosPredios')
             .then((response) => {
                 setEvento(response.data.value)
             }).catch((err) => {
@@ -27,8 +27,8 @@ function Eventos(){
     const eventoFiltrado = evento.filter(v => JSON.stringify(v.id).includes(id))
 
     const initialValue = {
-        todo_eventos: '',
-        todo_autor: '',
+        predios_nomeDosPredios: '',
+        predios_autor: '',
         id: id
     }
 
@@ -41,13 +41,13 @@ function Eventos(){
     }
 
     function handleSubmit(){
-        api.put('todo-editado', values);
+        api.put('predio-editado', values);
         alert('Editado com sucesso!');
         document.location.reload(true);
     };
 
     const handleDelete = () => {
-        api.delete(`todo-deletado/${id}`)
+        api.delete(`predio-deletado/${id}`)
         alert('Deletado com sucesso!')
         navigate("/dashboard")
     };
@@ -71,8 +71,8 @@ function Eventos(){
                                 rows="5"
                                 cols="50"
                                 className="form-control w-50" 
-                                name="todo_eventos" 
-                                defaultValue={v.todo_eventos}
+                                name="predios_nomeDosPredios" 
+                                defaultValue={v.predios_nomeDosPredios}
                                 onChange={handleChangeValues}
                                 ></textarea>
                             </div>
@@ -81,8 +81,8 @@ function Eventos(){
                                 <input 
                                 type="text" 
                                 className="form-control w-50" 
-                                name="todo_autor" 
-                                defaultValue={v.todo_autor}
+                                name="predios_autor" 
+                                defaultValue={v.predios_autor}
                                 onChange={handleChangeValues}
                                 ></input>
                             </div>
@@ -107,4 +107,4 @@ function Eventos(){
 
 }
 
-export default Eventos
+export default Setores

@@ -3,7 +3,9 @@
 
 //TODO IMPLEMENTAR O QUE FOI PROPOSTO PELO KEVEN
 
-//TODO GERAR UM POST NO TODO_CLIENTES AUTOMATICAMENTE QUANDO UM NOVO CLIENTE FOR CADASTRADO    
+//TODO GERAR UM POST NO TODO_CLIENTES AUTOMATICAMENTE QUANDO UM NOVO CLIENTE FOR CADASTRADO  
+
+//TODO ACABAR DE FAZER IMPLEMENTAÇÕES(VERIFICAR O predios_clientes O QUE REPRESENTA NO DB) E CRIAR OS POSTS E RENDERS
 
 import React, { useEffect, useState } from "react";
 
@@ -17,6 +19,10 @@ import FormDialog from "../../dialog/ClientesToDo";
 
 import cabecalhoTableDashboard from "../css/cabecalhoTableDashboard";
 
+import { darkScrollbar } from "@mui/material";
+
+import FormDialogAddEvent from "../../dialog/DoedEvent";
+
 //list-infosTodo
 
 function DashBoardInterface() {
@@ -24,16 +30,33 @@ function DashBoardInterface() {
     const [data, setData] = useState([]);
     const [url, setUrl] = useState('');
 
+    const [data2, setData2] = useState([]);
+    const [url2, setUrl2] = useState('');
+
     const [clientes, setClientes] = useState('');
     const [pesquisarCliente, setPesquisarCliente] = useState('')
 
+    const [idsDosClientes,setIdsDosClientes] = useState('')
+
     const [openDialog1, setOpenDialog1] = useState(false);
 
-    const getInfosTodo = async (req, res) => {
-        api.get('list-infosTodo')
+    const [openDialog2, setOpenDialog2] = useState(false);
+
+    const getInfosPredios = async (req, res) => {
+        api.get('list-infosPredios')
             .then((response) => {
                 setData(response.data.value)
                 setUrl(response.data.url)
+            }).catch((err) => {
+                console.log(err)
+            })
+    }
+
+    const getInfosDoed = async (req, res) => {
+        api.get('list-infosDoed')
+            .then((response) => {
+                setData2(response.data.value)
+                setUrl2(response.data.url)
             }).catch((err) => {
                 console.log(err)
             })
@@ -62,8 +85,20 @@ function DashBoardInterface() {
         setOpenDialog1(true);
     }
 
+    const idCliente = function(e){
+        setIdsDosClientes(e.target.value)
+    }
+
+    function handleClickAddEvento(e) {
+        setOpenDialog2(true);
+        idCliente(e)
+    }
+
+    console.log('data2', data2)
+
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
-        getInfosTodo()
+        getInfosPredios()
+        getInfosDoed()
     }, []);
 
     return (
@@ -85,7 +120,6 @@ function DashBoardInterface() {
                             >
                                 {value}
                             </button>
-
                         </div>
                     ))}
                 </div>
@@ -98,7 +132,7 @@ function DashBoardInterface() {
                             <button
                                 className="btn btn-outline-dark"
                                 onClick={() => handleClickAdd()}
-                            >Adicionar Evento
+                            >Adicionar Setor
                             </button>
                         </div>
                         <div className="position-relative p-2">
@@ -110,7 +144,7 @@ function DashBoardInterface() {
                                     <p>Data:</p>
                                 </div>
                                 <div className="col-8 ">
-                                    <p>Evento:</p>
+                                    <p>Setor:</p>
                                 </div>
                                 <div className="col-1 ">
                                     <p>Autor:</p>
@@ -122,9 +156,9 @@ function DashBoardInterface() {
                                 <FormDialog
                                     open={openDialog1}
                                     setOpen={setOpenDialog1}
-                                    todo_dataConclusao={value.todo_dataConclusao}
-                                    todo_eventos={value.todo_eventos}
-                                    todo_autor={value.todo_autor}
+                                    predios_dataConclusao={value.predios_dataConclusao}
+                                    predios_nomeDosPredios={value.predios_nomeDosPredios}
+                                    predios_autor={value.predios_autor}
                                     cliente_id={value.clientes_obra.id}
                                     data={value.data}
                                     setData={value.setData}
@@ -143,19 +177,41 @@ function DashBoardInterface() {
                                             <p style={{ background: 'rgba(50,50,50,0.5)', height: '13.6rem', width: '.5rem', border: "1px solid whitesmoke", borderRadius: "1rem" }} />
                                         </div>
                                         <div className="col-4 col-md-6">
-                                            <p>{value.todo_eventos}</p>
+                                            <p>{value.predios_nomeDosPredios}</p>
                                         </div>
                                         <div className="col-1">
                                             <p style={{ background: 'rgba(50,50,50,0.5)', height: '13.6rem', width: '.5rem', border: "1px solid whitesmoke", borderRadius: "1rem" }} />
                                         </div>
                                         <div className="col-1 col-md-2">
-                                            <p>{value.todo_autor}</p>
+                                            <p>{value.predios_autor}</p>
                                         </div>
                                     </div>
                                     <div className="p-2 d-flex d-inline justify-content-around">
-                                        <a className="btn btn-outline-dark" href={`edit-evento/${value.id}`}>Editar</a>
+                                        <a className="btn btn-outline-dark" href={`edit-predio/${value.id}`}>Editar</a>
+                                    </div>
+                                    <div className="p-2 d-flex d-inline justify-content-around">
+                                        <button
+                                        value={value.id}
+                                        className="btn btn-outline-dark"
+                                        onClick={handleClickAddEvento}
+                                        >Novo Evento</button>
                                     </div>
                                 </div>
+                            </div>
+                        ))}
+                        {data2.map(value => (
+                            <div key={value.id}>
+                                <FormDialogAddEvent 
+                                open={openDialog2}
+                                setOpen={setOpenDialog2}
+                                idPredio= {idsDosClientes} // USAR PARA CAMPO predios_clientes
+                                predios_clientes={value.predios_clientes} // VERIFICAR UTILIDADE
+                                doed_eventos={value.doed_eventos}
+                                doed_autor={value.doed_autor}
+                                id={value.id}
+                                data={value.data}
+                                setData={value.setData}
+                                />
                             </div>
                         ))}
                     </div>

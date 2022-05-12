@@ -16,7 +16,7 @@ import ConsultaClientes from "./pages/ConsultaClientes";
 
 import DashBoard from "./pages/DashBoardHome";
 
-import Eventos from "./pages/DashBoardHome/eventos";
+import Setores from "./pages/DashBoardHome/setores";
 
 import EditarFornecedor from "./pages/ConsultaFornecedores/fornecedoresEdit";
 
@@ -32,13 +32,13 @@ function Rotas(){
     return( // PATH = CAMINHO; ELEMENT = O QUE VAI SER RENDERIZADO;
         <BrowserRouter>
             <Routes> 
-                <Route path="/representantes" element={<ConsultaRepresentante />} exact ></Route>
-                <Route path="/" element={<DashBoard />}></Route>
+                <Route path="/" element={<DashBoard />} exact></Route>
+                <Route path="/representantes" element={<ConsultaRepresentante />}></Route>
                 <Route path="/fornecedores" element={<ConsultaFornecedores />} ></Route>
                 <Route path="/equipamentos" element={<ConsultaEquipamentos />} ></Route>
                 <Route path="/clientes" element={<ConsultaClientes />}></Route>
                 <Route path="/dashboard" element={<DashBoard />}></Route>
-                <Route path="/edit-evento/:id" element={<Eventos />}></Route>
+                <Route path="/edit-predio/:id" element={<Setores />}></Route>
                 <Route path="/edit-fornecedor/:id" element={<EditarFornecedor />}></Route>
                 <Route path="/edit-equipamento/:id" element={<EditarEquipamentos />}></Route>
                 <Route path="/edit-representante/:id" element={<EditarRepresentante />}></Route>

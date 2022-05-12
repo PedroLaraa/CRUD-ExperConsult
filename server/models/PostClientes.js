@@ -3,6 +3,7 @@ const db = require('./db')
 
 const PostPredios = require('./PostPredios')
 
+
 // Post() = Insere dados na table
 // DEFINE A TABLE PARA INSERÇÃO DE DADOS E OS TIPOS DE DADOS DE CADA COLUMN
 

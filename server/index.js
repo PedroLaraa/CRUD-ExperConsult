@@ -17,9 +17,9 @@ const PostRep = require('./models/PostRep')
 
 const PostClientes = require('./models/PostClientes')
 
-const PostToDo = require('./models/PostToDo')
-
 const PostPredios = require('./models/PostPredios')
+
+const PostDoed = require('./models/PostDoed')
 
 const path = require('path')
 
@@ -471,16 +471,16 @@ const mysql = require('mysql2')
 
     // ROTA - FAZ OS CADASTROS DOS EVENTOS NO BD
 
-    app.post('/todo-cadastrado', async (req, res) => {
+    app.post('/predio-cadastrado', async (req, res) => {
         const dataToInsert = {
-            todo_dataConclusao: req.body.todo_dataConclusao,
-            todo_eventos: req.body.todo_eventos,
-            todo_autor: req.body.todo_autor,
+            predios_dataConclusao: req.body.predios_dataConclusao,
+            predios_nomeDosPredios: req.body.predios_nomeDosPredios,
+            predios_autor: req.body.predios_autor,
             idCliente: req.body.cliente_id
         }
 
         try{
-            const dbResponse = await PostToDo.create(dataToInsert)
+            const dbResponse = await PostPredios.create(dataToInsert)
             res.redirect('192.168.10.228:3000/dashboard')
         }catch{
             res.render('erro')
@@ -489,17 +489,17 @@ const mysql = require('mysql2')
 
     // ROTA - FAZ O EDIT DOS EVENTOS
 
-    app.put('/todo-editado', async function(req, res){
+    app.put('/predio-editado', async function(req, res){
 
         const dataToInsert = {
-            todo_eventos: req.body.todo_eventos,
-            todo_autor: req.body.todo_autor,
+            predios_nomeDosPredios: req.body.predios_nomeDosPredios,
+            predios_autor: req.body.predios_autor,
         };
 
         const {id} = req.body
         
         try{
-            const dbResponse = await PostToDo.update(dataToInsert, {
+            const dbResponse = await PostPredios.update(dataToInsert, {
                 where: {
                     id: id
                 }
@@ -513,20 +513,20 @@ const mysql = require('mysql2')
 
     // ROTA - DELETA O EVENTO PELO ID
 
-    app.delete('/todo-deletado/:id', async function(req, res) {
+    app.delete('/predio-deletado/:id', async function(req, res) {
 
         const {id} = req.params
 
-        const dbResponse = await PostToDo.destroy({where:{id: id}})
+        const dbResponse = await PostPredios.destroy({where:{id: id}})
     })
 
     // ROTA - RECEBE UMA REQ DO FRONT E ENVIA DADOS
 
-    app.get('/list-infosTodo', async (req, res) =>{
-        await PostToDo.findAll({
+    app.get('/list-infosPredios', async (req, res) =>{
+        await PostPredios.findAll({
             include: [{
-                attributes: ['predios_nomeDosPredios', 'id'],
-                model: PostPredios
+                model: PostClientes,
+                attributes: ['clientes_apelido', 'id']
             }] 
         })
         .then((value) => {
@@ -540,34 +540,62 @@ const mysql = require('mysql2')
         })
     })
 
-    app.post('/predio-cadastrado', async (req, res) => {
+    app.post('/doed-cadastrado', async (req, res) => {
         const dataToInsert = {
+            predios_dataConclusao: req.body.predios_dataConclusao,
             predios_nomeDosPredios: req.body.predios_nomeDosPredios,
-            predios_clientes: req.body.predios_clientes,
+            predios_autor: req.body.predios_autor,
+            idCliente: req.body.cliente_id
         }
 
         try{
-            const dbResponse = await PostPredios.create(dataToInsert)
+            const dbResponse = await PostDoed.create(dataToInsert)
             res.redirect('192.168.10.228:3000/dashboard')
         }catch{
             res.render('erro')
         }
     })
 
-    //FIXME REQUISIÇÕES PARA FRONT ESTÃO RETORNANDO VALORES ERRADOS (PREDIOS E TODO)
+    // ROTA - FAZ O EDIT DOS EVENTOS
 
-    app.delete('/predio-deletado/:id', async function(req, res) {
+    app.put('/doed-editado', async function(req, res){
+
+        const dataToInsert = {
+            predios_nomeDosPredios: req.body.predios_nomeDosPredios,
+            predios_autor: req.body.predios_autor,
+        };
+
+        const {id} = req.body
+        
+        try{
+            const dbResponse = await PostDoed.update(dataToInsert, {
+                where: {
+                    id: id
+                }
+            })
+        } catch (ex) {
+            console.error(ex);
+            res.render('erro')
+        }
+        
+    });
+
+    // ROTA - DELETA O EVENTO PELO ID
+
+    app.delete('/doed-deletado/:id', async function(req, res) {
 
         const {id} = req.params
 
-        const dbResponse = await PostPredios.destroy({where:{id: id}})
+        const dbResponse = await PostDoed.destroy({where:{id: id}})
     })
 
-    app.get('/list-infospredios', async (req, res) =>{
-        await PostPredios.findAll({
+    // ROTA - RECEBE UMA REQ DO FRONT E ENVIA DADOS
+
+    app.get('/list-infosDoed', async (req, res) =>{
+        await PostDoed.findAll({
             include: [{
-                attributes: ['clientes_apelido', 'id'],
-                model: PostClientes
+                model: PostPredios,
+                attributes: ['predios_nomeDosPredios', 'predios_autor', 'id']
             }] 
         })
         .then((value) => {
@@ -575,7 +603,8 @@ const mysql = require('mysql2')
                 value,
                 url: "http://192.168.10.228:1212/files/"
             })
-        }).catch(() => {
+        }).catch((err) => {
+            console.log(err)
             res.render('erro')
         })
     })

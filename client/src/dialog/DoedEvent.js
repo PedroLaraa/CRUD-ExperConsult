@@ -21,13 +21,13 @@ import { SliderValueLabel } from '@mui/material';
 
 import api from '../config/configApi';
 
-export default function FormDialog(value) {
+export default function FormDialogAddEvent(value) {
 
     const [editValue,setEditValue] = useState({
-        predios_dataConclusao: value.predios_dataConclusao,
-        predios_nomeDosPredios: value.predios_nomeDosPredios,
-        predios_autor: value.predios_autor,
-        cliente_id: value.cliente_id,
+        doed_eventos: value.doed_eventos,
+        doed_autor: value.doed_autor,
+        predios_clientes: value.predios_clientes,
+        idPredio: value.idPredio,
         data: value.data,
         setData: value.setData,
         id: value.id    
@@ -38,10 +38,10 @@ export default function FormDialog(value) {
 
     const handleCriarEvento = () => {
         api.post('predio-cadastrado', {
-            predios_dataConclusao: editValue.predios_dataConclusao,
-            predios_nomeDosPredios: editValue.predios_nomeDosPredios,
-            predios_autor: editValue.predios_autor,
-            cliente_id: editValue.cliente_id,
+            predios_clientes: editValue.predios_clientes,
+            doed_eventos: editValue.doed_eventos,
+            doed_autor: editValue.doed_autor,
+            idPredio: editValue.idPredio,
             data: editValue.data,
             setData: editValue.setData,
         });
@@ -79,8 +79,8 @@ export default function FormDialog(value) {
                         autoFocus
                         autoComplete='off'
                         margin="dense"
-                        id="predios_nomeDosPredios"
-                        label="Setor: "
+                        id="doed_eventos"
+                        label="Evento: "
                         onChange={handleChangeValue}
                         type="text"
                         fullWidth
@@ -90,8 +90,20 @@ export default function FormDialog(value) {
                         autoFocus
                         autoComplete='off'
                         margin="dense"
-                        id="predios_autor"
+                        id="doed_autor"
                         label="Autor: "
+                        onChange={handleChangeValue}
+                        type="text"
+                        fullWidth
+                        variant="standard"
+                    />
+                    <TextField
+                        autoFocus
+                        autoComplete='off'
+                        margin="dense"
+                        defaultValue={value.idPredio}
+                        id="idPredio"
+                        label="ID: "
                         onChange={handleChangeValue}
                         type="text"
                         fullWidth
