@@ -4,7 +4,7 @@ const paragrafoDivStyle= {
     paddingTop:'.4rem',
     fontSize: '1rem',
     fontFamily: 'Raleway',
-    height: '15rem',
+    height: '20rem',
     width: '45rem',
 }
 

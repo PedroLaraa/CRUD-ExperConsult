@@ -13,8 +13,6 @@ import FormDialog from "../../dialog/ClientesToDo";
 
 import cabecalhoTableDashboard from "../css/cabecalhoTableDashboard";
 
-import { darkScrollbar } from "@mui/material";
-
 import FormDialogAddEvent from "../../dialog/DoedEvent";
 
 import paragrafoDoedStyle from "../css/paragrafoDoed";
@@ -87,6 +85,8 @@ function DashBoardInterface() {
 
     const doedFiltrado = data2.filter(v => JSON.stringify(v.predio_cliente).includes(idsDoedInt))
 
+    const verificacaoDeBusca = doedFiltrado.some(el => data2.map((value) => (value)).includes(el))
+
     function handleClickAdd() {
         setOpenDialog1(true);
     }
@@ -116,6 +116,12 @@ function DashBoardInterface() {
         getInfosDoed()
     }, []);
 
+    useEffect(() => {
+        if(verificacaoDeBusca == false && idsDoed != ''){
+            alert("Nenhum evento registrado!")
+        }
+    }, [idsDoed])
+
     return (
         <div
             className="container vh-100">
@@ -124,7 +130,7 @@ function DashBoardInterface() {
                     className="list-group col-4 overflow-auto"
                     style={botaoDashboardStyle}>
                     <h4>• Consultar Eventos:</h4>
-                    {nomesFiltrados.map((value) => (
+                    {nomesFiltrados.map(value => (
                         <div className="p-1" key={value}>
                             <button
                                 type="submit"
@@ -159,7 +165,7 @@ function DashBoardInterface() {
                                     <p>Data:</p>
                                 </div>
                                 <div className="col-8 ">
-                                    <p>Setor:</p>
+                                    <p>Setor / Evento:</p>
                                 </div>
                                 <div className="col-1 ">
                                     <p>Autor:</p>

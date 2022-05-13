@@ -84,6 +84,12 @@ const mysql = require('mysql2')
         })
     })
 
+    app.get('/cadastro-clientes', (req, res) => {
+        PostClientes.findAll().then(values => {
+            res.render('formClientes', {clientes: values})
+        })
+    })
+
 
     //ROTAS GERAIS
 

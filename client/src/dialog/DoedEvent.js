@@ -83,6 +83,8 @@ export default function FormDialogAddEvent(value) {
                         type="text"
                         fullWidth
                         variant="standard"
+                        multiline
+                        maxRows={5}
                     />
                     <TextField
                         autoFocus
