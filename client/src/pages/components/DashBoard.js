@@ -1,11 +1,5 @@
 
-//TODO TENTAR SETAR VALORES PADRÕES 
-
-//TODO IMPLEMENTAR O QUE FOI PROPOSTO PELO KEVEN
-
 //TODO GERAR UM POST NO TODO_CLIENTES AUTOMATICAMENTE QUANDO UM NOVO CLIENTE FOR CADASTRADO  
-
-//TODO ACABAR DE FAZER IMPLEMENTAÇÕES(VERIFICAR O predios_clientes O QUE REPRESENTA NO DB) E CRIAR OS POSTS E RENDERS
 
 import React, { useEffect, useState } from "react";
 
@@ -23,6 +17,10 @@ import { darkScrollbar } from "@mui/material";
 
 import FormDialogAddEvent from "../../dialog/DoedEvent";
 
+import paragrafoDoedStyle from "../css/paragrafoDoed";
+
+import paragrafoDivStyle from "../css/paragrafoDiv";
+
 //list-infosTodo
 
 function DashBoardInterface() {
@@ -36,11 +34,17 @@ function DashBoardInterface() {
     const [clientes, setClientes] = useState('');
     const [pesquisarCliente, setPesquisarCliente] = useState('')
 
-    const [idsDosClientes,setIdsDosClientes] = useState('')
+    const [idsDosClientes, setIdsDosClientes] = useState('')
+
+    const [idsDoed, setIdsDoed] = useState('')
 
     const [openDialog1, setOpenDialog1] = useState(false);
 
     const [openDialog2, setOpenDialog2] = useState(false);
+
+    const idsInteiros = parseInt(idsDosClientes)
+
+    const idsDoedInt = parseInt(idsDoed)
 
     const getInfosPredios = async (req, res) => {
         api.get('list-infosPredios')
@@ -81,12 +85,18 @@ function DashBoardInterface() {
 
     const nomesFiltrados = data.map(v => JSON.stringify(v.clientes_obra.clientes_apelido).replaceAll('"', '')).filter((elem, index, self) => index === self.indexOf(elem)) // RETORNA OS APELIDOS SEM REPETIR
 
+    const doedFiltrado = data2.filter(v => JSON.stringify(v.predio_cliente).includes(idsDoedInt))
+
     function handleClickAdd() {
         setOpenDialog1(true);
     }
 
-    const idCliente = function(e){
+    const idCliente = function (e) {
         setIdsDosClientes(e.target.value)
+    }
+
+    const idDoed = function (e) {
+        setIdsDoed(e.target.value)
     }
 
     function handleClickAddEvento(e) {
@@ -94,7 +104,12 @@ function DashBoardInterface() {
         idCliente(e)
     }
 
-    console.log('data2', data2)
+    function handleRemoveEvent(e){
+        const id = e.target.value
+        api.delete(`doed-deletado/${id}`)
+        alert('Evento deletado')
+        document.location.reload(true)
+    }
 
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
         getInfosPredios()
@@ -166,51 +181,104 @@ function DashBoardInterface() {
                                 <div
                                     className="container pb-1"
                                 >
-                                    <div
-                                        style={paragrafoDashboardStyle}
-                                        className="row justify-content-md-center"
-                                    >
-                                        <div className="col-1 col-md-2 ">
-                                            <p>{value.updatedAt.split('-').reverse().join('/')}</p>
+                                    <div>
+                                        <div 
+                                        className="container overflow-auto"
+                                        style={{maxHeight: "30rem", width: "50rem"}}
+                                        >
+                                            <div
+                                                style={paragrafoDivStyle}
+                                            >
+                                                <div className="row justify-content-md-center" style={paragrafoDashboardStyle}>
+                                                    <div className="col-1 col-md-2 ">
+                                                        <p>{value.updatedAt.split('-').reverse().join('/')}</p>
+                                                    </div>
+                                                    <div className="col-1">
+                                                        <p style={{ background: 'rgba(50,50,50,0.5)', height: '1.5rem', width: '.5rem', border: "1px solid whitesmoke", borderRadius: "1rem" }} />
+                                                    </div>
+                                                    <div className="col-4 col-md-6">
+                                                        <p>{value.predios_nomeDosPredios}</p>
+                                                    </div>
+                                                    <div className="col-1">
+                                                        <p style={{ background: 'rgba(50,50,50,0.5)', height: '1.5rem', width: '.5rem', border: "1px solid whitesmoke", borderRadius: "1rem" }} />
+                                                    </div>
+                                                    <div className="col-1 col-md-2">
+                                                        <p>{value.predios_autor}</p>
+                                                    </div>
+                                                </div>    
+                                                    {idsDoed == value.id && (
+                                                        <div>
+                                                            {doedFiltrado.map(value => (
+                                                                <div key={value.id}>
+                                                                    <div
+                                                                        style={paragrafoDoedStyle}
+                                                                        className="row justify-content-md-center">
+                                                                        <div className="col-1 col-md-2 ">
+                                                                            <p>{value.updatedAt.split('-').reverse().join('/')}</p>
+                                                                        </div>
+                                                                        <div className="col-1">
+                                                                            <p style={{ background: 'rgba(50,50,50,0.5)', height: '100%', width: '.5rem', border: "1px solid whitesmoke", borderRadius: "1rem" }} />
+                                                                        </div>
+                                                                        <div className="col-4 col-md-6">
+                                                                            <p>{value.doed_eventos}</p>
+                                                                        </div>
+                                                                        <div className="col-1">
+                                                                            <p style={{ background: 'rgba(50,50,50,0.5)', height: '100%', width: '.5rem', border: "1px solid whitesmoke", borderRadius: "1rem" }} />
+                                                                        </div>
+                                                                        <div className="col-1 col-md-2">
+                                                                            <p>{value.doed_autor}</p>
+                                                                            <button
+                                                                                className="btn btn-outline-danger"
+                                                                                value={value.id}
+                                                                                onClick={handleRemoveEvent}
+                                                                                data-toggle="tooltip"
+                                                                                data-placement="right"
+                                                                                title="Deletar Evento"
+                                                                                >❌
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            ))}
+                                                        </div>
+                                                    )}
+                                                </div>    
+                                            </div>
                                         </div>
-                                        <div className="col-1">
-                                            <p style={{ background: 'rgba(50,50,50,0.5)', height: '13.6rem', width: '.5rem', border: "1px solid whitesmoke", borderRadius: "1rem" }} />
+                                        <div className="p-2 d-flex d-inline justify-content-around">
+                                            <button
+                                                value={value.id}
+                                                onClick={idDoed}
+                                                className="btn btn-outline-dark"
+                                            >
+                                                Listar Eventos
+                                            </button>
                                         </div>
-                                        <div className="col-4 col-md-6">
-                                            <p>{value.predios_nomeDosPredios}</p>
+                                        <div className="p-2 d-flex d-inline justify-content-around">
+                                            <button
+                                                value={value.id}
+                                                className="btn btn-outline-dark"
+                                                onClick={handleClickAddEvento}
+                                            >Novo Evento
+                                            </button>
                                         </div>
-                                        <div className="col-1">
-                                            <p style={{ background: 'rgba(50,50,50,0.5)', height: '13.6rem', width: '.5rem', border: "1px solid whitesmoke", borderRadius: "1rem" }} />
+                                        <div className="p-2 d-flex d-inline justify-content-around">
+                                            <a className="btn btn-outline-dark" href={`edit-predio/${value.id}`}>Editar Setor</a>
                                         </div>
-                                        <div className="col-1 col-md-2">
-                                            <p>{value.predios_autor}</p>
-                                        </div>
-                                    </div>
-                                    <div className="p-2 d-flex d-inline justify-content-around">
-                                        <a className="btn btn-outline-dark" href={`edit-predio/${value.id}`}>Editar</a>
-                                    </div>
-                                    <div className="p-2 d-flex d-inline justify-content-around">
-                                        <button
-                                        value={value.id}
-                                        className="btn btn-outline-dark"
-                                        onClick={handleClickAddEvento}
-                                        >Novo Evento</button>
-                                    </div>
                                 </div>
                             </div>
                         ))}
                         {data2.map(value => (
                             <div key={value.id}>
-                                <FormDialogAddEvent 
-                                open={openDialog2}
-                                setOpen={setOpenDialog2}
-                                idPredio= {idsDosClientes} // USAR PARA CAMPO predios_clientes
-                                predios_clientes={value.predios_clientes} // VERIFICAR UTILIDADE
-                                doed_eventos={value.doed_eventos}
-                                doed_autor={value.doed_autor}
-                                id={value.id}
-                                data={value.data}
-                                setData={value.setData}
+                                <FormDialogAddEvent
+                                    open={openDialog2}
+                                    setOpen={setOpenDialog2}
+                                    predios_clientes={idsInteiros} // VERIFICAR UTILIDADE
+                                    doed_eventos={value.doed_eventos}
+                                    doed_autor={value.doed_autor}
+                                    id={value.id}
+                                    data={value.data}
+                                    setData={value.setData}
                                 />
                             </div>
                         ))}

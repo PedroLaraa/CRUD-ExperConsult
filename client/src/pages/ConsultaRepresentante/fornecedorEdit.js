@@ -57,8 +57,6 @@ function EditarRepresentante(){
         navigate("/dashboard")
     };
 
-    console.log(values)
-
     return(
         <div className="container position-relative">
             <div 

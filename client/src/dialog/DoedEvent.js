@@ -27,7 +27,6 @@ export default function FormDialogAddEvent(value) {
         doed_eventos: value.doed_eventos,
         doed_autor: value.doed_autor,
         predios_clientes: value.predios_clientes,
-        idPredio: value.idPredio,
         data: value.data,
         setData: value.setData,
         id: value.id    
@@ -37,11 +36,10 @@ export default function FormDialogAddEvent(value) {
     const [url, setUrl] = useState('');
 
     const handleCriarEvento = () => {
-        api.post('predio-cadastrado', {
-            predios_clientes: editValue.predios_clientes,
+        api.post('doed-cadastrado', {
+            predios_clientes: value.predios_clientes,
             doed_eventos: editValue.doed_eventos,
             doed_autor: editValue.doed_autor,
-            idPredio: editValue.idPredio,
             data: editValue.data,
             setData: editValue.setData,
         });
@@ -92,18 +90,6 @@ export default function FormDialogAddEvent(value) {
                         margin="dense"
                         id="doed_autor"
                         label="Autor: "
-                        onChange={handleChangeValue}
-                        type="text"
-                        fullWidth
-                        variant="standard"
-                    />
-                    <TextField
-                        autoFocus
-                        autoComplete='off'
-                        margin="dense"
-                        defaultValue={value.idPredio}
-                        id="idPredio"
-                        label="ID: "
                         onChange={handleChangeValue}
                         type="text"
                         fullWidth

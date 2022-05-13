@@ -542,10 +542,9 @@ const mysql = require('mysql2')
 
     app.post('/doed-cadastrado', async (req, res) => {
         const dataToInsert = {
-            predios_dataConclusao: req.body.predios_dataConclusao,
-            predios_nomeDosPredios: req.body.predios_nomeDosPredios,
-            predios_autor: req.body.predios_autor,
-            idCliente: req.body.cliente_id
+            doed_eventos: req.body.doed_eventos,
+            doed_autor: req.body.doed_autor,
+            predios_clientes: req.body.predios_clientes,
         }
 
         try{

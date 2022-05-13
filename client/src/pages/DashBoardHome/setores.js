@@ -64,17 +64,15 @@ function Setores(){
                 {eventoFiltrado.map((v) =>(
                     <div key={v.id}>
                         <form className="p-2 ">
-                        <h3 className="d-flex justify-content-center">▶ Evento</h3>
+                        <h3 className="d-flex justify-content-center">▶ Setor</h3>
                             <div className="form-group pt-2 d-flex justify-content-center">
-                                <textarea 
+                                <input
                                 type="text" 
-                                rows="5"
-                                cols="50"
                                 className="form-control w-50" 
                                 name="predios_nomeDosPredios" 
                                 defaultValue={v.predios_nomeDosPredios}
                                 onChange={handleChangeValues}
-                                ></textarea>
+                                ></input>
                             </div>
                             <h3 className="d-flex justify-content-center">▶ Autor</h3>
                             <div className="form-group pt-2 d-flex justify-content-center">

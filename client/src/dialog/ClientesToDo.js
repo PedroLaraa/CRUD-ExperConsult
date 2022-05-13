@@ -46,7 +46,7 @@ export default function FormDialog(value) {
             setData: editValue.setData,
         });
         handleClose();
-        alert('Cadastrado com sucesso!')
+        alert('Setor cadastrado com sucesso!')
         document.location.reload(true)
     };
 
@@ -100,7 +100,7 @@ export default function FormDialog(value) {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancelar</Button>
-                    <Button onClick={handleCriarEvento}>Cadastrar Evento</Button>
+                    <Button onClick={handleCriarEvento}>Cadastrar Setor</Button>
                 </DialogActions>
             </Dialog>
     );
