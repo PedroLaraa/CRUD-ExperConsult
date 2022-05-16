@@ -387,11 +387,13 @@ const mysql = require('mysql2')
     //CLIENTES:
 
 
-    // ROTA - CRIA CLIENTE
+    // ROTA - FORMULÁRIO DE CLIENTES
     
     app.get('/cadastro-clientes', function(req, res){
         res.render('formClientes')
     });
+
+    // ROTA - FAZ A INSERÇÃO DE DADOS DE CLIENTES NO BANCO DE DADOS
 
     app.post('/clientecadastrado', upload.single('clientes_logo'), async (req, res) => {
 
@@ -425,6 +427,8 @@ const mysql = require('mysql2')
                 res.render('erro');
             }
 });
+
+    // ROTA - FAZ O UPDATE DOS DADOS DE CLIENTES
 
     app.put('/cliente-editado', async function(req, res){
 
@@ -476,7 +480,7 @@ const mysql = require('mysql2')
         })
     })
 
-    // ROTA - FAZ OS CADASTROS DOS EVENTOS NO BD
+    // ROTA - FAZ OS CADASTROS DOS EVENTOS NO BD (PREDIOS)
 
     app.post('/predio-cadastrado', async (req, res) => {
         const dataToInsert = {
@@ -494,7 +498,7 @@ const mysql = require('mysql2')
         }
     })
 
-    // ROTA - FAZ O EDIT DOS EVENTOS
+    // ROTA - FAZ O EDIT DOS EVENTOS (PREDIOS)
 
     app.put('/predio-editado', async function(req, res){
 
@@ -518,7 +522,7 @@ const mysql = require('mysql2')
         
     });
 
-    // ROTA - DELETA O EVENTO PELO ID
+    // ROTA - DELETA O EVENTO PELO ID (PREDIOS)
 
     app.delete('/predio-deletado/:id', async function(req, res) {
 
@@ -527,7 +531,7 @@ const mysql = require('mysql2')
         const dbResponse = await PostPredios.destroy({where:{id: id}})
     })
 
-    // ROTA - RECEBE UMA REQ DO FRONT E ENVIA DADOS
+    // ROTA - RECEBE UMA REQ DO FRONT E ENVIA DADOS (PREDIOS)
 
     app.get('/list-infosPredios', async (req, res) =>{
         await PostPredios.findAll({
@@ -547,6 +551,8 @@ const mysql = require('mysql2')
         })
     })
 
+    // ROTA - FAZ A INSERÇÃO NO BANCO DE DADOS DOS HISTÓRICOS (DOED)
+
     app.post('/doed-cadastrado', async (req, res) => {
         const dataToInsert = {
             doed_eventos: req.body.doed_eventos,
@@ -562,7 +568,7 @@ const mysql = require('mysql2')
         }
     })
 
-    // ROTA - FAZ O EDIT DOS EVENTOS
+    // ROTA - FAZ O EDIT DOS EVENTOS (DOED)
 
     app.put('/doed-editado', async function(req, res){
 
@@ -586,7 +592,7 @@ const mysql = require('mysql2')
         
     });
 
-    // ROTA - DELETA O EVENTO PELO ID
+    // ROTA - DELETA O EVENTO PELO ID (DOED)
 
     app.delete('/doed-deletado/:id', async function(req, res) {
 
@@ -595,7 +601,7 @@ const mysql = require('mysql2')
         const dbResponse = await PostDoed.destroy({where:{id: id}})
     })
 
-    // ROTA - RECEBE UMA REQ DO FRONT E ENVIA DADOS
+    // ROTA - RECEBE UMA REQ DO FRONT E ENVIA DADOS (DOED)
 
     app.get('/list-infosDoed', async (req, res) =>{
         await PostDoed.findAll({
@@ -618,6 +624,6 @@ const mysql = require('mysql2')
     // PORTA QUE O BACK-END ESTÁ SENDO EXECUTADO
 
 app.listen(1212, function(){
-    console.log('SERVIDOR RODANDO')
+    console.log('Servidor rodando na porta: 1212'.toUpperCase())
 });
 

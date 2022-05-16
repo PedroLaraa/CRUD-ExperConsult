@@ -1,4 +1,6 @@
 
+//REALIZA OS IMPORTS NECESSÁRIOS (ESTILOS, MÉTODOS...)
+
 import React, { useEffect, useState } from "react";
 
 import api from '../../config/configApi';
@@ -16,8 +18,8 @@ import FormDialogAddEvent from "../../dialog/DoedEvent";
 import paragrafoDoedStyle from "../css/paragrafoDoed";
 
 import paragrafoDivStyle from "../css/paragrafoDiv";
-
-//list-infosTodo
+import { color } from "@mui/system";
+import { red } from "@mui/material/colors";
 
 function DashBoardInterface() {
 
@@ -28,19 +30,29 @@ function DashBoardInterface() {
     const [url2, setUrl2] = useState('');
 
     const [clientes, setClientes] = useState('');
-    const [pesquisarCliente, setPesquisarCliente] = useState('')
+    const [pesquisarCliente, setPesquisarCliente] = useState('');
 
-    const [idsDosClientes, setIdsDosClientes] = useState('')
+    // SETA OS IDS PARA CONFERÊNCIAS
 
-    const [idsDoed, setIdsDoed] = useState('')
+    const [idsDosClientes, setIdsDosClientes] = useState('');
+
+    const [idsDoed, setIdsDoed] = useState('');
+
+    // SETA OS ESTADOS DOS DIALOGS
 
     const [openDialog1, setOpenDialog1] = useState(false);
 
     const [openDialog2, setOpenDialog2] = useState(false);
 
-    const idsInteiros = parseInt(idsDosClientes)
+    // CONVERTE OS IDS DE STR PARA INT
 
-    const idsDoedInt = parseInt(idsDoed)
+    const idsInteiros = parseInt(idsDosClientes);
+
+    const idsDoedInt = parseInt(idsDoed);
+
+
+
+    // FAZ UMA REQUISIÇÃO PARA O BACK E RETORNAR O DATABASE COM DADOS (PREDIOS)
 
     const getInfosPredios = async (req, res) => {
         api.get('list-infosPredios')
@@ -52,6 +64,8 @@ function DashBoardInterface() {
             })
     }
 
+    // FAZ UMA REQUISIÇÃO PARA O BACK E RETORNAR O DATABASE COM DADOS (DOED)
+
     const getInfosDoed = async (req, res) => {
         api.get('list-infosDoed')
             .then((response) => {
@@ -62,13 +76,19 @@ function DashBoardInterface() {
             })
     }
 
+    // FUNÇÃO PARA DEFINIR OS CLIENTES
+
     function handleSetClientes(e) {
         setClientes(e.target.value)
     }
 
+    // FUNÇÃO PARA EXECUTAR AS BUSCAS
+
     function handlePesquisarCliente() {
         setPesquisarCliente(clientes)
     }
+
+    // FUNÇÃO PARA DISPARAR OS FILTROS
 
     function handleFiltrar(e) {
         handleSetClientes(e)
@@ -81,9 +101,9 @@ function DashBoardInterface() {
 
     const nomesFiltrados = data.map(v => JSON.stringify(v.clientes_obra.clientes_apelido).replaceAll('"', '')).filter((elem, index, self) => index === self.indexOf(elem)) // RETORNA OS APELIDOS SEM REPETIR
 
-    const doedFiltrado = data2.filter(v => JSON.stringify(v.predio_cliente).includes(idsDoedInt))
+    const doedFiltrado = data2.filter(v => JSON.stringify(v.predio_cliente).includes(idsDoedInt)) // VERIFICA SE OS IDS SÃO CORRESPONDENTES PARA FAZER O CADASTRO
 
-    const verificacaoDeBusca = doedFiltrado.some(el => data2.map((value) => (value)).includes(el))
+    const verificacaoDeBusca = doedFiltrado.some(el => data2.map((value) => (value)).includes(el)) // VERIFICA SE AQUELE SETOR POSSUI EVENTOS 
 
     function handleClickAdd() {
         setOpenDialog1(true);
@@ -267,7 +287,8 @@ function DashBoardInterface() {
                                             </button>
                                         </div>
                                         <div className="p-2 d-flex d-inline justify-content-around ">
-                                            <a className="btn btn-outline-dark w-25" href={`edit-predio/${value.id}`}>Editar SETOR</a>
+                                            <a className="btn btn-outline-dark w-25" href={`edit-predio/${value.id}`}>Editar SETOR</a> 
+                                            {/* GERA UMA ROTA PARA CADA SETOR SER EDITADO OU DELETADO */}
                                         </div>
                                 </div>
                             </div>
