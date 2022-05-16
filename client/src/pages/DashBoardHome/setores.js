@@ -89,12 +89,12 @@ function Setores(){
                                 type="submit" 
                                 onClick={handleSubmit}
                                 className="btn btn-success"
-                                >Salvar Evento</button>
+                                >Salvar Setor</button>
                                 <button 
                                 type="submit" 
                                 onClick={handleDelete}
                                 className="btn btn-outline-danger "
-                                >Deletar Evento</button>
+                                >Deletar Setor</button>
                             </div>
                         </form>
                     </div>

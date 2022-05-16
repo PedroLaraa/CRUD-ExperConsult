@@ -29,11 +29,11 @@ function FiltraEquipamentos(){
 
     const [open, setOpen] = React.useState(false);
     
-    const getInfosEqp = async (res, req) => { // REQUISIÇÃO DAS IMAGENS
+    const getInfosEqp = async (res, req) => { // REQUISIÇÃO DAS IMAGENS E DOS DADOS
     await api.get("list-infosequipamentos")
     .then((response) => {
         setData(response.data.value);
-        setUrl(response.data.url) ;
+        setUrl(response.data.url);
     }).catch((err) => {
         console.log(err);
     })
@@ -97,16 +97,16 @@ function FiltraEquipamentos(){
                                     <img src={url + value.desceqp_imagem} alt={value.desceqp_imagem.id} style={imagemEqpStyle}></img>
                                 </div>
                                 <a href={url + value.desceqp_pdf} download='pdf' style={{color: 'red'}}>DOWNLOAD PDF ⤓</a>
-                                <p>Fornecedor: {value.id_fornecedor} </p>  
-                                <p>Nome do equipamento: {value.desceqp_nomeeqp + ''}</p>
-                                <p>Modelo: {value.desceqp_modelo + ''}</p>
-                                <p>Marca: {value.desceqp_marca + ''}</p>
-                                <p>Consumo energético: {value.desceqp_consumoene + ''}</p>
-                                <p>Tipo de consumo: {value.desceqp_consumotipo+ ''}</p>
-                                <p>Preço: {value.desceqp_precoeqp+ ''}</p>
-                                <p>Data do último preço: {value.desceqp_dataultpreco+ ''}</p>
-                                <p>Capacidade produtiva: {value.desceqp_capacidadeprod + ''}</p>
-                                <p>Comentários sobre equipamento: {value.desceqp_comentario+ ''}</p>
+                                <p>• Fornecedor: {value.id_fornecedor} </p>  
+                                <p>• Nome do equipamento: {value.desceqp_nomeeqp + ''}</p>
+                                <p>• Modelo: {value.desceqp_modelo + ''}</p>
+                                <p>• Marca: {value.desceqp_marca + ''}</p>
+                                <p>• Consumo energético: {value.desceqp_consumoene + ''}</p>
+                                <p>• Tipo de consumo: {value.desceqp_consumotipo+ ''}</p>
+                                <p>• Preço: {value.desceqp_precoeqp+ ''}</p>
+                                <p>• Data do último preço: {value.desceqp_dataultpreco+ ''}</p>
+                                <p>• Capacidade produtiva: {value.desceqp_capacidadeprod + ''}</p>
+                                <p>• Comentários sobre equipamento: {value.desceqp_comentario+ ''}</p>
                             </div>
                             <div className="p-2 d-flex d-inline justify-content-around">
                                 <a className="btn btn-outline-dark" href={`edit-equipamento/${value.id}`}>Editar</a>

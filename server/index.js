@@ -410,6 +410,7 @@ const mysql = require('mysql2')
         };
 
         const cnpjCliente = await PostClientes.findAll({attributes: ['clientes_cnpj']})
+        
         const clientes_cnpj = req.body.clientes_cnpj
 
         try {

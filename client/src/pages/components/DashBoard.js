@@ -1,6 +1,4 @@
 
-//TODO GERAR UM POST NO TODO_CLIENTES AUTOMATICAMENTE QUANDO UM NOVO CLIENTE FOR CADASTRADO  
-
 import React, { useEffect, useState } from "react";
 
 import api from '../../config/configApi';
@@ -220,7 +218,7 @@ function DashBoardInterface() {
                                                                         style={paragrafoDoedStyle}
                                                                         className="row justify-content-md-center">
                                                                         <div className="col-1 col-md-2 ">
-                                                                            <p>{value.updatedAt.split('-').reverse().join('/')}</p>
+                                                                            <p>{value.createdAt.split('-').reverse().join('/')}</p>
                                                                         </div>
                                                                         <div className="col-1">
                                                                             <p style={{ background: 'rgba(50,50,50,0.5)', height: '100%', width: '.5rem', border: "1px solid whitesmoke", borderRadius: "1rem" }} />
@@ -251,25 +249,25 @@ function DashBoardInterface() {
                                                 </div>    
                                             </div>
                                         </div>
-                                        <div className="p-2 d-flex d-inline justify-content-around">
+                                        <div className="p-2 d-flex d-inline justify-content-around ">
                                             <button
                                                 value={value.id}
                                                 onClick={idDoed}
-                                                className="btn btn-outline-dark"
+                                                className="btn btn-outline-dark w-25"
                                             >
                                                 Listar Eventos
                                             </button>
                                         </div>
-                                        <div className="p-2 d-flex d-inline justify-content-around">
+                                        <div className="p-2 d-flex d-inline justify-content-around ">
                                             <button
                                                 value={value.id}
-                                                className="btn btn-outline-dark"
+                                                className="btn btn-outline-dark w-25"
                                                 onClick={handleClickAddEvento}
                                             >Novo Evento
                                             </button>
                                         </div>
-                                        <div className="p-2 d-flex d-inline justify-content-around">
-                                            <a className="btn btn-outline-dark" href={`edit-predio/${value.id}`}>Editar Setor</a>
+                                        <div className="p-2 d-flex d-inline justify-content-around ">
+                                            <a className="btn btn-outline-dark w-25" href={`edit-predio/${value.id}`}>Editar SETOR</a>
                                         </div>
                                 </div>
                             </div>
@@ -279,7 +277,7 @@ function DashBoardInterface() {
                                 <FormDialogAddEvent
                                     open={openDialog2}
                                     setOpen={setOpenDialog2}
-                                    predios_clientes={idsInteiros} // VERIFICAR UTILIDADE
+                                    predios_clientes={idsInteiros}
                                     doed_eventos={value.doed_eventos}
                                     doed_autor={value.doed_autor}
                                     id={value.id}
