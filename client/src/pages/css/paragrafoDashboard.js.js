@@ -6,9 +6,9 @@ const paragrafoDashboardStyle = {
     fontFamily: 'Raleway',
     border: '.3rem solid #A9D2D7',
     borderRadius: '1rem',
-    height: '3rem',
+    height: '4.1rem',
     width: '45rem',
-    background: 'rgba(120,120,120,0.4)',
+    background: 'rgba(168,208,213,0.3)',
 }
 
 // EXPORTA A FUNÇÃO PARA USO GERAL

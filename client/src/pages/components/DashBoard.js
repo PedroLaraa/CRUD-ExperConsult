@@ -123,16 +123,16 @@ function DashBoardInterface() {
     }
 
     function handleRemoveEvent(e){
+        e.preventDefault()
         const id = e.target.value
         api.delete(`doed-deletado/${id}`)
         alert('Evento deletado')
-        document.location.reload(true)
     }
 
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
         getInfosPredios()
         getInfosDoed()
-    }, []);
+    }, [verificacaoDeBusca]);
 
     useEffect(() => {
         if(verificacaoDeBusca == false && idsDoed != ''){
@@ -147,7 +147,7 @@ function DashBoardInterface() {
                 <div
                     className="list-group col-4 overflow-auto"
                     style={botaoDashboardStyle}>
-                    <h4>• Consultar Eventos:</h4>
+                    <h4>• Cliente:</h4>
                     {nomesFiltrados.map(value => (
                         <div className="p-1" key={value}>
                             <button
@@ -171,7 +171,7 @@ function DashBoardInterface() {
                             <button
                                 className="btn btn-outline-dark"
                                 onClick={() => handleClickAdd()}
-                            >Adicionar Setor
+                            >Adicionar Assunto
                             </button>
                         </div>
                         <div className="position-relative p-2">
@@ -183,7 +183,7 @@ function DashBoardInterface() {
                                     <p>Data:</p>
                                 </div>
                                 <div className="col-8 ">
-                                    <p>Setor / Evento:</p>
+                                    <p>Setor / Assunto:</p>
                                 </div>
                                 <div className="col-1 ">
                                     <p>Autor:</p>
@@ -218,13 +218,13 @@ function DashBoardInterface() {
                                                         <p>{value.updatedAt.split('-').reverse().join('/')}</p>
                                                     </div>
                                                     <div className="col-1">
-                                                        <p style={{ background: 'rgba(50,50,50,0.5)', height: '1.5rem', width: '.5rem', border: "1px solid whitesmoke", borderRadius: "1rem" }} />
+                                                        <p style={{ background: 'rgba(50,50,50,0.5)', height: '2rem', width: '.5rem', border: "1px solid whitesmoke", borderRadius: "1rem" }} />
                                                     </div>
                                                     <div className="col-4 col-md-6">
-                                                        <p>{value.predios_nomeDosPredios}</p>
+                                                        <p className="d-flex justify-content-between">{value.predios_nomeDosPredios} <button value={value.id} onClick={idDoed} className="btn btn-outline-dark">Listar Eventos</button></p>
                                                     </div>
                                                     <div className="col-1">
-                                                        <p style={{ background: 'rgba(50,50,50,0.5)', height: '1.5rem', width: '.5rem', border: "1px solid whitesmoke", borderRadius: "1rem" }} />
+                                                        <p style={{ background: 'rgba(50,50,50,0.5)', height: '2rem', width: '.5rem', border: "1px solid whitesmoke", borderRadius: "1rem" }} />
                                                     </div>
                                                     <div className="col-1 col-md-2">
                                                         <p>{value.predios_autor}</p>
@@ -232,19 +232,32 @@ function DashBoardInterface() {
                                                 </div>    
                                                     {idsDoed == value.id && (
                                                         <div>
+                                                            {/* <div className="d-flex d-inline justify-content-around ">
+                                                                <div className="p-2 ">
+                                                                    <button
+                                                                        value={value.id}
+                                                                        className="btn btn-outline-dark"
+                                                                        onClick={handleClickAddEvento}
+                                                                    >Novo Evento
+                                                                    </button>
+                                                                </div>
+                                                                <div className="p-2 ">
+                                                                    <a className="btn btn-outline-dark" href={`edit-predio/${value.id}`}>Editar SETOR / ASSUNTO</a> 
+                                                                </div>
+                                                            </div> */}
                                                             {doedFiltrado.map(value => (
                                                                 <div key={value.id}>
                                                                     <div
                                                                         style={paragrafoDoedStyle}
                                                                         className="row justify-content-md-center">
-                                                                        <div className="col-1 col-md-2 ">
+                                                                        <div className="col-1 col-md-2">
                                                                             <p>{value.createdAt.split('-').reverse().join('/')}</p>
                                                                         </div>
                                                                         <div className="col-1">
                                                                             <p style={{ background: 'rgba(50,50,50,0.5)', height: '100%', width: '.5rem', border: "1px solid whitesmoke", borderRadius: "1rem" }} />
                                                                         </div>
                                                                         <div className="col-4 col-md-6">
-                                                                            <p>{value.doed_eventos}</p>
+                                                                            <p>{value.doed_eventos}</p>                                                                            
                                                                         </div>
                                                                         <div className="col-1">
                                                                             <p style={{ background: 'rgba(50,50,50,0.5)', height: '100%', width: '.5rem', border: "1px solid whitesmoke", borderRadius: "1rem" }} />
@@ -262,36 +275,30 @@ function DashBoardInterface() {
                                                                             </button>
                                                                         </div>
                                                                     </div>
+                                                                    
                                                                 </div>
                                                             ))}
+                                                            <div className="d-flex d-inline justify-content-around ">
+                                                                <div className="p-2 ">
+                                                                    <button
+                                                                        value={value.id}
+                                                                        className="btn btn-outline-dark"
+                                                                        onClick={handleClickAddEvento}
+                                                                    >Novo Evento
+                                                                    </button>
+                                                                </div>
+                                                                <div className="p-2 ">
+                                                                    <a className="btn btn-outline-dark" href={`edit-predio/${value.id}`}>Editar SETOR / ASSUNTO</a> 
+                                                                    {/* GERA UMA ROTA PARA CADA SETOR SER EDITADO OU DELETADO */}
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     )}
                                                 </div>    
                                             </div>
                                         </div>
-                                        <div className="p-2 d-flex d-inline justify-content-around ">
-                                            <button
-                                                value={value.id}
-                                                onClick={idDoed}
-                                                className="btn btn-outline-dark w-25"
-                                            >
-                                                Listar Eventos
-                                            </button>
-                                        </div>
-                                        <div className="p-2 d-flex d-inline justify-content-around ">
-                                            <button
-                                                value={value.id}
-                                                className="btn btn-outline-dark w-25"
-                                                onClick={handleClickAddEvento}
-                                            >Novo Evento
-                                            </button>
-                                        </div>
-                                        <div className="p-2 d-flex d-inline justify-content-around ">
-                                            <a className="btn btn-outline-dark w-25" href={`edit-predio/${value.id}`}>Editar SETOR</a> 
-                                            {/* GERA UMA ROTA PARA CADA SETOR SER EDITADO OU DELETADO */}
-                                        </div>
+                                    </div>
                                 </div>
-                            </div>
                         ))}
                         {data2.map(value => (
                             <div key={value.id}>
