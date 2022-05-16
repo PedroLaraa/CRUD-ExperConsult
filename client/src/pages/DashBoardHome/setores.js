@@ -27,7 +27,7 @@ function Setores(){
     const eventoFiltrado = evento.filter(v => JSON.stringify(v.id).includes(id))
 
     const initialValue = {
-        predios_nomeDosPredios: '',
+        predios_nomeDosPredios: eventoFiltrado.map(v => v.predios_nomeDosPredios).toString(),
         predios_autor: '',
         id: id
     }
@@ -40,6 +40,8 @@ function Setores(){
         setValues({...values, [name]: value})
     }
 
+    console.log(values)
+
     function handleSubmit(){
         api.put('predio-editado', values);
         alert('Editado com sucesso!');
@@ -47,9 +49,9 @@ function Setores(){
     };
 
     const handleDelete = () => {
-        api.delete(`predio-deletado/${id}`)
-        alert('Deletado com sucesso!')
-        navigate("/dashboard")
+        api.delete(`predio-deletado/${id}`);
+        alert('Deletado com sucesso!');
+        navigate("/dashboard");
     };
 
     return(
@@ -71,6 +73,7 @@ function Setores(){
                                 className="form-control w-50" 
                                 name="predios_nomeDosPredios" 
                                 defaultValue={v.predios_nomeDosPredios}
+                                onClick={handleChangeValues}
                                 onChange={handleChangeValues}
                                 ></input>
                             </div>
@@ -81,6 +84,7 @@ function Setores(){
                                 className="form-control w-50" 
                                 name="predios_autor" 
                                 defaultValue={v.predios_autor}
+                                onClick={handleChangeValues}
                                 onChange={handleChangeValues}
                                 ></input>
                             </div>

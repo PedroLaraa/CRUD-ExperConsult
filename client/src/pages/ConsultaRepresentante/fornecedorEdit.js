@@ -77,6 +77,7 @@ function EditarRepresentante(){
                                 name="representante_nome" 
                                 defaultValue={v.representante_nome}
                                 onChange={handleChangeValues}
+                                onClick={handleChangeValues}
                                 ></input>
                             </div>
                             <h4 className="d-flex justify-content-center">▶ Empresas que representa</h4>
@@ -87,6 +88,7 @@ function EditarRepresentante(){
                                 name="representante_empresasrep" 
                                 defaultValue={v.representante_empresasrep}
                                 onChange={handleChangeValues}
+                                onClick={handleChangeValues}
                                 ></input>
                             </div>
                             <h4 className="d-flex justify-content-center">▶ Telefone</h4>
@@ -97,6 +99,7 @@ function EditarRepresentante(){
                                 name="representante_telefone" 
                                 defaultValue={v.representante_telefone}
                                 onChange={handleChangeValues}
+                                onClick={handleChangeValues}
                                 ></input>
                             </div>
                             <h4 className="d-flex justify-content-center">▶ Comentários</h4>
@@ -107,6 +110,7 @@ function EditarRepresentante(){
                                 name="representante_comentarios" 
                                 defaultValue={v.representante_comentarios}
                                 onChange={handleChangeValues}
+                                onClick={handleChangeValues}
                                 ></input>
                             </div>
                             <h4 className="d-flex justify-content-center">▶ Site</h4>
@@ -117,6 +121,7 @@ function EditarRepresentante(){
                                 name="representante_site" 
                                 defaultValue={v.representante_site}
                                 onChange={handleChangeValues}
+                                onClick={handleChangeValues}
                                 ></input>
                             </div>
                             <h4 className="d-flex justify-content-center">▶ Estados de atuação</h4>
@@ -127,6 +132,7 @@ function EditarRepresentante(){
                                 name="representante_estadoatuacao" 
                                 defaultValue={v.representante_estadoatuacao}
                                 onChange={handleChangeValues}
+                                onClick={handleChangeValues}
                                 ></input>
                             </div>
                             <h4 className="d-flex justify-content-center">▶ Status do representante</h4>
@@ -134,6 +140,7 @@ function EditarRepresentante(){
                                 <select 
                                 className="form-control form-select w-50"
                                 onChange={handleChangeValues}
+                                onClick={handleChangeValues}
                                 name="representante_status"
                                 >
                                     <option>

@@ -43,7 +43,10 @@ const PostClientes = db.sequelize.define('clientes_obras',{
     }
 })
 
-PostPredios.belongsTo(PostClientes, {foreignKey: 'idCliente'})
+PostPredios.belongsTo(PostClientes, {
+    foreignKey: 'idCliente',
+    onDelete: 'CASCADE'
+})
 
 // EXPORTA A FUNÇÃO Post()
 module.exports = PostClientes

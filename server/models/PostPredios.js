@@ -21,7 +21,10 @@ const PostPredios = db.sequelize.define('predio_clientes',{
     }
 })
 
-PostDoed.belongsTo(PostPredios, {foreignKey: 'predios_clientes'})
+PostDoed.belongsTo(PostPredios, {
+    foreignKey: 'predios_clientes',
+    onDelete: 'CASCADE'
+})
 
 // EXPORTA A FUNÇÃO Post()
 module.exports = PostPredios

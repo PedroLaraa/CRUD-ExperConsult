@@ -76,6 +76,7 @@ function EditarFornecedor(){
                                 name="fornec_fornecedornome" 
                                 defaultValue={v.fornec_fornecedornome}
                                 onChange={handleChangeValues}
+                                onClick={handleChangeValues}
                                 ></input>
                             </div>
                             <h4 className="d-flex justify-content-center">▶ Nível</h4>
@@ -85,6 +86,7 @@ function EditarFornecedor(){
                                 className="form-control form-select w-50" 
                                 name="fornec_nivelfornecedor" 
                                 onChange={handleChangeValues}
+                                onClick={handleChangeValues}
                                 >
                                     <option>
                                         Selecione algum nível
@@ -105,6 +107,7 @@ function EditarFornecedor(){
                                 name="fornec_razaosocial" 
                                 defaultValue={v.fornec_razaosocial}
                                 onChange={handleChangeValues}
+                                onClick={handleChangeValues}
                                 ></input>
                             </div>
                             <h4 className="d-flex justify-content-center">▶ Telefone</h4>
@@ -115,6 +118,7 @@ function EditarFornecedor(){
                                 name="fornec_telefone" 
                                 defaultValue={v.fornec_telefone}
                                 onChange={handleChangeValues}
+                                onClick={handleChangeValues}
                                 ></input>
                             </div>
                             <h4 className="d-flex justify-content-center">▶ Email</h4>
@@ -125,6 +129,7 @@ function EditarFornecedor(){
                                 name="fornec_email" 
                                 defaultValue={v.fornec_email}
                                 onChange={handleChangeValues}
+                                onClick={handleChangeValues}
                                 ></input>
                             </div>
                             <h4 className="d-flex justify-content-center">▶ Site</h4>
@@ -135,6 +140,7 @@ function EditarFornecedor(){
                                 name="fornec_site" 
                                 defaultValue={v.fornec_site}
                                 onChange={handleChangeValues}
+                                onClick={handleChangeValues}
                                 ></input>
                             </div>
                             <div className="pt-3 d-flex justify-content-around">

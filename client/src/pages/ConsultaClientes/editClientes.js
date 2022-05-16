@@ -80,6 +80,7 @@ function EditarCliente(){
                                 name="clientes_razaosocial" 
                                 defaultValue={v.clientes_razaosocial}
                                 onChange={handleChangeValues}
+                                onClick={handleChangeValues}
                                 ></input>
                             </div>
                             <h4 className="d-flex justify-content-center">▶ Nome fantasia</h4>
@@ -90,6 +91,7 @@ function EditarCliente(){
                                 name="clientes_nomefantasia" 
                                 defaultValue={v.clientes_nomefantasia}
                                 onChange={handleChangeValues}
+                                onClick={handleChangeValues}
                                 ></input>
                             </div>
                             <h4 className="d-flex justify-content-center">▶ Apelido</h4>
@@ -100,6 +102,7 @@ function EditarCliente(){
                                 name="clientes_apelido" 
                                 defaultValue={v.clientes_apelido}
                                 onChange={handleChangeValues}
+                                onClick={handleChangeValues}
                                 ></input>
                             </div>
                             <h4 className="d-flex justify-content-center">▶ CNPJ</h4>
@@ -110,6 +113,7 @@ function EditarCliente(){
                                 name="clientes_cnpj" 
                                 defaultValue={v.clientes_cnpj}
                                 onChange={handleChangeValues}
+                                onClick={handleChangeValues}
                                 ></input>
                             </div>
                             <h4 className="d-flex justify-content-center">▶ Endereço</h4>
@@ -120,6 +124,7 @@ function EditarCliente(){
                                 name="clientes_endereco" 
                                 defaultValue={v.clientes_endereco}
                                 onChange={handleChangeValues}
+                                onClick={handleChangeValues}
                                 ></input>
                             </div>
                             <h4 className="d-flex justify-content-center">▶ IE</h4>
@@ -130,6 +135,7 @@ function EditarCliente(){
                                 name="clientes_ie" 
                                 defaultValue={v.clientes_ie}
                                 onChange={handleChangeValues}
+                                onClick={handleChangeValues}
                                 ></input>
                             </div>
                             <h4 className="d-flex justify-content-center">▶ Nome do Responsável</h4>
@@ -140,6 +146,7 @@ function EditarCliente(){
                                 name="clientes_nomeResponsavel" 
                                 defaultValue={v.clientes_nomeResponsavel}
                                 onChange={handleChangeValues}
+                                onClick={handleChangeValues}
                                 ></input>
                             </div>
                             <h4 className="d-flex justify-content-center">▶ Telefone</h4>
@@ -150,6 +157,7 @@ function EditarCliente(){
                                 name="clientes_telefone" 
                                 defaultValue={v.clientes_telefone}
                                 onChange={handleChangeValues}
+                                onClick={handleChangeValues}
                                 ></input>
                             </div>
                             <h4 className="d-flex justify-content-center">▶ Email</h4>
@@ -160,6 +168,7 @@ function EditarCliente(){
                                 name="clientes_email" 
                                 defaultValue={v.clientes_email}
                                 onChange={handleChangeValues}
+                                onClick={handleChangeValues}
                                 ></input>
                             </div>
                             <h4 className="d-flex justify-content-center">▶ Premissas de Projeto</h4>
@@ -172,6 +181,7 @@ function EditarCliente(){
                                 name="clientes_premissasDeProjeto" 
                                 defaultValue={v.clientes_premissasDeProjeto}
                                 onChange={handleChangeValues}
+                                onClick={handleChangeValues}
                                 ></textarea>
                             </div>
                             <div className="pt-3 d-flex justify-content-around">
@@ -180,11 +190,11 @@ function EditarCliente(){
                                 onClick={handleSubmit}
                                 className="btn btn-success"
                                 >Salvar Cliente</button>
-                                {/* <button 
+                                <button 
                                 type="submit" 
                                 onClick={handleDelete}
                                 className="btn btn-outline-danger "
-                                >Deletar Cliente</button> */}
+                                >Deletar Cliente</button>
                             </div>
                         </form>
                     </div>
