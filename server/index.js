@@ -183,7 +183,7 @@ const mysql = require('mysql2')
         .then((fornec_foto) =>{
             return res.json({
                 fornec_foto,
-                url: "http://192.168.10.228:1212/files/"
+                url: "http://192.168.10.228:1212/files/" //FIXME TO IP SERVER
             }) 
         }).catch(() =>{
             res.render('erro')
@@ -284,8 +284,8 @@ const mysql = require('mysql2')
         .then((value) =>{
             return res.json({
                 value,
-                url: "http://192.168.10.228:1212/files/"
-            })
+                url: "http://192.168.10.228:1212/files/" //FIXME TO IP SERVER
+            }) 
         }).catch(() =>{
             res.render('erro')
         })
@@ -376,7 +376,7 @@ const mysql = require('mysql2')
         .then((representante_imagem) =>{
             return res.json({
                 representante_imagem,
-                url: "http://192.168.10.228:1212/files/"
+                url: "http://192.168.10.228:1212/files/" //FIXME TO IP SERVER
             }) 
         }).catch(() =>{
             res.render('erro')
@@ -469,8 +469,8 @@ const mysql = require('mysql2')
         .then((clientes_logo) =>{
             return res.json({
                 clientes_logo,
-                url: "http://192.168.10.228:1212/files/"
-            }) 
+                url: "http://192.168.10.228:1212/files/" //FIXME TO IP SERVER
+            })  
         }).catch(() =>{
             res.render('erro')
         })
@@ -488,7 +488,7 @@ const mysql = require('mysql2')
 
         try{
             const dbResponse = await PostPredios.create(dataToInsert)
-            res.redirect('192.168.10.228:3000/dashboard')
+            res.redirect('192.168.10.228:3000/dashboard') //FIXME TO IP SERVER
         }catch{
             res.render('erro')
         }
@@ -539,7 +539,7 @@ const mysql = require('mysql2')
         .then((value) => {
             res.json({
                 value,
-                url: "http://192.168.10.228:1212/files/"
+                url: "http://192.168.10.228:1212/files/" //FIXME TO IP SERVER
             })
         }).catch((err) => {
             console.log(err)
@@ -556,7 +556,7 @@ const mysql = require('mysql2')
 
         try{
             const dbResponse = await PostDoed.create(dataToInsert)
-            res.redirect('192.168.10.228:3000/dashboard')
+            res.redirect('192.168.10.228:3000/dashboard') //FIXME TO IP SERVER
         }catch{
             res.render('erro')
         }
@@ -607,7 +607,7 @@ const mysql = require('mysql2')
         .then((value) => {
             res.json({
                 value,
-                url: "http://192.168.10.228:1212/files/"
+                url: "http://192.168.10.228:1212/files/" //FIXME TO IP SERVER
             })
         }).catch((err) => {
             console.log(err)
