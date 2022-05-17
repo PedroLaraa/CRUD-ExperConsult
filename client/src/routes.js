@@ -26,6 +26,8 @@ import EditarRepresentante from "./pages/ConsultaRepresentante/fornecedorEdit";
 
 import EditarCliente from "./pages/ConsultaClientes/editClientes";
 
+import Login from './pages/Login'
+
 // CRIA AS ROTA DE NAVEGAÇÃO DE BROWSER
 
 function Rotas(){
@@ -33,6 +35,7 @@ function Rotas(){
         <BrowserRouter>
             <Routes> 
                 <Route path="/" element={<DashBoard />} exact></Route>
+                <Route path="/login" element={<Login/>}></Route>
                 <Route path="/representantes" element={<ConsultaRepresentante />}></Route>
                 <Route path="/fornecedores" element={<ConsultaFornecedores />} ></Route>
                 <Route path="/equipamentos" element={<ConsultaEquipamentos />} ></Route>
