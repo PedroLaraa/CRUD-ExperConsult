@@ -11,13 +11,7 @@ import DialogActions from '@mui/material/DialogActions';
 
 import DialogContent from '@mui/material/DialogContent';
 
-import DialogContentText from '@mui/material/DialogContentText';
-
 import DialogTitle from '@mui/material/DialogTitle';
-
-import { MenuItem, Select } from '@mui/material';
-
-import { SliderValueLabel } from '@mui/material';
 
 import api from '../config/configApi';
 
@@ -47,7 +41,6 @@ export default function FormDialog(value) {
         });
         handleClose();
         alert('Setor cadastrado com sucesso!')
-        document.location.reload(true)
     };
 
     const getInfosTodo = async (req, res) => {
@@ -73,14 +66,14 @@ export default function FormDialog(value) {
 
     return (
             <Dialog open={value.open} onClose={handleClose}>
-                <DialogTitle>Novo evento: </DialogTitle>
+                <DialogTitle>Novo assunto: </DialogTitle>
                 <DialogContent >
                     <TextField
                         autoFocus
                         autoComplete='off'
                         margin="dense"
                         id="predios_nomeDosPredios"
-                        label="Setor: "
+                        label="Assunto: "
                         onChange={handleChangeValue}
                         type="text"
                         fullWidth

@@ -45,7 +45,6 @@ export default function FormDialogAddEvent(value) {
         });
         handleClose();
         alert('Cadastrado com sucesso!')
-        document.location.reload(true)
     };
 
     const getInfosTodo = async (req, res) => {

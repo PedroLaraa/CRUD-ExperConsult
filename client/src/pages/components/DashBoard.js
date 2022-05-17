@@ -18,8 +18,6 @@ import FormDialogAddEvent from "../../dialog/DoedEvent";
 import paragrafoDoedStyle from "../css/paragrafoDoed";
 
 import paragrafoDivStyle from "../css/paragrafoDiv";
-import { color } from "@mui/system";
-import { red } from "@mui/material/colors";
 
 function DashBoardInterface() {
 
@@ -97,7 +95,7 @@ function DashBoardInterface() {
 
     const busca = clientes.toLowerCase(); // DEFINE O QUE SERÁ BUSCADO
 
-    const dataFiltrado = data.filter(v => JSON.stringify(v.clientes_obra.clientes_apelido).replaceAll('"', '').toLowerCase().includes(busca)); // FILTRA AS BUSCAS
+    const dataFiltrado = data.filter(v => JSON.stringify(v.clientes_obra.clientes_apelido).replaceAll('"', '').toLowerCase().includes(busca)); // RETORNA OS DADOS REFERENTES A BUSCA
 
     const nomesFiltrados = data.map(v => JSON.stringify(v.clientes_obra.clientes_apelido).replaceAll('"', '')).filter((elem, index, self) => index === self.indexOf(elem)) // RETORNA OS APELIDOS SEM REPETIR
 
@@ -105,24 +103,34 @@ function DashBoardInterface() {
 
     const verificacaoDeBusca = doedFiltrado.some(el => data2.map((value) => (value)).includes(el)) // VERIFICA SE AQUELE SETOR POSSUI EVENTOS 
 
+    // FUNÇÃO PARA ABRIR O DIALOG DE ADIÇÃO DE ASSUNTO
+
     function handleClickAdd() {
         setOpenDialog1(true);
     }
+
+    // PEGA O ID DO CLIENTE PARA REALIZAR O CADASTRO DE FORMA CORRETA
 
     const idCliente = function (e) {
         setIdsDosClientes(e.target.value)
     }
 
+    // PEGA OS ID's DOS DOED'S PARA FAZER O CADASTRO DE FORMA CORRETA
+
     const idDoed = function (e) {
         setIdsDoed(e.target.value)
     }
+
+    // FUNÇÃO PARA DISPARAR O DIALOG DE DOED'S E ADICIONAR O EVENTO NO ID CORRETO
 
     function handleClickAddEvento(e) {
         setOpenDialog2(true);
         idCliente(e)
     }
 
-    function handleRemoveEvent(e){
+    // FUNÇÃO PARA DELETAR DOED'S
+
+    function handleRemoveEvent(e) {
         e.preventDefault()
         const id = e.target.value
         api.delete(`doed-deletado/${id}`)
@@ -132,18 +140,18 @@ function DashBoardInterface() {
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
         getInfosPredios()
         getInfosDoed()
-    }, [verificacaoDeBusca]);
+    }, [openDialog2, openDialog1]); // PARAMETROS PARA ATUALIZAR OS DADOS SEM ATUALIZAR A PÁGINA
 
     useEffect(() => {
-        if(verificacaoDeBusca == false && idsDoed != ''){
+        if (verificacaoDeBusca == false && idsDoed != '') {
             alert("Nenhum evento registrado!")
         }
-    }, [idsDoed])
+    }, [idsDoed]) // VERIFICA A BUSCA SEMPRE QUE OS IDSDOED ALTERAM
 
     return (
         <div
             className="container vh-100">
-            <div className="row vh-100 position-relative p-2 pt-5 d-flex justify-content-center">
+            <div className="row h-auto position-relative p-2 pt-5 d-flex justify-content-center">
                 <div
                     className="list-group col-4 overflow-auto"
                     style={botaoDashboardStyle}>
@@ -163,7 +171,8 @@ function DashBoardInterface() {
                     ))}
                 </div>
                 {clientes && (
-                    <div className="col-8 overflow-auto vh-100"
+                    <div
+                        className="col-8 overflow-auto vh-100"
                         style={{ maxHeight: "40rem", width: "55rem", paddingLeft: "2rem" }}
                     >
                         <div className="d-flex d-inline justify-content-around p-3">
@@ -179,7 +188,7 @@ function DashBoardInterface() {
                                 style={cabecalhoTableDashboard}
                                 className="container row text-uppercase m-0"
                             >
-                                <div className="col-2 ">
+                                <div id="topo" className="col-2 ">
                                     <p>Data:</p>
                                 </div>
                                 <div className="col-8 ">
@@ -206,9 +215,9 @@ function DashBoardInterface() {
                                     className="container pb-1"
                                 >
                                     <div>
-                                        <div 
-                                        className="container overflow-auto"
-                                        style={{maxHeight: "30rem", width: "50rem"}}
+                                        <div
+                                            className="container overflow-auto"
+                                            style={{ maxHeight: "30rem", width: "50rem"}}
                                         >
                                             <div
                                                 style={paragrafoDivStyle}
@@ -229,76 +238,75 @@ function DashBoardInterface() {
                                                     <div className="col-1 col-md-2">
                                                         <p>{value.predios_autor}</p>
                                                     </div>
-                                                </div>    
-                                                    {idsDoed == value.id && (
-                                                        <div>
-                                                            {/* <div className="d-flex d-inline justify-content-around ">
+                                                </div>
+                                                {idsDoed == value.id && (
+                                                    <div>
+                                                        <div className="d-flex d-inline justify-content-around ">
                                                                 <div className="p-2 ">
                                                                     <button
                                                                         value={value.id}
                                                                         className="btn btn-outline-dark"
                                                                         onClick={handleClickAddEvento}
-                                                                    >Novo Evento
+                                                                        >Novo Evento
                                                                     </button>
                                                                 </div>
                                                                 <div className="p-2 ">
                                                                     <a className="btn btn-outline-dark" href={`edit-predio/${value.id}`}>Editar SETOR / ASSUNTO</a> 
-                                                                </div>
-                                                            </div> */}
-                                                            {doedFiltrado.map(value => (
-                                                                <div key={value.id}>
-                                                                    <div
-                                                                        style={paragrafoDoedStyle}
-                                                                        className="row justify-content-md-center">
-                                                                        <div className="col-1 col-md-2">
-                                                                            <p>{value.createdAt.split('-').reverse().join('/')}</p>
-                                                                        </div>
-                                                                        <div className="col-1">
-                                                                            <p style={{ background: 'rgba(50,50,50,0.5)', height: '100%', width: '.5rem', border: "1px solid whitesmoke", borderRadius: "1rem" }} />
-                                                                        </div>
-                                                                        <div className="col-4 col-md-6">
-                                                                            <p>{value.doed_eventos}</p>                                                                            
-                                                                        </div>
-                                                                        <div className="col-1">
-                                                                            <p style={{ background: 'rgba(50,50,50,0.5)', height: '100%', width: '.5rem', border: "1px solid whitesmoke", borderRadius: "1rem" }} />
-                                                                        </div>
-                                                                        <div className="col-1 col-md-2">
-                                                                            <p>{value.doed_autor}</p>
-                                                                            <button
-                                                                                className="btn btn-outline-danger"
-                                                                                value={value.id}
-                                                                                onClick={handleRemoveEvent}
-                                                                                data-toggle="tooltip"
-                                                                                data-placement="right"
-                                                                                title="Deletar Evento"
-                                                                                >❌
-                                                                            </button>
-                                                                        </div>
-                                                                    </div>
-                                                                    
-                                                                </div>
-                                                            ))}
-                                                            <div className="d-flex d-inline justify-content-around ">
-                                                                <div className="p-2 ">
-                                                                    <button
-                                                                        value={value.id}
-                                                                        className="btn btn-outline-dark"
-                                                                        onClick={handleClickAddEvento}
-                                                                    >Novo Evento
-                                                                    </button>
-                                                                </div>
-                                                                <div className="p-2 ">
-                                                                    <a className="btn btn-outline-dark" href={`edit-predio/${value.id}`}>Editar SETOR / ASSUNTO</a> 
-                                                                    {/* GERA UMA ROTA PARA CADA SETOR SER EDITADO OU DELETADO */}
                                                                 </div>
                                                             </div>
+                                                        {doedFiltrado.map(value => (
+                                                            <div key={value.id}>
+                                                                <div
+                                                                    style={paragrafoDoedStyle}
+                                                                    className="row justify-content-md-center">
+                                                                    <div className="col-1 col-md-2">
+                                                                        <p>{value.createdAt.split('-').reverse().join('/')}</p>
+                                                                    </div>
+                                                                    <div className="col-1">
+                                                                        <p style={{ background: 'rgba(50,50,50,0.5)', height: '100%', width: '.5rem', border: "1px solid whitesmoke", borderRadius: "1rem" }} />
+                                                                    </div>
+                                                                    <div className="col-4 col-md-6">
+                                                                        <p>{value.doed_eventos}</p>
+                                                                    </div>
+                                                                    <div className="col-1">
+                                                                        <p style={{ background: 'rgba(50,50,50,0.5)', height: '100%', width: '.5rem', border: "1px solid whitesmoke", borderRadius: "1rem" }} />
+                                                                    </div>
+                                                                    <div className="col-1 col-md-2">
+                                                                        <p>{value.doed_autor}</p>
+                                                                        <button
+                                                                            className="btn btn-outline-danger"
+                                                                            value={value.id}
+                                                                            onClick={handleRemoveEvent}
+                                                                            data-toggle="tooltip"
+                                                                            data-placement="right"
+                                                                            title="Deletar Evento"
+                                                                        >❌
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        ))}
+                                                        <div className="d-flex d-inline justify-content-around ">
+                                                            <div className="p-2 ">
+                                                                <button
+                                                                    value={value.id}
+                                                                    className="btn btn-outline-dark"
+                                                                    onClick={handleClickAddEvento}
+                                                                >Novo Evento
+                                                                </button>
+                                                            </div>
+                                                            <div className="p-2 ">
+                                                                <a className="btn btn-outline-dark" href={`edit-predio/${value.id}`}>Editar SETOR / ASSUNTO</a>
+                                                                {/* GERA UMA ROTA PARA CADA SETOR SER EDITADO OU DELETADO */}
+                                                            </div>
                                                         </div>
-                                                    )}
-                                                </div>    
+                                                    </div>
+                                                )}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                         ))}
                         {data2.map(value => (
                             <div key={value.id}>
