@@ -241,7 +241,7 @@ function DashBoardInterface() {
                                                 </div>
                                                 {idsDoed == value.id && (
                                                     <div>
-                                                        <div className="d-flex d-inline justify-content-around ">
+                                                        {/* <div className="d-flex d-inline justify-content-around ">
                                                                 <div className="p-2 ">
                                                                     <button
                                                                         value={value.id}
@@ -253,7 +253,7 @@ function DashBoardInterface() {
                                                                 <div className="p-2 ">
                                                                     <a className="btn btn-outline-dark" href={`edit-predio/${value.id}`}>Editar SETOR / ASSUNTO</a> 
                                                                 </div>
-                                                            </div>
+                                                            </div> */}
                                                         {doedFiltrado.map(value => (
                                                             <div key={value.id}>
                                                                 <div
