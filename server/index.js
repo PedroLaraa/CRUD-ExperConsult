@@ -21,6 +21,12 @@ const PostPredios = require('./models/PostPredios')
 
 const PostDoed = require('./models/PostDoed')
 
+const PostUser = require('./models/PostUser')
+
+const PostPermissoesUser = require('./models/PostPermissoesUser')
+
+const PostSetorUser = require('./models/PostSetorUser')
+
 const path = require('path')
 
 const upload = require('./middleware/uploadimg')
@@ -38,6 +44,8 @@ const db = require('./models/db')
 const { json } = require('body-parser')
 
 const mysql = require('mysql2')
+
+const jwt = require('jsonwebtoken')
 
     // PERMITE ACESSO DO BROWSER AO SISTEMA
 
@@ -620,6 +628,31 @@ const mysql = require('mysql2')
             res.render('erro')
         })
     })
+
+    // ROTAS DOS USUÁRIOS
+
+    //ROTA DE PPOST PARA VERIFICAR EXISTENCIA DO USER
+
+    // TODO VERIFICAR O LOGIN SE EXISTE NO DB E RETORNAR OS DOIS MODELS JUNTOS
+    // TODO NÃO DESANIME INDEPENDENTE DE TUDO!!!
+    
+    app.get('/list-infosUserPerm', async (req, res) => {
+        await PostUser.findAll({
+            include: [{
+                model: PostPermissoesUser,
+                attributes: ['id', 'perm_nomeDaPerm']
+            }]
+        })
+        .then((value) => {
+            res.json({
+                value,
+                url: "http://192.168.10.228:1212/files/"
+            })
+        }).catch((err) => {
+            console.log(err)
+            res.render('erro')
+        });
+    });
 
     // PORTA QUE O BACK-END ESTÁ SENDO EXECUTADO
 

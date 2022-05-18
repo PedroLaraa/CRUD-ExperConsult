@@ -1,6 +1,6 @@
 // IMPORTA O REACR E REACT ROUTER DOOM
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import {BrowserRouter, Routes ,Route, Navigate} from 'react-router-dom';
 
@@ -28,28 +28,43 @@ import EditarCliente from "./pages/ConsultaClientes/editClientes";
 
 import Login from './pages/Login'
 
-import { AuthProvider } from "./contexts/auth";
+import { AuthProvider, AuthContext } from "./contexts/auth";
 
 // CRIA AS ROTA DE NAVEGAÇÃO DE BROWSER
 
 function Rotas(){
 
+    const Private = ({children}) =>{
+
+        const { authenticated,loading } = useContext(AuthContext);
+
+        if(loading){
+            return <div className="loading"> <h1> Carregando...</h1>.</div>
+        }
+
+        if(!authenticated){
+            return <Navigate to="/login" />;
+        }
+
+        return children
+    };
+
     return( // PATH = CAMINHO; ELEMENT = O QUE VAI SER RENDERIZADO;
         <BrowserRouter>
             <AuthProvider>
                 <Routes> 
-                    <Route path="/" element={<DashBoard />} exact></Route>
+                    <Route path="/" element={<Private><DashBoard /></Private>} exact></Route>
                     <Route path="/login" element={<Login/>}></Route>
-                    <Route path="/representantes" element={<ConsultaRepresentante />}></Route>
-                    <Route path="/fornecedores" element={<ConsultaFornecedores />} ></Route>
-                    <Route path="/equipamentos" element={<ConsultaEquipamentos />} ></Route>
-                    <Route path="/clientes" element={<ConsultaClientes />}></Route>
-                    <Route path="/dashboard" element={<DashBoard />}></Route>
-                    <Route path="/edit-predio/:id" element={<Setores />}></Route>
-                    <Route path="/edit-fornecedor/:id" element={<EditarFornecedor />}></Route>
-                    <Route path="/edit-equipamento/:id" element={<EditarEquipamentos />}></Route>
-                    <Route path="/edit-representante/:id" element={<EditarRepresentante />}></Route>
-                    <Route path="/edit-cliente/:id" element={<EditarCliente />}></Route>
+                    <Route path="/representantes" element={<Private><ConsultaRepresentante /></Private>}></Route>
+                    <Route path="/fornecedores" element={<Private><ConsultaFornecedores /></Private>} ></Route>
+                    <Route path="/equipamentos" element={<Private><ConsultaEquipamentos /></Private>} ></Route>
+                    <Route path="/clientes" element={<Private><ConsultaClientes /></Private>}></Route>
+                    <Route path="/dashboard" element={<Private><DashBoard /></Private>}></Route>
+                    <Route path="/edit-predio/:id" element={<Private><Setores /></Private>}></Route>
+                    <Route path="/edit-fornecedor/:id" element={<Private><EditarFornecedor /></Private>}></Route>
+                    <Route path="/edit-equipamento/:id" element={<Private><EditarEquipamentos /></Private>}></Route>
+                    <Route path="/edit-representante/:id" element={<Private><EditarRepresentante /></Private>}></Route>
+                    <Route path="/edit-cliente/:id" element={<Private><EditarCliente /></Private>}></Route>
                 </Routes>
             </AuthProvider>
         </BrowserRouter>

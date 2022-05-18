@@ -9,14 +9,14 @@ import './style.css'
 function Login(){
 
     const [user, setUser] = useState("");
+
     const [senha, setSenha] = useState("");
 
     const {authenticated, login} = useContext(AuthContext);
 
     function handleSubmit(e){
         e.preventDefault()
-        console.log("Submit", {user, senha})
-
+        
         login(user, senha)
     }
 
@@ -34,7 +34,6 @@ function Login(){
                             <h3 className="p-2 d-flex justify-content-center">
                                 LOGIN NO SISTEMA
                             </h3>
-                            <p>{String(authenticated)}</p>
                             <div className="p-2">
                                 <label> Usuário:</label>
                                     <input 

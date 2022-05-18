@@ -3,6 +3,10 @@
 
 import React, { useEffect, useState } from "react";
 
+import { useContext } from "react";
+
+import { AuthContext, AuthProvider } from "../../contexts/auth";
+
 import api from '../../config/configApi';
 
 import paragrafoDashboardStyle from "../css/paragrafoDashboard.js";
@@ -48,7 +52,7 @@ function DashBoardInterface() {
 
     const idsDoedInt = parseInt(idsDoed);
 
-
+    const {authenticaded, logout} = useContext(AuthContext);
 
     // FAZ UMA REQUISIÇÃO PARA O BACK E RETORNAR O DATABASE COM DADOS (PREDIOS)
 
@@ -138,6 +142,10 @@ function DashBoardInterface() {
         document.location.reload(true)
     }
 
+    function handleLogoutUser(e){
+        logout()
+    }
+
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
         getInfosPredios()
         getInfosDoed()
@@ -157,6 +165,12 @@ function DashBoardInterface() {
                     className="list-group col-4 p-1 overflow-auto"
                     style={botaoDashboardStyle}>
                     <h4>• Cliente:</h4>
+                    <div>
+                        <button
+                        className="btn btn-outline-dark"
+                        onClick={handleLogoutUser}
+                        >Logout</button>
+                    </div>
                     {nomesFiltrados.map(value => (
                         <div className="p-1" key={value}>
                             <button
