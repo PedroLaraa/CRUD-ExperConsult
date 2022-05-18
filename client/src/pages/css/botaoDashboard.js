@@ -10,7 +10,7 @@ const botaoDashboardStyle = {
     width: '20rem',
     display: 'flex',
     alignItems: 'center',
-    background: 'rgba(120,120,120,0.4)',
+    background: 'rgba(248,248,255,0.8)',
 }
 
 // EXPORTA A FUNÇÃO PARA USO GERAL

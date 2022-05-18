@@ -93,7 +93,7 @@ export default function FormDialog(value) {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancelar</Button>
-                    <Button onClick={handleCriarEvento}>Cadastrar Setor</Button>
+                    <Button onClick={handleCriarEvento}>Cadastrar Assunto</Button>
                 </DialogActions>
             </Dialog>
     );

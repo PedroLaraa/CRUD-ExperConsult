@@ -135,6 +135,7 @@ function DashBoardInterface() {
         const id = e.target.value
         api.delete(`doed-deletado/${id}`)
         alert('Evento deletado')
+        document.location.reload(true)
     }
 
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
@@ -151,9 +152,9 @@ function DashBoardInterface() {
     return (
         <div
             className="container vh-100">
-            <div className="row h-auto position-relative p-2 pt-5 d-flex justify-content-center">
+            <div className="row h-auto position-relative pt-5 d-flex justify-content-center">
                 <div
-                    className="list-group col-4 overflow-auto"
+                    className="list-group col-4 p-1 overflow-auto"
                     style={botaoDashboardStyle}>
                     <h4>• Cliente:</h4>
                     {nomesFiltrados.map(value => (
@@ -163,7 +164,7 @@ function DashBoardInterface() {
                                 value={value}
                                 className="btn btn-outline-dark"
                                 onClick={handleFiltrar}
-                                style={{ width: "18rem" }}
+                                style={{ width: "18rem", fontSize:'1.1rem', fontFamily: 'Raleway' }}
                             >
                                 {value}
                             </button>
@@ -180,6 +181,7 @@ function DashBoardInterface() {
                             <button
                                 className="btn btn-outline-dark"
                                 onClick={() => handleClickAdd()}
+                                style={{fontSize:'1.1rem', fontFamily: 'Raleway'}}
                             >Adicionar Assunto
                             </button>
                         </div>
@@ -217,12 +219,14 @@ function DashBoardInterface() {
                                     <div>
                                         <div
                                             className="container overflow-auto"
-                                            style={{ maxHeight: "30rem", width: "50rem"}}
+                                            style={{ maxHeight: "30rem", width: "100%"}}
                                         >
                                             <div
                                                 style={paragrafoDivStyle}
                                             >
-                                                <div className="row justify-content-md-center" style={paragrafoDashboardStyle}>
+                                                <div 
+                                                className="row justify-content-center" 
+                                                style={paragrafoDashboardStyle}>
                                                     <div className="col-1 col-md-2 ">
                                                         <p>{value.updatedAt.split('-').reverse().join('/')}</p>
                                                     </div>
@@ -230,7 +234,7 @@ function DashBoardInterface() {
                                                         <p style={{ background: 'rgba(50,50,50,0.5)', height: '2rem', width: '.5rem', border: "1px solid whitesmoke", borderRadius: "1rem" }} />
                                                     </div>
                                                     <div className="col-4 col-md-6">
-                                                        <p className="d-flex justify-content-between">{value.predios_nomeDosPredios} <button value={value.id} onClick={idDoed} className="btn btn-outline-dark">Listar Eventos</button></p>
+                                                        <p className="d-flex justify-content-between">{value.predios_nomeDosPredios} <button value={value.id} onClick={idDoed} className="btn btn-outline-dark " style={{fontSize:'1rem', fontFamily: 'Raleway'}}>Listar Eventos</button></p>
                                                     </div>
                                                     <div className="col-1">
                                                         <p style={{ background: 'rgba(50,50,50,0.5)', height: '2rem', width: '.5rem', border: "1px solid whitesmoke", borderRadius: "1rem" }} />
@@ -264,6 +268,7 @@ function DashBoardInterface() {
                                                                             className="btn btn-outline-danger"
                                                                             value={value.id}
                                                                             onClick={handleRemoveEvent}
+                                                                            style={{fontSize:'1.1rem', fontFamily: 'Raleway'}}
                                                                             data-toggle="tooltip"
                                                                             data-placement="right"
                                                                             title="Deletar Evento"
@@ -279,11 +284,12 @@ function DashBoardInterface() {
                                                                     value={value.id}
                                                                     className="btn btn-outline-dark"
                                                                     onClick={handleClickAddEvento}
+                                                                    style={{fontSize:'1.1rem', fontFamily: 'Raleway'}}
                                                                 >Novo Evento
                                                                 </button>
                                                             </div>
                                                             <div className="p-2 ">
-                                                                <a className="btn btn-outline-dark" href={`edit-predio/${value.id}`}>Editar SETOR / ASSUNTO</a>
+                                                                <a className="btn btn-outline-dark" href={`edit-predio/${value.id}`} style={{fontSize:'1.1rem', fontFamily: 'Raleway'}}>Editar SETOR / ASSUNTO</a>
                                                                 {/* GERA UMA ROTA PARA CADA SETOR SER EDITADO OU DELETADO */}
                                                             </div>
                                                         </div>
