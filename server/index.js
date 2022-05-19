@@ -50,6 +50,8 @@ const jwt = require('jsonwebtoken')
 const { decode } = require('punycode')
 const { set } = require('express/lib/response')
 
+const SECRET = 'experconsult'
+
     // PERMITE ACESSO DO BROWSER AO SISTEMA
 
     app.use((req, res, next) => {
@@ -79,24 +81,19 @@ const { set } = require('express/lib/response')
     app.use(bodyParser.urlencoded({extended: false}))
     app.use(bodyParser.json())
 
+    function verifyJwt(req, res, next){ // FIXME VERIFICAÇÃO FALHANDO, PROVAVEL SOLUÇÃO É PASSAR OS FORMS DO BACK PARA O FRONT... SHIT
+        const token = req.headers['Bearer'];
+        jwt.verify(token, SECRET, (err, decoded) => {
+            if(err) return console.log(err)
+            req.id = decoded.id
+            next()
+        })
+    }
+
 // ROUTES FOR FRONT END INFOS
 
-    const SECRET = 'experconsult'
-
-        const verifyJWT = (req, res, next) => {
-            const token = req.headers['x-acess-token'];
-
-            jwt.verify(token, SECRET, (err, decoded) => {
-                if(err) return res.redirect('http://expertestes:3000/login'), console.log(err) 
-
-
-                req.id = decoded.id
-                next();
-            })
-        }
-
     // Lista os fornecedores no Form Handlebars dos representantes
-    app.get('/cadastro-representante', verifyJWT, (req, res) => {
+    app.get('/cadastro-representante', (req, res) => {
         PostFornec.findAll().then(fornecedores => {
             res.render('formrepresentantes', {fornecedores: fornecedores})
         })
@@ -121,7 +118,7 @@ const { set } = require('express/lib/response')
 
     // SUPORTE
 
-    app.get('/suporte', function (req, res){
+    app.get('/suporte',verifyJwt ,function (req, res){
         res.render('suporte')
     })
 
@@ -654,6 +651,8 @@ const { set } = require('express/lib/response')
 
     // POST DOS DADOS DE USUÁRIO PARA VERIFICAÇÃO DE AUTORIZAÇÃO DO LOGIN
 
+    //FIXME VERIFICAR MOTIVO DAS ROTAS PRIVADAS DO BACK-END NÃO FUNCIONAREM
+
     app.post('/login-auth', async (req, res) => {
 
         const usersdb = await PostUser.findAll({attributes: ['user_nomeUser', 'id']})
@@ -662,15 +661,13 @@ const { set } = require('express/lib/response')
 
         for(let i = 0; i < usersdb.length; i++){
 
-            var id = usersdb[i].id
-
             if(req.body.usuario === usersdb[i].user_nomeUser && 
             req.body.senha === senhadb[i].user_senha){
-                const token = jwt.sign({id}, SECRET, {expiresIn: 1200});
+                const id = usersdb[i].id
+                const token = jwt.sign({id: id}, SECRET, {expiresIn: 1200});
                 return res.json({auth: true, token});
             }
         }
-
     })
 
     // LISTAGEM DE DADOS DOS USUÁRIOS

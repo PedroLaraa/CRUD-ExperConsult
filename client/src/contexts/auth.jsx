@@ -10,6 +10,8 @@ export const AuthContext = createContext()
 
 export const AuthProvider = ({children}) => {
 
+    const navigate = useNavigate();
+
     const [loading, setLoading] = useState(true)
 
     const [user, setUser] = useState(null);
@@ -22,13 +24,10 @@ export const AuthProvider = ({children}) => {
             setUser(JSON.parse(recoverUser));
         }
 
-        setLoading(false)
+        setLoading(false);
 
     }, [])
 
-    const navigate = useNavigate();
-
-    
     const login = async (usuario, senha) => {
 
         const response = await createSession(usuario, senha);
@@ -39,7 +38,7 @@ export const AuthProvider = ({children}) => {
         localStorage.setItem("user", JSON.stringify(loggedUser));
         localStorage.setItem("token", token);
 
-        api.defaults.headers.Authorization = `x-acess-token ${token}`;
+        api.defaults.headers.Authorization = `Bearer ${token}`;
 
         setUser(loggedUser);
         navigate('/dashboard');
@@ -48,10 +47,10 @@ export const AuthProvider = ({children}) => {
 
     const logout = () => {
         setUser(null)
-        localStorage.removeItem('user')
+        localStorage.removeItem('user');
         localStorage.removeItem("token");
         api.defaults.headers.Authorization = null;
-        navigate('/login')
+        navigate('/login');
     };
 
     return (
