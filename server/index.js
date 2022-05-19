@@ -47,12 +47,16 @@ const mysql = require('mysql2')
 
 const jwt = require('jsonwebtoken')
 
+const { decode } = require('punycode')
+const { set } = require('express/lib/response')
+
     // PERMITE ACESSO DO BROWSER AO SISTEMA
 
     app.use((req, res, next) => {
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
-        res.header("Access-Control-Allow-Headers", "X-PINGOTHER, Content-Type, Authorization");
+        res.header("Access-Control-Allow-Headers", "*");
+        res.header("Access-Control-Request-Headers", "*");
         app.use(cors());
         next();
     });
@@ -77,8 +81,22 @@ const jwt = require('jsonwebtoken')
 
 // ROUTES FOR FRONT END INFOS
 
+    const SECRET = 'experconsult'
+
+        const verifyJWT = (req, res, next) => {
+            const token = req.headers['x-acess-token'];
+
+            jwt.verify(token, SECRET, (err, decoded) => {
+                if(err) return res.redirect('http://expertestes:3000/login'), console.log(err) 
+
+
+                req.id = decoded.id
+                next();
+            })
+        }
+
     // Lista os fornecedores no Form Handlebars dos representantes
-    app.get('/cadastro-representante', (req, res) => {
+    app.get('/cadastro-representante', verifyJWT, (req, res) => {
         PostFornec.findAll().then(fornecedores => {
             res.render('formrepresentantes', {fornecedores: fornecedores})
         })
@@ -108,7 +126,6 @@ const jwt = require('jsonwebtoken')
     })
 
 // ROTAS DE CRUD
-
 
     // FORNECEDORES:
 
@@ -286,6 +303,8 @@ const jwt = require('jsonwebtoken')
     })
 
     // ROTA - RECEBE REQ DO FRONT (INFOS EQUIPAMENTOS)
+
+    //TODO CONFERÊNCIA DE ROTAS DANDO ERRO
 
     app.get('/list-infosequipamentos', async (req, res) =>{
         await Post.findAll()
@@ -633,8 +652,28 @@ const jwt = require('jsonwebtoken')
 
     //ROTA DE PPOST PARA VERIFICAR EXISTENCIA DO USER
 
-    // TODO VERIFICAR O LOGIN SE EXISTE NO DB E RETORNAR OS DOIS MODELS JUNTOS
-    // TODO NÃO DESANIME INDEPENDENTE DE TUDO!!!
+    // POST DOS DADOS DE USUÁRIO PARA VERIFICAÇÃO DE AUTORIZAÇÃO DO LOGIN
+
+    app.post('/login-auth', async (req, res) => {
+
+        const usersdb = await PostUser.findAll({attributes: ['user_nomeUser', 'id']})
+
+        const senhadb = await PostUser.findAll({attributes: ['user_senha']})
+
+        for(let i = 0; i < usersdb.length; i++){
+
+            var id = usersdb[i].id
+
+            if(req.body.usuario === usersdb[i].user_nomeUser && 
+            req.body.senha === senhadb[i].user_senha){
+                const token = jwt.sign({id}, SECRET, {expiresIn: 1200});
+                return res.json({auth: true, token});
+            }
+        }
+
+    })
+
+    // LISTAGEM DE DADOS DOS USUÁRIOS
     
     app.get('/list-infosUserPerm', async (req, res) => {
         await PostUser.findAll({
@@ -648,6 +687,7 @@ const jwt = require('jsonwebtoken')
                 value,
                 url: "http://192.168.10.228:1212/files/"
             })
+            console.log(req.id + 'fez esta chamada')
         }).catch((err) => {
             console.log(err)
             res.render('erro')

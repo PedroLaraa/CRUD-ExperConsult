@@ -2,11 +2,17 @@ import React, { useEffect, useState, createContext, Children } from "react";
 
 import { Navigator, useNavigate } from "react-router-dom";
 
+import { createSession } from "../config/configApi";
+
+import api from '../config/configApi';
+
 export const AuthContext = createContext()
 
 export const AuthProvider = ({children}) => {
 
     const [loading, setLoading] = useState(true)
+
+    const [user, setUser] = useState(null);
 
     useEffect(() =>{
 
@@ -22,26 +28,29 @@ export const AuthProvider = ({children}) => {
 
     const navigate = useNavigate();
 
-    const [user, setUser] = useState(null);
+    
+    const login = async (usuario, senha) => {
 
-    const login = (usuario, senha) => {
+        const response = await createSession(usuario, senha);
 
-        const loggedUser = {
-            id: '123',
-            usuario,
-        }
+        const loggedUser = response.data;
+        const token = response.data.token;
 
-        localStorage.setItem("user", JSON.stringify(loggedUser))
+        localStorage.setItem("user", JSON.stringify(loggedUser));
+        localStorage.setItem("token", token);
 
-        if (senha === 'secret'){
-            setUser(loggedUser)
-            navigate('/dashboard')
-        }
+        api.defaults.headers.Authorization = `x-acess-token ${token}`;
+
+        setUser(loggedUser);
+        navigate('/dashboard');
+
     };
 
     const logout = () => {
         setUser(null)
         localStorage.removeItem('user')
+        localStorage.removeItem("token");
+        api.defaults.headers.Authorization = null;
         navigate('/login')
     };
 

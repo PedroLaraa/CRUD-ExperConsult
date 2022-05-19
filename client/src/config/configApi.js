@@ -5,3 +5,11 @@ import axios from "axios";
 export default axios.create({
     baseURL: "http://192.168.10.228:1212/" // FIXME TO IP SERVER
 });
+
+export const api = axios.create({
+    baseURL:"http://192.168.10.228:1212/"
+});
+
+export const createSession = async (usuario, senha) => {
+    return api.post('/login-auth', { usuario, senha });
+}
