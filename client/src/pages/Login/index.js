@@ -4,7 +4,7 @@ import { AuthContext } from "../../contexts/auth";
 
 import api from '../../config/configApi';
 
-import './style.css'
+import './loginStyle.css'
 
 function Login(){
 

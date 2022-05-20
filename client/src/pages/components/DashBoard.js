@@ -257,7 +257,7 @@ function DashBoardInterface() {
                                                         <p>{value.predios_autor}</p>
                                                     </div>
                                                 </div>
-                                                {idsDoed == value.id && (
+                                                {idsDoed === value.id && (
                                                     <div>
                                                         {doedFiltrado.map(value => (
                                                             <div key={value.id}>
