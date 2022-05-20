@@ -22,6 +22,7 @@ import FormDialogAddEvent from "../../dialog/DoedEvent";
 import paragrafoDoedStyle from "../css/paragrafoDoed";
 
 import paragrafoDivStyle from "../css/paragrafoDiv";
+import { valueToPercent } from "@mui/base";
 
 function DashBoardInterface() {
 
@@ -52,7 +53,7 @@ function DashBoardInterface() {
 
     const idsDoedInt = parseInt(idsDoed);
 
-    const {authenticaded, logout} = useContext(AuthContext);
+    const { authenticaded, logout } = useContext(AuthContext);
 
     // FAZ UMA REQUISIÇÃO PARA O BACK E RETORNAR O DATABASE COM DADOS (PREDIOS)
 
@@ -101,11 +102,11 @@ function DashBoardInterface() {
 
     const dataFiltrado = data.filter(v => JSON.stringify(v.clientes_obra.clientes_apelido).replaceAll('"', '').toLowerCase().includes(busca)); // RETORNA OS DADOS REFERENTES A BUSCA
 
-    const nomesFiltrados = data.map(v => JSON.stringify(v.clientes_obra.clientes_apelido).replaceAll('"', '')).filter((elem, index, self) => index === self.indexOf(elem)) // RETORNA OS APELIDOS SEM REPETIR
+    const nomesFiltrados = data.map(v => JSON.stringify(v.clientes_obra.clientes_apelido).replaceAll('"', '')).filter((elem, index, self) => index === self.indexOf(elem)); // RETORNA OS APELIDOS SEM REPETIR
 
-    const doedFiltrado = data2.filter(v => JSON.stringify(v.predio_cliente).includes(idsDoedInt)) // VERIFICA SE OS IDS SÃO CORRESPONDENTES PARA FAZER O CADASTRO
+    const doedFiltrado = data2.filter(v => JSON.stringify(v.predios_clientes).includes(idsDoedInt)) 
 
-    const verificacaoDeBusca = doedFiltrado.some(el => data2.map((value) => (value)).includes(el)) // VERIFICA SE AQUELE SETOR POSSUI EVENTOS 
+    const verificacaoDeBusca = doedFiltrado.some(el => data2.map((value) => (value)).includes(el)); // VERIFICA SE AQUELE SETOR POSSUI EVENTOS 
 
     // FUNÇÃO PARA ABRIR O DIALOG DE ADIÇÃO DE ASSUNTO
 
@@ -116,46 +117,48 @@ function DashBoardInterface() {
     // PEGA O ID DO CLIENTE PARA REALIZAR O CADASTRO DE FORMA CORRETA
 
     const idCliente = function (e) {
-        setIdsDosClientes(e.target.value)
+        setIdsDosClientes(e.target.value);
     }
 
     // PEGA OS ID's DOS DOED'S PARA FAZER O CADASTRO DE FORMA CORRETA
 
     const idDoed = function (e) {
-        setIdsDoed(e.target.value)
+        setIdsDoed(e.target.value);
     }
 
     // FUNÇÃO PARA DISPARAR O DIALOG DE DOED'S E ADICIONAR O EVENTO NO ID CORRETO
 
     function handleClickAddEvento(e) {
         setOpenDialog2(true);
-        idCliente(e)
+        idCliente(e);
     }
 
     // FUNÇÃO PARA DELETAR DOED'S
 
     function handleRemoveEvent(e) {
         e.preventDefault()
-        const id = e.target.value
-        api.delete(`doed-deletado/${id}`)
-        alert('Evento deletado')
-        document.location.reload(true)
+        const id = e.target.value;
+        api.delete(`doed-deletado/${id}`);
+        alert('Evento deletado');
+        document.location.reload(true);
     }
 
-    function handleLogoutUser(e){
+    function handleLogoutUser(e) {
         logout()
     }
 
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
-        getInfosPredios()
-        getInfosDoed()
+        getInfosPredios();
+        getInfosDoed();
     }, [openDialog2, openDialog1]); // PARAMETROS PARA ATUALIZAR OS DADOS SEM ATUALIZAR A PÁGINA
 
     useEffect(() => {
-        if (verificacaoDeBusca == false && idsDoed != '') {
+        if (verificacaoDeBusca === false && idsDoed !== '') {
             alert("Nenhum evento registrado!")
         }
     }, [idsDoed]) // VERIFICA A BUSCA SEMPRE QUE OS IDSDOED ALTERAM
+
+    debugger
 
     return (
         <div
@@ -167,8 +170,8 @@ function DashBoardInterface() {
                     <h4>• Cliente:</h4>
                     <div>
                         <button
-                        className="btn btn-outline-dark"
-                        onClick={handleLogoutUser}
+                            className="btn btn-outline-dark"
+                            onClick={handleLogoutUser}
                         >Logout</button>
                     </div>
                     {nomesFiltrados.map(value => (
@@ -178,7 +181,7 @@ function DashBoardInterface() {
                                 value={value}
                                 className="btn btn-outline-dark"
                                 onClick={handleFiltrar}
-                                style={{ width: "18rem", fontSize:'1.1rem', fontFamily: 'Raleway' }}
+                                style={{ width: "18rem", fontSize: '1.1rem', fontFamily: 'Raleway' }}
                             >
                                 {value}
                             </button>
@@ -195,7 +198,7 @@ function DashBoardInterface() {
                             <button
                                 className="btn btn-outline-dark"
                                 onClick={() => handleClickAdd()}
-                                style={{fontSize:'1.1rem', fontFamily: 'Raleway'}}
+                                style={{ fontSize: '1.1rem', fontFamily: 'Raleway' }}
                             >Adicionar Assunto
                             </button>
                         </div>
@@ -233,14 +236,14 @@ function DashBoardInterface() {
                                     <div>
                                         <div
                                             className="container overflow-auto"
-                                            style={{ maxHeight: "30rem", width: "100%"}}
+                                            style={{ maxHeight: "30rem", width: "100%" }}
                                         >
                                             <div
                                                 style={paragrafoDivStyle}
                                             >
-                                                <div 
-                                                className="row justify-content-center" 
-                                                style={paragrafoDashboardStyle}>
+                                                <div
+                                                    className="row justify-content-center"
+                                                    style={paragrafoDashboardStyle}>
                                                     <div className="col-1 col-md-2 ">
                                                         <p>{value.updatedAt.split('-').reverse().join('/')}</p>
                                                     </div>
@@ -248,7 +251,7 @@ function DashBoardInterface() {
                                                         <p style={{ background: 'rgba(50,50,50,0.5)', height: '2rem', width: '.5rem', border: "1px solid whitesmoke", borderRadius: "1rem" }} />
                                                     </div>
                                                     <div className="col-4 col-md-6">
-                                                        <p className="d-flex justify-content-between">{value.predios_nomeDosPredios} <button value={value.id} onClick={idDoed} className="btn btn-outline-dark " style={{fontSize:'1rem', fontFamily: 'Raleway'}}>Listar Eventos</button></p>
+                                                        <p className="d-flex justify-content-between">{value.predios_nomeDosPredios} <button value={value.id} onClick={idDoed} className="btn btn-outline-dark " style={{ fontSize: '1rem', fontFamily: 'Raleway' }}>Listar Eventos</button></p>
                                                     </div>
                                                     <div className="col-1">
                                                         <p style={{ background: 'rgba(50,50,50,0.5)', height: '2rem', width: '.5rem', border: "1px solid whitesmoke", borderRadius: "1rem" }} />
@@ -257,7 +260,7 @@ function DashBoardInterface() {
                                                         <p>{value.predios_autor}</p>
                                                     </div>
                                                 </div>
-                                                {idsDoed === value.id && (
+                                                {idsDoedInt === value.id && ( // FIXME FAZ COM QUE OS EVENTOS SEJAM DUPLICADOS
                                                     <div>
                                                         {doedFiltrado.map(value => (
                                                             <div key={value.id}>
@@ -282,7 +285,7 @@ function DashBoardInterface() {
                                                                             className="btn btn-outline-danger"
                                                                             value={value.id}
                                                                             onClick={handleRemoveEvent}
-                                                                            style={{fontSize:'1.1rem', fontFamily: 'Raleway'}}
+                                                                            style={{ fontSize: '1.1rem', fontFamily: 'Raleway' }}
                                                                             data-toggle="tooltip"
                                                                             data-placement="right"
                                                                             title="Deletar Evento"
@@ -298,12 +301,12 @@ function DashBoardInterface() {
                                                                     value={value.id}
                                                                     className="btn btn-outline-dark"
                                                                     onClick={handleClickAddEvento}
-                                                                    style={{fontSize:'1.1rem', fontFamily: 'Raleway'}}
+                                                                    style={{ fontSize: '1.1rem', fontFamily: 'Raleway' }}
                                                                 >Novo Evento
                                                                 </button>
                                                             </div>
                                                             <div className="p-2 ">
-                                                                <a className="btn btn-outline-dark" href={`edit-predio/${value.id}`} style={{fontSize:'1.1rem', fontFamily: 'Raleway'}}>Editar SETOR / ASSUNTO</a>
+                                                                <a className="btn btn-outline-dark" href={`edit-predio/${value.id}`} style={{ fontSize: '1.1rem', fontFamily: 'Raleway' }}>Editar SETOR / ASSUNTO</a>
                                                                 {/* GERA UMA ROTA PARA CADA SETOR SER EDITADO OU DELETADO */}
                                                             </div>
                                                         </div>

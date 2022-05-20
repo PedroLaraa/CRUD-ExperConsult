@@ -205,7 +205,7 @@ const SECRET = 'experconsult'
         .then((fornec_foto) =>{
             return res.json({
                 fornec_foto,
-                url: "http://192.168.10.228:1212/files/" //FIXME TO IP SERVER
+                url: "http://192.168.10.122:1212/files/" //FIXME TO IP SERVER
             }) 
         }).catch(() =>{
             res.render('erro')
@@ -308,7 +308,7 @@ const SECRET = 'experconsult'
         .then((value) =>{
             return res.json({
                 value,
-                url: "http://192.168.10.228:1212/files/" //FIXME TO IP SERVER
+                url: "http://192.168.10.122:1212/files/" //FIXME TO IP SERVER
             }) 
         }).catch(() =>{
             res.render('erro')
@@ -400,7 +400,7 @@ const SECRET = 'experconsult'
         .then((representante_imagem) =>{
             return res.json({
                 representante_imagem,
-                url: "http://192.168.10.228:1212/files/" //FIXME TO IP SERVER
+                url: "http://192.168.10.122:1212/files/" //FIXME TO IP SERVER
             }) 
         }).catch(() =>{
             res.render('erro')
@@ -412,10 +412,6 @@ const SECRET = 'experconsult'
 
 
     // ROTA - FORMULÁRIO DE CLIENTES
-    
-    app.get('/cadastro-clientes', function(req, res){
-        res.render('formClientes')
-    });
 
     // ROTA - FAZ A INSERÇÃO DE DADOS DE CLIENTES NO BANCO DE DADOS
 
@@ -431,7 +427,7 @@ const SECRET = 'experconsult'
             clientes_ie:  req.body.clientes_ie,
             clientes_nomeResponsavel:  req.body.clientes_nomeResponsavel + '',
             clientes_telefone:  req.body.clientes_telefone ,
-            clientes_email:  req.body.clientes_email ,
+            clientes_email:  req.body.clientes_email + '',
             clientes_logo: (typeof req.file !== 'undefined') ? req.file.filename : '',
         };
 
@@ -442,7 +438,7 @@ const SECRET = 'experconsult'
         try {
                 if(cnpjCliente.map((v) =>(v.clientes_cnpj)) != clientes_cnpj){
                     const dbResponse = await PostClientes.create(dataToInsert);
-                    res.redirect('/cadastro-clientes');
+                    res.redirect('http://expertestes:3000/dashboard');
                 }else{
                     res.json('Cliente já cadastrado no sistema!')
                 }
@@ -450,7 +446,7 @@ const SECRET = 'experconsult'
                 console.error(ex);
                 res.render('erro');
             }
-});
+    });
 
     // ROTA - FAZ O UPDATE DOS DADOS DE CLIENTES
 
@@ -497,7 +493,7 @@ const SECRET = 'experconsult'
         .then((clientes_logo) =>{
             return res.json({
                 clientes_logo,
-                url: "http://192.168.10.228:1212/files/" //FIXME TO IP SERVER
+                url: "http://192.168.10.122:1212/files/" //FIXME TO IP SERVER
             })  
         }).catch(() =>{
             res.render('erro')
@@ -516,7 +512,7 @@ const SECRET = 'experconsult'
 
         try{
             const dbResponse = await PostPredios.create(dataToInsert)
-            res.redirect('192.168.10.228:3000/dashboard') //FIXME TO IP SERVER
+            res.redirect('192.168.10.122:3000/dashboard') //FIXME TO IP SERVER
         }catch{
             res.render('erro')
         }
@@ -567,7 +563,7 @@ const SECRET = 'experconsult'
         .then((value) => {
             res.json({
                 value,
-                url: "http://192.168.10.228:1212/files/" //FIXME TO IP SERVER
+                url: "http://192.168.10.122:1212/files/" //FIXME TO IP SERVER
             })
         }).catch((err) => {
             console.log(err)
@@ -586,7 +582,7 @@ const SECRET = 'experconsult'
 
         try{
             const dbResponse = await PostDoed.create(dataToInsert)
-            res.redirect('192.168.10.228:3000/dashboard') //FIXME TO IP SERVER
+            res.redirect('192.168.10.122:3000/dashboard') //FIXME TO IP SERVER
         }catch{
             res.render('erro')
         }
@@ -637,7 +633,7 @@ const SECRET = 'experconsult'
         .then((value) => {
             res.json({
                 value,
-                url: "http://192.168.10.228:1212/files/" //FIXME TO IP SERVER
+                url: "http://192.168.10.122:1212/files/" //FIXME TO IP SERVER
             })
         }).catch((err) => {
             console.log(err)

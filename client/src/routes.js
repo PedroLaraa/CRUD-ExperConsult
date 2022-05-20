@@ -55,13 +55,13 @@ function Rotas(){
         <BrowserRouter>
             <AuthProvider>
                 <Routes> 
-                    <Route path="/" element={<Private><DashBoard /></Private>} exact></Route>
+                    <Route path="/" element={<DashBoard />} exact></Route>
                     <Route path="/login" element={<Login/>}></Route>
                     <Route path="/representantes" element={<Private><ConsultaRepresentante /></Private>}></Route>
                     <Route path="/fornecedores" element={<Private><ConsultaFornecedores /></Private>} ></Route>
                     <Route path="/equipamentos" element={<Private><ConsultaEquipamentos /></Private>} ></Route>
                     <Route path="/clientes" element={<Private><ConsultaClientes /></Private>}></Route>
-                    <Route path="/dashboard" element={<Private><DashBoard /></Private>}></Route>
+                    <Route path="/dashboard" element={<DashBoard />}></Route>
                     <Route path="/edit-predio/:id" element={<Private><Setores /></Private>}></Route>
                     <Route path="/edit-fornecedor/:id" element={<Private><EditarFornecedor /></Private>}></Route>
                     <Route path="/edit-equipamento/:id" element={<Private><EditarEquipamentos /></Private>}></Route>
