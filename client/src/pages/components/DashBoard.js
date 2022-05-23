@@ -22,7 +22,6 @@ import FormDialogAddEvent from "../../dialog/DoedEvent";
 import paragrafoDoedStyle from "../css/paragrafoDoed";
 
 import paragrafoDivStyle from "../css/paragrafoDiv";
-import { valueToPercent } from "@mui/base";
 
 function DashBoardInterface() {
 
@@ -102,9 +101,15 @@ function DashBoardInterface() {
 
     const dataFiltrado = data.filter(v => JSON.stringify(v.clientes_obra.clientes_apelido).replaceAll('"', '').toLowerCase().includes(busca)); // RETORNA OS DADOS REFERENTES A BUSCA
 
-    const nomesFiltrados = data.map(v => JSON.stringify(v.clientes_obra.clientes_apelido).replaceAll('"', '')).filter((elem, index, self) => index === self.indexOf(elem)); // RETORNA OS APELIDOS SEM REPETIR
+    const nomesFiltrados = data.map(v => JSON.stringify(v.clientes_obra.clientes_apelido).replaceAll('"', '')).filter((elem, index, self) => index === self.indexOf(elem)).sort() // RETORNA OS APELIDOS SEM REPETIR
 
-    const doedFiltrado = data2.filter(v => JSON.stringify(v.predios_clientes).includes(idsDoedInt)) 
+    const doedFiltrado = data2.filter(v => v.predios_clientes == idsDoed)
+
+    function ordemDecrescente(a, b) {
+        return a.createdAt > b.createdAt
+    }
+
+    doedFiltrado.sort(ordemDecrescente)
 
     const verificacaoDeBusca = doedFiltrado.some(el => data2.map((value) => (value)).includes(el)); // VERIFICA SE AQUELE SETOR POSSUI EVENTOS 
 
@@ -136,7 +141,7 @@ function DashBoardInterface() {
     // FUNÇÃO PARA DELETAR DOED'S
 
     function handleRemoveEvent(e) {
-        e.preventDefault()
+        e.preventDefault();
         const id = e.target.value;
         api.delete(`doed-deletado/${id}`);
         alert('Evento deletado');
@@ -158,8 +163,6 @@ function DashBoardInterface() {
         }
     }, [idsDoed]) // VERIFICA A BUSCA SEMPRE QUE OS IDSDOED ALTERAM
 
-    debugger
-
     return (
         <div
             className="container vh-100">
@@ -168,12 +171,12 @@ function DashBoardInterface() {
                     className="list-group col-4 p-1 overflow-auto"
                     style={botaoDashboardStyle}>
                     <h4>• Cliente:</h4>
-                    <div>
+                    {/* <div>
                         <button
                             className="btn btn-outline-dark"
                             onClick={handleLogoutUser}
                         >Logout</button>
-                    </div>
+                    </div> */}
                     {nomesFiltrados.map(value => (
                         <div className="p-1" key={value}>
                             <button

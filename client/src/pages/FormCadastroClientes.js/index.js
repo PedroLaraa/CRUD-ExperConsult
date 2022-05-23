@@ -44,6 +44,7 @@ function FormClientes() {
             autoComplete="off" 
             onSubmit={handleCadastrarCliente}
             encType="multipart/form-data"
+            method="POST"
             >
                 <h1 className="text-uppercase">Cadastro de Cliente</h1>
                 <h2 className="text-uppercase p-2">• Preencha os campos obrigatórios!</h2>

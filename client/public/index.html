@@ -5,6 +5,7 @@
 <!DOCTYPE html> 
 <html lang="pt-br">
     <head>
+        <script src="./js/index.js"></script>
         <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="../favicon/favicon-16x16.png">
@@ -88,7 +89,7 @@
                     Clientes
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="http://expertestes:1212/cadastro-clientes">Cadastro</a> <!--FIXME TO IP SERVER-->
+                    <a class="dropdown-item" href="/cadastro-clientes">Cadastro</a> <!--FIXME TO IP SERVER-->
                     <a class="dropdown-item" href="/clientes">Consulta</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#"></a>
@@ -96,9 +97,16 @@
                 </li>
                 </ul>
                 <div class="w-100" id="topo">
-                    <ul class="navbar-nav w-100 float-right justify-content-end">
+                    <ul class="navbar-nav w-100 float-right ">
                         <li class="float-right ml-auto">
                             <a class="nav-link" href="http://expertestes:1212/suporte">Suporte</a> <!--FIXME TO IP SERVER-->
+                        </li>
+                    </ul>
+                </div>
+                <div class="w-100" id="topo">
+                    <ul class="navbar-nav w-100 float-right justify-content-end">
+                        <li class="float-right ml-auto">
+                            <button class="btn btn-outline-dark" id="logoutBtn">Logout</button> <!--FIXME TO IP SERVER-->
                         </li>
                     </ul>
                 </div>
@@ -170,6 +178,13 @@
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
     <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+    
+    <sccript>   
+
+        
+
+    </sccript>  
+    
     <style>
 
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300&display=swap');
