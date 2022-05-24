@@ -7,6 +7,7 @@ const paragrafoDivStyle= {
     fontFamily: 'Raleway',
     height: '100%',
     width: '45rem',
+    fontWeight: '100'
 }
 
 // EXPORTA A FUNÇÃO PARA USO GERAL

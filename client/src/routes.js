@@ -30,6 +30,8 @@ import FormClientes from "./pages/FormCadastroClientes.js";
 
 import FormFornecedores from "./pages/FormCadastroFornecedor";
 
+import FormEquipamentos from "./pages/FormCadastroEquipamentos";
+
 import Login from './pages/Login'
 
 import { AuthProvider, AuthContext } from "./contexts/auth";
@@ -71,6 +73,7 @@ function Rotas(){
                     <Route path="/edit-cliente/:id" element={<Private><EditarCliente /></Private>}></Route>
                     <Route path="/cadastro-clientes" element={<Private><FormClientes /></Private>}></Route>
                     <Route path="/cadastro-fornecedores" element={<Private><FormFornecedores /></Private>}></Route>
+                    <Route path="/cadastro-equipamentos" element={<Private><FormEquipamentos /></Private>}></Route>
                 </Routes>
             </AuthProvider>
         </BrowserRouter>

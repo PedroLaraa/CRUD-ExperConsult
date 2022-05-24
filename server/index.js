@@ -150,7 +150,7 @@ const SECRET = 'experconsult'
                 try {
                     if(nomeFornecedor.map((v) =>(v.fornec_fornecedornome).toLowerCase()) != fornec_fornecedornome.toLowerCase()){
                         const dbResponse = await PostFornec.create(dataToInsert);
-                        res.redirect('/cadastro-fornecedor');
+                        res.redirect('http://expertestes:3000/cadastro-fornecedores'); // FIXME TO IP SERVER
                     }else{
                         res.json('Fornecedor já cadastrado no sistema!')
                     }
@@ -204,7 +204,7 @@ const SECRET = 'experconsult'
         .then((fornec_foto) =>{
             return res.json({
                 fornec_foto,
-                url: "http://expertestes:1212/files" //FIXME TO IP SERVER
+                url: "http://192.168.10.122:1212/files/" //FIXME TO IP SERVER
             }) 
         }).catch(() =>{
             res.render('erro')
@@ -419,7 +419,7 @@ const SECRET = 'experconsult'
         const dataToInsert = {
             clientes_razaosocial:  req.body.clientes_razaosocial ,
             clientes_nomefantasia:  req.body.clientes_nomefantasia ,
-            clientes_apelido:  req.body.clientes_apelido ,
+            clientes_apelido:  req.body.clientes_apelido,
             clientes_cnpj:  req.body.clientes_cnpj,
             clientes_endereco:  req.body.clientes_endereco ,
             clientes_premissasDeProjeto:  req.body.clientes_premissasDeProjeto + '' ,
@@ -437,6 +437,8 @@ const SECRET = 'experconsult'
         try {
                 if(cnpjCliente.map((v) =>(v.clientes_cnpj)) != clientes_cnpj){
                     const dbResponse = await PostClientes.create(dataToInsert);
+                    res.redirect('http://192.168.10.122:3000/cadastro-clientes') // FIXME TO IP SERVER
+                    
                 }else{
                     res.json('Cliente já cadastrado no sistema!')
                 }
@@ -676,7 +678,7 @@ const SECRET = 'experconsult'
         .then((value) => {
             res.json({
                 value,
-                url: "http://192.168.10.228:1212/files/"
+                url: "http://192.168.10.228:1212/files/" // FIXME TO IP SERVER
             })
             console.log(req.id + 'fez esta chamada')
         }).catch((err) => {

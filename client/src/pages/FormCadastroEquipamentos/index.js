@@ -4,9 +4,9 @@ import { api } from "../../config/configApi";
 
 import { useNavigate } from "react-router-dom";
 
-import './clientesStyle.css'
+import './equipamentosStyle.css'
 
-function FormClientes() {
+function FormEquipamentos() {
 
 
     return(
@@ -17,8 +17,8 @@ function FormClientes() {
             autoComplete="off" 
             encType="multipart/form-data"
             method="POST"
-            action="http://192.168.10.122:1212/clientecadastrado"
-            onSubmit={(e) => alert('CLIENTE CADASTRADO COM SUCESSO!!!')}
+            action="http://192.168.10.122:1212/equipamentocadastrado"
+            onSubmit={(e) => alert('EQUIPAMENTO CADASTRADO COM SUCESSO!!!')}
             >
                 <h1 className="text-uppercase">Cadastro de Cliente</h1>
                 <h2 className="text-uppercase p-2">• Preencha os campos obrigatórios!</h2>
@@ -163,4 +163,4 @@ function FormClientes() {
     )
 }
 
-export default FormClientes;
+export default FormEquipamentos;

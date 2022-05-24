@@ -8,30 +8,6 @@ import './fornecedoresStyle.css'
 
 function FormFornecedores() {
 
-    const [values, setValues] = useState({
-        fornec_nivelfornecedor : '',
-        fornec_fornecedornome : '',
-        fornec_razaosocial : '',
-        fornec_telefone : '',
-        fornec_email : '',
-        fornec_site : '',
-        fornec_foto : '',
-    })
-
-    const navigate = useNavigate();
-
-    function handleChangeValues(ev){
-        const {name, value} = ev.target
-
-        setValues({...values, [name]: value})
-    }
-
-    const handleCadastrarFornecedor = async (req, res) => {
-        await api.post('fornecedorcadastrado', 
-        values, 
-        alert('Fornecedor cadastrado!'))
-        navigate('/cadastro-fornecedores')
-    }
 
     return(
         <div>
@@ -39,8 +15,10 @@ function FormFornecedores() {
             className="was-validated " 
             id="formulario" 
             autoComplete="off" 
-            onSubmit={handleCadastrarFornecedor}
             encType="multipart/form-data"
+            method="POST"
+            action="http://192.168.10.122:1212/fornecedorcadastrado"
+            onSubmit={(e) => alert('FORNECEDOR CADASTRADO COM SUCESSO!!!')}
             >
                 <h1 className="text-uppercase">Cadastro de Fornecedor</h1>
                 <h2 className="text-uppercase p-2">• Preencha os campos obrigatórios!</h2>
@@ -53,7 +31,6 @@ function FormFornecedores() {
                         placeholder="Campo obrigatório" 
                         required
                         name="fornec_nivelfornecedor"
-                        onChange={handleChangeValues}
                     >
                         <option>Selecione...</option>
                         <option value="Final">Final</option>
@@ -70,7 +47,6 @@ function FormFornecedores() {
                         placeholder="Campo opcional" 
                         required
                         name="fornec_fornecedornome"
-                        onChange={handleChangeValues}
                     >
                     </input>
                 </div>
@@ -83,7 +59,6 @@ function FormFornecedores() {
                         placeholder="Campo obrigatório" 
                         required
                         name="fornec_razaosocial"
-                        onChange={handleChangeValues}
                     >
                     </input>
                 </div>
@@ -96,7 +71,6 @@ function FormFornecedores() {
                         placeholder="Campo obrigatório" 
                         required
                         name="fornec_telefone"
-                        onChange={handleChangeValues}
                     >
                     </input>
                 </div>
@@ -109,7 +83,6 @@ function FormFornecedores() {
                         placeholder="Campo obrigatório" 
                         required
                         name="fornec_email"
-                        onChange={handleChangeValues}
                     >
                     </input>
                 </div>
@@ -121,7 +94,6 @@ function FormFornecedores() {
                         id="validationInput" 
                         placeholder="Campo opcional" 
                         name="fornec_site"
-                        onChange={handleChangeValues}
                     >
                     </input>
                 </div>
@@ -133,7 +105,6 @@ function FormFornecedores() {
                     className="custom-file-input form-control is-invalid" 
                     id="validatedCustomFile" 
                     name="fornec_foto"
-                    onChange={handleChangeValues}
                     />
                 </div>
                 <hr />

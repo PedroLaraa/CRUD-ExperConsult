@@ -5,7 +5,7 @@ const botaoDashboardStyle = {
     fontSize: '1rem',
     fontFamily: 'Raleway',
     border: '.3rem solid #A9D2D7',
-    borderRadius: '1rem',
+    borderRadius: '.4rem',
     height: '40rem',
     width: '20rem',
     display: 'flex',

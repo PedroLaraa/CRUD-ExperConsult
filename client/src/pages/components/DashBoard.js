@@ -189,7 +189,7 @@ function DashBoardInterface() {
                                 className="btn btn-outline-dark"
                                 onClick={handleFiltrar}
                                 style={{ width: "18rem", fontSize: '1.1rem', fontFamily: 'Raleway' }}
-                            >
+                            > 
                                 {value}
                             </button>
                         </div>
@@ -200,8 +200,10 @@ function DashBoardInterface() {
                         className="col-8 overflow-auto vh-100"
                         style={{ maxHeight: "40rem", width: "55rem", paddingLeft: "2rem" }}
                     >
-                        <div className="d-flex d-inline justify-content-around p-3">
-                            <h1 className="text-uppercase">• {clientes}</h1>
+                        <div className="d-flex d-inline justify-content-around p-3 bg-white bg-opacity-75 border border-dark border-1 rounded-3 ">
+                            <h1 
+                            className="text-uppercase w-100" 
+                            >• {clientes}</h1>
                             <button
                                 className="btn btn-outline-dark"
                                 onClick={() => handleClickAdd()}
@@ -214,13 +216,13 @@ function DashBoardInterface() {
                                 style={cabecalhoTableDashboard}
                                 className="container row text-uppercase m-0"
                             >
-                                <div id="topo" className="col-2 ">
+                                <div id="topo" className="col-2">
                                     <p>Data:</p>
                                 </div>
                                 <div className="col-8 ">
                                     <p>Setor / Assunto:</p>
                                 </div>
-                                <div className="col-1 ">
+                                <div className="col-2 ">
                                     <p>Autor:</p>
                                 </div>
                             </div>
@@ -251,7 +253,7 @@ function DashBoardInterface() {
                                                 <div
                                                     className="row justify-content-center"
                                                     style={paragrafoDashboardStyle}>
-                                                    <div className="col-1 col-md-2 ">
+                                                    <div className="col-2 col-md-2">
                                                         <p>{value.updatedAt.split('-').reverse().join('/')}</p>
                                                     </div>
                                                     <div className="col-1">
@@ -267,7 +269,7 @@ function DashBoardInterface() {
                                                         <p>{value.predios_autor}</p>
                                                     </div>
                                                 </div>
-                                                {idsDoedInt === value.id && ( // FIXME FAZ COM QUE OS EVENTOS SEJAM DUPLICADOS
+                                                {idsDoedInt === value.id && (
                                                     <div>
                                                         {doedFiltrado.map(value => (
                                                             <div key={value.id}>

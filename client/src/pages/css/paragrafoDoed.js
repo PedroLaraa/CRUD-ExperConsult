@@ -2,13 +2,13 @@
 
 const paragrafoDoedStyle = {
     paddingTop:'.4rem',
-    fontSize: '1.1rem',
+    fontSize: '1rem',
     fontFamily: 'Raleway',
     border: '.3rem solid #A9D2D7',
-    borderRadius: '1rem',
+    borderRadius: '.5rem',
     height: '100%',
     width: '45rem',
-    background: 'rgba(248,248,255,0.7)',
+    background: 'rgba(248,248,255,0.9)',
 }
 
 // EXPORTA A FUNÇÃO PARA USO GERAL

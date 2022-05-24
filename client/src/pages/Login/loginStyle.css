@@ -30,7 +30,6 @@ input{
 .logo-exper2{
     position: relative;
     top: -4.2rem;
-    left: 12rem;
     height: 2rem;
     width: 3rem;
     display: flex;
@@ -38,14 +37,10 @@ input{
     align-items: center;
     border-radius: 0.5rem;
     animation: girar 4s linear infinite;
+    margin: auto;
 }
 
 .logo-exper2 img {
     width: 7rem;
     height: 4rem;
-}
-
-.logo-exper{
-    visibility: hidden;
-
 }

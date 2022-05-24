@@ -16,23 +16,12 @@
         <meta name="theme-color" content="#000000" />
         <meta
         name="description"
-        content="Site sobre ..."
+        content="Site sobre..."
         />
         <link rel="apple-touch-icon" href="favicon.ico" />
-        <!--
-        manifest.json provides metadata used when your web app is installed on a
-        user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-        -->
-        <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-        <!--
-        Notice the use of %PUBLIC_URL% in the tags above.
-        It will be replaced with the URL of the `public` folder during the build.
-        Only files inside the `public` folder can be referenced from the HTML.
 
-        Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-        work correctly both with client-side routing and a non-root public URL.
-        Learn how to configure a non-root public URL by running `npm run build`.
-        -->
+        <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
         <title>EXPER CONSULT</title>
     </head>
 
@@ -41,9 +30,9 @@
     <header>
     </header>
     <body>
-        <!-- <div id="videoControl">
-            <video autoplay muted loop type="video/mp4" src="./img/logoVideoExper.mp4" ></video>
-        </div> -->
+        <div id="videoControl">
+            <video autoplay muted loop type="video/mp4" src="./img/logo-icones.mp4" ></video>
+        </div>
         <nav class="navbar navbar-expand-lg navbar-dark sticky-top px-2" style="background-color: #A9D2D7">
             <a class="navbar-brand" href="/dashboard">EXPER CONSULT</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
@@ -59,7 +48,7 @@
                     Fornecedor
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="http://expertestes:1212/cadastro-fornecedor">Cadastro</a> <!--FIXME TO IP SERVER-->
+                    <a class="dropdown-item" href="/cadastro-fornecedores">Cadastro</a> 
                     <a class="dropdown-item" href="/fornecedores">Consulta</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#"></a>
@@ -70,7 +59,7 @@
                     Equipamentos
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="http://expertestes:1212/cadastro-equipamentos">Cadastro</a> <!--FIXME TO IP SERVER-->
+                    <a class="dropdown-item" href="http://expertestes:1212/cadastro-equipamentos">Cadastro</a>
                     <a class="dropdown-item" href="/equipamentos">Consulta</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#"></a>
@@ -81,7 +70,7 @@
                     Representante
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="http://expertestes:1212/cadastro-representante">Cadastro</a> <!--FIXME TO IP SERVER-->
+                    <a class="dropdown-item" href="http://expertestes:1212/cadastro-representante">Cadastro</a>
                     <a class="dropdown-item" href="/representantes">Consulta</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#"></a>
@@ -92,7 +81,7 @@
                     Clientes
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/cadastro-clientes">Cadastro</a> <!--FIXME TO IP SERVER-->
+                    <a class="dropdown-item" href="/cadastro-clientes">Cadastro</a> 
                     <a class="dropdown-item" href="/clientes">Consulta</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#"></a>
@@ -102,14 +91,14 @@
                 <div class="w-100" id="topo">
                     <ul class="navbar-nav w-100 float-right ">
                         <li class="float-right ml-auto">
-                            <a class="nav-link" href="http://expertestes:1212/suporte">Suporte</a> <!--FIXME TO IP SERVER-->
+                            <a class="nav-link" href="http://expertestes:1212/suporte">Suporte</a>
                         </li>
                     </ul>
                 </div>
                 <div class="w-100" id="logoutBtn">
                     <ul class="navbar-nav w-100 float-right justify-content-end">
                         <li class="float-right ml-auto">
-                            <button class="btn btn-outline-dark" id="logoutBtn">Logout</button> <!--FIXME TO IP SERVER-->
+                            <button class="btn btn-outline-dark" id="logoutBtn">Logout</button>
                         </li>
                     </ul>
                 </div>

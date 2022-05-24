@@ -1,6 +1,7 @@
 p{
     font-weight: bold;
     word-wrap: break-word;
+    margin-bottom: 16px;
 }
 
 label{
