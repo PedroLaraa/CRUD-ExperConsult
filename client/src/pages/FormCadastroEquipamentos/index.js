@@ -8,6 +8,11 @@ import './equipamentosStyle.css'
 
 function FormEquipamentos() {
 
+    // TODO PARA AMANHÃ:
+    // TODO ACABAR FORMULÁRIOS NO FRONT-END
+    // TODO TENTAR CRIAR AUTORIZAÇÕES DE USUÁRIO (NÍVEIS DE HIERARQUIA)
+    // TODO PREENCHIMENTOS AUTOMÁTICOS DE DADOS VINDOS DO USUÁRIO E SENHA
+    // TODO ROTINAS DE BACKUP PARA O BANCO DE DADOS
 
     return(
         <div className="">
