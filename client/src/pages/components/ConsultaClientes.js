@@ -2,6 +2,10 @@
 
 import React, { useEffect, useState } from "react";
 
+import { useContext } from "react";
+
+import { AuthContext, AuthProvider } from "../../contexts/auth";
+
 import api from '../../config/configApi';
 
 import paragrafoStyle from "../css/paragrafo";
@@ -54,12 +58,18 @@ function FiltraClientes() {
     }, []);
 
     useEffect(() => {
-        if(pesquisarCliente){
-            if(verificacaoDeBusca === false || clientes === ''){
+        if (pesquisarCliente) {
+            if (verificacaoDeBusca === false || clientes === '') {
                 alert('Resultado da busca não encontrado!')
             }
         }
     }, [pesquisarCliente])
+
+    const { logout } = useContext(AuthContext);
+
+    const element = document.getElementById('logoutBtn');
+
+    element.addEventListener('click', logout, false);
 
     return (
 
@@ -91,18 +101,26 @@ function FiltraClientes() {
                                     <div >
                                         <img src={url + value.clientes_logo} alt={value.clientes_logo.id} style={imagemEqpStyle}></img>
                                     </div>
-                                    <p>Razão social: {value.clientes_razaosocial} </p>
-                                    <p>Nome fantasia: {value.clientes_nomefantasia + ''}</p>
-                                    <p>Apelido: {value.clientes_apelido + ''}</p>
-                                    <p>CNPJ: {value.clientes_cnpj + ''}</p>
-                                    <p>Endereço: {value.clientes_endereco + ''}</p>
-                                    <p>IE: {value.clientes_ie + ''}</p>
-                                    <p>Responsável: {value.clientes_nomeResponsavel + ''}</p>
-                                    <p>Telefone (Respoonsável): {value.clientes_telefone + ''}</p>
-                                    <p>Email (Responsável): {value.clientes_email + ''}</p>
-                                    <p>Premissas de projeto: {value.clientes_premissasDeProjeto + ''}</p>
-                                    <div className="p-2 d-flex d-inline justify-content-around">
-                                        <a className="btn btn-outline-dark" href={`edit-cliente/${value.id}`}>Editar</a>
+                                    <div style={{padding: '1.7rem'}}>
+                                        <p>Razão social: <label>{value.clientes_razaosocial}</label></p>
+                                        <p>Nome fantasia: <label>{value.clientes_nomefantasia + ''}</label></p>
+                                        <p>Apelido: <label>{value.clientes_apelido + ''}</label></p>
+                                        <p style={{ fontFamily: 'Arial' }}>CNPJ: <label>{value.clientes_cnpj + ''}</label></p>
+                                        <div className=".breakText">
+                                            <p>Endereço: <label>{value.clientes_endereco + ''}</label></p>
+                                        </div>
+                                        <p style={{ fontFamily: 'Arial'}}>IE: <label>{value.clientes_ie + ''}</label></p>
+                                        <p>Responsável: <label>{value.clientes_nomeResponsavel + ''}</label></p>
+                                        <p style={{ fontFamily: 'Arial' }}>Telefone (Respoonsável): <label> {value.clientes_telefone + ''}</label> </p>
+                                        <p style={{ fontFamily: 'Arial'}}>Email (Responsável): <label>{value.clientes_email + ''}</label></p>
+                                        <div className="breakText">
+                                            <p>Premissas de projeto: <label>{value.clientes_premissasDeProjeto + ''}</label></p>
+                                        </div>
+                                        <div 
+                                        className="p-2 d-flex justify-content-end"
+                                        >
+                                            <a className="btn btn-outline-dark" href={`edit-cliente/${value.id}`}>Editar</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

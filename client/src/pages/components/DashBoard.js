@@ -54,6 +54,10 @@ function DashBoardInterface() {
 
     const { authenticaded, logout } = useContext(AuthContext);
 
+    const element = document.getElementById('logoutBtn');
+
+    element.addEventListener('click', logout, false);
+
     // FAZ UMA REQUISIÇÃO PARA O BACK E RETORNAR O DATABASE COM DADOS (PREDIOS)
 
     const getInfosPredios = async (req, res) => {

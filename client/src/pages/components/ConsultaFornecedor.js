@@ -2,6 +2,10 @@
 
 import React, { useEffect, useState } from "react";
 
+import { useContext } from "react";
+
+import { AuthContext, AuthProvider } from "../../contexts/auth";
+
 import api from '../../config/configApi';
 
 import paragrafoStyle from "../css/paragrafo";
@@ -58,6 +62,12 @@ function FiltraFornecedores() {
             }
         }
     }, [pesquisarFornecedor])
+
+    const { logout } = useContext(AuthContext);
+
+    const element = document.getElementById('logoutBtn');
+
+    element.addEventListener('click', logout, false);
 
     return (
 

@@ -10,6 +10,7 @@
     align-self: center;
     font-size: 1.3rem;
     color: rgb(255, 255, 255);
+    border: none;
 }
 
 .containerForm{
@@ -45,5 +46,6 @@ input{
 }
 
 .logo-exper{
-    opacity: 0;
+    visibility: hidden;
+
 }

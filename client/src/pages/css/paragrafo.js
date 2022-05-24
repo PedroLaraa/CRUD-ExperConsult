@@ -6,6 +6,7 @@ const paragrafoStyle = {
     fontFamily: 'Raleway',
     border: '.3rem solid #A9D2D7',
     borderRadius: '1rem',
+    backgroundColor: 'rgba(248, 248, 255, 0.8)'
 }
 
 // EXPORTA A FUNÇÃO PARA USO GERAL

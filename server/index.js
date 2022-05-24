@@ -58,7 +58,6 @@ const SECRET = 'experconsult'
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
         res.header("Access-Control-Allow-Headers", "*");
-        res.header("Access-Control-Request-Headers", "*");
         app.use(cors());
         next();
     });
@@ -205,7 +204,7 @@ const SECRET = 'experconsult'
         .then((fornec_foto) =>{
             return res.json({
                 fornec_foto,
-                url: "192.168.10.122:1212/files" //FIXME TO IP SERVER
+                url: "http://expertestes:1212/files" //FIXME TO IP SERVER
             }) 
         }).catch(() =>{
             res.render('erro')
@@ -308,7 +307,7 @@ const SECRET = 'experconsult'
         .then((value) =>{
             return res.json({
                 value,
-                url: "http://192.168.10.122:1212/files" //FIXME TO IP SERVER
+                url: "http://192.168.10.122:1212/files/" //FIXME TO IP SERVER
             }) 
         }).catch(() =>{
             res.render('erro')
@@ -400,7 +399,7 @@ const SECRET = 'experconsult'
         .then((representante_imagem) =>{
             return res.json({
                 representante_imagem,
-                url: "http://192.168.10.122:1212/files" //FIXME TO IP SERVER
+                url: "http://192.168.10.122:1212/files/" //FIXME TO IP SERVER
             }) 
         }).catch(() =>{
             res.render('erro')
@@ -492,7 +491,7 @@ const SECRET = 'experconsult'
         .then((clientes_logo) =>{
             return res.json({
                 clientes_logo,
-                url: "http://192.168.10.122:1212/files" //FIXME TO IP SERVER
+                url: "http://192.168.10.122:1212/files/" //FIXME TO IP SERVER
             })  
         }).catch(() =>{
             res.render('erro')
@@ -562,7 +561,7 @@ const SECRET = 'experconsult'
         .then((value) => {
             res.json({
                 value,
-                url: "http://192.168.10.122:1212/files" //FIXME TO IP SERVER
+                url: "http://192.168.10.122:1212/files/" //FIXME TO IP SERVER
             })
         }).catch((err) => {
             console.log(err)
@@ -632,7 +631,7 @@ const SECRET = 'experconsult'
         .then((value) => {
             res.json({
                 value,
-                url: "http://192.168.10.122:1212/files" //FIXME TO IP SERVER
+                url: "http://192.168.10.122:1212/files/" //FIXME TO IP SERVER
             })
         }).catch((err) => {
             console.log(err)
@@ -677,7 +676,7 @@ const SECRET = 'experconsult'
         .then((value) => {
             res.json({
                 value,
-                url: "http://192.168.10.228:1212/files"
+                url: "http://192.168.10.228:1212/files/"
             })
             console.log(req.id + 'fez esta chamada')
         }).catch((err) => {
