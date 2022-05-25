@@ -167,6 +167,13 @@ function DashBoardInterface() {
         }
     }, [idsDoed]) // VERIFICA A BUSCA SEMPRE QUE OS IDSDOED ALTERAM
 
+    useEffect(() => { // TODO USUARIO SENDO RETORNADO COM SUCESSO =D USE E ABUSE
+
+        let recoveredUsers = JSON.parse(localStorage.getItem('user'))
+
+        console.log('RoverUser', recoveredUsers)
+    }, [])
+
     return (
         <div
             className="container vh-100">

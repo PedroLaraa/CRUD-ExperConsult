@@ -80,14 +80,6 @@ const SECRET = 'experconsult'
     app.use(bodyParser.urlencoded({extended: false}))
     app.use(bodyParser.json())
 
-    function verifyJwt(req, res, next){ // FIXME VERIFICAÇÃO FALHANDO, PROVAVEL SOLUÇÃO É PASSAR OS FORMS DO BACK PARA O FRONT... SHIT
-        const token = req.headers['Bearer'];
-        jwt.verify(token, SECRET, (err, decoded) => {
-            if(err) return console.log(err)
-            req.id = decoded.id
-            next()
-        })
-    }
 
 // ROUTES FOR FRONT END INFOS
 
@@ -117,7 +109,7 @@ const SECRET = 'experconsult'
 
     // SUPORTE
 
-    app.get('/suporte',verifyJwt ,function (req, res){
+    app.get('/suporte' ,function (req, res){
         res.render('suporte')
     })
 
@@ -236,6 +228,7 @@ const SECRET = 'experconsult'
             desceqp_precoeqp: req.body.desceqp_precoeqp,
             desceqp_dataultpreco: req.body.desceqp_dataultpreco,
             desceqp_marca: req.body.desceqp_marca,
+            fornecedor_idfk: req.body.fornecedor_idfk,
             desceqp_imagem: (typeof req.files.desceqp_imagem !== 'undefined') ? req.files['desceqp_imagem'][0].filename: '',
             desceqp_pdf: (typeof req.files.desceqp_pdf !== 'undefined') ? req.files['desceqp_pdf'][0].filename: '',
         };
@@ -246,7 +239,7 @@ const SECRET = 'experconsult'
             try {
                 if(nomeEquipamento.map((v) =>(v.desceqp_nomeeqp).toLowerCase()) != desceqp_nomeeqp.toLowerCase()){
                     const dbResponse = await Post.create(dataToInsert);
-                    res.redirect('/cadastro-equipamentos');
+                    res.redirect('http://192.168.10.122:3000/cadastro-equipamentos');
                 }else{
                     res.json('Equipamento já cadastrado no sistema!')
                 }
@@ -261,7 +254,6 @@ const SECRET = 'experconsult'
     app.put('/equipamento-editado', async function(req, res){
 
         const dataToInsert ={
-            id_fornecedor: req.body.id_fornecedor,
             desceqp_nomeeqp: req.body.desceqp_nomeeqp,
             desceqp_modelo: req.body.desceqp_modelo,
             desceqp_consumoene: req.body.desceqp_consumoene,
@@ -302,7 +294,7 @@ const SECRET = 'experconsult'
         await Post.findAll({
             include: [{
                 model: PostFornec,
-                attributes: ['fornec_fornecedornome', 'fornec_nivelfornecedor', 'id']
+                attributes: ['fornec_fornecedornome', 'idMarca']
             }] 
         })
         .then((value) =>{
@@ -335,17 +327,16 @@ const SECRET = 'experconsult'
             representante_site: req.body.representante_site,
             representante_estadoatuacao: req.body.representante_estadoatuacao,
             representante_comentarios: req.body.representante_comentarios,
-            representante_empresasrep: req.body.representante_empresasrep + ''.replace('["]', ''), // Remove elementos
+            representante_empresasrep: req.body.representante_empresasrep + ''.replace(',', '-'), // Remove elementos
             representante_status: req.body.representante_status,
         };
 
         const nomeRepresentante = await PostRep.findAll({attributes: ['representante_nome']})
         const representante_nome = req.body.representante_nome
-
             try {
                 if(nomeRepresentante.map((v) =>(v.representante_nome)) != representante_nome){
                     const dbResponse = await PostRep.create(dataToInsert);
-                    res.redirect('/cadastro-representante');
+                    res.redirect('http://192.168.10.122:3000/cadastro-representante');
                 }else{
                     res.json('Representante já cadastrado no sistema!')
                 }
@@ -396,7 +387,12 @@ const SECRET = 'experconsult'
     // ROTA - RECEBE REQ DO FRONT (INFOS REPRESENTANTES)
 
     app.get('/list-img', async (req, res) =>{
-        await PostRep.findAll()
+        await PostRep.findAll({
+            include: [{
+                model: PostFornec,
+                attributes: ['fornec_fornecedornome', 'id']
+            }]
+        })
         .then((representante_imagem) =>{
             return res.json({
                 representante_imagem,
@@ -583,7 +579,7 @@ const SECRET = 'experconsult'
 
         try{
             const dbResponse = await PostDoed.create(dataToInsert)
-            res.redirect('192.168.10.122:3000/dashboard') //FIXME TO IP SERVER
+            res.redirect('http://192.168.10.122:3000/dashboard') //FIXME TO IP SERVER
         }catch{
             res.render('erro')
         }
@@ -648,8 +644,6 @@ const SECRET = 'experconsult'
 
     // POST DOS DADOS DE USUÁRIO PARA VERIFICAÇÃO DE AUTORIZAÇÃO DO LOGIN
 
-    //FIXME VERIFICAR MOTIVO DAS ROTAS PRIVADAS DO BACK-END NÃO FUNCIONAREM
-
     app.post('/login-auth', async (req, res) => {
 
         const usersdb = await PostUser.findAll({attributes: ['user_nomeUser', 'id']})
@@ -662,9 +656,14 @@ const SECRET = 'experconsult'
             req.body.senha === senhadb[i].user_senha){
                 const id = usersdb[i].id
                 const token = jwt.sign({id: id}, SECRET, {expiresIn: 1200});
-                return res.json({auth: true, token});
+                const usuario = usersdb[i]
+                return res.json({auth: true, token, usuario});
             }
         }
+    })
+
+    app.get('/users', async (req, res) => {
+
     })
 
     // LISTAGEM DE DADOS DOS USUÁRIOS

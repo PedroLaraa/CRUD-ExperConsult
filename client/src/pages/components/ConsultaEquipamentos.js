@@ -54,7 +54,7 @@ function FiltraEquipamentos(){
 
     const busca = pesquisarFornecedor.toLowerCase();
 
-    const dataFiltrado = data.filter(v => v.id_fornecedor.toLowerCase().includes(busca));
+    const dataFiltrado = data.filter(v => v.desceqp_modelo.toLowerCase().includes(busca));
 
     const verificacaoDeBusca = data.some(el => dataFiltrado.map((value) => (value)).includes(el))
 
@@ -76,6 +76,8 @@ function FiltraEquipamentos(){
 
     element.addEventListener('click', logout, false);
 
+    console.log('Data', data)
+
     return (
 
         <div>
@@ -84,7 +86,7 @@ function FiltraEquipamentos(){
                     <input
                     style={inputStyle}
                     type='search'
-                    placeholder="Fornecedor:"
+                    placeholder="Equipamento:"
                     onChange={(e) => setFornecedor(e.target.value)}
                     >
                     </input>
@@ -107,7 +109,7 @@ function FiltraEquipamentos(){
                                     <img src={url + value.desceqp_imagem} alt={value.desceqp_imagem.id} style={imagemEqpStyle}></img>
                                 </div>
                                 <a href={url + value.desceqp_pdf} download='pdf' style={{color: 'red'}}>DOWNLOAD PDF ⤓</a>
-                                <p>• Fornecedor: {value.id_fornecedor} </p>  
+                                <p>• Fornecedor: {value.fornecedore.fornec_fornecedornome} </p>  
                                 <p>• Nome do equipamento: {value.desceqp_nomeeqp + ''}</p>
                                 <p>• Modelo: {value.desceqp_modelo + ''}</p>
                                 <p>• Marca: {value.desceqp_marca + ''}</p>
@@ -117,9 +119,9 @@ function FiltraEquipamentos(){
                                 <p>• Data do último preço: {value.desceqp_dataultpreco+ ''}</p>
                                 <p>• Capacidade produtiva: {value.desceqp_capacidadeprod + ''}</p>
                                 <p>• Comentários sobre equipamento: {value.desceqp_comentario+ ''}</p>
-                            </div>
-                            <div className="p-2 d-flex d-inline justify-content-around">
-                                <a className="btn btn-outline-dark" href={`edit-equipamento/${value.id}`}>Editar</a>
+                                <div className="p-2 d-flex d-inline justify-content-around">
+                                    <a className="btn btn-outline-dark" href={`edit-equipamento/${value.id}`}>Editar</a>
+                                </div>
                             </div>
                         </div>        
                     </div>

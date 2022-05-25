@@ -19,9 +19,11 @@ export const AuthProvider = ({children}) => {
     useEffect(() =>{
 
         const recoverUser = localStorage.getItem('user');
+        const token = localStorage.getItem('token');
 
-        if(recoverUser){
+        if(recoverUser && token){
             setUser(JSON.parse(recoverUser));
+            api.defaults.headers.Authorization = `Bearer ${token}`;
         }
 
         setLoading(false);
@@ -31,7 +33,6 @@ export const AuthProvider = ({children}) => {
     const login = async (usuario, senha) => {
 
         const response = await createSession(usuario, senha);
-
         const loggedUser = response.data;
         const token = response.data.token;
 
@@ -42,7 +43,6 @@ export const AuthProvider = ({children}) => {
 
         setUser(loggedUser);
         navigate('/dashboard');
-
     };
 
     const logout = () => {

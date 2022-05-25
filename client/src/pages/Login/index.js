@@ -12,7 +12,8 @@ function Login(){
 
     const [senha, setSenha] = useState("");
 
-    const {authenticated, login} = useContext(AuthContext);
+
+    const { login } = useContext(AuthContext);
 
     function handleSubmit(e){
         e.preventDefault()

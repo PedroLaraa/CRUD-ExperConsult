@@ -21,7 +21,7 @@ const PostRep = db.sequelize.define('representantes_fornecedores',{
         type: db.Sequelize.STRING
     },
     representante_empresasrep: {
-        type: db.Sequelize.JSON
+        type: db.Sequelize.INTEGER
     },
     representante_status: {
         type: db.Sequelize.STRING

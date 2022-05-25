@@ -3,6 +3,8 @@ const db = require('./db')
 
 const Post = require('./Post')
 
+const PostRep = require('./PostRep')
+
 // PostFornec() = Insere dados na table
 // DEFINE A TABLE PARA INSERÇÃO DE DADOS E OS TIPOS DE DADOS DE CADA COLUMN
 
@@ -38,6 +40,12 @@ Post.belongsTo(PostFornec, {
 
 Post.belongsTo(PostFornec, {
     foreignKey: 'desceqp_marca',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE'
+})
+
+PostRep.belongsTo(PostFornec, {
+    foreignKey: 'representante_empresasrep',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE'
 })

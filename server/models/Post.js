@@ -11,9 +11,6 @@ const Post = db.sequelize.define('descricao_equipamentos',{
     desceqp_modelo: {
         type: db.Sequelize.STRING
     },
-    id_fornecedor: {
-        type: db.Sequelize.STRING
-    },
     desceqp_capacidadeprod: {
         type: db.Sequelize.STRING
     },
