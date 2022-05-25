@@ -227,10 +227,8 @@ const SECRET = 'experconsult'
         name: 'desceqp_pdf', maxCount: 1}]), async function(req, res){
 
         const dataToInsert = {
-            fornec_nivelfornecedor: req.body.fornec_nivelfornecedor,
             desceqp_nomeeqp: req.body.desceqp_nomeeqp,
             desceqp_modelo: req.body.desceqp_modelo,
-            id_fornecedor: req.body.id_fornecedor,
             desceqp_capacidadeprod: req.body.desceqp_capacidadeprod,
             desceqp_consumoene: req.body.desceqp_consumoene,
             desceqp_consumotipo: req.body.desceqp_consumotipo,
@@ -300,10 +298,13 @@ const SECRET = 'experconsult'
 
     // ROTA - RECEBE REQ DO FRONT (INFOS EQUIPAMENTOS)
 
-    //TODO CONFERÊNCIA DE ROTAS DANDO ERRO
-
     app.get('/list-infosequipamentos', async (req, res) =>{
-        await Post.findAll()
+        await Post.findAll({
+            include: [{
+                model: PostFornec,
+                attributes: ['fornec_fornecedornome', 'fornec_nivelfornecedor', 'id']
+            }] 
+        })
         .then((value) =>{
             return res.json({
                 value,
@@ -421,7 +422,7 @@ const SECRET = 'experconsult'
             clientes_nomefantasia:  req.body.clientes_nomefantasia ,
             clientes_apelido:  req.body.clientes_apelido,
             clientes_cnpj:  req.body.clientes_cnpj,
-            clientes_endereco:  req.body.clientes_endereco ,
+            clientes_endereco:  req.body.clientes_endereco + ''.replace('[""]', ' '),
             clientes_premissasDeProjeto:  req.body.clientes_premissasDeProjeto + '' ,
             clientes_ie:  req.body.clientes_ie,
             clientes_nomeResponsavel:  req.body.clientes_nomeResponsavel + '',
@@ -457,7 +458,7 @@ const SECRET = 'experconsult'
             clientes_nomefantasia: req.body.clientes_nomefantasia,
             clientes_apelido: req.body.clientes_apelido,
             clientes_cnpj: req.body.clientes_cnpj,
-            clientes_endereco: req.body.clientes_endereco,
+            clientes_endereco: req.body.clientes_endereco + '',
             clientes_premissasDeProjeto: req.body.clientes_premissasDeProjeto,
             clientes_ie: req.body.clientes_ie,
             clientes_nomeResponsavel: req.body.clientes_nomeResponsavel,

@@ -102,19 +102,19 @@ function FiltraClientes() {
                                         <img src={url + value.clientes_logo} alt={value.clientes_logo.id} style={imagemEqpStyle}></img>
                                     </div>
                                     <div style={{padding: '1.7rem'}}>
-                                        <p>Razão social: <label>{value.clientes_razaosocial}</label></p>
-                                        <p>Nome fantasia: <label>{value.clientes_nomefantasia + ''}</label></p>
-                                        <p>Apelido: <label>{value.clientes_apelido + ''}</label></p>
-                                        <p style={{ fontFamily: 'Arial' }}>CNPJ: <label>{value.clientes_cnpj + ''}</label></p>
-                                        <div className=".breakText">
-                                            <p>Endereço: <label>{value.clientes_endereco + ''}</label></p>
-                                        </div>
-                                        <p style={{ fontFamily: 'Arial'}}>IE: <label>{value.clientes_ie + ''}</label></p>
-                                        <p>Responsável: <label>{value.clientes_nomeResponsavel + ''}</label></p>
-                                        <p style={{ fontFamily: 'Arial' }}>Telefone (Respoonsável): <label> {value.clientes_telefone + ''}</label> </p>
-                                        <p style={{ fontFamily: 'Arial'}}>Email (Responsável): <label>{value.clientes_email + ''}</label></p>
+                                        <p style={{ fontWeight: 'bold'}}>Razão social: <label>{value.clientes_razaosocial}</label></p>
+                                        <p style={{ fontWeight: 'bold'}}>Nome fantasia: <label>{value.clientes_nomefantasia + ''}</label></p>
+                                        <p style={{ fontWeight: 'bold'}}>Apelido: <label>{value.clientes_apelido + ''}</label></p>
+                                        <p style={{ fontFamily: 'Arial', fontWeight: 'bold' }}>CNPJ: <label>{value.clientes_cnpj + ''}</label></p>
                                         <div className="breakText">
-                                            <p>Premissas de projeto: <label>{value.clientes_premissasDeProjeto + ''}</label></p>
+                                            <p style={{ fontWeight: 'bold'}}>Endereço: <label>{value.clientes_endereco + ''}</label></p>
+                                        </div>
+                                        <p style={{ fontFamily: 'Arial', fontWeight: 'bold'}}>IE: <label>{value.clientes_ie + ''}</label></p>
+                                        <p style={{ fontWeight: 'bold'}}>Responsável: <label>{value.clientes_nomeResponsavel + ''}</label></p>
+                                        <p style={{ fontFamily: 'Arial', fontWeight: 'bold' }}>Telefone (Respoonsável): <label> {value.clientes_telefone + ''}</label> </p>
+                                        <p style={{ fontFamily: 'Arial', fontWeight: 'bold'}}>Email (Responsável): <label>{value.clientes_email + ''}</label></p>
+                                        <div className="breakText">
+                                            <p style={{ fontWeight: 'bold'}}>Premissas de projeto: <label>{value.clientes_premissasDeProjeto + ''}</label></p>
                                         </div>
                                         <div 
                                         className="p-2 d-flex justify-content-end"

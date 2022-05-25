@@ -1,6 +1,8 @@
 // IMPORTA O SEQUELIZE DO DB PARA ENVIAR DADOS
 const db = require('./db')
 
+const Post = require('./Post')
+
 // PostFornec() = Insere dados na table
 // DEFINE A TABLE PARA INSERÇÃO DE DADOS E OS TIPOS DE DADOS DE CADA COLUMN
 
@@ -26,6 +28,18 @@ const PostFornec = db.sequelize.define('fornecedores',{
     fornec_nivelfornecedor: {
         type: db.Sequelize.STRING
     }
+})
+
+Post.belongsTo(PostFornec, {
+    foreignKey: 'fornecedor_idfk',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE'
+})
+
+Post.belongsTo(PostFornec, {
+    foreignKey: 'desceqp_marca',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE'
 })
 
 // EXPORTA A FUNÇÃO PostFornec()

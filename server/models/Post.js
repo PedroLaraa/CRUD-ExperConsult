@@ -39,7 +39,10 @@ const Post = db.sequelize.define('descricao_equipamentos',{
         type: db.Sequelize.STRING
     },
     desceqp_marca:{
-        type: db.Sequelize.STRING
+        type: db.Sequelize.INTEGER
+    },
+    fornecedor_idfk:{
+        type: db.Sequelize.INTEGER
     }
 })
 

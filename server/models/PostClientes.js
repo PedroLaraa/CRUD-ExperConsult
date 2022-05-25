@@ -21,7 +21,7 @@ const PostClientes = db.sequelize.define('clientes_obras',{
         type: db.Sequelize.STRING
     },
     clientes_endereco: {
-        type: db.Sequelize.STRING
+        type: db.Sequelize.JSON
     },
     clientes_premissasDeProjeto: {
         type: db.Sequelize.STRING

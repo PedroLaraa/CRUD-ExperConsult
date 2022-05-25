@@ -1,0 +1,25 @@
+form{
+    width: 85%;
+    margin: auto;
+    align-items: center;
+    border: .4rem solid whitesmoke;
+    border-radius: .5rem;
+    background-color: rgba(245, 245, 245, 0.6);
+}
+
+label{
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.5rem;
+}
+
+input{
+    font-family: 'Raleway', sans-serif;
+}
+
+h2{
+    position: relative;
+    width: 27rem;
+    margin: auto;
+    color: rgb(0, 0, 0);
+    font-size: 1.3rem;
+}

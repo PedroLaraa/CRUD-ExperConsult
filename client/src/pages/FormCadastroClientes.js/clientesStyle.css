@@ -1,9 +1,10 @@
 form{
-    width: 40rem;
+    width: 85%;
     margin: auto;
     align-items: center;
-    border: .5rem solid whitesmoke;
+    border: .4rem solid whitesmoke;
     border-radius: .5rem;
+    background-color: rgba(245, 245, 245, 0.6);
 }
 
 label{
