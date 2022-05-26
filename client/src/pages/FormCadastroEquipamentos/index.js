@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+
+import { AuthContext } from "../../contexts/auth";
 
 import api from '../../config/configApi';
 
@@ -23,7 +25,11 @@ function FormEquipamentos() {
         getImagesFornec()
     }, []);
 
-    console.log(data)
+    const { logout } = useContext(AuthContext);
+
+    const element = document.getElementById('logoutBtn');
+
+    element.addEventListener('click', logout, false);
 
     return (
         <div className="">

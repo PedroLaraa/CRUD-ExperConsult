@@ -1,11 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+
+import { AuthContext } from "../../contexts/auth";
 
 import './fornecedoresStyle.css'
 
-function FormFornecedores() {
+function FormFornecedores() {    
 
+    const { logout } = useContext(AuthContext);
+
+    const element = document.getElementById('logoutBtn');
+
+    element.addEventListener('click', logout, false);
 
     return(
+
         <div>
             <form 
             className="was-validated " 

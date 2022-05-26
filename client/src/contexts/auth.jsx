@@ -1,4 +1,4 @@
-import React, { useEffect, useState, createContext, Children } from "react";
+import React, { useEffect, useState, createContext, Children, useContext} from "react";
 
 import { Navigator, useNavigate } from "react-router-dom";
 
@@ -43,10 +43,20 @@ export const AuthProvider = ({children}) => {
 
         setUser(loggedUser);
         navigate('/dashboard');
+
+        if(loggedUser.auth === true){
+            alert(`Seja bem vindo(a) ${loggedUser.usuario.user_nome}!`);
+            navigate('/dashboard');
+        }else if(loggedUser.auth === false){
+            alert(`Usuário ou senha incorretos!`);
+            localStorage.removeItem('user');
+            localStorage.removeItem("token");
+            navigate('/login');
+        }
     };
 
     const logout = () => {
-        setUser(null)
+        setUser(null);
         localStorage.removeItem('user');
         localStorage.removeItem("token");
         api.defaults.headers.Authorization = null;

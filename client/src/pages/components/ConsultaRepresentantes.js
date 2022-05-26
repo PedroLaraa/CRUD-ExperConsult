@@ -33,16 +33,16 @@ function FiltraRepresentantes() {
     const getInfosRepresentante = async (res, req) => { // REQUISIÇÃO DAS IMAGENS
         await api.get("list-img")
             .then((response) => {
-                setData(response.data.representante_imagem)
-                setUrl(response.data.url)
+                setData(response.data.representante_imagem);
+                setUrl(response.data.url);
             }).catch((err) => {
                 console.log(err);
             })
     }
 
     function handleFiltrar(e) {
-        e.preventDefault()
-        setPesquisarFornecedor(fornecedor)
+        e.preventDefault();
+        setPesquisarFornecedor(fornecedor);
     }
 
     function handleClickEdit() {

@@ -12,13 +12,24 @@ function Login(){
 
     const [senha, setSenha] = useState("");
 
+    const [passwordShow, setPasswordShow] = useState(false);
+
 
     const { login } = useContext(AuthContext);
 
     function handleSubmit(e){
         e.preventDefault()
-        
+
         login(user, senha)
+
+        if(user === "" || senha === ""){
+            alert("Preencha todos os campos")
+        }
+
+    }
+
+    const passwordShowHandler = () => {
+        setPasswordShow(!passwordShow)
     }
 
     return (
@@ -38,7 +49,8 @@ function Login(){
                             <div className="p-2">
                                 <label> Usuário:</label>
                                     <input 
-                                    className="w-100"
+                                    style={{"width": "90%"}}
+                                    className="p-1"
                                     id="user"
                                     name="user"
                                     type="text"
@@ -47,13 +59,20 @@ function Login(){
                             </div>
                             <div className="p-2">
                                 <label>Senha:</label>
+                                <div className="d-flex">
                                     <input 
                                     className="w-100"
                                     id="senha"
                                     name="senha"
-                                    type="password"
+                                    type={passwordShow ? "text" : "password"}
                                     onChange={(e) => setSenha(e.target.value)}
-                                    ></input>
+                                    maxlength="12"
+                                    >
+                                    </input>
+                                    <p 
+                                    className='position-relative m-2'
+                                    onClick={passwordShowHandler}>👀</p>
+                                </div>
                             </div>
                             <div className="p-2 d-flex justify-content-center">
                                 <button 

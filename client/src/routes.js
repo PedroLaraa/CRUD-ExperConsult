@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useState } from "react";
 
 import {BrowserRouter, Routes ,Route, Navigate} from 'react-router-dom';
 
-// IMPORTA FUNÇÕES COM AS  ROTAS
+// IMPORTA FUNÇÕES COM AS  ROTAS E OS DEVIDOS ARQUIVOS PARA O SISTEMA
 
 import ConsultaFornecedores from './pages/ConsultaFornecedores';
 
@@ -44,34 +44,74 @@ import { AuthProvider, AuthContext } from "./contexts/auth";
 
 function Rotas(){
 
+    const [permissoes, setPermissoes] = useState([]);
+
+    useEffect(() => {
+        setPermissoes(JSON.parse(localStorage.getItem('user')))
+    }, [])
+
     const Private = ({children}) =>{
 
-        const { authenticated,loading } = useContext(AuthContext);
+        const { authenticated, loading } = useContext(AuthContext);
 
         if(loading){
-            return <div className="loading"> <h1> Carregando...</h1>.</div>
+            return <div className="loading"> <h1> Carregando...</h1></div>
         }
 
         if(!authenticated){
-            return <Navigate to="/login" />;
+            return alert("Você não está autenticado, faça login para continuar"), <Navigate to="/login" />
+        }
+
+        if( authenticated && permissoes.usuario.user_permissoes === 3){
+            document.getElementById('usuariosBtn').style.display = 'none';
+
+            return children
         }
 
         return children
+
     };
 
-    const PrivatePerms = ({children}) =>{
+    // document.getElementById('usuariosBtn').style.display = 'none';
 
-        const { authenticated,loading } = useContext(AuthContext);
+    const PrivatePermsDeveloper = ({children}) =>{
+
+        const { authenticated, loading } = useContext(AuthContext);
 
         if(loading){
             return <div className="loading"> <h1> Carregando...</h1>.</div>
         }
 
         if(!authenticated){
-            return <Navigate to="/login" />;
+            return alert("Você não tem permissão para acessar essa rota!"), <Navigate to="/login" />;
         }
 
-        return children
+        if(authenticated && permissoes.usuario.user_permissoes === 1){
+            return children
+        }else{
+            const btnUsers = document.getElementById('usuariosBtn').style.display = 'none';
+            return alert("Você não tem permissão para acessar essa rota!"), <Navigate to="/dashboard" />;
+        }
+
+    };
+
+    const PrivatePermsSupervisor = ({children}) => {
+
+        const { authenticated, loading } = useContext(AuthContext);
+
+        if(loading){
+            return <div className="loading"> <h1> Carregando...</h1></div>;
+        }
+
+        if(!authenticated){
+            return alert("Você não tem permissão para acessar essa rota!"), <Navigate to="/login" />;
+        }
+
+        if(authenticated && permissoes.usuario.user_permissoes === 2 || permissoes.usuario.user_permissoes === 1 ){
+            return children;
+        }else{
+            return alert("Você não tem permissão para acessar essa rota!"), <Navigate to="/dashboard" />;
+        }
     };
 
     return( // PATH = CAMINHO; ELEMENT = O QUE VAI SER RENDERIZADO;
@@ -94,7 +134,7 @@ function Rotas(){
                     <Route path="/cadastro-fornecedores" element={<Private><FormFornecedores /></Private>}></Route>
                     <Route path="/cadastro-equipamentos" element={<Private><FormEquipamentos /></Private>}></Route>
                     <Route path="/cadastro-representante" element={<Private><FormRepresentante /></Private>}></Route>
-                    <Route path="/cadastro-usuario" element={<Private><FormUsuario /></Private>}></Route>
+                    <Route path="/cadastro-usuario" element={<PrivatePermsSupervisor><FormUsuario /></PrivatePermsSupervisor>}></Route>
                 </Routes>
             </AuthProvider>
         </BrowserRouter>

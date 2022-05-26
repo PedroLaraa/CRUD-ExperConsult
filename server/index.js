@@ -47,9 +47,6 @@ const mysql = require('mysql2')
 
 const jwt = require('jsonwebtoken')
 
-const { decode } = require('punycode')
-const { set } = require('express/lib/response')
-
 const SECRET = 'experconsult'
 
     // PERMITE ACESSO DO BROWSER AO SISTEMA
@@ -645,40 +642,58 @@ const SECRET = 'experconsult'
     // POST DOS DADOS DE USUÁRIO PARA VERIFICAÇÃO DE AUTORIZAÇÃO DO LOGIN
 
     app.post('/login-auth', async (req, res) => {
-
-        const usersdb = await PostUser.findAll({attributes: ['user_nomeUser', 'user_cargo', 'user_permissoes' ,'id']})
+        
+        try {
+        
+        const usersdb = await PostUser.findAll({attributes: ['user_nomeUser']})
 
         const senhadb = await PostUser.findAll({attributes: ['user_senha']})
+
+        const idsdb = await PostUser.findAll({attributes: ['id']})
+
+        const usersData = await PostUser.findAll({attributes: ['user_nomeUser','user_nome', 'user_cargo', 'user_permissoes' ,'id']})
 
         for(let i = 0; i < usersdb.length; i++){
 
             if(req.body.usuario === usersdb[i].user_nomeUser && 
             req.body.senha === senhadb[i].user_senha){
-                const id = usersdb[i].id
+                const id = idsdb[i].id
                 const token = jwt.sign({id: id}, SECRET, {expiresIn: 1200});
-                const usuario = usersdb[i]
+                const usuario = usersData[i]
                 return res.json({auth: true, token, usuario});
             }
         }
+    }catch(err){
+        console.log(err)
+    }
+
     })
 
     //ROTA - FAZ O CADASTRO DE USUÁRIO
 
-    app.post('/usuariocadastrado', async (req, res) => {
+    app.post('/usuariocadastrado', upload.single() ,async (req, res) => {
+
         const dataToInsert = {
-            user_nomeUser : req.body.user_nomeUser,
-            user_senha : req.body.user_senha,
-            user_email : req.body.user_email,
-            user_emailPessoal : req.body.user_emailPessoal,
-            user_telefone : req.body.user_telefone,
+            user_nome: req.body.user_nome,
+            user_nomeUser : req.body.user_nomeUser ,
+            user_senha : req.body.user_senha ,
+            user_email : req.body.user_email ,
+            user_emailPessoal : req.body.user_emailPessoal ,
+            user_telefone : req.body.user_telefone ,
             user_dataNasc : req.body.user_dataNasc,
-            user_cpf : req.body.user_cpf,
+            user_cpf : req.body.user_cpf ,
+            user_permissoes: req.body.user_permissoes,
+            user_setor: req.body.user_setor,
+            user_cargo: req.body.user_cargo,
         }
 
+        console.log(dataToInsert)
+
         try{
-            const dbResponse = await PostDoed.create(dataToInsert)
+            const dbResponse = await PostUser.create(dataToInsert)
             res.redirect('http://192.168.10.122:3000/dashboard') //FIXME TO IP SERVER
-        }catch{
+        }catch(err){
+            console.log(err)
             res.render('erro')
         }
     })

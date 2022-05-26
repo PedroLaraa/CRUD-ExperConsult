@@ -10,7 +10,7 @@ import api from '../../config/configApi';
 
 import paragrafoStyle from "../css/paragrafo";
 
-import imagemEqpStyle from "../css/imagemEqp";
+import imagemClienteStyle from "../css/imagemCliente";
 
 import formStyle from "../css/formStyle";
 
@@ -99,7 +99,7 @@ function FiltraClientes() {
                             <div style={containerStyle}>
                                 <div style={paragrafoStyle}>
                                     <div >
-                                        <img src={url + value.clientes_logo} alt={value.clientes_logo.id} style={imagemEqpStyle}></img>
+                                        <img src={url + value.clientes_logo} alt={value.clientes_logo.id} style={imagemClienteStyle}></img>
                                     </div>
                                     <div style={{padding: '1.7rem'}}>
                                         <p style={{ fontWeight: 'bold'}}>Razão social: <label>{value.clientes_razaosocial}</label></p>

@@ -175,6 +175,8 @@ function DashBoardInterface() {
 
     }, [])
 
+    // TODO COLOCAR A QUANTIDADE DE EVENTOS QUE TEM EM UM PRÉDIO ESPECÍFICO
+
     return (
         <div
             className="container vh-100">

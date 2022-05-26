@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+
+import { AuthContext } from "../../contexts/auth";
 
 import api from '../../config/configApi';
 
@@ -35,15 +37,17 @@ function FormUsuario(){
         getInfosPerm()
     }, []);
 
-    console.log('DATA', data)
-    console.log('DATA2', data2)
+    const { logout } = useContext(AuthContext);
+
+    const element = document.getElementById('logoutBtn');
+
+    element.addEventListener('click', logout, false);
 
     return (
         <div className="">
             <form
-                className="was-validated "
+                className="was-validated"
                 id="formulario"
-                autoComplete="off"
                 encType="multipart/form-data"
                 method="POST"
                 action="http://192.168.10.122:1212/usuariocadastrado" 
@@ -57,10 +61,10 @@ function FormUsuario(){
                         <label htmlFor="customControlValidation1">Nome:</label>
                         <input
                             className="form-control is-valid"
+                            name="user_nome"
                             id="validationInput"
                             placeholder="Campo obrigatório"
                             required
-                            name="user_nome"
                         >
                         </input>
                     </div>
@@ -68,10 +72,10 @@ function FormUsuario(){
                         <label htmlFor="customControlValidation1">Usuário:</label>
                         <input
                             className="form-control is-invalid"
+                            name="user_nomeUser"
                             id="validationInput"
                             placeholder="Campo obrigatório"
                             required
-                            name="user_nomeUser"
                         >
                         </input>
                     </div>
@@ -79,10 +83,10 @@ function FormUsuario(){
                         <label htmlFor="customControlValidation1">Senha:</label>
                         <input
                             className="form-control is-invalid"
+                            name="user_senha"
                             id="validationInput"
                             placeholder="Campo obrigatório"
                             type="password"
-                            name="user_senha"
                             required
                         >
                         </input>
@@ -93,10 +97,10 @@ function FormUsuario(){
                 <div className="p-2 col-md-3 mb-3 form-group">
                         <label htmlFor="customControlValidation1">Email (Exper):</label>
                         <input
+                            name="user_email"
                             className="form-control is-valid"
                             id="validationInput"
                             placeholder="Campo obrigatório"
-                            name="user_email"
                             type="email"
                             required
                         >
@@ -105,10 +109,10 @@ function FormUsuario(){
                     <div className="p-2 col-md-3 mb-3">
                         <label htmlFor="customControlValidation1">Email (Pessoal):</label>
                         <input
+                            name="user_emailPessoal"
                             className="form-control is-invalid"
                             id="validationTextArea"
                             placeholder="Campo obrigatório"
-                            name="user_emailPessoal"
                             type="email"
                             required
                         >
@@ -120,10 +124,10 @@ function FormUsuario(){
                 <div className="p-2 col-md-3 mb-3 form-group">
                         <label htmlFor="customControlValidation1">Telefone:</label>
                         <input
+                            name="user_telefone"
                             className="form-control is-valid"
                             id="validationInput"
                             placeholder="Campo obrigatório"
-                            name="user_telefone"
                             required
                         >
                         </input>
@@ -131,10 +135,10 @@ function FormUsuario(){
                     <div className="p-2 col-md-3 mb-3">
                         <label htmlFor="customControlValidation1">Data nascimento:</label>
                         <input
+                            name="user_dataNasc"
                             className="form-control is-invalid"
                             id="validationTextArea"
                             placeholder="Campo obrigatório"
-                            name="user_dataNasc"
                             type="date"
                             required
                         >
@@ -143,10 +147,10 @@ function FormUsuario(){
                     <div className="p-2 col-md-3 mb-3">
                         <label htmlFor="customControlValidation1">CPF:</label>
                         <input
+                            name="user_cpf"
                             className="form-control is-invalid"
                             id="validationTextArea"
                             placeholder="Campo obrigatório"
-                            name="user_cpf"
                             required
                         >
                         </input>
@@ -154,23 +158,51 @@ function FormUsuario(){
                 </div>
                 <hr />
                 <div className=" row d-flex flex-row justify-content-around">
-                <div className="p-2 col-md-3 mb-3 form-group">
-                <label htmlFor="customControlValidation1">Nível: </label>
-                        <select
-                            className="form-select form-select-lg mb-3 overflow-auto"
-                            id="validationInput" 
-                            required
-                            name="representante_empresasrep"
+                    <div className="p-2 col-md-3 mb-3 form-group">
+                    <label htmlFor="customControlValidation1">Nível: </label>
+                            <select
+                                name="user_permissoes"
+                                className="form-select form-select-lg mb-3 overflow-auto"
+                                id="validationInput" 
+                                required
+                            >
+                                <option value=''>Selecione...</option>
+                                {data.map(value => (
+                                    <>
+                                        <option key={value.id} value={value.id}>• {value.perm_nomeDaPerm}</option>
+                                    </>
+                                ))}
+                            
+                            </select>
+                    </div>
+                    <div className="p-2 col-md-3 mb-3 form-group">
+                        <label htmlFor="customControlValidation1">Cargo: </label>
+                        <input 
+                        name="user_cargo"
+                        className="form-control is-invalid"
+                        id="validationTextArea"
+                        placeholder="Campo obrigatório"
+                        required
                         >
-                            <option value=''>Selecione...</option>
-                            {data.map(value => (
-                                <>
-                                    <option value={value.id}>• {value.perm_nomeDaPerm}</option>
-                                </>
-                            ))}
-                        
-                        </select>
-                </div>
+                        </input>
+                    </div>
+                    <div className="p-2 col-md-3 mb-3 form-group">
+                    <label htmlFor="customControlValidation1">Setor: </label>
+                            <select
+                                name="user_setor"
+                                className="form-select form-select-lg mb-3 overflow-auto"
+                                id="validationInput" 
+                                required
+                            >
+                                <option value=''>Selecione...</option>
+                                {data2.map(value => (
+                                    <>
+                                        <option key={value.id} value={value.id}>• {value.setores_nomeSetor}</option>
+                                    </>
+                                ))}
+                            
+                            </select>
+                    </div>
                 </div>
                 <div className=" row d-flex flex-row justify-content-around">
                     <div className="p-2 col-md-1 mb-3">
