@@ -49,8 +49,8 @@ function Login(){
                             <div className="p-2">
                                 <label> Usuário:</label>
                                     <input 
-                                    style={{"width": "90%"}}
-                                    className="p-1"
+                                    style={{"width": "92%"}}
+                                    className=""
                                     id="user"
                                     name="user"
                                     type="text"
@@ -70,7 +70,7 @@ function Login(){
                                     >
                                     </input>
                                     <p 
-                                    className='position-relative m-2'
+                                    className='position-relative m-1'
                                     onClick={passwordShowHandler}>👀</p>
                                 </div>
                             </div>

@@ -60,6 +60,7 @@ export const AuthProvider = ({children}) => {
         localStorage.removeItem('user');
         localStorage.removeItem("token");
         api.defaults.headers.Authorization = null;
+        
         navigate('/login');
     };
 
