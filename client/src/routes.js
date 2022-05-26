@@ -34,6 +34,8 @@ import FormEquipamentos from "./pages/FormCadastroEquipamentos";
 
 import FormRepresentante from "./pages/FormCadastroRepresentante";
 
+import FormUsuario from "./pages/CadastroUsuarios";
+
 import Login from './pages/Login'
 
 import { AuthProvider, AuthContext } from "./contexts/auth";
@@ -43,6 +45,21 @@ import { AuthProvider, AuthContext } from "./contexts/auth";
 function Rotas(){
 
     const Private = ({children}) =>{
+
+        const { authenticated,loading } = useContext(AuthContext);
+
+        if(loading){
+            return <div className="loading"> <h1> Carregando...</h1>.</div>
+        }
+
+        if(!authenticated){
+            return <Navigate to="/login" />;
+        }
+
+        return children
+    };
+
+    const PrivatePerms = ({children}) =>{
 
         const { authenticated,loading } = useContext(AuthContext);
 
@@ -77,6 +94,7 @@ function Rotas(){
                     <Route path="/cadastro-fornecedores" element={<Private><FormFornecedores /></Private>}></Route>
                     <Route path="/cadastro-equipamentos" element={<Private><FormEquipamentos /></Private>}></Route>
                     <Route path="/cadastro-representante" element={<Private><FormRepresentante /></Private>}></Route>
+                    <Route path="/cadastro-usuario" element={<Private><FormUsuario /></Private>}></Route>
                 </Routes>
             </AuthProvider>
         </BrowserRouter>

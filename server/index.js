@@ -640,13 +640,13 @@ const SECRET = 'experconsult'
 
     // ROTAS DOS USUÁRIOS
 
-    //ROTA DE PPOST PARA VERIFICAR EXISTENCIA DO USER
+    //ROTA DE POST PARA VERIFICAR EXISTENCIA DO USER
 
     // POST DOS DADOS DE USUÁRIO PARA VERIFICAÇÃO DE AUTORIZAÇÃO DO LOGIN
 
     app.post('/login-auth', async (req, res) => {
 
-        const usersdb = await PostUser.findAll({attributes: ['user_nomeUser', 'id']})
+        const usersdb = await PostUser.findAll({attributes: ['user_nomeUser', 'user_cargo', 'user_permissoes' ,'id']})
 
         const senhadb = await PostUser.findAll({attributes: ['user_senha']})
 
@@ -662,8 +662,25 @@ const SECRET = 'experconsult'
         }
     })
 
-    app.get('/users', async (req, res) => {
+    //ROTA - FAZ O CADASTRO DE USUÁRIO
 
+    app.post('/usuariocadastrado', async (req, res) => {
+        const dataToInsert = {
+            user_nomeUser : req.body.user_nomeUser,
+            user_senha : req.body.user_senha,
+            user_email : req.body.user_email,
+            user_emailPessoal : req.body.user_emailPessoal,
+            user_telefone : req.body.user_telefone,
+            user_dataNasc : req.body.user_dataNasc,
+            user_cpf : req.body.user_cpf,
+        }
+
+        try{
+            const dbResponse = await PostDoed.create(dataToInsert)
+            res.redirect('http://192.168.10.122:3000/dashboard') //FIXME TO IP SERVER
+        }catch{
+            res.render('erro')
+        }
     })
 
     // LISTAGEM DE DADOS DOS USUÁRIOS
@@ -680,12 +697,35 @@ const SECRET = 'experconsult'
                 value,
                 url: "http://192.168.10.228:1212/files/" // FIXME TO IP SERVER
             })
-            console.log(req.id + 'fez esta chamada')
         }).catch((err) => {
             console.log(err)
             res.render('erro')
         });
     });
+
+    app.get('/list-permissoes', async (req, res) => {
+        await PostPermissoesUser.findAll()
+        .then((value) => {
+            res.json({
+                value
+            })
+        }).catch((err) => {
+            console.log(err)
+            res.render('erro')
+        })
+    })
+
+    app.get('/list-setores', async (req, res) => {
+        await PostSetorUser.findAll()
+        .then((value) => {
+            res.json({
+                value
+            })
+        }).catch((err) => {
+            console.log(err)
+            res.render('erro')
+        })
+    })
 
     // PORTA QUE O BACK-END ESTÁ SENDO EXECUTADO
 

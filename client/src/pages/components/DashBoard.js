@@ -34,6 +34,8 @@ function DashBoardInterface() {
     const [clientes, setClientes] = useState('');
     const [pesquisarCliente, setPesquisarCliente] = useState('');
 
+    const [ recoveredUsers, setRecoveredUsers] = useState('')
+
     // SETA OS IDS PARA CONFERÊNCIAS
 
     const [idsDosClientes, setIdsDosClientes] = useState('');
@@ -167,11 +169,10 @@ function DashBoardInterface() {
         }
     }, [idsDoed]) // VERIFICA A BUSCA SEMPRE QUE OS IDSDOED ALTERAM
 
-    useEffect(() => { // TODO USUARIO SENDO RETORNADO COM SUCESSO =D USE E ABUSE
+    useEffect(() => {
 
-        let recoveredUsers = JSON.parse(localStorage.getItem('user'))
+        setRecoveredUsers(JSON.parse(localStorage.getItem('user')))
 
-        console.log('RoverUser', recoveredUsers)
     }, [])
 
     return (
@@ -182,12 +183,6 @@ function DashBoardInterface() {
                     className="list-group col-4 p-1 overflow-auto"
                     style={botaoDashboardStyle}>
                     <h4>• Cliente:</h4>
-                    {/* <div>
-                        <button
-                            className="btn btn-outline-dark"
-                            onClick={handleLogoutUser}
-                        >Logout</button>
-                    </div> */}
                     {nomesFiltrados.map(value => (
                         <div className="p-1" key={value}>
                             <button
@@ -254,6 +249,7 @@ function DashBoardInterface() {
                                             className="container overflow-auto"
                                             style={{ maxHeight: "30rem", width: "100%" }}
                                         >
+                                            <h1>{value.predios_clientes}</h1>
                                             <div
                                                 style={paragrafoDivStyle}
                                             >
@@ -341,7 +337,7 @@ function DashBoardInterface() {
                                     setOpen={setOpenDialog2}
                                     predios_clientes={idsInteiros}
                                     doed_eventos={value.doed_eventos}
-                                    doed_autor={value.doed_autor}
+                                    doed_autor= {recoveredUsers.usuario.user_nomeUser}
                                     id={value.id}
                                     data={value.data}
                                     setData={value.setData}

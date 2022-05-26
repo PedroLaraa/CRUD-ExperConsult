@@ -11,6 +11,7 @@
     font-size: 1.3rem;
     color: rgb(255, 255, 255);
     border: none;
+    background-color: rgba(255, 255, 255, 0);
 }
 
 .containerForm{

@@ -39,7 +39,7 @@ export default function FormDialogAddEvent(value) {
         api.post('doed-cadastrado', {
             predios_clientes: value.predios_clientes,
             doed_eventos: editValue.doed_eventos,
-            doed_autor: editValue.doed_autor,
+            doed_autor: value.doed_autor,
             data: editValue.data,
             setData: editValue.setData,
         });
@@ -91,7 +91,9 @@ export default function FormDialogAddEvent(value) {
                         margin="dense"
                         id="doed_autor"
                         label="Autor: "
+                        disabled
                         onChange={handleChangeValue}
+                        defaultValue={value.doed_autor}
                         type="text"
                         fullWidth
                         variant="standard"
