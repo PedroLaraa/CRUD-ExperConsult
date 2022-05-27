@@ -118,6 +118,18 @@ function FormUsuario(){
                         >
                         </input>
                     </div>
+                    <div className="p-2 col-md-3 mb-3">
+                        <label htmlFor="customControlValidation1">Endereço:</label>
+                        <input
+                            name="user_endereco"
+                            className="form-control is-invalid"
+                            id="validationTextArea"
+                            placeholder="Campo obrigatório"
+                            type="email"
+                            required
+                        >
+                        </input>
+                    </div>
                 </div>
                 <hr />
                 <div className=" row d-flex flex-row justify-content-around">
@@ -127,7 +139,10 @@ function FormUsuario(){
                             name="user_telefone"
                             className="form-control is-valid"
                             id="validationInput"
-                            placeholder="Campo obrigatório"
+                            type='tel'
+                            pattern="+55[(0-9)]{2}[0-9]{5}-[0-9]{4}"
+                            placeholder="+55(__)_____-____"
+                            data-slots="_"
                             required
                         >
                         </input>
@@ -159,7 +174,7 @@ function FormUsuario(){
                 <hr />
                 <div className=" row d-flex flex-row justify-content-around">
                     <div className="p-2 col-md-3 mb-3 form-group">
-                    <label htmlFor="customControlValidation1">Nível: </label>
+                    <label htmlFor="customControlValidation1">Nível de usuário: </label>
                             <select
                                 name="user_permissoes"
                                 className="form-select form-select-lg mb-3 overflow-auto"

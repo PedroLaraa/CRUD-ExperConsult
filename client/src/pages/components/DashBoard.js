@@ -34,7 +34,7 @@ function DashBoardInterface() {
     const [clientes, setClientes] = useState('');
     const [pesquisarCliente, setPesquisarCliente] = useState('');
 
-    const [ recoveredUsers, setRecoveredUsers] = useState('')
+    const [recoveredUsers, setRecoveredUsers] = useState('')
 
     // SETA OS IDS PARA CONFERÊNCIAS
 
@@ -105,17 +105,40 @@ function DashBoardInterface() {
 
     const busca = clientes.toLowerCase(); // DEFINE O QUE SERÁ BUSCADO
 
+
+    function findOcc(arr, key) {
+        let arr2 = [];
+
+        arr.forEach((x) => {
+
+            if (arr2.some((val) => { return val[key] == x[key] })) {
+
+                arr2.forEach((k) => {
+                    if (k[key] === x[key]) {
+                        k["occurrence"]++
+                    }
+                })
+
+            } else {
+
+                let a = {}
+                a[key] = x[key]
+                a["occurrence"] = 1
+                arr2.push(a);
+            }
+        })
+
+        return arr2
+    }
+
+
     const dataFiltrado = data.filter(v => JSON.stringify(v.clientes_obra.clientes_apelido).replaceAll('"', '').toLowerCase().includes(busca)); // RETORNA OS DADOS REFERENTES A BUSCA
+
+    const contadorDeEventos = findOcc(data2, 'predios_clientes')
 
     const nomesFiltrados = data.map(v => JSON.stringify(v.clientes_obra.clientes_apelido).replaceAll('"', '')).filter((elem, index, self) => index === self.indexOf(elem)).sort() // RETORNA OS APELIDOS SEM REPETIR
 
-    const doedFiltrado = data2.filter(v => v.predios_clientes == idsDoed)
-
-    function ordemDecrescente(a, b) {
-        return a.createdAt > b.createdAt
-    }
-
-    doedFiltrado.sort(ordemDecrescente)
+    const doedFiltrado = data2.filter(v => v.predios_clientes == idsDoed).reverse() // FILRA OS DOEDS POR PREDIO E COLOCA EM ORDEM CRESCENTE
 
     const verificacaoDeBusca = doedFiltrado.some(el => data2.map((value) => (value)).includes(el)); // VERIFICA SE AQUELE SETOR POSSUI EVENTOS 
 
@@ -175,8 +198,6 @@ function DashBoardInterface() {
 
     }, [])
 
-    // TODO COLOCAR A QUANTIDADE DE EVENTOS QUE TEM EM UM PRÉDIO ESPECÍFICO
-
     return (
         <div
             className="container vh-100">
@@ -192,8 +213,8 @@ function DashBoardInterface() {
                                 value={value}
                                 className="btn btn-outline-dark"
                                 onClick={handleFiltrar}
-                                style={{ width: "18rem", fontSize: '1.1rem', fontFamily: 'Raleway' }}
-                            > 
+                                style={{ width: "17rem", fontSize: '1.1rem', fontFamily: 'Raleway' }}
+                            >
                                 {value}
                             </button>
                         </div>
@@ -202,11 +223,11 @@ function DashBoardInterface() {
                 {clientes && (
                     <div
                         className="col-8 overflow-auto vh-100"
-                        style={{ maxHeight: "40rem", width: "55rem", paddingLeft: "2rem" }}
+                        style={{ maxHeight: "40rem", width: "60rem", paddingLeft: "2rem" }}
                     >
                         <div className="d-flex d-inline justify-content-around p-3 bg-white bg-opacity-75 border border-dark border-1 rounded-3 ">
-                            <h1 
-                            className="text-uppercase w-100" 
+                            <h1
+                                className="text-uppercase w-100"
                             >• {clientes}</h1>
                             <button
                                 className="btn btn-outline-dark"
@@ -238,7 +259,7 @@ function DashBoardInterface() {
                                     setOpen={setOpenDialog1}
                                     predios_dataConclusao={value.predios_dataConclusao}
                                     predios_nomeDosPredios={value.predios_nomeDosPredios}
-                                    predios_autor={value.predios_autor}
+                                    predios_autor={recoveredUsers.usuario.user_nomeUser}
                                     cliente_id={value.clientes_obra.id}
                                     data={value.data}
                                     setData={value.setData}
@@ -256,19 +277,51 @@ function DashBoardInterface() {
                                                 style={paragrafoDivStyle}
                                             >
                                                 <div
-                                                    className="row justify-content-center"
+                                                    className="row justify-content-around"
                                                     style={paragrafoDashboardStyle}>
                                                     <div className="col-2 col-md-2">
                                                         <p>{value.updatedAt.split('-').reverse().join('/')}</p>
                                                     </div>
                                                     <div className="col-1">
-                                                        <p style={{ background: 'rgba(50,50,50,0.5)', height: '2rem', width: '.5rem', border: "1px solid whitesmoke", borderRadius: "1rem" }} />
+                                                        <p style={{ background: 'rgba(50,50,50,0.5)', height: '95%', width: '.5rem', border: "1px solid whitesmoke", borderRadius: "1rem" }} />
                                                     </div>
                                                     <div className="col-4 col-md-6">
-                                                        <p className="d-flex justify-content-between">{value.predios_nomeDosPredios} <button value={value.id} onClick={idDoed} className="btn btn-outline-dark " style={{ fontSize: '1rem', fontFamily: 'Raleway' }}>Listar Eventos</button></p>
+                                                        <p
+                                                            className="d-flex justify-content-between">{value.predios_nomeDosPredios}
+                                                            <p className="d-flex justify-content-between">
+                                                                <button
+                                                                    value={value.id}
+                                                                    onClick={idDoed}
+                                                                    className="btn btn-outline-dark "
+                                                                    style={{ fontSize: '1rem', fontFamily: 'Raleway' }}>
+                                                                    Listar Eventos
+                                                                </button>
+                                                                <button
+                                                                    value={value.id}
+                                                                    onClick={idDoed}
+                                                                    className="btn btn-outline-dark " >
+                                                                    {contadorDeEventos.map(v => v.predios_clientes).includes(value.id) && (
+                                                                        <>
+                                                                            <p>{contadorDeEventos.map((v) => {
+                                                                                if (JSON.stringify(v.predios_clientes) == (value.id)) {
+                                                                                    return <p>{v.occurrence}</p>
+                                                                                }
+                                                                            }
+
+                                                                            )}</p>
+                                                                        </>
+                                                                    )}
+                                                                    {contadorDeEventos.map(v => v.predios_clientes).includes(value.id) == false && (
+                                                                        <>
+                                                                            <p>0</p>
+                                                                        </>
+                                                                    )}
+                                                                </button>
+                                                            </p>
+                                                        </p>
                                                     </div>
                                                     <div className="col-1">
-                                                        <p style={{ background: 'rgba(50,50,50,0.5)', height: '2rem', width: '.5rem', border: "1px solid whitesmoke", borderRadius: "1rem" }} />
+                                                        <p style={{ background: 'rgba(50,50,50,0.5)', height: '95%', width: '.5rem', border: "1px solid whitesmoke", borderRadius: "1rem" }} />
                                                     </div>
                                                     <div className="col-1 col-md-2">
                                                         <p>{value.predios_autor}</p>
@@ -339,7 +392,7 @@ function DashBoardInterface() {
                                     setOpen={setOpenDialog2}
                                     predios_clientes={idsInteiros}
                                     doed_eventos={value.doed_eventos}
-                                    doed_autor= {recoveredUsers.usuario.user_nomeUser}
+                                    doed_autor={recoveredUsers.usuario.user_nomeUser}
                                     id={value.id}
                                     data={value.data}
                                     setData={value.setData}

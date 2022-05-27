@@ -7,7 +7,7 @@ const botaoDashboardStyle = {
     border: '.3rem solid #A9D2D7',
     borderRadius: '.4rem',
     height: '40rem',
-    width: '20rem',
+    width: '21rem',
     display: 'flex',
     alignItems: 'center',
     background: 'rgba(248,248,255,0.8)',

@@ -7,7 +7,7 @@ const paragrafoDoedStyle = {
     border: '.3rem solid #A9D2D7',
     borderRadius: '.5rem',
     height: '100%',
-    width: '45rem',
+    width: '50rem',
     background: 'rgba(248,248,255,0.9)',
 }
 

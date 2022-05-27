@@ -34,7 +34,7 @@ export default function FormDialog(value) {
         api.post('predio-cadastrado', {
             predios_dataConclusao: editValue.predios_dataConclusao,
             predios_nomeDosPredios: editValue.predios_nomeDosPredios,
-            predios_autor: editValue.predios_autor,
+            predios_autor: value.predios_autor,
             cliente_id: editValue.cliente_id,
             data: editValue.data,
             setData: editValue.setData,
@@ -87,6 +87,8 @@ export default function FormDialog(value) {
                         label="Autor: "
                         onChange={handleChangeValue}
                         type="text"
+                        disabled
+                        defaultValue={value.predios_autor}
                         fullWidth
                         variant="standard"
                     />
