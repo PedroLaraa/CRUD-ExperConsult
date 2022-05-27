@@ -18,6 +18,8 @@ import containerStyle from "../css/container";
 
 import botaoStyle from "../css/botaoEdit";
 
+import {handleAlterImage} from "./function/recuperaUserImg";
+
 // FUNÇÃO PARA CONSULTA DE DADOS DOS EQUIPAMENTOS
 
 function FiltraRepresentantes() {
@@ -57,6 +59,7 @@ function FiltraRepresentantes() {
 
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
         getInfosRepresentante()
+        handleAlterImage()
     }, []);
 
     useEffect(() => {

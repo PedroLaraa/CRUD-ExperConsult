@@ -4,6 +4,8 @@ import { AuthContext } from "../../contexts/auth";
 
 import api from '../../config/configApi';
 
+import { handleAlterImage } from "../components/function/recuperaUserImg";
+
 function FormUsuario(){
 
     const [data, setData] = useState([]);
@@ -35,6 +37,7 @@ function FormUsuario(){
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
         getInfosUser()
         getInfosPerm()
+        handleAlterImage()
     }, []);
 
     const { logout } = useContext(AuthContext);
@@ -54,7 +57,6 @@ function FormUsuario(){
                 onSubmit={(e) => alert('USUÁRIO CADASTRADO COM SUCESSO!!!')}
             >
                 <h1 className="text-uppercase" style={{width: '14rem', textAlign: 'center'}}>Cadastro de Usuário</h1>
-                <h2 className="text-uppercase p-2">• Preencha os campos obrigatórios!</h2>
                 <hr />
                 <div className=" row d-flex flex-row justify-content-around">
                     <div className="p-2 col-md-3 mb-3">
@@ -125,7 +127,6 @@ function FormUsuario(){
                             className="form-control is-invalid"
                             id="validationTextArea"
                             placeholder="Campo obrigatório"
-                            type="email"
                             required
                         >
                         </input>
@@ -142,7 +143,7 @@ function FormUsuario(){
                             type='tel'
                             pattern="+55[(0-9)]{2}[0-9]{5}-[0-9]{4}"
                             placeholder="+55(__)_____-____"
-                            data-slots="_"
+                            maxLength="17"
                             required
                         >
                         </input>
@@ -217,6 +218,20 @@ function FormUsuario(){
                                 ))}
                             
                             </select>
+                    </div>
+                </div>
+                <hr />
+                <div className=" row d-flex flex-row justify-content-around">
+                    <div className=" row d-flex flex-row justify-content-around">
+                        <div className="p-2 col-md-5 mb-3">
+                            <label>Upload de foto ⇪</label>
+                            <input 
+                            type="file" 
+                            className="custom-file-input form-control is-invalid" 
+                            id="validatedCustomFile" 
+                            name="user_foto"
+                            />
+                        </div>
                     </div>
                 </div>
                 <div className=" row d-flex flex-row justify-content-around">

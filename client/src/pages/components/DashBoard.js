@@ -23,6 +23,8 @@ import paragrafoDoedStyle from "../css/paragrafoDoed";
 
 import paragrafoDivStyle from "../css/paragrafoDiv";
 
+import {handleAlterImage} from "./function/recuperaUserImg";
+
 function DashBoardInterface() {
 
     const [data, setData] = useState([]);
@@ -156,8 +158,17 @@ function DashBoardInterface() {
 
     // PEGA OS ID's DOS DOED'S PARA FAZER O CADASTRO DE FORMA CORRETA
 
+    const [showEvents, setShowEvents] = useState(false);
+
     const idDoed = function (e) {
         setIdsDoed(e.target.value);
+        if (idsDoed == e.target.value) {
+            setShowEvents(false)
+            setIdsDoed('')
+        } else {
+            setShowEvents(true)
+            setIdsDoed(e.target.value)
+        }
     }
 
     // FUNÇÃO PARA DISPARAR O DIALOG DE DOED'S E ADICIONAR O EVENTO NO ID CORRETO
@@ -184,6 +195,7 @@ function DashBoardInterface() {
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
         getInfosPredios();
         getInfosDoed();
+
     }, [openDialog2, openDialog1]); // PARAMETROS PARA ATUALIZAR OS DADOS SEM ATUALIZAR A PÁGINA
 
     useEffect(() => {
@@ -196,7 +208,10 @@ function DashBoardInterface() {
 
         setRecoveredUsers(JSON.parse(localStorage.getItem('user')))
 
+        handleAlterImage()
+
     }, [])
+
 
     return (
         <div
@@ -301,7 +316,7 @@ function DashBoardInterface() {
                                                                     onClick={idDoed}
                                                                     className="btn btn-outline-dark " >
                                                                     {contadorDeEventos.map(v => v.predios_clientes).includes(value.id) && (
-                                                                        <>
+                                                                        <div key={value.id}>
                                                                             <p>{contadorDeEventos.map((v) => {
                                                                                 if (JSON.stringify(v.predios_clientes) == (value.id)) {
                                                                                     return <p>{v.occurrence}</p>
@@ -309,12 +324,12 @@ function DashBoardInterface() {
                                                                             }
 
                                                                             )}</p>
-                                                                        </>
+                                                                        </div>
                                                                     )}
                                                                     {contadorDeEventos.map(v => v.predios_clientes).includes(value.id) == false && (
-                                                                        <>
+                                                                        <div key={value.id}>
                                                                             <p>0</p>
-                                                                        </>
+                                                                        </div>
                                                                     )}
                                                                 </button>
                                                             </p>
@@ -348,16 +363,48 @@ function DashBoardInterface() {
                                                                     </div>
                                                                     <div className="col-1 col-md-2">
                                                                         <p>{value.doed_autor}</p>
-                                                                        <button
-                                                                            className="btn btn-outline-danger"
-                                                                            value={value.id}
-                                                                            onClick={handleRemoveEvent}
-                                                                            style={{ fontSize: '1.1rem', fontFamily: 'Raleway' }}
-                                                                            data-toggle="tooltip"
-                                                                            data-placement="right"
-                                                                            title="Deletar Evento"
-                                                                        >❌
-                                                                        </button>
+                                                                        {value.doed_autor === recoveredUsers.usuario.user_nomeUser && (
+                                                                            <>
+                                                                                <button
+                                                                                    className="btn btn-outline-danger"
+                                                                                    value={value.id}
+                                                                                    onClick={handleRemoveEvent}
+                                                                                    style={{ fontSize: '1.1rem', fontFamily: 'Raleway' }}
+                                                                                    data-toggle="tooltip"
+                                                                                    data-placement="right"
+                                                                                    title="Deletar Evento"
+                                                                                >❌
+                                                                                </button>
+                                                                            </>
+                                                                        )}
+                                                                        {recoveredUsers.usuario.user_permissoes === 1 && (
+                                                                            <>
+                                                                                <button
+                                                                                    className="btn btn-outline-danger"
+                                                                                    value={value.id}
+                                                                                    onClick={handleRemoveEvent}
+                                                                                    style={{ fontSize: '1.1rem', fontFamily: 'Raleway' }}
+                                                                                    data-toggle="tooltip"
+                                                                                    data-placement="right"
+                                                                                    title="Deletar Evento"
+                                                                                >❌
+                                                                                </button>
+                                                                            </>
+                                                                        )}
+                                                                        {recoveredUsers.usuario.user_permissoes === 2 && (
+                                                                            <>
+                                                                                <button
+                                                                                    className="btn btn-outline-danger"
+                                                                                    value={value.id}
+                                                                                    onClick={handleRemoveEvent}
+                                                                                    style={{ fontSize: '1.1rem', fontFamily: 'Raleway' }}
+                                                                                    data-toggle="tooltip"
+                                                                                    data-placement="right"
+                                                                                    title="Deletar Evento"
+                                                                                >❌
+                                                                                </button>
+                                                                            </>
+                                                                        )}
                                                                     </div>
                                                                 </div>
                                                             </div>

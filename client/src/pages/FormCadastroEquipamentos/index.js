@@ -6,6 +6,8 @@ import api from '../../config/configApi';
 
 import './equipamentosStyle.css'
 
+import { handleAlterImage } from "../components/function/recuperaUserImg";
+
 function FormEquipamentos() {
 
     const [data, setData] = useState([]);
@@ -23,6 +25,7 @@ function FormEquipamentos() {
 
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
         getImagesFornec()
+        handleAlterImage()
     }, []);
 
     const { logout } = useContext(AuthContext);
@@ -43,7 +46,6 @@ function FormEquipamentos() {
                 onSubmit={(e) => alert('EQUIPAMENTO CADASTRADO COM SUCESSO!!!')}
             >
                 <h1 className="text-uppercase" style={{width: '20rem'}}>Cadastro de Equipamento</h1>
-                <h2 className="text-uppercase p-2">• Preencha os campos obrigatórios!</h2>
                 <hr />
                 <div className=" row d-flex flex-row justify-content-around">
                     <div className="p-2 col-md-2 mb-3 form-group">

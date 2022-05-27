@@ -6,6 +6,8 @@ import api from '../../config/configApi';
 
 import './representanteStyle.css'
 
+import { handleAlterImage } from "../components/function/recuperaUserImg";
+
 function FormRepresentante(){
 
     const { logout } = useContext(AuthContext);
@@ -29,6 +31,7 @@ function FormRepresentante(){
 
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
         getImagesFornec()
+        handleAlterImage()
     }, []);
 
     return (
@@ -42,9 +45,7 @@ function FormRepresentante(){
                 action="http://192.168.10.122:1212/representantecadastrado" 
                 onSubmit={(e) => alert('REPRESENTANTE CADASTRADO COM SUCESSO!!!')}
             >
-                <h1 className="text-uppercase" style={{width: '20rem'}}>Cadastro de Representante</h1>
-                <h2 className="text-uppercase p-2">• Preencha os campos obrigatórios!</h2>
-                <hr />
+                <h1 className="text-uppercase" style={{width: '20rem'}}>Cadastro de Representante</h1>                <hr />
                 <div className=" row d-flex flex-row justify-content-around">
                     <div className="p-2 col-md-2 mb-3 form-group">
                         <label htmlFor="customControlValidation1">Empresas que representa: </label>

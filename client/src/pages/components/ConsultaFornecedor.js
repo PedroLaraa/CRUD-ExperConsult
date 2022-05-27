@@ -20,6 +20,8 @@ import containerStyle from "../css/container";
 
 import botaoStyle from "../css/botaoEdit";
 
+import {handleAlterImage} from "./function/recuperaUserImg";
+
 // FUNÇÃO PARA CONSULTA DE DADOS DOS EQUIPAMENTOS
 
 function FiltraFornecedores() {
@@ -53,6 +55,7 @@ function FiltraFornecedores() {
 
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
         getImagesFornec()
+        handleAlterImage()
     }, []);
 
     useEffect(() => {

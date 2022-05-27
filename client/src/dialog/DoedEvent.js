@@ -85,19 +85,6 @@ export default function FormDialogAddEvent(value) {
                         multiline
                         maxRows={5}
                     />
-                    <TextField
-                        autoFocus
-                        autoComplete='off'
-                        margin="dense"
-                        id="doed_autor"
-                        label="Autor: "
-                        disabled
-                        onChange={handleChangeValue}
-                        defaultValue={value.doed_autor}
-                        type="text"
-                        fullWidth
-                        variant="standard"
-                    />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancelar</Button>

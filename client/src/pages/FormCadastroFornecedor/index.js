@@ -4,6 +4,8 @@ import { AuthContext } from "../../contexts/auth";
 
 import './fornecedoresStyle.css'
 
+import { handleAlterImage } from "../components/function/recuperaUserImg";
+
 function FormFornecedores() {    
 
     const { logout } = useContext(AuthContext);
@@ -11,6 +13,10 @@ function FormFornecedores() {
     const element = document.getElementById('logoutBtn');
 
     element.addEventListener('click', logout, false);
+
+    useEffect(() => {
+        handleAlterImage()
+    } , []);
 
     return(
 
@@ -25,7 +31,6 @@ function FormFornecedores() {
             onSubmit={(e) => alert('FORNECEDOR CADASTRADO COM SUCESSO!!!')}
             >
                 <h1 className="text-uppercase" style={{width: '20rem'}}>Cadastro de Fornecedor</h1>
-                <h2 className="text-uppercase p-2">• Preencha os campos obrigatórios!</h2>
                 <hr />
                 <div className=" row d-flex flex-row justify-content-around">
                     <div className="p-2 col-md-2 mb-3 form-group">

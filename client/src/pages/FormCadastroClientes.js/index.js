@@ -4,6 +4,8 @@ import { AuthContext } from "../../contexts/auth";
 
 import './clientesStyle.css'
 
+import { handleAlterImage } from "../components/function/recuperaUserImg";
+
 function FormClientes() {
 
     const { logout } = useContext(AuthContext);
@@ -11,6 +13,10 @@ function FormClientes() {
     const element = document.getElementById('logoutBtn');
 
     element.addEventListener('click', logout, false);
+
+    useEffect(() => {
+        handleAlterImage()
+    }, [])
 
     return (
 
@@ -25,7 +31,6 @@ function FormClientes() {
                 onSubmit={(e) => alert('CLIENTE CADASTRADO COM SUCESSO!!!')}
             >
                 <h1 className="text-uppercase">Cadastro de Cliente</h1>
-                <h2 className="text-uppercase p-2">• Preencha os campos obrigatórios!</h2>
                 <hr />
                 <div className="w-100 m-0 row d-flex flex-row justify-content-around">
                     <div className="p-2 col-md-5 mb-3">

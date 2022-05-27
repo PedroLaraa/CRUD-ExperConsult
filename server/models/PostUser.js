@@ -38,6 +38,12 @@ const PostUser = db.sequelize.define('usuarios_dados',{
     },
     user_setor: { //
         type: db.Sequelize.INTEGER
+    },
+    user_endereco: {
+        type: db.Sequelize.STRING
+    },
+    user_foto: {
+        type: db.Sequelize.STRING
     }
 })
 

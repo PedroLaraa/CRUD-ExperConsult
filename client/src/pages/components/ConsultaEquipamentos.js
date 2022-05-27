@@ -20,6 +20,7 @@ import containerStyle from "../css/container";
 
 import botaoStyle from "../css/botaoEdit";
 
+import {handleAlterImage} from "./function/recuperaUserImg";
 
 // FUNÇÃO PARA CONSULTA DE DADOS DOS EQUIPAMENTOS
 
@@ -60,6 +61,7 @@ function FiltraEquipamentos(){
 
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
         getInfosEqp()
+        handleAlterImage()
     },[]);
 
     useEffect(() => {

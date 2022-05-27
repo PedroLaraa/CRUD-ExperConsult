@@ -1,9 +1,8 @@
-<!--
-    DOCUMENTO PARA CRIÇÃO DE !!!PADRÔES!!! PARA AS PÁGINAS
--->
-
 <!DOCTYPE html>
+
 <html lang="pt-br">
+
+<!-- DOCUMENTO PARA CRIÇÃO DE !!!PADRÔES!!! PARA AS PÁGINAS -->
 
 <head>
     <script src="./js/index.js"></script>
@@ -29,9 +28,9 @@
 </header>
 
 <body>
-    <div id="videoControl">
+    <!-- <div id="videoControl">
         <video autoplay muted loop type="video/mp4" src="./img/logo-icones.mp4"></video>
-    </div>
+    </div> -->
     <nav id="navbarOculta" class="navbar navbar-expand-lg navbar-dark sticky-top px-2"
         style="background-color: #A9D2D7">
         <a class="navbar-brand" href="/dashboard">EXPER CONSULT</a>
@@ -109,10 +108,23 @@
             </div>
             <div class="w-100">
                 <ul class="navbar-nav w-100 float-right justify-content-end">
-                    <li class="float-right ml-auto">
-                        <button class="btn btn-outline-dark" id="logoutBtn">Logout</button>
+                    <li>
+                        <img src="./img/userImgPadrao.jpg" alt="logo" class="img-fluid border border-white rounded-circle" style="width: 50px;" id="imgLoggedUser">
                     </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Usuário
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="btn btn-outline-dark" id="logoutBtn">Logout</a>
+                            <!-- <a class="dropdown-item" href="/cadastro-representante">Cadastro</a> -->
+                            <div class="dropdown-divider"></div>
+                        </div>
+                    </li>
+    
                 </ul>
+                
             </div>
         </div>
     </nav>
@@ -182,8 +194,6 @@
 <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
 
 <sccript>
-
-
 
 </sccript>
 

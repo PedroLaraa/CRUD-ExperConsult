@@ -20,6 +20,7 @@ import containerStyle from "../css/container";
 
 import botaoStyle from "../css/botaoEdit";
 
+import {handleAlterImage} from "./function/recuperaUserImg";
 
 // FUNÇÃO PARA CONSULTA DE DADOS DOS EQUIPAMENTOS
 
@@ -41,6 +42,8 @@ function FiltraClientes() {
             })
     }
 
+    console.log(url)
+
     function handleFiltrar(e) {
         setPesquisarCliente(clientes)
 
@@ -55,6 +58,7 @@ function FiltraClientes() {
 
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
         getInfosCliente()
+        handleAlterImage()
     }, []);
 
     useEffect(() => {

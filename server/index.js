@@ -651,7 +651,7 @@ const SECRET = 'experconsult'
 
         const idsdb = await PostUser.findAll({attributes: ['id']})
 
-        const usersData = await PostUser.findAll({attributes: ['user_nomeUser','user_nome', 'user_cargo', 'user_permissoes' ,'id']})
+        const usersData = await PostUser.findAll({attributes: ['user_nomeUser','user_nome', 'user_cargo', 'user_permissoes', 'user_foto' ,'id']})
 
         for(let i = 0; i < usersdb.length; i++){
 
@@ -661,8 +661,10 @@ const SECRET = 'experconsult'
                 const token = jwt.sign({id: id}, SECRET, {expiresIn: 1200});
                 const usuario = usersData[i]
                 return res.json({auth: true, token, usuario});
+                res.redirect('http://192.168.10.122:3000/dashboard') //FIXME TO IP SERVER
             }
         }
+    
     }catch(err){
         console.log(err)
     }
@@ -671,7 +673,7 @@ const SECRET = 'experconsult'
 
     //ROTA - FAZ O CADASTRO DE USUÁRIO
 
-    app.post('/usuariocadastrado', upload.single() ,async (req, res) => {
+    app.post('/usuariocadastrado', upload.single('user_foto') ,async (req, res) => {
 
         const dataToInsert = {
             user_nome: req.body.user_nome,
@@ -685,9 +687,9 @@ const SECRET = 'experconsult'
             user_permissoes: req.body.user_permissoes,
             user_setor: req.body.user_setor,
             user_cargo: req.body.user_cargo,
+            user_endereco: req.body.user_endereco,
+            user_foto: (typeof req.file !== 'undefined') ? req.file.filename : '',
         }
-
-        console.log(dataToInsert)
 
         try{
             const dbResponse = await PostUser.create(dataToInsert)

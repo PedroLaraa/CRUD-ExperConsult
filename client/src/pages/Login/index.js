@@ -32,13 +32,32 @@ function Login(){
         setPasswordShow(!passwordShow)
     }
 
+    function handleAlterImage(e){
+
+        var img = document.getElementById('imgLoggedUser');
+
+        const urlUser = 'http://192.168.10.122:1212/files/' // FIXME TO IP SERVER
+
+        const user = JSON.parse(localStorage.getItem('user'))
+
+        img.src = urlUser + user.usuario.user_foto
+    }
+
+    const handleLogin = (e) => {
+        handleSubmit(e)
+        handleAlterImage(e)
+    }
+
     return (
         <div id="container">
             <div className="container d-flex justify-content-center vh-100">
                 <div 
                 className="form"
                 >
-                    <form className="form" autoComplete="off">
+                    <form 
+                    className="form" 
+                    autoComplete="off"
+                    >
                         <div className="containerForm">
                             <div className="logo-exper2">
                                 <img href="#topo" src="./img/logo-icone.png" />
@@ -66,7 +85,7 @@ function Login(){
                                     name="senha"
                                     type={passwordShow ? "text" : "password"}
                                     onChange={(e) => setSenha(e.target.value)}
-                                    maxlength="12"
+                                    maxLength="12"
                                     >
                                     </input>
                                     <p 
@@ -78,7 +97,7 @@ function Login(){
                                 <button 
                                 type="submit"
                                 className="btn btn-success w-25"
-                                onClick={handleSubmit}
+                                onClick={handleLogin}
                                 >Login</button>
                             </div>
                         </div>
