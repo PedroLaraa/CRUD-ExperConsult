@@ -47,10 +47,12 @@ export const AuthProvider = ({children}) => {
         if(loggedUser.auth === true){
             alert(`Seja bem vindo(a) ${loggedUser.usuario.user_nome}!`);
             navigate('/dashboard');
+            document.location.reload();
         }else if(loggedUser.auth === false){
-            alert(`Usuário ou senha incorretos!`);
+            alert(`Usuário ou senha inválidos!`);
             localStorage.removeItem('user');
             localStorage.removeItem("token");
+
             navigate('/login');
         }
     };
@@ -62,6 +64,7 @@ export const AuthProvider = ({children}) => {
         api.defaults.headers.Authorization = null;
         
         navigate('/login');
+        document.location.reload();
     };
 
     return (

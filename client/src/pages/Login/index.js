@@ -23,10 +23,10 @@ function Login(){
         login(user, senha)
 
         if(user === "" || senha === ""){
-            alert("Preencha todos os campos")
+            alert("Preencha todos os campos!!!")
         }
-
     }
+
 
     const passwordShowHandler = () => {
         setPasswordShow(!passwordShow)

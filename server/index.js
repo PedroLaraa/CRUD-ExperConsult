@@ -27,6 +27,8 @@ const PostPermissoesUser = require('./models/PostPermissoesUser')
 
 const PostSetorUser = require('./models/PostSetorUser')
 
+const PostNotificaUser = require('./models/PostNotificaUser')
+
 const path = require('path')
 
 const upload = require('./middleware/uploadimg')
@@ -287,11 +289,13 @@ const SECRET = 'experconsult'
 
     // ROTA - RECEBE REQ DO FRONT (INFOS EQUIPAMENTOS)
 
-    app.get('/list-infosequipamentos', async (req, res) =>{
+    //FIXME - RELAÇÃO DE TABELA FALHA COM DUAS RELAÇÕES
+    
+    app.get('/list-infosequipamentos', async (req, res) => {
         await Post.findAll({
             include: [{
                 model: PostFornec,
-                attributes: ['fornec_fornecedornome', 'idMarca']
+                attributes: ['fornec_fornecedornome']
             }] 
         })
         .then((value) =>{
@@ -303,7 +307,6 @@ const SECRET = 'experconsult'
             res.render('erro')
         })
     })
-
 
     //REPRESENTANTES:
 
@@ -395,7 +398,7 @@ const SECRET = 'experconsult'
                 representante_imagem,
                 url: "http://192.168.10.122:1212/files/" //FIXME TO IP SERVER
             }) 
-        }).catch(() =>{
+        }).catch(() => {
             res.render('erro')
         })
     })
@@ -653,18 +656,23 @@ const SECRET = 'experconsult'
 
         const usersData = await PostUser.findAll({attributes: ['user_nomeUser','user_nome', 'user_cargo', 'user_permissoes', 'user_foto' ,'id']})
 
-        for(let i = 0; i < usersdb.length; i++){
+        var usuarioEncontrado = false
 
-            if(req.body.usuario === usersdb[i].user_nomeUser && 
-            req.body.senha === senhadb[i].user_senha){
+        for(let i = 0; i < usersdb.length; i++){
+                        
+            if(req.body.usuario == usersdb[i].user_nomeUser && 
+                req.body.senha == senhadb[i].user_senha){
                 const id = idsdb[i].id
                 const token = jwt.sign({id: id}, SECRET, {expiresIn: 1200});
                 const usuario = usersData[i]
-                return res.json({auth: true, token, usuario});
-                res.redirect('http://192.168.10.122:3000/dashboard') //FIXME TO IP SERVER
+                return res.json({auth: true, token, usuario}), usuarioEncontrado = true 
             }
         }
-    
+
+        if(usuarioEncontrado == false){
+            return res.json({auth: false})
+        }
+
     }catch(err){
         console.log(err)
     }
@@ -676,6 +684,7 @@ const SECRET = 'experconsult'
     app.post('/usuariocadastrado', upload.single('user_foto') ,async (req, res) => {
 
         const dataToInsert = {
+
             user_nome: req.body.user_nome,
             user_nomeUser : req.body.user_nomeUser ,
             user_senha : req.body.user_senha ,
@@ -689,6 +698,7 @@ const SECRET = 'experconsult'
             user_cargo: req.body.user_cargo,
             user_endereco: req.body.user_endereco,
             user_foto: (typeof req.file !== 'undefined') ? req.file.filename : '',
+            
         }
 
         try{
@@ -742,6 +752,52 @@ const SECRET = 'experconsult'
             console.log(err)
             res.render('erro')
         })
+    })
+
+    // ROTA - FAZ O CADASTRO DE UMA NOVA MENSAGEM PARA SUPORTE
+
+    app.post('/report-enviado', upload.single('') ,async (req, res) => {
+
+        const dataToInsert = {
+
+            notificacoes_mensagem: req.body.notificacoes_mensagem,
+            notificacoes_motivo: req.body.notificacoes_motivo,
+            notificacoes_autor: req.body.notificacoes_autor,
+            notificacoes_destinatario: req.body.notificacoes_destinatario,
+        }
+
+        console.log(dataToInsert)
+
+        try{
+            const dbResponse = await PostNotificaUser.create(dataToInsert)
+            res.redirect('http://expertestes:3000/dashboard') //FIXME TO IP SERVER
+        }catch(err){
+            console.log(err)
+            res.render('erro')        
+        }
+    })
+
+    app.get('/list-notificacoesDeveloper', async (req, res) => {
+
+        PostNotificaUser.findAll({
+            where: {
+                notificacoes_destinatario: 1
+            }
+        })
+        .then((value) => {
+            res.json({
+                value
+            })
+        })
+
+    })
+
+    app.delete('/chamado-deletado/:id', async function(req, res) {
+
+        const {id} = req.params
+
+        const dbResponse = await PostNotificaUser.destroy({where:{id: id}})
+
     })
 
     // PORTA QUE O BACK-END ESTÁ SENDO EXECUTADO

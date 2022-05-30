@@ -107,7 +107,6 @@ function DashBoardInterface() {
 
     const busca = clientes.toLowerCase(); // DEFINE O QUE SERÁ BUSCADO
 
-
     function findOcc(arr, key) {
         let arr2 = [];
 

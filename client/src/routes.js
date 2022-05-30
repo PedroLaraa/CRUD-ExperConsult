@@ -36,7 +36,11 @@ import FormRepresentante from "./pages/FormCadastroRepresentante";
 
 import FormUsuario from "./pages/CadastroUsuarios";
 
+import SuporteSistema from "./pages/SuporteSistema";
+
 import Login from './pages/Login'
+
+import NotificacoesUser from "./pages/NotificacoesUser";
 
 import { AuthProvider, AuthContext } from "./contexts/auth";
 
@@ -49,6 +53,8 @@ function Rotas(){
     useEffect(() => {
         setPermissoes(JSON.parse(localStorage.getItem('user')))
     }, [])
+
+    const notificacoesDeveloper = document.getElementById('notificacoesBtn');
 
     const Private = ({children}) =>{
 
@@ -64,6 +70,19 @@ function Rotas(){
 
         if( authenticated && permissoes.usuario.user_permissoes === 3){
             document.getElementById('usuariosBtn').style.display = 'none';
+            notificacoesDeveloper.style.display = 'none';
+
+            return children
+        }
+
+        if( authenticated && permissoes.usuario.user_permissoes === 2){
+            notificacoesDeveloper.style.display = 'none';
+
+            return children
+        }
+
+        if( authenticated && permissoes.usuario.user_permissoes === 1){
+            notificacoesDeveloper.setAttribute('href', '/notificacoes-developer')
 
             return children
         }
@@ -87,7 +106,7 @@ function Rotas(){
         }
 
         if(authenticated && permissoes.usuario.user_permissoes === 1){
-            return children
+            return children;
         }else{
             const btnUsers = document.getElementById('usuariosBtn').style.display = 'none';
             return alert("Você não tem permissão para acessar essa rota!"), <Navigate to="/dashboard" />;
@@ -114,7 +133,7 @@ function Rotas(){
         }
     };
 
-    return( // PATH = CAMINHO; ELEMENT = O QUE VAI SER RENDERIZADO;
+    return( // PATH = ROTA; ELEMENT = O QUE VAI SER RENDERIZADO;
         <BrowserRouter>
             <AuthProvider>
                 <Routes> 
@@ -135,6 +154,8 @@ function Rotas(){
                     <Route path="/cadastro-equipamentos" element={<Private><FormEquipamentos /></Private>}></Route>
                     <Route path="/cadastro-representante" element={<Private><FormRepresentante /></Private>}></Route>
                     <Route path="/cadastro-usuario" element={<PrivatePermsSupervisor><FormUsuario /></PrivatePermsSupervisor>}></Route>
+                    <Route path="/suporte" element={<Private><SuporteSistema /></Private>}></Route>
+                    <Route path="/notificacoes-developer" element={<PrivatePermsDeveloper><NotificacoesUser /></PrivatePermsDeveloper>}></Route>
                 </Routes>
             </AuthProvider>
         </BrowserRouter>

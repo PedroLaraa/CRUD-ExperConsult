@@ -18,8 +18,6 @@ import inputStyle from "../css/inputStyle";
 
 import containerStyle from "../css/container";
 
-import botaoStyle from "../css/botaoEdit";
-
 import {handleAlterImage} from "./function/recuperaUserImg";
 
 // FUNÇÃO PARA CONSULTA DE DADOS DOS EQUIPAMENTOS
@@ -57,17 +55,17 @@ function FiltraEquipamentos(){
 
     const dataFiltrado = data.filter(v => v.desceqp_modelo.toLowerCase().includes(busca));
 
-    const verificacaoDeBusca = data.some(el => dataFiltrado.map((value) => (value)).includes(el))
+    const verificacaoDeBusca = data.some(el => dataFiltrado.map((value) => (value)).includes(el));
 
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
-        getInfosEqp()
-        handleAlterImage()
+        getInfosEqp();
+        handleAlterImage();
     },[]);
 
     useEffect(() => {
         if(pesquisarFornecedor){
             if(verificacaoDeBusca === false || fornecedor === ''){
-                alert('Resultado da busca não encontrado!')
+                alert('Resultado da busca não encontrado!');
             }
         }
     }, [pesquisarFornecedor])
@@ -78,7 +76,7 @@ function FiltraEquipamentos(){
 
     element.addEventListener('click', logout, false);
 
-    console.log('Data', data)
+    console.log('Data', data);
 
     return (
 

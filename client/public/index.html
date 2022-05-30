@@ -102,29 +102,31 @@
             <div class="w-100" id="topo">
                 <ul class="navbar-nav w-100 float-right ">
                     <li class="float-right ml-auto">
-                        <a class="nav-link" href="http://expertestes:1212/suporte">Suporte</a>
+                        <a class="nav-link" href="/suporte">Suporte</a>
                     </li>
                 </ul>
             </div>
-            <div class="w-100">
-                <ul class="navbar-nav w-100 float-right justify-content-end">
+            <div class="" style="width: 90%;">
+                <ul class="navbar-nav float-right justify-content-end" >
+                    <li class="p-1">
+                        <a class="btn btn-dark" id="notificacoesBtn" href="" >
+                            <i>🔔</i>
+                        </a>
+                    </li>
                     <li>
-                        <img src="./img/userImgPadrao.jpg" alt="logo" class="img-fluid border border-white rounded-circle" style="width: 50px;" id="imgLoggedUser">
+                        <img src="./img/userImgPadrao.jpg" alt="logo" class="img-fluid border border-white rounded-circle" style="width: 45px;" id="imgLoggedUser">
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        <a class="nav-link dropdown-toggle" href="#" id="nomeUserLogado" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Usuário
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="btn btn-outline-dark" id="logoutBtn">Logout</a>
-                            <!-- <a class="dropdown-item" href="/cadastro-representante">Cadastro</a> -->
                             <div class="dropdown-divider"></div>
                         </div>
                     </li>
-    
                 </ul>
-                
             </div>
         </div>
     </nav>
@@ -171,7 +173,7 @@
         <!-- Copyright -->
         <div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2);">
             © 2022 Copyright:
-            <a class="text-dark" href="https://www.experconsult.com.br">Exper Consult Ltda</a>
+            <a class="text-dark" href="">Exper Consult Ltda</a>
         </div>
         <!-- Copyright -->
         <div class="logo-exper">
@@ -282,6 +284,16 @@
         width: 5rem;
         height: 3rem;
     }
+
+    #logoutBtn{
+        display: flex;
+        justify-content: center;
+    }
+
+    #ulUser{
+        width: 90%;
+    }
+
 </style>
 
 </html>

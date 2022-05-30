@@ -3,7 +3,7 @@ const db = require('./db')
 
 const PostUser = require('./PostUser')
 
-// PostRep() = Insere dados na table
+// PostPermissoesUser() = Insere dados na table
 // DEFINE A TABLE PARA INSERÇÃO DE DADOS E OS TIPOS DE DADOS DE CADA COLUMN
 
 const PostPermissoesUser = db.sequelize.define('permissoes_user',{

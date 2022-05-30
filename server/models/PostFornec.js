@@ -32,23 +32,25 @@ const PostFornec = db.sequelize.define('fornecedores',{
     }
 })
 
-Post.belongsTo(PostFornec, {
-    foreignKey: 'fornecedor_idfk',
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE'
-})
+// PostFornec.associate = (models) => {
+    Post.belongsTo(PostFornec, {
+        foreignKey: 'fornecedor_idfk',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+    })
 
-Post.belongsTo(PostFornec, {
-    foreignKey: 'desceqp_marca',
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE'
-})
+    Post.belongsTo(PostFornec, {
+        foreignKey: 'desceqp_marca',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+    })
 
-PostRep.belongsTo(PostFornec, {
-    foreignKey: 'representante_empresasrep',
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE'
-})
+    PostRep.belongsTo(PostFornec, {
+        foreignKey: 'representante_empresasrep',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+    })
+// }
 
 // EXPORTA A FUNÇÃO PostFornec()
 module.exports = PostFornec
