@@ -1,12 +1,16 @@
 // IMPORTA O SEQUELIZE DO DB PARA ENVIAR DADOS
 const db = require('./db')
 
+const Post = require('./Post')
 
+const PostFornec = require('./PostFornec')
 
-// Post() = Insere dados na table
+const PostRep = require('./PostRep')
+
+// PostFornec() = Insere dados na table
 // DEFINE A TABLE PARA INSERÇÃO DE DADOS E OS TIPOS DE DADOS DE CADA COLUMN
 
-const Post = db.sequelize.define('descricao_equipamentos', {
+const PostMarcasEqp = db.sequelize.define('descricao_equipamentos', {
     desceqp_nomeeqp: {
         type: db.Sequelize.STRING
     },
@@ -45,7 +49,10 @@ const Post = db.sequelize.define('descricao_equipamentos', {
     }
 });
 
+PostMarcasEqp.belongsTo(PostFornec, {
+    foreignKey: 'desceqp_marca',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE'
+})
 
-
-// EXPORTA A FUNÇÃO Post()
-module.exports = Post
+module.exports = PostMarcasEqp

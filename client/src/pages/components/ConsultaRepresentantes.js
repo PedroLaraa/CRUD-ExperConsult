@@ -30,7 +30,18 @@ function FiltraRepresentantes() {
     const [fornecedor, setFornecedor] = useState('');
     const [pesquisarFornecedor, setPesquisarFornecedor] = useState('')
 
+    const [fornecedoresRep, setFornecedoresRep] = useState([]);
+
     const [open, setOpen] = React.useState(false);
+
+    const getInfosFornecedores = async (res, req) => { // REQUISIÇÃO DAS IMAGENS
+        await api.get("list-imgf")
+            .then((response) => {
+                setFornecedoresRep(response.data.fornec_foto);
+            }).catch((err) => {
+                console.log(err);
+            })
+    }
 
     const getInfosRepresentante = async (res, req) => { // REQUISIÇÃO DAS IMAGENS
         await api.get("list-img")
@@ -57,8 +68,14 @@ function FiltraRepresentantes() {
 
     const verificacaoDeBusca = data.some(el => dataFiltrado.map((value) => (value)).includes(el))
 
+    const empresasRepresenta = dataFiltrado.map(v => (v.representante_empresasrep).toString().split(','))
+
+    const idsFornecedores = fornecedoresRep.map(v => (v.id).toString().split(','))
+
+
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
         getInfosRepresentante()
+        getInfosFornecedores()
         handleAlterImage()
     }, []);
 
@@ -75,6 +92,8 @@ function FiltraRepresentantes() {
     const element = document.getElementById('logoutBtn');
 
     element.addEventListener('click', logout, false);
+
+    console.log('Data',dataFiltrado)
 
     return (
 
@@ -104,7 +123,7 @@ function FiltraRepresentantes() {
                             <div>
                                 <div style={paragrafoStyle}>
                                     <p>Nome: {value.representante_nome + ''}</p>
-                                    <p>Representa: {value.representante_empresasrep + ''}</p>
+                                    <p>Representa: {value.fornecedore.fornec_fornecedornome + ''}</p>
                                     <p>Telefone: {value.representante_telefone + ''}</p>
                                     <p>Comentários: {value.representante_comentarios + ''}</p>
                                     <p>Site: {value.representante_site + ''}</p>

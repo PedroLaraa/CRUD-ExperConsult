@@ -29,6 +29,8 @@ const PostSetorUser = require('./models/PostSetorUser')
 
 const PostNotificaUser = require('./models/PostNotificaUser')
 
+const PostMarcasEqp = require('./models/PostMarcasEqp')
+
 const path = require('path')
 
 const upload = require('./middleware/uploadimg')
@@ -202,9 +204,7 @@ const SECRET = 'experconsult'
         })
     })
 
-
     //EQUIPAMENTOS:
-
 
     // ROTA - RENDERIZA FORMULÁRIO DE REGISTRO DOS EQUIPAMENTOS
 
@@ -294,8 +294,25 @@ const SECRET = 'experconsult'
     app.get('/list-infosequipamentos', async (req, res) => {
         await Post.findAll({
             include: [{
-                model: PostFornec,
+                model: PostFornec, 
                 attributes: ['fornec_fornecedornome']
+            }] 
+        })
+        .then((value) =>{
+            return res.json({
+                value,
+                url: "http://192.168.10.122:1212/files/" //FIXME TO IP SERVER
+            }) 
+        }).catch(() =>{
+            res.render('erro')
+        })
+    })
+
+    app.get('/list-infosequipamentosMarcas', async (req, res) => {
+        await PostMarcasEqp.findAll({
+            include: [{
+                model: PostFornec, 
+                attributes: ['fornec_fornecedornome'],
             }] 
         })
         .then((value) =>{
@@ -393,7 +410,7 @@ const SECRET = 'experconsult'
                 attributes: ['fornec_fornecedornome', 'id']
             }]
         })
-        .then((representante_imagem) =>{
+        .then((representante_imagem) => {
             return res.json({
                 representante_imagem,
                 url: "http://192.168.10.122:1212/files/" //FIXME TO IP SERVER

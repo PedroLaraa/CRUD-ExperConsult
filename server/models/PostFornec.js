@@ -8,7 +8,7 @@ const PostRep = require('./PostRep')
 // PostFornec() = Insere dados na table
 // DEFINE A TABLE PARA INSERÇÃO DE DADOS E OS TIPOS DE DADOS DE CADA COLUMN
 
-const PostFornec = db.sequelize.define('fornecedores',{
+const PostFornec = db.sequelize.define('fornecedores', {
     fornec_fornecedornome: {
         type: db.Sequelize.STRING
     },
@@ -21,7 +21,7 @@ const PostFornec = db.sequelize.define('fornecedores',{
     fornec_telefone: {
         type: db.Sequelize.STRING
     },
-    fornec_email : {
+    fornec_email: {
         type: db.Sequelize.STRING
     },
     fornec_foto: {
@@ -30,27 +30,18 @@ const PostFornec = db.sequelize.define('fornecedores',{
     fornec_nivelfornecedor: {
         type: db.Sequelize.STRING
     }
-})
+});
 
-// PostFornec.associate = (models) => {
-    Post.belongsTo(PostFornec, {
-        foreignKey: 'fornecedor_idfk',
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE'
-    })
+Post.belongsTo(PostFornec, {
+    foreignKey: 'fornecedor_idfk',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE'
+});
 
-    Post.belongsTo(PostFornec, {
-        foreignKey: 'desceqp_marca',
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE'
-    })
+PostRep.belongsTo(PostFornec, {
+    foreignKey: 'representante_empresasrep',
+});
 
-    PostRep.belongsTo(PostFornec, {
-        foreignKey: 'representante_empresasrep',
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE'
-    })
-// }
 
 // EXPORTA A FUNÇÃO PostFornec()
 module.exports = PostFornec
