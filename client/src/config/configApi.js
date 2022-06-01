@@ -7,7 +7,7 @@ export default axios.create({
 });
 
 export const api = axios.create({
-    baseURL:"http://192.168.10.122:1212/"
+    baseURL:"http://192.168.10.122:1212/" // FIXME TO IP SERVER
 });
 
 export const createSession = async (usuario, senha) => {

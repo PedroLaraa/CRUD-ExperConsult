@@ -238,7 +238,7 @@ const SECRET = 'experconsult'
             try {
                 if(nomeEquipamento.map((v) =>(v.desceqp_nomeeqp).toLowerCase()) != desceqp_nomeeqp.toLowerCase()){
                     const dbResponse = await Post.create(dataToInsert);
-                    res.redirect('http://192.168.10.122:3000/cadastro-equipamentos');
+                    res.redirect('http://192.168.10.122:3000/cadastro-equipamentos'); // FIXME TO IP SERVER
                 }else{
                     res.json('Equipamento já cadastrado no sistema!')
                 }
@@ -353,7 +353,7 @@ const SECRET = 'experconsult'
             try {
                 if(nomeRepresentante.map((v) =>(v.representante_nome)) != representante_nome){
                     const dbResponse = await PostRep.create(dataToInsert);
-                    res.redirect('http://192.168.10.122:3000/cadastro-representante');
+                    res.redirect('http://192.168.10.122:3000/cadastro-representante'); // FIXME TO IP SERVER
                 }else{
                     res.json('Representante já cadastrado no sistema!')
                 }

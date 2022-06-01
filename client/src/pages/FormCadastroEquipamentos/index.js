@@ -42,7 +42,7 @@ function FormEquipamentos() {
                 autoComplete="off"
                 encType="multipart/form-data"
                 method="POST"
-                action="http://192.168.10.122:1212/equipamentocadastrado" 
+                action="http://192.168.10.122:1212/equipamentocadastrado" // FIXME TO IP SERVER
                 onSubmit={(e) => alert('EQUIPAMENTO CADASTRADO COM SUCESSO!!!')}
             >
                 <h1 className="text-uppercase" style={{width: '20rem'}}>Cadastro de Equipamento</h1>

@@ -31,7 +31,7 @@ function SuporteSistema() {
             autoComplete="off" 
             encType="multipart/form-data"
             method="POST"
-            action="http://192.168.10.122:1212/report-enviado"
+            action="http://192.168.10.122:1212/report-enviado" // FIXME TO IP SERVER
             onSubmit={(e) => alert('MENSAGEM ENVIADA COM SUCESSO!!!')}
             >
                 <div className="row d-flex flex-row justify-content-around">
