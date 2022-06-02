@@ -673,7 +673,7 @@ const SECRET = 'experconsult'
 
         const idsdb = await PostUser.findAll({attributes: ['id']})
 
-        const usersData = await PostUser.findAll({attributes: ['user_nomeUser','user_nome', 'user_cargo', 'user_permissoes', 'user_foto' ,'id']})
+        const usersData = await PostUser.findAll({attributes: ['user_setor','user_nomeUser','user_nome', 'user_cargo', 'user_permissoes', 'user_foto' ,'id']})
 
         var usuarioEncontrado = false
 
@@ -827,7 +827,7 @@ const SECRET = 'experconsult'
         dataToInsert = {
             notificacoes_mensagem: req.body.notificacoes_mensagem,
             notificacoes_motivo: req.body.notificacoes_motivo,
-            notificacoes_autor: req.body.doed_autor,
+            notificacoes_autor: req.body.notificacoes_autor,
             notificacoes_destinatario: req.body.notificacoes_destinatario,
         }
 

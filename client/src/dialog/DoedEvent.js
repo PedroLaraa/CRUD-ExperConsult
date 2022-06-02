@@ -51,6 +51,9 @@ export default function FormDialogAddEvent(value) {
         });
         api.post('notificacoes-setores', {
             notificacoes_destinatario: personName,
+            notificacoes_autor: value.doed_autor,
+            notificacoes_motivo: 'Novo evento!!!',
+            notificacoes_mensagem: editValue.doed_eventos
         });
         handleClose();
         alert('Cadastrado com sucesso!')
@@ -78,65 +81,67 @@ export default function FormDialogAddEvent(value) {
     };
 
     const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-    PaperProps: {
-        style: {
-            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-            width: 250,
+    const ITEM_PADDING_TOP = 8;
+    const MenuProps = {
+        PaperProps: {
+            style: {
+                maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+                width: 250,
+            },
         },
-    },
-};
+    };
 
-const names = [
-    'Aprovações',
-    'Engenharia',
-    'Financeiro',
-    'Direção',
-    'Orçamentos',
-    'Conceito',
-    'Arquitetura',
-    'Custos',
-    'Software',
-].sort()    
+    const names = [
+        'Aprovações 2',
+        'Engenharia 3',
+        'Financeiro 6',
+        'Direção 5',
+        'Orçamentos 8',
+        'Conceito 9',
+        'Arquitetura 4',
+        'Custos 10',
+        'Software 1',
+    ].sort()
 
     function MultipleSelectCheckmarks() {
 
-    const handleChange = (event) => {
-        const {
-            target: { value },
-        } = event;
-        setPersonName(
-            typeof value === 'string' ? value.split(',') : value,
-        );
-    };
+        const handleChange = (event) => {
+            const {
+                target: { value },
+            } = event;
+            setPersonName(
+                typeof value === 'string' ? value.split(',') : value,
+            );
+        };
 
-    return (
-        <div>
-            <FormControl sx={{ m: 2, width: 400 }}>
-                <InputLabel id="demo-multiple-checkbox-label">Setores para notificar:</InputLabel>
-                <Select
-                    labelId="demo-multiple-checkbox-label"
-                    id="demo-multiple-checkbox"
-                    multiple
-                    value={personName}
-                    onChange={handleChange}
-                    input={<OutlinedInput label="Setores para notificar:" />}
-                    renderValue={(selected) => selected.join(', ')}
-                    MenuProps={MenuProps}
-                    name="notificacoes_destinatario"
-                >
-                    {names.map((name) => (
-                        <MenuItem key={name} value={name}>
-                            <Checkbox checked={personName.indexOf(name) > -1} />
-                            <ListItemText primary={name} />
-                        </MenuItem>
-                    ))}
-                </Select>
-            </FormControl>
-        </div>
-    );
-}
+        // FIXME CHECKBOX NÃO ESTÁ FICANDO MARCDA E FICA DANDO RELOAD
+
+        return (
+            <div>
+                <FormControl sx={{ m: 2, width: 400 }}>
+                    <InputLabel id="demo-multiple-checkbox-label">Setores para notificar:</InputLabel>
+                    <Select
+                        labelId="demo-multiple-checkbox-label"
+                        id="demo-multiple-checkbox"
+                        multiple
+                        value={personName}
+                        onChange={handleChange}
+                        input={<OutlinedInput label="Setores para notificar:" />}
+                        renderValue={(selected) => selected.join(', ')}
+                        MenuProps={MenuProps}
+                        name="notificacoes_destinatario"
+                    >
+                        {names.map((name) => (
+                            <MenuItem key={name} value={name.charAt(name.length - 1)}>
+                                <Checkbox checked={personName.indexOf(name) > -1} />
+                                <ListItemText primary={name} />
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
+            </div>
+        );
+    }
 
     return (
         <Dialog open={value.open} onClose={handleClose}>

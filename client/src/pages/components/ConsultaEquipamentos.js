@@ -80,7 +80,7 @@ function FiltraEquipamentos() {
 
     const dataFiltradoMarcas = marcaEqp.filter(v => v.desceqp_nomeeqp.toLowerCase().includes(busca2));
 
-    const dataFiltradoMarcas2 = marcaEqp.filter(v => v.fornecedore.fornec_fornecedornome.toLowerCase().includes(busca2));
+    const dataFiltradoMarcas2 = marcaEqp.filter(v => v.fornecedore.fornec_fornecedornome.toLowerCase().includes(busca));
 
     const verificacaoDeBusca = data.some(el => dataFiltradoNomeEqp.map((value) => (value)).includes(el));
 
@@ -110,6 +110,7 @@ function FiltraEquipamentos() {
                 alert('Resultado da busca não encontrado!');
             }
         }
+        
     }, [pesquisarFornecedor, pesquisarEquipamento]);
 
     const { logout } = useContext(AuthContext);
