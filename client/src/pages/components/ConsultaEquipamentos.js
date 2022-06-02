@@ -100,13 +100,13 @@ function FiltraEquipamentos() {
 
     useEffect(() => {
         if (pesquisarFornecedor) {
-            if (verificacaoDeBusca === false || fornecedor === '') {
+            if (verificacaoDeBusca2 === false || fornecedor === '') {
                 alert('Resultado da busca não encontrado!');
             }
         }
 
         if (pesquisarEquipamento) {
-            if (verificacaoDeBusca2 === false || equipamento === '') {
+            if (verificacaoDeBusca === false || equipamento === '') {
                 alert('Resultado da busca não encontrado!');
             }
         }
@@ -177,7 +177,7 @@ function FiltraEquipamentos() {
                                     <p>• Nome do equipamento: {value.desceqp_nomeeqp + ''}</p>
                                     <p>• Modelo: {value.desceqp_modelo + ''}</p>
                                     <p>• Marca: {marcas2[increment]}</p>
-                                    <p>• Consumo energético: {value.desceqp_consumoene + ''}</p>
+                                    <p>• Dados elétricos: {value.desceqp_consumoene + ''}</p>
                                     <p>• Tipo de consumo: {value.desceqp_consumotipo + ''}</p>
                                     <p>• Preço: {value.desceqp_precoeqp + ''}</p>
                                     <p>• Data do último preço: {value.desceqp_dataultpreco.split('-').reverse().join('/')}</p>

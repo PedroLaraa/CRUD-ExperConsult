@@ -53,10 +53,10 @@ function FormUsuario(){
                 id="formulario"
                 encType="multipart/form-data"
                 method="POST"
-                action="http://192.168.10.122:1212/usuariocadastrado" 
+                action="http://192.168.10.122:1212/usuariocadastrado" // FIXME TO IP SERVER
                 onSubmit={(e) => alert('USUÁRIO CADASTRADO COM SUCESSO!!!')}
             >
-                <h1 className="text-uppercase" style={{width: '14rem', textAlign: 'center'}}>Cadastro de Usuário</h1>
+                <h1 className="text-uppercase" style={{width: '18rem', textAlign: 'center'}}>Cadastro de Usuário</h1>
                 <hr />
                 <div className=" row d-flex flex-row justify-content-around">
                     <div className="p-2 col-md-3 mb-3">

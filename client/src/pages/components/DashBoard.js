@@ -195,7 +195,7 @@ function DashBoardInterface() {
         getInfosPredios();
         getInfosDoed();
 
-    }, [openDialog2, openDialog1]); // PARAMETROS PARA ATUALIZAR OS DADOS SEM ATUALIZAR A PÁGINA
+    }, [openDialog1, openDialog2]); // PARAMETROS PARA ATUALIZAR OS DADOS SEM ATUALIZAR A PÁGINA
 
     useEffect(() => {
         if (verificacaoDeBusca === false && idsDoed !== '') {
@@ -239,7 +239,7 @@ function DashBoardInterface() {
                         className="col-8 overflow-auto vh-100"
                         style={{ maxHeight: "40rem", width: "60rem", paddingLeft: "2rem" }}
                     >
-                        <div className="d-flex d-inline justify-content-around p-3 bg-white bg-opacity-75 border border-dark border-1 rounded-3 ">
+                        <div className="d-flex d-inline justify-content-around p-3 bg-opacity-25 border border-dark border-1 rounded-3 " style={{background: "ghostwhite"}}>
                             <h1
                                 className="text-uppercase w-100"
                             >• {clientes}</h1>

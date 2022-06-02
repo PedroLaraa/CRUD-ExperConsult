@@ -31,6 +31,8 @@ const PostNotificaUser = require('./models/PostNotificaUser')
 
 const PostMarcasEqp = require('./models/PostMarcasEqp')
 
+const PostNotificaSetor = require('./models/PostNotificaSetor')
+
 const path = require('path')
 
 const upload = require('./middleware/uploadimg')
@@ -814,6 +816,43 @@ const SECRET = 'experconsult'
         const {id} = req.params
 
         const dbResponse = await PostNotificaUser.destroy({where:{id: id}})
+
+    })
+
+    // ROTAS NOTIFICAÇÕES DE SETORES:
+
+    // ROTA - INSERE NOTIFICAÇÕES DE SETORES
+
+    app.post('/notificacoes-setores', async (req, res) => {
+        dataToInsert = {
+            notificacoes_mensagem: req.body.notificacoes_mensagem,
+            notificacoes_motivo: req.body.notificacoes_motivo,
+            notificacoes_autor: req.body.doed_autor,
+            notificacoes_destinatario: req.body.notificacoes_destinatario,
+        }
+
+        console.log(dataToInsert)
+
+        try{
+            const dbResponse = await PostNotificaSetor.create(dataToInsert)
+        }
+        catch(err){
+            console.log(err)
+            res.render('erro')
+        }
+    })
+
+    app.get('/list-notificacoesSetor', async (req, res) => {
+
+        PostNotificaSetor.findAll({})
+        .then((value) => {
+            res.json({
+                value
+            })
+        }).catch((err) => {
+            console.log(err)
+            res.render('erro')
+        })
 
     })
 

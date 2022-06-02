@@ -109,6 +109,7 @@ function Rotas(){
             return children;
         }else{
             const btnUsers = document.getElementById('usuariosBtn').style.display = 'none';
+            notificacoesDeveloper.style.display = 'none';
             return alert("Você não tem permissão para acessar essa rota!"), <Navigate to="/dashboard" />;
         }
 
@@ -126,10 +127,15 @@ function Rotas(){
             return alert("Você não tem permissão para acessar essa rota!"), <Navigate to="/login" />;
         }
 
-        if(authenticated && permissoes.usuario.user_permissoes === 2 || permissoes.usuario.user_permissoes === 1 ){
+        if(authenticated && permissoes.usuario.user_permissoes === 2){
+            notificacoesDeveloper.style.display = 'none';
             return children;
         }else{
             return alert("Você não tem permissão para acessar essa rota!"), <Navigate to="/dashboard" />;
+        }
+
+        if(authenticated && permissoes.usuario.user_permissoes === 1){
+            return children;
         }
     };
 

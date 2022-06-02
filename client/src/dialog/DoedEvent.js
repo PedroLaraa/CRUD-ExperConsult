@@ -1,5 +1,5 @@
 
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 import Button from '@mui/material/Button';
 
@@ -11,11 +11,15 @@ import DialogActions from '@mui/material/DialogActions';
 
 import DialogContent from '@mui/material/DialogContent';
 
-import DialogContentText from '@mui/material/DialogContentText';
+import OutlinedInput from '@mui/material/OutlinedInput';
+
+import ListItemText from '@mui/material/ListItemText';
+
+import Checkbox from '@mui/material/Checkbox';
 
 import DialogTitle from '@mui/material/DialogTitle';
 
-import { MenuItem, Select } from '@mui/material';
+import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 
 import { SliderValueLabel } from '@mui/material';
 
@@ -23,17 +27,19 @@ import api from '../config/configApi';
 
 export default function FormDialogAddEvent(value) {
 
-    const [editValue,setEditValue] = useState({
+    const [editValue, setEditValue] = useState({
         doed_eventos: value.doed_eventos,
         doed_autor: value.doed_autor,
         predios_clientes: value.predios_clientes,
         data: value.data,
         setData: value.setData,
-        id: value.id    
+        id: value.id,
     });
 
     const [data, setData] = useState([]);
     const [url, setUrl] = useState('');
+
+    const [personName, setPersonName] = useState([]);
 
     const handleCriarEvento = () => {
         api.post('doed-cadastrado', {
@@ -42,6 +48,9 @@ export default function FormDialogAddEvent(value) {
             doed_autor: value.doed_autor,
             data: editValue.data,
             setData: editValue.setData,
+        });
+        api.post('notificacoes-setores', {
+            notificacoes_destinatario: personName,
         });
         handleClose();
         alert('Cadastrado com sucesso!')
@@ -61,35 +70,97 @@ export default function FormDialogAddEvent(value) {
         value.setOpen(false);
     };
 
-    const handleChangeValue = value =>{
+    const handleChangeValue = value => {
         setEditValue(prevValues => ({
             ...prevValues,
             [value.target.id]: value.target.value,
         }));
     };
 
+    const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+    PaperProps: {
+        style: {
+            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+            width: 250,
+        },
+    },
+};
+
+const names = [
+    'Aprovações',
+    'Engenharia',
+    'Financeiro',
+    'Direção',
+    'Orçamentos',
+    'Conceito',
+    'Arquitetura',
+    'Custos',
+    'Software',
+].sort()    
+
+    function MultipleSelectCheckmarks() {
+
+    const handleChange = (event) => {
+        const {
+            target: { value },
+        } = event;
+        setPersonName(
+            typeof value === 'string' ? value.split(',') : value,
+        );
+    };
+
     return (
-            <Dialog open={value.open} onClose={handleClose}>
-                <DialogTitle>Novo evento: </DialogTitle>
-                <DialogContent >
-                    <TextField
-                        autoFocus
-                        autoComplete='off'
-                        margin="dense"
-                        id="doed_eventos"
-                        label="Evento: "
-                        onChange={handleChangeValue}
-                        type="text"
-                        fullWidth
-                        variant="standard"
-                        multiline
-                        maxRows={5}
-                    />
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose}>Cancelar</Button>
-                    <Button onClick={handleCriarEvento}>Cadastrar Evento</Button>
-                </DialogActions>
-            </Dialog>
+        <div>
+            <FormControl sx={{ m: 2, width: 400 }}>
+                <InputLabel id="demo-multiple-checkbox-label">Setores para notificar:</InputLabel>
+                <Select
+                    labelId="demo-multiple-checkbox-label"
+                    id="demo-multiple-checkbox"
+                    multiple
+                    value={personName}
+                    onChange={handleChange}
+                    input={<OutlinedInput label="Setores para notificar:" />}
+                    renderValue={(selected) => selected.join(', ')}
+                    MenuProps={MenuProps}
+                    name="notificacoes_destinatario"
+                >
+                    {names.map((name) => (
+                        <MenuItem key={name} value={name}>
+                            <Checkbox checked={personName.indexOf(name) > -1} />
+                            <ListItemText primary={name} />
+                        </MenuItem>
+                    ))}
+                </Select>
+            </FormControl>
+        </div>
+    );
+}
+
+    return (
+        <Dialog open={value.open} onClose={handleClose}>
+            <DialogTitle>Novo evento: </DialogTitle>
+            <DialogContent >
+                <TextField
+                    autoFocus
+                    autoComplete='off'
+                    margin="dense"
+                    id="doed_eventos"
+                    label="Evento: "
+                    onChange={handleChangeValue}
+                    type="text"
+                    fullWidth
+                    variant="standard"
+                    multiline
+                    maxRows={5}
+                />
+                <MultipleSelectCheckmarks />
+            </DialogContent>
+            <DialogActions>
+                <Button onClick={handleClose}>Cancelar</Button>
+                <Button onClick={handleCriarEvento}>Cadastrar Evento</Button>
+            </DialogActions>
+        </Dialog>
     );
 }

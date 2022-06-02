@@ -16,7 +16,7 @@ export const AuthProvider = ({children}) => {
 
     const [user, setUser] = useState(null);
 
-    useEffect(() =>{
+    useEffect(() => {
 
         const recoverUser = localStorage.getItem('user');
         const token = localStorage.getItem('token');
@@ -55,6 +55,7 @@ export const AuthProvider = ({children}) => {
 
             navigate('/login');
         }
+
     };
 
     const logout = () => {

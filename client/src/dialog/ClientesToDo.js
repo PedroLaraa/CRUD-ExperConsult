@@ -79,19 +79,7 @@ export default function FormDialog(value) {
                         fullWidth
                         variant="standard"
                     />
-                    <TextField
-                        autoFocus
-                        autoComplete='off'
-                        margin="dense"
-                        id="predios_autor"
-                        label="Autor: "
-                        onChange={handleChangeValue}
-                        type="text"
-                        disabled
-                        defaultValue={value.predios_autor}
-                        fullWidth
-                        variant="standard"
-                    />
+                    
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancelar</Button>
