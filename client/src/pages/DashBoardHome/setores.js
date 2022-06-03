@@ -7,6 +7,8 @@ import api from '../../config/configApi';
 
 import { useNavigate } from "react-router-dom";
 
+import NotificacoesSetor from "../NotificacoesSetores";
+
 function Setores(){
 
     const {id} = useParams()
@@ -56,6 +58,7 @@ function Setores(){
 
     return(
         <div className="container position-relative">
+            <NotificacoesSetor />
             <div 
             className=" border background-color vh-100"
             style={{background: 'rgba(50,50,50,0.2)'}}

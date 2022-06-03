@@ -20,6 +20,8 @@ import botaoStyle from "../css/botaoEdit";
 
 import {handleAlterImage} from "./function/recuperaUserImg";
 
+import NotificacoesSetor from "../NotificacoesSetores";
+
 // FUNÇÃO PARA CONSULTA DE DADOS DOS EQUIPAMENTOS
 
 function FiltraRepresentantes() {
@@ -98,6 +100,7 @@ function FiltraRepresentantes() {
     return (
 
         <div>
+            <NotificacoesSetor />
             <div style={{ padding: '2rem' }}>
                 <form style={formStyle}>
                     <input

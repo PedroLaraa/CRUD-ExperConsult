@@ -25,6 +25,8 @@ import paragrafoDivStyle from "../css/paragrafoDiv";
 
 import {handleAlterImage} from "./function/recuperaUserImg";
 
+import NotificacoesSetor from "../NotificacoesSetores";
+
 function DashBoardInterface() {
 
     const [data, setData] = useState([]);
@@ -211,10 +213,12 @@ function DashBoardInterface() {
 
     }, [])
 
+    
 
     return (
         <div
             className="container vh-100">
+                <NotificacoesSetor />
             <div className="row h-auto position-relative pt-5 d-flex justify-content-center">
                 <div
                     className="list-group col-4 p-1 overflow-auto"
@@ -321,7 +325,6 @@ function DashBoardInterface() {
                                                                                     return <p>{v.occurrence}</p>
                                                                                 }
                                                                             }
-
                                                                             )}</p>
                                                                         </div>
                                                                     )}

@@ -8,6 +8,8 @@ import './equipamentosStyle.css'
 
 import { handleAlterImage } from "../components/function/recuperaUserImg";
 
+import NotificacoesSetor from "../NotificacoesSetores";
+
 function FormEquipamentos() {
 
     const [data, setData] = useState([]);
@@ -36,6 +38,7 @@ function FormEquipamentos() {
 
     return (
         <div className="">
+            <NotificacoesSetor />
             <form
                 className="was-validated "
                 id="formulario"

@@ -673,7 +673,7 @@ const SECRET = 'experconsult'
 
         const idsdb = await PostUser.findAll({attributes: ['id']})
 
-        const usersData = await PostUser.findAll({attributes: ['user_setor','user_nomeUser','user_nome', 'user_cargo', 'user_permissoes', 'user_foto' ,'id']})
+        const usersData = await PostUser.findAll({attributes: ['user_notificacoesLidas','user_setor','user_nomeUser','user_nome', 'user_cargo', 'user_permissoes', 'user_foto' ,'id']})
 
         var usuarioEncontrado = false
 
@@ -727,6 +727,29 @@ const SECRET = 'experconsult'
             console.log(err)
             res.render('erro')
         }
+    })
+
+    // ROTA - DESTINADA A DEFINIR AS NOTIFICAÇÕES LIDAS PELO USUÁRIO
+
+    app.put('/notificacao-lida', async function(req, res){
+
+        const dataToInsert = {
+            user_notificacoesLidas: req.body.user_notificacoesLidas,
+        }
+
+        const id = req.body.id
+
+        try{
+            const dbResponse = await PostUser.update(dataToInsert, {
+                where: {
+                    id: id
+                }
+            })
+        }catch(err){
+            console.log(err)
+            res.render('erro')
+        }
+
     })
 
     // LISTAGEM DE DADOS DOS USUÁRIOS
@@ -830,8 +853,6 @@ const SECRET = 'experconsult'
             notificacoes_autor: req.body.notificacoes_autor,
             notificacoes_destinatario: req.body.notificacoes_destinatario,
         }
-
-        console.log(dataToInsert)
 
         try{
             const dbResponse = await PostNotificaSetor.create(dataToInsert)

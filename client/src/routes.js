@@ -42,6 +42,8 @@ import Login from './pages/Login'
 
 import NotificacoesUser from "./pages/NotificacoesUser";
 
+import NotificacoesSetores from "./pages/NotificacoesSetores";
+
 import { AuthProvider, AuthContext } from "./contexts/auth";
 
 // CRIA AS ROTA DE NAVEGAÇÃO DE BROWSER
@@ -70,14 +72,12 @@ function Rotas(){
 
         if( authenticated && permissoes.usuario.user_permissoes === 3){
             document.getElementById('usuariosBtn').style.display = 'none';
-            notificacoesDeveloper.style.display = 'none';
-
+            notificacoesDeveloper.removeAttribute('href');
             return children
         }
 
         if( authenticated && permissoes.usuario.user_permissoes === 2){
-            notificacoesDeveloper.style.display = 'none';
-
+            notificacoesDeveloper.removeAttribute('href');
             return children
         }
 
@@ -109,7 +109,6 @@ function Rotas(){
             return children;
         }else{
             const btnUsers = document.getElementById('usuariosBtn').style.display = 'none';
-            notificacoesDeveloper.style.display = 'none';
             return alert("Você não tem permissão para acessar essa rota!"), <Navigate to="/dashboard" />;
         }
 
@@ -127,16 +126,16 @@ function Rotas(){
             return alert("Você não tem permissão para acessar essa rota!"), <Navigate to="/login" />;
         }
 
+        if(authenticated && permissoes.usuario.user_permissoes === 1){
+            return children;
+        }
+
         if(authenticated && permissoes.usuario.user_permissoes === 2){
-            notificacoesDeveloper.style.display = 'none';
             return children;
         }else{
             return alert("Você não tem permissão para acessar essa rota!"), <Navigate to="/dashboard" />;
         }
 
-        if(authenticated && permissoes.usuario.user_permissoes === 1){
-            return children;
-        }
     };
 
     return( // PATH = ROTA; ELEMENT = O QUE VAI SER RENDERIZADO;
@@ -162,6 +161,7 @@ function Rotas(){
                     <Route path="/cadastro-usuario" element={<PrivatePermsSupervisor><FormUsuario /></PrivatePermsSupervisor>}></Route>
                     <Route path="/suporte" element={<Private><SuporteSistema /></Private>}></Route>
                     <Route path="/notificacoes-developer" element={<PrivatePermsDeveloper><NotificacoesUser /></PrivatePermsDeveloper>}></Route>
+                    <Route path="/notificacoes-setores" element={<Private><NotificacoesSetores /></Private>}></Route>
                 </Routes>
             </AuthProvider>
         </BrowserRouter>

@@ -6,6 +6,8 @@ import api from '../../config/configApi';
 
 import { handleAlterImage } from "../components/function/recuperaUserImg";
 
+import NotificacoesSetor from "../NotificacoesSetores";
+
 function SuporteSistema() {
 
     const [user, setUser] = useState([]);
@@ -34,6 +36,7 @@ function SuporteSistema() {
             action="http://192.168.10.122:1212/report-enviado" // FIXME TO IP SERVER
             onSubmit={(e) => alert('MENSAGEM ENVIADA COM SUCESSO!!!')}
             >
+                <NotificacoesSetor />
                 <div className="row d-flex flex-row justify-content-around">
                     <div className="p-2 col-md-5 mb-3">
                         <label htmlFor="customControlValidation1">Motivo da mensagem: </label> 

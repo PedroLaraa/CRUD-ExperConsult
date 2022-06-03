@@ -6,6 +6,8 @@ import './fornecedoresStyle.css'
 
 import { handleAlterImage } from "../components/function/recuperaUserImg";
 
+import NotificacoesSetor from "../NotificacoesSetores";
+
 function FormFornecedores() {    
 
     const { logout } = useContext(AuthContext);
@@ -21,6 +23,7 @@ function FormFornecedores() {
     return(
 
         <div>
+            <NotificacoesSetor />
             <form 
             className="was-validated " 
             id="formulario" 

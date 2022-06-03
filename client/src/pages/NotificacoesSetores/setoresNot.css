@@ -1,0 +1,9 @@
+#containerDiv{
+    width: 35rem;
+    background-color: #ffffff;
+    position: fixed;
+    border: 4px solid #A9D2D7;
+    border-radius: .4rem;
+    z-index: 999;
+    right: 2rem;
+}

@@ -8,6 +8,8 @@ import './representanteStyle.css'
 
 import { handleAlterImage } from "../components/function/recuperaUserImg";
 
+import NotificacoesSetor from "../NotificacoesSetores";
+
 function FormRepresentante(){
 
     const { logout } = useContext(AuthContext);
@@ -36,6 +38,7 @@ function FormRepresentante(){
 
     return (
         <div className="">
+            <NotificacoesSetor />
             <form
                 className="was-validated "
                 id="formulario"

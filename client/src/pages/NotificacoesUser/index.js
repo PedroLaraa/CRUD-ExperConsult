@@ -10,6 +10,8 @@ import paragrafoDoedStyle from "../css/paragrafoDoed";
 
 import paragrafoDashboardStyle from "../css/paragrafoDashboard.js";
 
+import NotificacoesSetor from "../NotificacoesSetores";
+
 function NotificacoesUser() {
 
     const { logout } = useContext(AuthContext);
@@ -70,6 +72,7 @@ function NotificacoesUser() {
 
     return (
         <div className="row position-relative pt-5 d-flex justify-content-center vh-100 vw-100">
+            <NotificacoesSetor />
             <div className="list-group col-2 p-1">
                 {tiposDeReport.map(value => (
                     <div key={value.id} className="p-1">

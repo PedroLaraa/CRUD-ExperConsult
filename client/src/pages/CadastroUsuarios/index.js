@@ -6,6 +6,8 @@ import api from '../../config/configApi';
 
 import { handleAlterImage } from "../components/function/recuperaUserImg";
 
+import NotificacoesSetor from "../NotificacoesSetores";
+
 function FormUsuario(){
 
     const [data, setData] = useState([]);
@@ -48,6 +50,7 @@ function FormUsuario(){
 
     return (
         <div className="">
+            <NotificacoesSetor />
             <form
                 className="was-validated"
                 id="formulario"

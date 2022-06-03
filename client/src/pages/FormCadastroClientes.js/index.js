@@ -6,6 +6,8 @@ import './clientesStyle.css'
 
 import { handleAlterImage } from "../components/function/recuperaUserImg";
 
+import NotificacoesSetor from "../NotificacoesSetores";
+
 function FormClientes() {
 
     const { logout } = useContext(AuthContext);
@@ -21,6 +23,7 @@ function FormClientes() {
     return (
 
         <div className="">
+            <NotificacoesSetor />
             <form
                 className="was-validated"
                 id="formulario"

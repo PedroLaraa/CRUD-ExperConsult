@@ -44,6 +44,9 @@ const PostUser = db.sequelize.define('usuarios_dados',{
     },
     user_foto: {
         type: db.Sequelize.STRING
+    },
+    user_notificacoesLidas: {
+        type: db.Sequelize.STRING
     }
 })
 

@@ -20,6 +20,8 @@ import containerStyle from "../css/container";
 
 import { handleAlterImage } from "./function/recuperaUserImg";
 
+import NotificacoesSetor from "../NotificacoesSetores";
+
 // FUNÇÃO PARA CONSULTA DE DADOS DOS EQUIPAMENTOS
 
 function FiltraEquipamentos() {
@@ -126,6 +128,7 @@ function FiltraEquipamentos() {
     return (
 
         <div>
+            <NotificacoesSetor />
             <div style={{ padding: '2rem' }}>
                 <form style={formStyle} >
                     <div className="w-100 m-0 row d-flex flex-row justify-content-around">

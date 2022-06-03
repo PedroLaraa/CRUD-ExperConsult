@@ -34,6 +34,7 @@ export default function FormDialogAddEvent(value) {
         data: value.data,
         setData: value.setData,
         id: value.id,
+        notificacoes_motivo: ''
     });
 
     const [data, setData] = useState([]);
@@ -52,11 +53,11 @@ export default function FormDialogAddEvent(value) {
         api.post('notificacoes-setores', {
             notificacoes_destinatario: personName,
             notificacoes_autor: value.doed_autor,
-            notificacoes_motivo: 'Novo evento!!!',
+            notificacoes_motivo: editValue.notificacoes_motivo,
             notificacoes_mensagem: editValue.doed_eventos
         });
         handleClose();
-        alert('Cadastrado com sucesso!')
+        alert('Evento cadastrado com sucesso e notificação enviada!')
     };
 
     const getInfosTodo = async (req, res) => {
@@ -94,16 +95,16 @@ export default function FormDialogAddEvent(value) {
     const names = [
         'Aprovações 2',
         'Engenharia 3',
-        'Financeiro 6',
+        'Custos 6',
         'Direção 5',
         'Orçamentos 8',
         'Conceito 9',
         'Arquitetura 4',
-        'Custos 10',
         'Software 1',
     ].sort()
 
     function MultipleSelectCheckmarks() {
+        const [personName, setPersonName] = React.useState([]);
 
         const handleChange = (event) => {
             const {
@@ -114,12 +115,10 @@ export default function FormDialogAddEvent(value) {
             );
         };
 
-        // FIXME CHECKBOX NÃO ESTÁ FICANDO MARCDA E FICA DANDO RELOAD
-
         return (
             <div>
                 <FormControl sx={{ m: 2, width: 400 }}>
-                    <InputLabel id="demo-multiple-checkbox-label">Setores para notificar:</InputLabel>
+                    <InputLabel id="demo-multiple-checkbox-label">Setores para notificar: </InputLabel>
                     <Select
                         labelId="demo-multiple-checkbox-label"
                         id="demo-multiple-checkbox"
@@ -129,11 +128,10 @@ export default function FormDialogAddEvent(value) {
                         input={<OutlinedInput label="Setores para notificar:" />}
                         renderValue={(selected) => selected.join(', ')}
                         MenuProps={MenuProps}
-                        name="notificacoes_destinatario"
                     >
                         {names.map((name) => (
                             <MenuItem key={name} value={name.charAt(name.length - 1)}>
-                                <Checkbox checked={personName.indexOf(name) > -1} />
+                                <Checkbox checked={personName.indexOf(name.charAt(name.length - 1)) > -1} />
                                 <ListItemText primary={name} />
                             </MenuItem>
                         ))}
@@ -153,6 +151,20 @@ export default function FormDialogAddEvent(value) {
                     margin="dense"
                     id="doed_eventos"
                     label="Evento: "
+                    onChange={handleChangeValue}
+                    type="text"
+                    fullWidth
+                    variant="standard"
+                    multiline
+                    maxRows={5}
+                />
+                <h5 className='pt-5'>Notificar: </h5>
+                <TextField
+                    autoFocus
+                    autoComplete='off'
+                    margin="dense"
+                    id="notificacoes_motivo"
+                    label="Motivo da Notificação (SEJA BREVE):"
                     onChange={handleChangeValue}
                     type="text"
                     fullWidth
