@@ -21,8 +21,6 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 
-import { SliderValueLabel } from '@mui/material';
-
 import api from '../config/configApi';
 
 export default function FormDialogAddEvent(value) {
@@ -68,7 +66,7 @@ export default function FormDialogAddEvent(value) {
             }).catch((err) => {
                 console.log(err)
             })
-    }
+    };
 
     const handleClose = () => {
         value.setOpen(false);

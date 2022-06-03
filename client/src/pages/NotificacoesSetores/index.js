@@ -14,6 +14,8 @@ import './setoresNot.css'
 
 function NotificacoesSetor() {
 
+    // Contexto de autenticação
+
     const { logout } = useContext(AuthContext);
 
     const element = document.getElementById('logoutBtn');
@@ -29,7 +31,7 @@ function NotificacoesSetor() {
 
     const [show, setShow] = useState(false);
 
-    const getNotificacoesSetores = async (req, res) => {
+    const getNotificacoesSetores = async (req, res) => { // RECUPERA AS NOTIFICAÇÕES DO BANCO DE DADOS POR UMA ROTA BACK-END
         api.get('list-notificacoesSetor')
             .then((response) => {
                 setData(response.data.value)
@@ -38,7 +40,7 @@ function NotificacoesSetor() {
             })
     }
 
-    useEffect(() => {
+    useEffect(() => { // CARREGA AS NOTIFICAÇÕES E ETC
         handleAlterImage()
 
         setRecoveredUsers(JSON.parse(localStorage.getItem('user')))
@@ -47,15 +49,13 @@ function NotificacoesSetor() {
 
     }, [])
 
-    const setoresId = data.map(v => v.notificacoes_destinatario)
+    const setoresId = data.map(v => v.notificacoes_destinatario) // RECUPERA O ID DOS SETORES
 
-    const setoresIdArray = setoresId.map(v => v.split(','))
+    const setoresIdArray = setoresId.map(v => v.split(',')) // TRANSFORMA O STRING EM ARRAY
 
     const dataFiltrado = []
 
-
-
-    for (let i = 0; i < setoresIdArray.length; i++) {
+    for (let i = 0; i < setoresIdArray.length; i++) { // FILTRA OS DADOS PARA RETORNAR APENAS AS NOTIFICAÇÕES DE SETORES QUE O USUARIO TEM ACESSO
         for (let j = 0; j < setoresIdArray[i].length; j++) {
             if (setoresIdArray[i][j] == recoveredUsers.usuario.user_setor) {
                 dataFiltrado.push(data[i])
@@ -65,7 +65,7 @@ function NotificacoesSetor() {
         }
     }
 
-    function handleShowNotification() {
+    function handleShowNotification() { // FUNÇÃO PARA MOSTRAR / OCULTAR A NOTIFICAÇÃO
 
         setShow(!show)
 
@@ -75,20 +75,17 @@ function NotificacoesSetor() {
 
     }
 
-    notificacoesBtn.addEventListener('click', handleShowNotification, false)
+    notificacoesBtn.addEventListener('click', handleShowNotification, false) // EVENTO PARA ABRIR A NOTIFICAÇÃO
 
-    const idsLidos = dataFiltrado.map(v => v.id)
+    const idsLidos = dataFiltrado.map(v => v.id) // RECUPERA OS IDS DAS NOTIFICÇÕES
 
-    function handleClearNotification() {
+    function handleClearNotification() { // FUNÇÃO PARA LIMPAR AS NOTIFICAÇÕES
 
         setShow(!show)
 
         const values = {
-
             user_notificacoesLidas: idsLidos.toString(),
-    
             id: recoveredUsers.usuario.id
-    
         }
 
         const el = document.getElementById('toggleNot')
@@ -105,17 +102,21 @@ function NotificacoesSetor() {
 
     }
 
-    const idsLocalStorageLidos = localStorage.getItem('notificacoesLidas').split(',')
+    const idsLocalStorageLidos = localStorage.getItem('notificacoesLidas').split(',') // RECUPERA OS IDS LIDOS
 
     const notificacoesNaoLidas = []
 
-    for (let i = 0; i <= idsLocalStorageLidos.length; i++) {
+    for (let i = 0; i <= idsLocalStorageLidos.length; i++) { // VERIFICA SE AS NOTIFICAÇÕES NÃO FORAM LIDAS
         for (let j = 0; j <= idsLidos.length; j++) {
             if (idsLocalStorageLidos[i] == idsLidos[j]) {
                 delete dataFiltrado[j]
             }
         }
     }
+
+    const iconeNotificacao = document.getElementById('iconeNotificacao') // DEFINE O ICONE DA NOTIFICAÇÃO
+
+    iconeNotificacao.innerHTML = `🔔 ${dataFiltrado.length - idsLocalStorageLidos.length}` // ALTERA O ÍCONE DE NOTIFICAÇÕES PARA O NÚMERO DE NOTIFICAÇÕES NÃO LIDAS
 
     return (
         <div className="p-2 d-none" id='toggleNot'>
