@@ -32,6 +32,8 @@ export default function FormDialogAddEvent(value) {
         data: value.data,
         setData: value.setData,
         id: value.id,
+        nomeDoPredio: value.nomeDoPredio,
+        nomeDoCliente: value.nomeDoCliente,
         notificacoes_motivo: ''
     });
 
@@ -51,11 +53,11 @@ export default function FormDialogAddEvent(value) {
         api.post('notificacoes-setores', {
             notificacoes_destinatario: personName,
             notificacoes_autor: value.doed_autor,
-            notificacoes_motivo: editValue.notificacoes_motivo,
+            notificacoes_motivo: `Novo evento cadastrado no prédio "${value.nomeDoPredio}" do cliente "${value.nomeDoCliente}"`,
             notificacoes_mensagem: editValue.doed_eventos
         });
         handleClose();
-        alert('Evento cadastrado com sucesso e notificação enviada!')
+        alert('Evento cadastrado com sucesso e notificação enviada!');
     };
 
     const getInfosTodo = async (req, res) => {
@@ -102,7 +104,6 @@ export default function FormDialogAddEvent(value) {
     ].sort()
 
     function MultipleSelectCheckmarks() {
-        const [personName, setPersonName] = React.useState([]);
 
         const handleChange = (event) => {
             const {
@@ -157,19 +158,6 @@ export default function FormDialogAddEvent(value) {
                     maxRows={5}
                 />
                 <h5 className='pt-5'>Notificar: </h5>
-                <TextField
-                    autoFocus
-                    autoComplete='off'
-                    margin="dense"
-                    id="notificacoes_motivo"
-                    label="Motivo da Notificação (SEJA BREVE):"
-                    onChange={handleChangeValue}
-                    type="text"
-                    fullWidth
-                    variant="standard"
-                    multiline
-                    maxRows={5}
-                />
                 <MultipleSelectCheckmarks />
             </DialogContent>
             <DialogActions>

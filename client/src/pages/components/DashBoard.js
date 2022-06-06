@@ -23,9 +23,11 @@ import paragrafoDoedStyle from "../css/paragrafoDoed";
 
 import paragrafoDivStyle from "../css/paragrafoDiv";
 
-import {handleAlterImage} from "./function/recuperaUserImg";
+import { handleAlterImage } from "./function/recuperaUserImg";
 
 import NotificacoesSetor from "../NotificacoesSetores";
+
+var clientesEditados 
 
 function DashBoardInterface() {
 
@@ -34,7 +36,7 @@ function DashBoardInterface() {
 
     const [data2, setData2] = useState([]);
     const [url2, setUrl2] = useState('');
-
+    
     const [clientes, setClientes] = useState('');
     const [pesquisarCliente, setPesquisarCliente] = useState('');
 
@@ -64,7 +66,7 @@ function DashBoardInterface() {
 
     element.addEventListener('click', logout, false);
 
-    // FAZ UMA REQUISIÇÃO PARA O BACK E RETORNAR O DATABASE COM DADOS (PREDIOS)
+    // FAZ UMA REQUISIÇÃO PARA O BACK E RETORNAR O DATABASE COM DADOS (PRÉDIOS)
 
     const getInfosPredios = async (req, res) => {
         api.get('list-infosPredios')
@@ -130,20 +132,22 @@ function DashBoardInterface() {
                 arr2.push(a);
             }
         })
-
-        return arr2
+        return arr2;
     }
-
 
     const dataFiltrado = data.filter(v => JSON.stringify(v.clientes_obra.clientes_apelido).replaceAll('"', '').toLowerCase().includes(busca)); // RETORNA OS DADOS REFERENTES A BUSCA
 
     const contadorDeEventos = findOcc(data2, 'predios_clientes')
 
-    const nomesFiltrados = data.map(v => JSON.stringify(v.clientes_obra.clientes_apelido).replaceAll('"', '')).filter((elem, index, self) => index === self.indexOf(elem)).sort() // RETORNA OS APELIDOS SEM REPETIR
+    const nomesFiltrados = data.map(v => JSON.stringify(v.clientes_obra.clientes_apelido).toLowerCase().replaceAll('"', '')).filter((elem, index, self) => index === self.indexOf(elem)).sort() // RETORNA OS APELIDOS SEM REPETIR
+
+    clientesEditados = nomesFiltrados
 
     const doedFiltrado = data2.filter(v => v.predios_clientes == idsDoed).reverse() // FILRA OS DOEDS POR PREDIO E COLOCA EM ORDEM CRESCENTE
 
     const verificacaoDeBusca = doedFiltrado.some(el => data2.map((value) => (value)).includes(el)); // VERIFICA SE AQUELE SETOR POSSUI EVENTOS 
+
+    const nomeDoPredio = dataFiltrado.filter(v => JSON.stringify(v.id) == (idsDoed)).map(v => v.predios_nomeDosPredios).toString() // RETORNA O NOME DO PREDIO
 
     // FUNÇÃO PARA ABRIR O DIALOG DE ADIÇÃO DE ASSUNTO
 
@@ -203,7 +207,7 @@ function DashBoardInterface() {
         if (verificacaoDeBusca === false && idsDoed !== '') {
             alert("Nenhum evento registrado!")
         }
-    }, [idsDoed]) // VERIFICA A BUSCA SEMPRE QUE OS IDSDOED ALTERAM
+    }, [idsDoed]); // VERIFICA A BUSCA SEMPRE QUE OS IDSDOED ALTERAM
 
     useEffect(() => {
 
@@ -211,22 +215,21 @@ function DashBoardInterface() {
 
         handleAlterImage()
 
-    }, [])
-
-    
+    }, []);
 
     return (
         <div
             className="container vh-100">
-                <NotificacoesSetor />
+            <NotificacoesSetor />
             <div className="row h-auto position-relative pt-5 d-flex justify-content-center">
                 <div
                     className="list-group col-4 p-1 overflow-auto"
                     style={botaoDashboardStyle}>
-                    <h4>• Cliente:</h4>
+                    <h3>• Cliente:</h3>
                     {nomesFiltrados.map(value => (
                         <div className="p-1" key={value}>
                             <button
+                                id={value}
                                 type="submit"
                                 value={value}
                                 className="btn btn-outline-dark"
@@ -243,7 +246,7 @@ function DashBoardInterface() {
                         className="col-8 overflow-auto vh-100"
                         style={{ maxHeight: "40rem", width: "60rem", paddingLeft: "2rem" }}
                     >
-                        <div className="d-flex d-inline justify-content-around p-3 bg-opacity-25 border border-dark border-1 rounded-3 " style={{background: "ghostwhite"}}>
+                        <div className="d-flex d-inline justify-content-around p-3 bg-opacity-25 border border-dark border-1 rounded-3 " style={{ background: "ghostwhite" }}>
                             <h1
                                 className="text-uppercase w-100"
                             >• {clientes}</h1>
@@ -294,9 +297,10 @@ function DashBoardInterface() {
                                             <div
                                                 style={paragrafoDivStyle}
                                             >
-                                                <div
+                                                <div // ID ESTÁ AQUI
                                                     className="row justify-content-around"
-                                                    style={paragrafoDashboardStyle}>
+                                                    style={paragrafoDashboardStyle}
+                                                >
                                                     <div className="col-2 col-md-2">
                                                         <p>{value.updatedAt.split('-').reverse().join('/')}</p>
                                                     </div>
@@ -350,7 +354,8 @@ function DashBoardInterface() {
                                                             <div key={value.id}>
                                                                 <div
                                                                     style={paragrafoDoedStyle}
-                                                                    className="row justify-content-md-center">
+                                                                    className="row justify-content-md-center"
+                                                                >
                                                                     <div className="col-1 col-md-2">
                                                                         <p>{value.createdAt.split('-').reverse().join('/')}</p>
                                                                     </div>
@@ -443,6 +448,8 @@ function DashBoardInterface() {
                                     doed_eventos={value.doed_eventos}
                                     doed_autor={recoveredUsers.usuario.user_nomeUser}
                                     id={value.id}
+                                    nomeDoPredio={nomeDoPredio}
+                                    nomeDoCliente={busca}
                                     data={value.data}
                                     setData={value.setData}
                                 />
@@ -454,5 +461,7 @@ function DashBoardInterface() {
         </div>
     )
 }
+
+export {clientesEditados}
 
 export default DashBoardInterface

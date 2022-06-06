@@ -58,6 +58,7 @@ const SECRET = 'experconsult'
     // PERMITE ACESSO DO BROWSER AO SISTEMA
 
     app.use((req, res, next) => {
+        res.header('Access-Control-Allow-Headers', '*');
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
         res.header("Access-Control-Allow-Headers", "*");
@@ -852,6 +853,7 @@ const SECRET = 'experconsult'
             notificacoes_motivo: req.body.notificacoes_motivo,
             notificacoes_autor: req.body.notificacoes_autor,
             notificacoes_destinatario: req.body.notificacoes_destinatario,
+            notificacoes_clienteNotificado: req.body.notificacoes_clienteNotificado,
         }
 
         try{

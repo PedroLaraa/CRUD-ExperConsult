@@ -14,8 +14,10 @@ const PostNotificaSetor = db.sequelize.define('notificacoes_setores',{
     },
     notificacoes_destinatario: {
         type: db.Sequelize.INTEGER
+    },
+    notificacoes_clienteNotificado: {
+        type: db.Sequelize.STRING
     }
-    
 })
 
 // EXPORTA A FUNÇÃO PostNotificaSetor()

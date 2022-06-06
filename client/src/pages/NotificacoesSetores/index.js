@@ -8,9 +8,11 @@ import { handleAlterImage } from "../components/function/recuperaUserImg";
 
 import paragrafoDoedStyle from "../css/paragrafoDoed";
 
-import paragrafoDashboardStyle from "../css/paragrafoDashboard.js";
+import paragrafoDashboardStyle from "../css/paragrafoDashboard.js.js";
 
-import './setoresNot.css'
+import './setoresNot.css';
+
+import { clientesEditados } from "../components/DashBoard";
 
 function NotificacoesSetor() {
 
@@ -41,6 +43,7 @@ function NotificacoesSetor() {
     }
 
     useEffect(() => { // CARREGA AS NOTIFICAÇÕES E ETC
+
         handleAlterImage()
 
         setRecoveredUsers(JSON.parse(localStorage.getItem('user')))
@@ -118,6 +121,20 @@ function NotificacoesSetor() {
 
     iconeNotificacao.innerHTML = `🔔 ${dataFiltrado.length - idsLocalStorageLidos.length}` // ALTERA O ÍCONE DE NOTIFICAÇÕES PARA O NÚMERO DE NOTIFICAÇÕES NÃO LIDAS
 
+    const clientesNotificados = dataFiltrado.map(v => (v.notificacoes_clienteNotificado).toLowerCase()).filter(v => v != null) // RECUPERA OS CLIENTES NOTIFICADOS
+
+    function botoesNotificados(){ // VERIFICA SE OS CLIENTES FORAM EDITADOS E MUDA A COR DO BOTÃO
+        for(let i = 0; i < clientesNotificados.length; i++){
+            for(let j = 0; j < clientesEditados.length; j++){
+                if(clientesNotificados[i] == clientesEditados[j]){
+                    document.getElementById(clientesNotificados[i]).style.backgroundColor = 'green'
+                }
+            }
+        } 
+    }
+
+    // FIXME COLOCAR ESSA FUNÇÃO PARA ACIONAR APÓS PÁGINA CARREGAR
+
     return (
         <div className="p-2 d-none" id='toggleNot'>
             <div id="containerDiv">
@@ -134,13 +151,13 @@ function NotificacoesSetor() {
                             </div>
                         </div>
                         {dataFiltrado.map(v => (
-                            <div key={v.id} className="">
+                            <div key={v.id}>
                                 <div className="row d-flex justify-content-around ">
                                     <div className="col-11 ">
                                         <p>• Notificação: {v.notificacoes_motivo}</p>
                                     </div>
                                     <div className="col-11 ">
-                                        <p>• Mensagem: {v.notificacoes_mensagem}</p>
+                                        <p>• Evento: {v.notificacoes_mensagem}</p>
                                     </div>
                                     <div className="col-11 " style={{ backgroundColor: '#A2A2A2', height: '4px' }}>
                                         <p></p>
