@@ -156,7 +156,7 @@ export default function FormDialogAddEvent(value) {
                     type="text"
                     style={{width: '100%'}}
                     variant="standard"
-                    multiline
+                    multiline="true"
                     minRows={5}
                     maxRows={5}
                 />

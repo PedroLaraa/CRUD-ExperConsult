@@ -238,7 +238,7 @@ function DashBoardInterface() {
                                 id={value}
                                 type="submit"
                                 value={value}
-                                className="btn btn-outline-dark"
+                                className="btn btn-outline-dark text-uppercase"
                                 onClick={handleFiltrar}
                                 style={{ width: "17rem", fontSize: '1.1rem', fontFamily: 'Raleway' }}
                             >
@@ -253,9 +253,7 @@ function DashBoardInterface() {
                         style={{ maxHeight: "40rem", width: "60rem", paddingLeft: "2rem" }}
                     >
                         <div className="d-flex d-inline justify-content-around p-3 bg-opacity-25 border border-dark border-1 rounded-3 " style={{ background: "ghostwhite" }}>
-                            <h1
-                                className="text-uppercase w-100"
-                            >• {clientes}</h1>
+                            <h1 className="text-uppercase w-100">• {clientes}</h1>
                             <button
                                 className="btn btn-outline-dark"
                                 onClick={() => handleClickAdd()}
