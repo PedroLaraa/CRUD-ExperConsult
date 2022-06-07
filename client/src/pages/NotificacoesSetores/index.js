@@ -12,7 +12,7 @@ import paragrafoDashboardStyle from "../css/paragrafoDashboard.js.js";
 
 import './setoresNot.css';
 
-import { clientesEditados } from "../components/DashBoard";
+import { clientesEditados, prediosEditados } from "../components/DashBoard";
 
 function NotificacoesSetor() {
 
@@ -103,6 +103,7 @@ function NotificacoesSetor() {
 
         api.put('notificacao-lida', values)
 
+        document.location.reload()
     }
 
     const idsLocalStorageLidos = localStorage.getItem('notificacoesLidas').split(',') // RECUPERA OS IDS LIDOS
@@ -113,27 +114,43 @@ function NotificacoesSetor() {
         for (let j = 0; j <= idsLidos.length; j++) {
             if (idsLocalStorageLidos[i] == idsLidos[j]) {
                 delete dataFiltrado[j]
-            }
-        }
-    }
+            };
+        };
+    };
 
-    const iconeNotificacao = document.getElementById('iconeNotificacao') // DEFINE O ICONE DA NOTIFICAÇÃO
+    const iconeNotificacao = document.getElementById('iconeNotificacao') // DEFINE O ÍCONE DA NOTIFICAÇÃO
 
     iconeNotificacao.innerHTML = `🔔 ${dataFiltrado.length - idsLocalStorageLidos.length}` // ALTERA O ÍCONE DE NOTIFICAÇÕES PARA O NÚMERO DE NOTIFICAÇÕES NÃO LIDAS
 
     const clientesNotificados = dataFiltrado.map(v => (v.notificacoes_clienteNotificado).toLowerCase()).filter(v => v != null) // RECUPERA OS CLIENTES NOTIFICADOS
 
-    function botoesNotificados(){ // VERIFICA SE OS CLIENTES FORAM EDITADOS E MUDA A COR DO BOTÃO
-        for(let i = 0; i < clientesNotificados.length; i++){
-            for(let j = 0; j < clientesEditados.length; j++){
-                if(clientesNotificados[i] == clientesEditados[j]){
-                    document.getElementById(clientesNotificados[i]).style.backgroundColor = 'green'
-                }
-            }
-        } 
-    }
+    const prediosNotificados = dataFiltrado.map(v => (v.notificacoes_predioNotificado).toLowerCase()).filter(v => v != null)
 
-    // FIXME COLOCAR ESSA FUNÇÃO PARA ACIONAR APÓS PÁGINA CARREGAR
+    function botoesNotificados() { // VERIFICA SE OS CLIENTES E PRÉDIOS FORAM EDITADOS E MUDA A COR DO BOTÃO
+        for (let i = 0; i < clientesNotificados.length; i++) {
+            for (let j = 0; j < clientesEditados.length; j++) {
+                if (clientesNotificados[i] == clientesEditados[j]) {
+                    document.getElementById(clientesNotificados[i]).style.backgroundColor = 'rgba(255, 255, 0, 0.5)'
+                };
+            };
+        };
+        for (let i = 0; i < prediosNotificados.length; i++) {
+            for (let j = 0; j < prediosEditados.length; j++) {
+                if (prediosNotificados[i] == prediosEditados[j]) {
+                    document.getElementById(prediosNotificados[i]).style.backgroundColor = 'rgba(255, 255, 0, 0.4)'
+                };
+            };
+        };
+    };
+
+    var eventTriggeredFlag = false;
+
+    window.addEventListener('DOMContentLoaded', botoesNotificados, true);
+    setTimeout(function () {
+        if (!eventTriggeredFlag) {
+            botoesNotificados()
+        }
+    }, 50);
 
     return (
         <div className="p-2 d-none" id='toggleNot'>
@@ -150,7 +167,7 @@ function NotificacoesSetor() {
                                 <p></p>
                             </div>
                         </div>
-                        {dataFiltrado.map(v => (
+                        {dataFiltrado.reverse().map(v => (
                             <div key={v.id}>
                                 <div className="row d-flex justify-content-around ">
                                     <div className="col-11 ">
@@ -170,7 +187,6 @@ function NotificacoesSetor() {
             </div>
         </div>
     )
-
 }
 
 export default NotificacoesSetor;

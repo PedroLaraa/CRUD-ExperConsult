@@ -17,6 +17,9 @@ const PostNotificaSetor = db.sequelize.define('notificacoes_setores',{
     },
     notificacoes_clienteNotificado: {
         type: db.Sequelize.STRING
+    },
+    notificacoes_predioNotificado: {
+        type: db.Sequelize.STRING
     }
 })
 

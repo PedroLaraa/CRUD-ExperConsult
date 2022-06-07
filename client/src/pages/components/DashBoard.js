@@ -29,6 +29,8 @@ import NotificacoesSetor from "../NotificacoesSetores";
 
 var clientesEditados 
 
+var prediosEditados
+
 function DashBoardInterface() {
 
     const [data, setData] = useState([]);
@@ -149,17 +151,21 @@ function DashBoardInterface() {
 
     const nomeDoPredio = dataFiltrado.filter(v => JSON.stringify(v.id) == (idsDoed)).map(v => v.predios_nomeDosPredios).toString() // RETORNA O NOME DO PREDIO
 
+    const prediosFiltrados = data.map(v => JSON.stringify(v.predios_nomeDosPredios).toLowerCase().replaceAll('"', '') + v.id)
+
+    prediosEditados = prediosFiltrados
+
     // FUNÇÃO PARA ABRIR O DIALOG DE ADIÇÃO DE ASSUNTO
 
     function handleClickAdd() {
         setOpenDialog1(true);
-    }
+    };
 
     // PEGA O ID DO CLIENTE PARA REALIZAR O CADASTRO DE FORMA CORRETA
 
     const idCliente = function (e) {
         setIdsDosClientes(e.target.value);
-    }
+    };
 
     // PEGA OS ID's DOS DOED'S PARA FAZER O CADASTRO DE FORMA CORRETA
 
@@ -173,15 +179,15 @@ function DashBoardInterface() {
         } else {
             setShowEvents(true)
             setIdsDoed(e.target.value)
-        }
-    }
+        };
+    };
 
     // FUNÇÃO PARA DISPARAR O DIALOG DE DOED'S E ADICIONAR O EVENTO NO ID CORRETO
 
     function handleClickAddEvento(e) {
         setOpenDialog2(true);
         idCliente(e);
-    }
+    };
 
     // FUNÇÃO PARA DELETAR DOED'S
 
@@ -191,11 +197,11 @@ function DashBoardInterface() {
         api.delete(`doed-deletado/${id}`);
         alert('Evento deletado');
         document.location.reload(true);
-    }
+    };
 
     function handleLogoutUser(e) {
-        logout()
-    }
+        logout();
+    };
 
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
         getInfosPredios();
@@ -300,6 +306,7 @@ function DashBoardInterface() {
                                                 <div // ID ESTÁ AQUI
                                                     className="row justify-content-around"
                                                     style={paragrafoDashboardStyle}
+                                                    id={value.predios_nomeDosPredios.toLowerCase() + value.id}
                                                 >
                                                     <div className="col-2 col-md-2">
                                                         <p>{value.updatedAt.split('-').reverse().join('/')}</p>
@@ -462,6 +469,6 @@ function DashBoardInterface() {
     )
 }
 
-export {clientesEditados}
+export { clientesEditados, prediosEditados }
 
 export default DashBoardInterface

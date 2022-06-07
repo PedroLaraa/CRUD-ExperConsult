@@ -854,6 +854,7 @@ const SECRET = 'experconsult'
             notificacoes_autor: req.body.notificacoes_autor,
             notificacoes_destinatario: req.body.notificacoes_destinatario,
             notificacoes_clienteNotificado: req.body.notificacoes_clienteNotificado,
+            notificacoes_predioNotificado: req.body.notificacoes_predioNotificado,
         }
 
         try{

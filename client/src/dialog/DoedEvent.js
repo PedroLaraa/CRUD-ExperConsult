@@ -19,7 +19,7 @@ import Checkbox from '@mui/material/Checkbox';
 
 import DialogTitle from '@mui/material/DialogTitle';
 
-import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import { FormControl, InputLabel, MenuItem, Select, TextareaAutosize } from '@mui/material';
 
 import api from '../config/configApi';
 
@@ -54,7 +54,9 @@ export default function FormDialogAddEvent(value) {
             notificacoes_destinatario: personName,
             notificacoes_autor: value.doed_autor,
             notificacoes_motivo: `Novo evento cadastrado no prédio "${value.nomeDoPredio}" do cliente "${value.nomeDoCliente}"`,
-            notificacoes_mensagem: editValue.doed_eventos
+            notificacoes_mensagem: editValue.doed_eventos,
+            notificacoes_clienteNotificado: value.nomeDoCliente,
+            notificacoes_predioNotificado: value.nomeDoPredio.toLowerCase() + value.predios_clientes,
         });
         handleClose();
         alert('Evento cadastrado com sucesso e notificação enviada!');
@@ -79,7 +81,7 @@ export default function FormDialogAddEvent(value) {
             ...prevValues,
             [value.target.id]: value.target.value,
         }));
-    };
+    }
 
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 8;
@@ -144,7 +146,7 @@ export default function FormDialogAddEvent(value) {
         <Dialog open={value.open} onClose={handleClose}>
             <DialogTitle>Novo evento: </DialogTitle>
             <DialogContent >
-                <TextField
+                <TextareaAutosize
                     autoFocus
                     autoComplete='off'
                     margin="dense"
@@ -152,9 +154,10 @@ export default function FormDialogAddEvent(value) {
                     label="Evento: "
                     onChange={handleChangeValue}
                     type="text"
-                    fullWidth
+                    style={{width: '100%'}}
                     variant="standard"
                     multiline
+                    minRows={5}
                     maxRows={5}
                 />
                 <h5 className='pt-5'>Notificar: </h5>
