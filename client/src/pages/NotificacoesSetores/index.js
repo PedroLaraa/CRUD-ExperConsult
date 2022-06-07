@@ -159,26 +159,26 @@ function NotificacoesSetor() {
             <div id="containerDiv">
                 {show === true && (
                     <div className="overflow-auto" style={{ maxHeight: '20rem' }}>
-                        <div className="row d-flex justify-content-around">
-                            <div className="col-11 p-4">
-                                <button className="w-100 btn btn-dark" onClick={handleClearNotification}>
+                        <div className="row d-flex justify-content-around m-auto" style={{width: '99%'}}>
+                            <div className="col-5 p-4">
+                                <button className="btn btn-dark" onClick={handleClearNotification}>
                                     🧹 Limpar Notificações
                                 </button>
                             </div>
-                            <div className="col-11" style={{ backgroundColor: '#A2A2A2', height: '4px' }}>
+                            <div className="col-12" style={{ backgroundColor: '#A2A2A2', height: '4px' }}>
                                 <p></p>
                             </div>
                         </div>
                         {dataFiltrado.reverse().map(v => (
-                            <div key={v.id}>
+                            <div key={v.id} className="m-auto" style={{width: '95%'}}>
                                 <div className="row d-flex justify-content-around ">
-                                    <div className="col-11 ">
+                                    <div className="col-12 ">
                                         <p>• Notificação: {v.notificacoes_motivo}</p>
                                     </div>
-                                    <div className="col-11 ">
+                                    <div className="col-12 ">
                                         <p>• Evento: {v.notificacoes_mensagem}</p>
                                     </div>
-                                    <div className="col-11 " style={{ backgroundColor: '#A2A2A2', height: '4px' }}>
+                                    <div className="col-12 " style={{ backgroundColor: '#A2A2A2', height: '4px' }}>
                                         <p></p>
                                     </div>
                                 </div>
