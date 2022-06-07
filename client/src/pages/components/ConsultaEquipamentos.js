@@ -92,8 +92,6 @@ function FiltraEquipamentos() {
 
     const marcas2 = dataFiltradoMarcas2.map((v) => [v.fornecedore.fornec_fornecedornome])
 
-    console.log('marcaEqp', marcaEqp)
-
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
         getInfosEqp();
         getInfosMarcas();

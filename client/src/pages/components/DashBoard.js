@@ -42,7 +42,7 @@ function DashBoardInterface() {
     const [clientes, setClientes] = useState('');
     const [pesquisarCliente, setPesquisarCliente] = useState('');
 
-    const [recoveredUsers, setRecoveredUsers] = useState('')
+    const [recoveredUsers, setRecoveredUsers] = useState('');
 
     // SETA OS IDS PARA CONFERÊNCIAS
 
@@ -306,7 +306,7 @@ function DashBoardInterface() {
                                                 <div // ID ESTÁ AQUI
                                                     className="row justify-content-around"
                                                     style={paragrafoDashboardStyle}
-                                                    id={value.predios_nomeDosPredios.toLowerCase() + value.id}
+                                                    id={(value.predios_nomeDosPredios + value.id).toLowerCase()}
                                                 >
                                                     <div className="col-2 col-md-2">
                                                         <p>{value.updatedAt.split('-').reverse().join('/')}</p>

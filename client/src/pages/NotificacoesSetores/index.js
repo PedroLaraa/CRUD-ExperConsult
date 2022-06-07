@@ -134,14 +134,16 @@ function NotificacoesSetor() {
                 };
             };
         };
-        for (let i = 0; i < prediosNotificados.length; i++) {
-            for (let j = 0; j < prediosEditados.length; j++) {
-                if (prediosNotificados[i] == prediosEditados[j]) {
-                    document.getElementById(prediosNotificados[i]).style.backgroundColor = 'rgba(255, 255, 0, 0.4)'
-                };
+        for(let i = 0; i < prediosNotificados.length; i++){
+            if(document.getElementById(prediosNotificados[i]) === null){
+                continue
+            }else{
+                document.getElementById(prediosNotificados[i]).style.backgroundColor = 'rgba(255, 255, 0, 0.5)'
             };
         };
     };
+
+    // FUNÇÃO PARA DISPARAR A LEITURA DOS BOTÕES APÓS O DOCUMENTO CARREGAR, EVITA ERROS!!!
 
     var eventTriggeredFlag = false;
 
@@ -150,7 +152,7 @@ function NotificacoesSetor() {
         if (!eventTriggeredFlag) {
             botoesNotificados()
         }
-    }, 50);
+    }, 100);
 
     return (
         <div className="p-2 d-none" id='toggleNot'>

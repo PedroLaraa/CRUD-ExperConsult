@@ -70,6 +70,12 @@ function Rotas(){
             return alert("Você não está autenticado, faça login para continuar"), <Navigate to="/login" />
         }
 
+        if( authenticated && permissoes.usuario.user_permissoes === 1){
+            notificacoesDeveloper.setAttribute('href', '/notificacoes-developer')
+
+            return children
+        }
+
         if( authenticated && permissoes.usuario.user_permissoes === 3){
             document.getElementById('usuariosBtn').style.display = 'none';
             notificacoesDeveloper.removeAttribute('href');
@@ -78,12 +84,6 @@ function Rotas(){
 
         if( authenticated && permissoes.usuario.user_permissoes === 2){
             notificacoesDeveloper.removeAttribute('href');
-            return children
-        }
-
-        if( authenticated && permissoes.usuario.user_permissoes === 1){
-            notificacoesDeveloper.setAttribute('href', '/notificacoes-developer')
-
             return children
         }
 
