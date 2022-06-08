@@ -356,7 +356,7 @@ const SECRET = 'experconsult'
             try {
                 if(nomeRepresentante.map((v) =>(v.representante_nome)) != representante_nome){
                     const dbResponse = await PostRep.create(dataToInsert);
-                    res.redirect('http://192.168.10.122:3000/cadastro-representante'); // FIXME TO IP SERVER
+                    res.redirect('http://expertestes:3000/cadastro-representante'); // FIXME TO IP SERVER
                 }else{
                     res.json('Representante já cadastrado no sistema!')
                 }
@@ -454,7 +454,7 @@ const SECRET = 'experconsult'
         try {
                 if(cnpjCliente.map((v) =>(v.clientes_cnpj)) != clientes_cnpj){
                     const dbResponse = await PostClientes.create(dataToInsert);
-                    res.redirect('http://192.168.10.122:3000/cadastro-clientes') // FIXME TO IP SERVER
+                    res.redirect('http://expertestes:3000/cadastro-clientes') // FIXME TO IP SERVER
                     
                 }else{
                     res.json('Cliente já cadastrado no sistema!')
@@ -599,7 +599,7 @@ const SECRET = 'experconsult'
 
         try{
             const dbResponse = await PostDoed.create(dataToInsert)
-            res.redirect('http://192.168.10.122:3000/dashboard') //FIXME TO IP SERVER
+            res.redirect('http://expertestes:3000/dashboard') //FIXME TO IP SERVER
         }catch{
             res.render('erro')
         }
@@ -704,7 +704,6 @@ const SECRET = 'experconsult'
     app.post('/usuariocadastrado', upload.single('user_foto') ,async (req, res) => {
 
         const dataToInsert = {
-
             user_nome: req.body.user_nome,
             user_nomeUser : req.body.user_nomeUser ,
             user_senha : req.body.user_senha ,
@@ -718,13 +717,12 @@ const SECRET = 'experconsult'
             user_cargo: req.body.user_cargo,
             user_endereco: req.body.user_endereco,
             user_foto: (typeof req.file !== 'undefined') ? req.file.filename : '',
-            
         }
 
-        try{
+        try {
             const dbResponse = await PostUser.create(dataToInsert)
-            res.redirect('http://192.168.10.122:3000/dashboard') //FIXME TO IP SERVER
-        }catch(err){
+            res.redirect('http://expertestes:3000/dashboard') //FIXME TO IP SERVER
+        } catch(err){
             console.log(err)
             res.render('erro')
         }

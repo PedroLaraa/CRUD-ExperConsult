@@ -58,32 +58,53 @@ function Rotas(){
 
     const notificacoesDeveloper = document.getElementById('notificacoesBtn');
 
+    const Public =({children}) => {
+
+        const navbar = document.getElementById('navbarOculta');
+
+        navbar.style.display = 'none';
+
+        return children;
+
+    }
+
     const Private = ({children}) =>{
 
         const { authenticated, loading } = useContext(AuthContext);
 
         if(loading){
+
             return <div className="loading"> <h1> Carregando...</h1></div>
+
         }
 
         if(!authenticated){
+
             return alert("Você não está autenticado, faça login para continuar"), <Navigate to="/login" />
+
         }
 
         if( authenticated && permissoes.usuario.user_permissoes === 1){
+
             notificacoesDeveloper.setAttribute('href', '/notificacoes-developer')
 
             return children
+
         }
 
         if( authenticated && permissoes.usuario.user_permissoes === 3){
+
             document.getElementById('usuariosBtn').style.display = 'none';
+
             notificacoesDeveloper.removeAttribute('href');
+
             return children
         }
 
         if( authenticated && permissoes.usuario.user_permissoes === 2){
+
             notificacoesDeveloper.removeAttribute('href');
+
             return children
         }
 
@@ -91,27 +112,25 @@ function Rotas(){
 
     };
 
-    // document.getElementById('usuariosBtn').style.display = 'none';
-
     const PrivatePermsDeveloper = ({children}) =>{
 
         const { authenticated, loading } = useContext(AuthContext);
 
         if(loading){
             return <div className="loading"> <h1> Carregando...</h1>.</div>
-        }
+        };
 
         if(!authenticated){
             return alert("Você não tem permissão para acessar essa rota!"), <Navigate to="/login" />;
-        }
+        };
 
         if(authenticated && permissoes.usuario.user_permissoes === 1){
             return children;
-        }else{
+        }
+        else {
             const btnUsers = document.getElementById('usuariosBtn').style.display = 'none';
             return alert("Você não tem permissão para acessar essa rota!"), <Navigate to="/dashboard" />;
-        }
-
+        };
     };
 
     const PrivatePermsSupervisor = ({children}) => {
@@ -120,21 +139,21 @@ function Rotas(){
 
         if(loading){
             return <div className="loading"> <h1> Carregando...</h1></div>;
-        }
+        };
 
         if(!authenticated){
             return alert("Você não tem permissão para acessar essa rota!"), <Navigate to="/login" />;
-        }
+        };
 
         if(authenticated && permissoes.usuario.user_permissoes === 1){
             return children;
-        }
+        };
 
         if(authenticated && permissoes.usuario.user_permissoes === 2){
             return children;
         }else{
             return alert("Você não tem permissão para acessar essa rota!"), <Navigate to="/dashboard" />;
-        }
+        };
 
     };
 
@@ -143,7 +162,7 @@ function Rotas(){
             <AuthProvider>
                 <Routes> 
                     <Route path="/" element={<Private><DashBoard /></Private>} exact></Route>
-                    <Route path="/login" element={<Login/>}></Route>
+                    <Route path="/login" element={<Public><Login/></Public>}></Route>
                     <Route path="/representantes" element={<Private><ConsultaRepresentante /></Private>}></Route>
                     <Route path="/fornecedores" element={<Private><ConsultaFornecedores /></Private>} ></Route>
                     <Route path="/equipamentos" element={<Private><ConsultaEquipamentos /></Private>} ></Route>

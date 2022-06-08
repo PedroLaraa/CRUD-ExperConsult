@@ -44,11 +44,11 @@ function NotificacoesSetor() {
 
     useEffect(() => { // CARREGA AS NOTIFICAÇÕES E ETC
 
-        handleAlterImage()
+        handleAlterImage();
 
-        setRecoveredUsers(JSON.parse(localStorage.getItem('user')))
+        setRecoveredUsers(JSON.parse(localStorage.getItem('user')));
 
-        getNotificacoesSetores()
+        getNotificacoesSetores();
 
     }, [])
 
@@ -162,7 +162,7 @@ function NotificacoesSetor() {
                         <div className="row d-flex justify-content-around m-auto" style={{width: '99%'}}>
                             <div className="col-5 p-4">
                                 <button className="btn btn-dark" onClick={handleClearNotification}>
-                                    🧹 Limpar Notificações
+                                    🧹 Limpar Notificações 
                                 </button>
                             </div>
                             <div className="col-12" style={{ backgroundColor: '#A2A2A2', height: '4px' }}>

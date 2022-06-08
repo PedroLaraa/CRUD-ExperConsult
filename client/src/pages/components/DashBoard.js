@@ -27,7 +27,7 @@ import { handleAlterImage } from "./function/recuperaUserImg";
 
 import NotificacoesSetor from "../NotificacoesSetores";
 
-var clientesEditados 
+var clientesEditados
 
 var prediosEditados
 
@@ -38,7 +38,7 @@ function DashBoardInterface() {
 
     const [data2, setData2] = useState([]);
     const [url2, setUrl2] = useState('');
-    
+
     const [clientes, setClientes] = useState('');
     const [pesquisarCliente, setPesquisarCliente] = useState('');
 
@@ -200,7 +200,9 @@ function DashBoardInterface() {
     };
 
     function handleLogoutUser(e) {
+
         logout();
+
     };
 
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
@@ -217,9 +219,9 @@ function DashBoardInterface() {
 
     useEffect(() => {
 
-        setRecoveredUsers(JSON.parse(localStorage.getItem('user')))
+        setRecoveredUsers(JSON.parse(localStorage.getItem('user')));
 
-        handleAlterImage()
+        handleAlterImage();
 
     }, []);
 
@@ -266,14 +268,14 @@ function DashBoardInterface() {
                                 style={cabecalhoTableDashboard}
                                 className="container row text-uppercase m-0"
                             >
-                                <div id="topo" className="col-2">
+                                {/* <div id="topo" className="col-2">
                                     <p>Data:</p>
-                                </div>
+                                </div> */}
                                 <div className="col-8 ">
                                     <p>Setor / Assunto:</p>
                                 </div>
-                                <div className="col-2 ">
-                                    <p>Autor:</p>
+                                <div className="col-3 ">
+                                    <p>Dados:</p>
                                 </div>
                             </div>
                         </div>
@@ -306,12 +308,12 @@ function DashBoardInterface() {
                                                     style={paragrafoDashboardStyle}
                                                     id={(value.predios_nomeDosPredios + value.id).toLowerCase()}
                                                 >
-                                                    <div className="col-2 col-md-2">
+                                                    {/* <div className="col-2 col-md-2">
                                                         <p>{value.updatedAt.split('-').reverse().join('/')}</p>
-                                                    </div>
-                                                    <div className="col-1">
+                                                    </div> */}
+                                                    {/* <div className="col-1">
                                                         <p style={{ background: 'rgba(50,50,50,0.5)', height: '95%', width: '.5rem', border: "1px solid whitesmoke", borderRadius: "1rem" }} />
-                                                    </div>
+                                                    </div> */}
                                                     <div className="col-4 col-md-6">
                                                         <p
                                                             className="d-flex justify-content-between">{value.predios_nomeDosPredios}
@@ -349,8 +351,12 @@ function DashBoardInterface() {
                                                     <div className="col-1">
                                                         <p style={{ background: 'rgba(50,50,50,0.5)', height: '95%', width: '.5rem', border: "1px solid whitesmoke", borderRadius: "1rem" }} />
                                                     </div>
-                                                    <div className="col-1 col-md-2">
-                                                        <p>{value.predios_autor}</p>
+                                                    <div className="col-3 d-flex justify-content-end">
+                                                        <p>{value.predios_autor}
+                                                            <button type="button" className="btn btn-secondary" data-toggle="tooltip" data-placement="top" title={`Data: ${value.createdAt.split('-').reverse().join('/')}`}>
+                                                                🛈
+                                                            </button>
+                                                        </p>
                                                     </div>
                                                 </div>
                                                 {idsDoedInt === value.id && (
@@ -361,62 +367,39 @@ function DashBoardInterface() {
                                                                     style={paragrafoDoedStyle}
                                                                     className="row justify-content-md-center"
                                                                 >
-                                                                    <div className="col-1 col-md-2">
+                                                                    {/* <div className="col-1 col-md-2">
                                                                         <p>{value.createdAt.split('-').reverse().join('/')}</p>
                                                                     </div>
                                                                     <div className="col-1">
                                                                         <p style={{ background: 'rgba(50,50,50,0.5)', height: '100%', width: '.5rem', border: "1px solid whitesmoke", borderRadius: "1rem" }} />
-                                                                    </div>
-                                                                    <div className="col-4 col-md-6">
+                                                                    </div> */}
+                                                                    <div className="col-6">
                                                                         <p>{value.doed_eventos}</p>
                                                                     </div>
                                                                     <div className="col-1">
                                                                         <p style={{ background: 'rgba(50,50,50,0.5)', height: '100%', width: '.5rem', border: "1px solid whitesmoke", borderRadius: "1rem" }} />
                                                                     </div>
-                                                                    <div className="col-1 col-md-2">
-                                                                        <p>{value.doed_autor}</p>
-                                                                        {value.doed_autor === recoveredUsers.usuario.user_nomeUser && (
-                                                                            <>
-                                                                                <button
+                                                                    <div className="col-3 d-flex justify-content-end">
+                                                                        <p className="col-3 d-flex justify-content-end">{value.doed_autor}
+                                                                            <button type="button" style={{height: '2.4rem'}} className="btn btn-secondary" data-toggle="tooltip" data-placement="top" title={`Data: ${value.createdAt.split('-').reverse().join('/')}`}>
+                                                                                🛈
+                                                                            </button>
+                                                                        </p>
+                                                                        {value.doed_autor === recoveredUsers.usuario.user_nomeUser || recoveredUsers.usuario.user_permissoes === 2 || recoveredUsers.usuario.user_permissoes === 1 ?  
+                                                                        
+                                                                        <button
                                                                                     className="btn btn-outline-danger"
                                                                                     value={value.id}
                                                                                     onClick={handleRemoveEvent}
-                                                                                    style={{ fontSize: '1.1rem', fontFamily: 'Raleway' }}
+                                                                                    style={{ fontSize: '1rem', fontFamily: 'Raleway', width: '2.8rem', height: '2.4rem', paddingRight: '.6rem' }}
                                                                                     data-toggle="tooltip"
                                                                                     data-placement="right"
                                                                                     title="Deletar Evento"
                                                                                 >❌
                                                                                 </button>
-                                                                            </>
-                                                                        )}
-                                                                        {recoveredUsers.usuario.user_permissoes === 1 && (
-                                                                            <>
-                                                                                <button
-                                                                                    className="btn btn-outline-danger"
-                                                                                    value={value.id}
-                                                                                    onClick={handleRemoveEvent}
-                                                                                    style={{ fontSize: '1.1rem', fontFamily: 'Raleway' }}
-                                                                                    data-toggle="tooltip"
-                                                                                    data-placement="right"
-                                                                                    title="Deletar Evento"
-                                                                                >❌
-                                                                                </button>
-                                                                            </>
-                                                                        )}
-                                                                        {recoveredUsers.usuario.user_permissoes === 2 && (
-                                                                            <>
-                                                                                <button
-                                                                                    className="btn btn-outline-danger"
-                                                                                    value={value.id}
-                                                                                    onClick={handleRemoveEvent}
-                                                                                    style={{ fontSize: '1.1rem', fontFamily: 'Raleway' }}
-                                                                                    data-toggle="tooltip"
-                                                                                    data-placement="right"
-                                                                                    title="Deletar Evento"
-                                                                                >❌
-                                                                                </button>
-                                                                            </>
-                                                                        )}
+                                                                                
+                                                                                : '' 
+                                                                        }
                                                                     </div>
                                                                 </div>
                                                             </div>

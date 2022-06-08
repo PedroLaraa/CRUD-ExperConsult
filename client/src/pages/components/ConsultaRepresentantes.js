@@ -21,6 +21,7 @@ import botaoStyle from "../css/botaoEdit";
 import {handleAlterImage} from "./function/recuperaUserImg";
 
 import NotificacoesSetor from "../NotificacoesSetores";
+import { valueToPercent } from "@mui/base";
 
 // FUNÇÃO PARA CONSULTA DE DADOS DOS EQUIPAMENTOS
 
@@ -70,9 +71,11 @@ function FiltraRepresentantes() {
 
     const verificacaoDeBusca = data.some(el => dataFiltrado.map((value) => (value)).includes(el))
 
-    const empresasRepresenta = dataFiltrado.map(v => (v.representante_empresasrep).toString().split(','))
+    const empresasRepresenta = dataFiltrado.map(v => (v.representante_empresasrep).split(','))
 
-    const idsFornecedores = fornecedoresRep.map(v => (v.id).toString().split(','))
+    const idsFornecedores = fornecedoresRep.map(v => v.id)
+
+    const nomesDosFornecedores = fornecedoresRep.map(v => v.fornec_fornecedornome)
 
 
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
@@ -95,10 +98,21 @@ function FiltraRepresentantes() {
 
     element.addEventListener('click', logout, false);
 
-    console.log('Data',dataFiltrado)
+    var empresasFinais = [];
+
+        for(let i = 0; i < empresasRepresenta.length; i++) {
+            for(let j = 0; j < empresasRepresenta[i].length; j++) {
+                for(let k = 0; k < idsFornecedores.length; k++) {
+                    if(empresasRepresenta[i][j] == idsFornecedores[k]) {
+                        empresasFinais.push(' '+ nomesDosFornecedores[k])
+                    };
+                };
+            };
+        };
+
+    let increment = 0;
 
     return (
-
         <div>
             <NotificacoesSetor />
             <div style={{ padding: '2rem' }}>
@@ -126,7 +140,7 @@ function FiltraRepresentantes() {
                             <div>
                                 <div style={paragrafoStyle}>
                                     <p>Nome: {value.representante_nome + ''}</p>
-                                    <p>Representa: {value.fornecedore.fornec_fornecedornome + ''}</p>
+                                    <p>Representa: {empresasFinais + ''}</p>
                                     <p>Telefone: {value.representante_telefone + ''}</p>
                                     <p>Comentários: {value.representante_comentarios + ''}</p>
                                     <p>Site: {value.representante_site + ''}</p>
@@ -136,6 +150,9 @@ function FiltraRepresentantes() {
                                         <a className="btn btn-outline-dark" href={`edit-representante/${value.id}`}>Editar</a>
                                     </div>
                                 </div>
+                            </div>
+                            <div className="d-none">
+                                {increment++}
                             </div>
                         </div>
                     ))}

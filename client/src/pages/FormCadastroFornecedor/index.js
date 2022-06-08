@@ -47,7 +47,6 @@ function FormFornecedores() {
                             <option value=''>Selecione...</option>
                             <option value="Final">Final</option>
                             <option value="Intermediário">Intermediário</option>
-                            
                         </select>
                     </div>
                 </div>
@@ -57,7 +56,7 @@ function FormFornecedores() {
                         <input 
                             className="form-control is-valid" 
                             id="validationInput" 
-                            placeholder="Campo opcional" 
+                            placeholder="Campo obrigatório" 
                             required
                             name="fornec_fornecedornome"
                         >
