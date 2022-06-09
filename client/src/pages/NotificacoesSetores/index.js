@@ -155,7 +155,7 @@ function NotificacoesSetor() {
     }, 100);
 
     return (
-        <div className="p-2 " id='toggleNot'>
+        <div className="p-2 d-none" id='toggleNot'>
             <div id="containerDiv">
                 {show === true && (
                     <div className="overflow-auto" style={{ maxHeight: '20rem' }}>

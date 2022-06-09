@@ -62,16 +62,6 @@ export default function FormDialogAddEvent(value) {
         alert('Evento cadastrado com sucesso e notificação enviada!');
     };
 
-    const getInfosTodo = async (req, res) => {
-        api.get('list-infosPredios')
-            .then((response) => {
-                setData(response.data.value)
-                setUrl(response.data.url)
-            }).catch((err) => {
-                console.log(err)
-            })
-    };
-
     const handleClose = () => {
         value.setOpen(false);
     };
@@ -146,18 +136,15 @@ export default function FormDialogAddEvent(value) {
         <Dialog open={value.open} onClose={handleClose}>
             <DialogTitle>Novo evento: </DialogTitle>
             <DialogContent >
-                <TextField
-                    autoFocus
+            <TextField
                     autoComplete='off'
                     margin="dense"
                     id="doed_eventos"
                     label="Evento: "
                     onChange={handleChangeValue}
                     type="text"
-                    style={{width: '100%'}}
+                    fullWidth
                     variant="standard"
-                    multiline="true"
-                    maxRows={6}
                 />
                 <h5 className='pt-5'>Notificar: </h5>
                 <MultipleSelectCheckmarks />
