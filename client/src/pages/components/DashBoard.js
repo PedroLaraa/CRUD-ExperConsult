@@ -137,11 +137,11 @@ function DashBoardInterface() {
         return arr2;
     }
 
-    const dataFiltrado = data.filter(v => JSON.stringify(v.clientes_obra.clientes_apelido).replaceAll('"', '').toLowerCase().includes(busca)); // RETORNA OS DADOS REFERENTES A BUSCA
+    const dataFiltrado = data.filter(v => JSON.stringify(v.obras_cliente.obras_nomeDaObra).replaceAll('"', '').toLowerCase().includes(busca)); // RETORNA OS DADOS REFERENTES A BUSCA
 
     const contadorDeEventos = findOcc(data2, 'predios_clientes')
 
-    const nomesFiltrados = data.map(v => JSON.stringify(v.clientes_obra.clientes_apelido).toLowerCase().replaceAll('"', '')).filter((elem, index, self) => index === self.indexOf(elem)).sort() // RETORNA OS APELIDOS SEM REPETIR
+    const nomesFiltrados = data.map(v => JSON.stringify(v.obras_cliente.obras_nomeDaObra).toLowerCase().replaceAll('"', '')).filter((elem, index, self) => index === self.indexOf(elem)).sort() // RETORNA OS APELIDOS SEM REPETIR
 
     clientesEditados = nomesFiltrados
 

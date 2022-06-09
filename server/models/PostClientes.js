@@ -1,7 +1,7 @@
 // IMPORTA O SEQUELIZE DO DB PARA ENVIAR DADOS
 const db = require('./db')
 
-const PostPredios = require('./PostPredios')
+const PostObras = require('./PostObras')
 
 
 // Post() = Insere dados na table
@@ -43,8 +43,8 @@ const PostClientes = db.sequelize.define('clientes_obras',{
     }
 })
 
-PostPredios.belongsTo(PostClientes, {
-    foreignKey: 'idCliente',
+PostObras.belongsTo(PostClientes, {
+    foreignKey: 'obras_cliente',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE'
 })

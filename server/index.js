@@ -33,6 +33,8 @@ const PostMarcasEqp = require('./models/PostMarcasEqp')
 
 const PostNotificaSetor = require('./models/PostNotificaSetor')
 
+const PostObras = require('./models/PostObras')
+
 const path = require('path')
 
 const upload = require('./middleware/uploadimg')
@@ -517,6 +519,51 @@ const SECRET = 'experconsult'
         })
     })
 
+    // ROTAS - OBRAS:
+
+    // ROTA - FAZ O CADASTRO DA OBRA NO BD (OBRAS):
+
+    app.post('/obra-cadastrada', async (req, res) => {
+
+        const dataToInsert = {
+            obras_nomeDaObra: req.body.obras_nomeDaObra,
+            obras_premissasDaObra: req.body.obras_premissasDaObra,
+            obras_cliente: req.body.obras_cliente
+        }
+
+        try{
+            const dbResponse = await PostObras.create(dataToInsert);
+            res.redirect('http://expertestes:3000/cadastro-obras') // FIXME TO IP SERVER
+        }
+        catch(err){
+            console.error(err);
+            res.render('erro')
+        }
+
+    })
+
+    // ROTA - RECEBE A REQUISIÇÃO DO FRONT (INFOS OBRAS):
+
+    app.get('/list-infosObras', async (req, res) =>{
+
+        await PostObras.findAll({
+            include: [{
+                model: PostClientes,
+                attributes: ['clientes_apelido', 'id']
+            }]
+        })
+        .then((value) => {
+            return res.json({
+                value
+            })
+        })
+        .catch((err) => {
+            console.error(err);
+            res.render('erro');
+        })
+
+    })
+
     // ROTA - FAZ OS CADASTROS DOS EVENTOS NO BD (PREDIOS)
 
     app.post('/predio-cadastrado', async (req, res) => {
@@ -573,8 +620,8 @@ const SECRET = 'experconsult'
     app.get('/list-infosPredios', async (req, res) =>{
         await PostPredios.findAll({
             include: [{
-                model: PostClientes,
-                attributes: ['clientes_apelido', 'id']
+                model: PostObras,
+                attributes: ['obras_nomeDaObra', 'id']
             }] 
         })
         .then((value) => {
