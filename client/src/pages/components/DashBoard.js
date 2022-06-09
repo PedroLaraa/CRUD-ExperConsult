@@ -174,11 +174,11 @@ function DashBoardInterface() {
     const idDoed = function (e) {
         setIdsDoed(e.target.value);
         if (idsDoed == e.target.value) {
-            setShowEvents(false)
-            setIdsDoed('')
+            setShowEvents(false);
+            setIdsDoed('');
         } else {
-            setShowEvents(true)
-            setIdsDoed(e.target.value)
+            setShowEvents(true);
+            setIdsDoed(e.target.value);
         };
     };
 
@@ -215,6 +215,7 @@ function DashBoardInterface() {
         if (verificacaoDeBusca === false && idsDoed !== '') {
             alert("Nenhum evento registrado!")
         }
+    
     }, [idsDoed]); // VERIFICA A BUSCA SEMPRE QUE OS IDSDOED ALTERAM
 
     useEffect(() => {

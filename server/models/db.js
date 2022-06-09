@@ -5,7 +5,7 @@ const Sequelize = require('sequelize')
 // FAZ A CONEXÃO COM O BANCO DE DADOS INDICADO
 
 // NOME BD, USER, SENHA
-const sequelize = new Sequelize('experconsultdb', 'root', 'ExPer@DB2020',{
+const sequelize = new Sequelize('expertestesbackup', 'root', 'ExPer@DB2020',{
     host: "localhost",
     dialect: 'mysql'
 })

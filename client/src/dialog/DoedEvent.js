@@ -146,7 +146,7 @@ export default function FormDialogAddEvent(value) {
         <Dialog open={value.open} onClose={handleClose}>
             <DialogTitle>Novo evento: </DialogTitle>
             <DialogContent >
-                <TextareaAutosize
+                <TextField
                     autoFocus
                     autoComplete='off'
                     margin="dense"
@@ -157,8 +157,7 @@ export default function FormDialogAddEvent(value) {
                     style={{width: '100%'}}
                     variant="standard"
                     multiline="true"
-                    minRows={5}
-                    maxRows={5}
+                    maxRows={6}
                 />
                 <h5 className='pt-5'>Notificar: </h5>
                 <MultipleSelectCheckmarks />
