@@ -23,6 +23,8 @@ import { FormControl, InputLabel, MenuItem, Select, TextareaAutosize } from '@mu
 
 import api from '../config/configApi';
 
+import './doedStyle.css';
+
 export default function FormDialogAddEvent(value) {
 
     const [editValue, setEditValue] = useState({
@@ -146,17 +148,19 @@ export default function FormDialogAddEvent(value) {
         <Dialog open={value.open} onClose={handleClose}>
             <DialogTitle>Novo evento: </DialogTitle>
             <DialogContent >
-                <TextField
-                    autoFocus
+                <TextareaAutosize
                     autoComplete='off'
                     margin="dense"
                     id="doed_eventos"
                     label="Evento: "
+                    style={{ width: '100%' }}
                     onChange={handleChangeValue}
                     type="text"
-                    style={{width: '100%'}}
+                    fullWidth
                     variant="standard"
-                    maxRows={6}
+                    multiline
+                    minRows={6}
+                    maxRows={8}
                 />
                 <h5 className='pt-5'>Notificar: </h5>
                 <MultipleSelectCheckmarks />

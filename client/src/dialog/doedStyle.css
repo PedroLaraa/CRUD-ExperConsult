@@ -1,0 +1,32 @@
+.modal-backdrop{
+    display: none;
+    overflow-x: hidden;
+}
+
+.css-zw3mfo-MuiModal-root-MuiDialog-root{
+    background-color: transparent;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+}
+
+.css-yiavyu-MuiBackdrop-root-MuiDialog-backdrop{
+    background-color: transparent;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+}
+
+.css-hz1bth-MuiDialog-container{
+    background-color: transparent;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+}
+
+.css-1t1j96h-MuiPaper-root-MuiDialog-paper{
+    background-color: transparent;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+}

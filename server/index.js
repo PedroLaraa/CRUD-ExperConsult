@@ -523,7 +523,7 @@ const SECRET = 'experconsult'
 
     // ROTA - FAZ O CADASTRO DA OBRA NO BD (OBRAS):
 
-    app.post('/obra-cadastrada', async (req, res) => {
+    app.post('/obracadastrada', upload.single() , async (req, res) => {
 
         const dataToInsert = {
             obras_nomeDaObra: req.body.obras_nomeDaObra,
@@ -531,15 +531,16 @@ const SECRET = 'experconsult'
             obras_cliente: req.body.obras_cliente
         }
 
+        console.log(dataToInsert)
+
         try{
             const dbResponse = await PostObras.create(dataToInsert);
-            res.redirect('http://expertestes:3000/cadastro-obras') // FIXME TO IP SERVER
+            res.redirect('http://expertestes:3000/cadastro-obra') // FIXME TO IP SERVER
         }
         catch(err){
             console.error(err);
             res.render('erro')
         }
-
     })
 
     // ROTA - RECEBE A REQUISIÇÃO DO FRONT (INFOS OBRAS):
@@ -680,9 +681,9 @@ const SECRET = 'experconsult'
 
     app.delete('/doed-deletado/:id', async function(req, res) {
 
-        const {id} = req.params
+        const { id } = req.params
 
-        const dbResponse = await PostDoed.destroy({where:{id: id}})
+        const dbResponse = await PostDoed.destroy({where:{ id: id }})
     })
 
     // ROTA - RECEBE UMA REQ DO FRONT E ENVIA DADOS (DOED)

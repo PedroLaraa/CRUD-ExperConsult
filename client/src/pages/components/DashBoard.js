@@ -39,6 +39,8 @@ function DashBoardInterface() {
     const [data2, setData2] = useState([]);
     const [url2, setUrl2] = useState('');
 
+    const [obras, setObras] = useState([]);
+
     const [clientes, setClientes] = useState('');
     const [pesquisarCliente, setPesquisarCliente] = useState('');
 
@@ -70,6 +72,15 @@ function DashBoardInterface() {
 
     // FAZ UMA REQUISIÇÃO PARA O BACK E RETORNAR O DATABASE COM DADOS (PRÉDIOS)
 
+    const getInfosObras = async (req, res) => {
+        api.get('list-infosObras')
+            .then((response) => {
+                setObras(response.data.value)
+            }).catch((err) => {
+                console.log(err)
+            })
+    }
+    
     const getInfosPredios = async (req, res) => {
         api.get('list-infosPredios')
             .then((response) => {
@@ -139,9 +150,13 @@ function DashBoardInterface() {
 
     const dataFiltrado = data.filter(v => JSON.stringify(v.obras_cliente.obras_nomeDaObra).replaceAll('"', '').toLowerCase().includes(busca)); // RETORNA OS DADOS REFERENTES A BUSCA
 
+    // FIXME PRÉDIOS ESTÃO SENDO DUPLICADOS, ARRUMAR O FILTRO DE BUSCA... É NECESSÁRIO MANDAR PRO DB UM NOME DO PRÉDIO COM O NOME DO CLIENTE PRA FILTRAR CORRETAMENTE
+    
+    // FIXME DEVE SER ENVIADO O DADO NA HORA DE CADASTRAR A OBRA
+
     const contadorDeEventos = findOcc(data2, 'predios_clientes')
 
-    const nomesFiltrados = data.map(v => JSON.stringify(v.obras_cliente.obras_nomeDaObra).toLowerCase().replaceAll('"', '')).filter((elem, index, self) => index === self.indexOf(elem)).sort() // RETORNA OS APELIDOS SEM REPETIR
+    const nomesFiltrados = obras.map(v => JSON.stringify(v.clientes_obra.clientes_apelido + ' - ' + v.obras_nomeDaObra).toLowerCase().replaceAll('"', '')).filter((elem, index, self) => index === self.indexOf(elem)).sort() // RETORNA OS APELIDOS SEM REPETIR
 
     clientesEditados = nomesFiltrados
 
@@ -206,8 +221,12 @@ function DashBoardInterface() {
     };
 
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
+        
         getInfosPredios();
+
         getInfosDoed();
+
+        getInfosObras();
 
     }, [openDialog1, openDialog2]); // PARAMETROS PARA ATUALIZAR OS DADOS SEM ATUALIZAR A PÁGINA
 
@@ -233,18 +252,18 @@ function DashBoardInterface() {
                 <div
                     className="list-group col-4 p-1 overflow-auto"
                     style={botaoDashboardStyle}>
-                    <h3>• Cliente:</h3>
+                    <h3>• Cliente / Obra :</h3>
                     {nomesFiltrados.map(value => (
                         <div className="p-1" key={value}>
                             <button
                                 id={value}
                                 type="submit"
-                                value={value}
+                                value={value.split(' - ')[1]}
                                 className="btn btn-outline-dark text-uppercase"
                                 onClick={handleFiltrar}
                                 style={{ width: "17rem", fontSize: '1.1rem', fontFamily: 'Raleway' }}
                             >
-                                {value}
+                                { value }
                             </button>
                         </div>
                     ))}
@@ -287,7 +306,7 @@ function DashBoardInterface() {
                                     predios_dataConclusao={value.predios_dataConclusao}
                                     predios_nomeDosPredios={value.predios_nomeDosPredios}
                                     predios_autor={recoveredUsers.usuario.user_nomeUser}
-                                    cliente_id={value.clientes_obra.id}
+                                    cliente_id={value.obras_cliente.id}
                                     data={value.data}
                                     setData={value.setData}
                                 />
@@ -299,7 +318,7 @@ function DashBoardInterface() {
                                             className="container overflow-auto"
                                             style={{ maxHeight: "30rem", width: "100%" }}
                                         >
-                                            <h1>{value.predios_clientes}</h1>
+                                            {/* <h1>{value.obras_cliente.obras_nomeDaObra}</h1> */}
                                             <div
                                                 style={paragrafoDivStyle}
                                             >

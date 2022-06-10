@@ -44,6 +44,18 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Infraestrutura
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" id="redirectPage" href="" >Planilha de Padrões</a>
+                        <!-- <a class="dropdown-item" href="/dashboard" >Agendamentos</a>
+                        <a class="dropdown-item" href="/dashboard" >Compras</a> -->
+                        <div class="dropdown-divider"></div>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Fornecedor
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -83,6 +95,7 @@
                         <a class="dropdown-item" href="/cadastro-clientes">Cadastro</a>
                         <a class="dropdown-item" href="/clientes">Consulta</a>
                         <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/cadastro-obra">Cadastrar Obra</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown" id="usuariosBtn">
@@ -95,7 +108,7 @@
                         <!-- <a class="dropdown-item" href="/usuarios">Consulta</a> -->
                         <div class="dropdown-divider"></div>
                     </div>
-                </li>
+                </li>                
             </ul>
             <div class="w-100" id="topo">
                 <ul class="navbar-nav w-100 float-right ">
@@ -174,7 +187,7 @@
             <a class="text-dark" href="">Exper Consult Ltda</a>
         </div>
         <div class="text-center text-dark p-3 text-uppercase" style="background-color: rgba(0, 0, 0, 0.2);">
-            Versão do sistema: v3.0
+            Versão do sistema: v4.0
         </div>
         <!-- Copyright -->
         <div class="logo-exper">
@@ -196,9 +209,14 @@
 <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
 <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
 
-<sccript>
+<script>
 
-</sccript>
+    document.getElementById('redirectPage').addEventListener('click', function(e) {
+        // e.preventDefault();
+        window.open('https://docs.google.com/spreadsheets/d/1vRxlP6KDnos8a2bOzsa7RHzGV11aP8VnKaFWX4_J9kk/edit?usp=sharing')
+    });
+
+</script>
 
 <style>
     @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300&display=swap');
