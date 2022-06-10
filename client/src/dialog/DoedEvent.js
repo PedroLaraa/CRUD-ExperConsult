@@ -21,6 +21,8 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 import { FormControl, InputLabel, MenuItem, Select, TextareaAutosize } from '@mui/material';
 
+import './doedStyle.css';
+
 import api from '../config/configApi';
 
 export default function FormDialogAddEvent(value) {
@@ -71,7 +73,7 @@ export default function FormDialogAddEvent(value) {
             ...prevValues,
             [value.target.id]: value.target.value,
         }));
-    }
+    };
 
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 8;
@@ -119,6 +121,8 @@ export default function FormDialogAddEvent(value) {
                         input={<OutlinedInput label="Setores para notificar:" />}
                         renderValue={(selected) => selected.join(', ')}
                         MenuProps={MenuProps}
+                        multiline
+                        rows={4}
                     >
                         {names.map((name) => (
                             <MenuItem key={name} value={name.charAt(name.length - 1)}>
@@ -136,15 +140,19 @@ export default function FormDialogAddEvent(value) {
         <Dialog open={value.open} onClose={handleClose}>
             <DialogTitle>Novo evento: </DialogTitle>
             <DialogContent >
-            <TextField
+            <TextareaAutosize
                     autoComplete='off'
                     margin="dense"
                     id="doed_eventos"
                     label="Evento: "
+                    style={{ width: '100%' }}
                     onChange={handleChangeValue}
                     type="text"
                     fullWidth
                     variant="standard"
+                    multiline
+                    minRows={6}
+                    maxRows={8}
                 />
                 <h5 className='pt-5'>Notificar: </h5>
                 <MultipleSelectCheckmarks />
