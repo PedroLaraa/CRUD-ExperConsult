@@ -148,13 +148,7 @@ function DashBoardInterface() {
 
     const busca = clientes.toLowerCase(); // DEFINE O QUE SERÁ BUSCADO
 
-    const busca2 = clientes.toLowerCase();
-
     const dataFiltrado = data.filter(v => JSON.stringify(v.obras_cliente.obras_nomeDaObra).replaceAll('"', '').toLowerCase().includes(busca.split(' - ')[1])); // RETORNA OS DADOS REFERENTES A BUSCA
-
-    // FIXME PRÉDIOS ESTÃO SENDO DUPLICADOS, ARRUMAR O FILTRO DE BUSCA... É NECESSÁRIO MANDAR PRO DB UM NOME DO PRÉDIO COM O NOME DO CLIENTE PRA FILTRAR CORRETAMENTE
-    
-    // FIXME DEVE SER ENVIADO O DADO NA HORA DE CADASTRAR A OBRA
 
     const contadorDeEventos = findOcc(data2, 'predios_clientes')
 

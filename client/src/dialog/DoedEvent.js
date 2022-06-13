@@ -83,7 +83,7 @@ export default function FormDialogAddEvent(value) {
             ...prevValues,
             [value.target.id]: value.target.value,
         }));
-    }
+    };
 
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 8;
@@ -105,7 +105,7 @@ export default function FormDialogAddEvent(value) {
         'Conceito 9',
         'Arquitetura 4',
         'Software 1',
-    ].sort()
+    ].sort();
 
     function MultipleSelectCheckmarks() {
 
@@ -142,7 +142,7 @@ export default function FormDialogAddEvent(value) {
                 </FormControl>
             </div>
         );
-    }
+    };
 
     return (
         <Dialog open={value.open} onClose={handleClose}>
@@ -170,4 +170,4 @@ export default function FormDialogAddEvent(value) {
             </DialogActions>
         </Dialog>
     );
-}
+};

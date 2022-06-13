@@ -35,6 +35,8 @@ const PostNotificaSetor = require('./models/PostNotificaSetor')
 
 const PostObras = require('./models/PostObras')
 
+const PostCompras = require('./models/PostCompras')
+
 const path = require('path')
 
 const upload = require('./middleware/uploadimg')
@@ -637,6 +639,7 @@ const SECRET = 'experconsult'
     // ROTA - FAZ A INSERÇÃO NO BANCO DE DADOS DOS HISTÓRICOS (DOED)
 
     app.post('/doed-cadastrado', async (req, res) => {
+
         const dataToInsert = {
             doed_eventos: req.body.doed_eventos,
             doed_autor: req.body.doed_autor,
@@ -649,6 +652,7 @@ const SECRET = 'experconsult'
         }catch{
             res.render('erro');
         }
+
     });
 
     // ROTA - FAZ O EDIT DOS EVENTOS (DOED)
@@ -892,7 +896,7 @@ const SECRET = 'experconsult'
     // ROTA - INSERE NOTIFICAÇÕES DE SETORES
 
     app.post('/notificacoes-setores', async (req, res) => {
-        dataToInsert = {
+        const dataToInsert = {
             notificacoes_mensagem: req.body.notificacoes_mensagem,
             notificacoes_motivo: req.body.notificacoes_motivo,
             notificacoes_autor: req.body.notificacoes_autor,
@@ -913,6 +917,42 @@ const SECRET = 'experconsult'
     app.get('/list-notificacoesSetor', async (req, res) => {
 
         PostNotificaSetor.findAll({})
+        .then((value) => {
+            res.json({
+                value
+            })
+        }).catch((err) => {
+            console.log(err)
+            res.render('erro')
+        })
+
+    })
+
+    // ROTAS - COMPRAS EXPER
+
+    // ROTA - INSERE COMPRAS NO DB
+
+    app.post('/compracadastrada', async (req, res) => {
+
+        const dataToInsert = {
+            lista_item: req.body.lista_item,
+            lista_quantidade: req.body.lista_quantidade,
+            lista_categoria: req.body.lista_categoria,
+        }
+
+        try{
+            const dbResponse = await PostCompras.create(dataToInsert)
+        }catch(err){
+            console.log(err)
+            res.render('erro')
+        }   
+    })
+
+    // ROTA - LISTAGEM DE COMPRAS
+
+    app.get('/list-compras', async (req, res) => {
+
+        PostCompras.findAll({})
         .then((value) => {
             res.json({
                 value

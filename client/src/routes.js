@@ -46,6 +46,8 @@ import NotificacoesSetores from "./pages/NotificacoesSetores";
 
 import CadastroObra from "./pages/CadastroObra";
 
+import ComprasExper from "./pages/ComprasExper";
+
 import { AuthProvider, AuthContext } from "./contexts/auth";
 
 // CRIA AS ROTA DE NAVEGAÇÃO DE BROWSER
@@ -184,6 +186,7 @@ function Rotas(){
                     <Route path="/notificacoes-developer" element={<PrivatePermsDeveloper><NotificacoesUser /></PrivatePermsDeveloper>}></Route>
                     <Route path="/notificacoes-setores" element={<Private><NotificacoesSetores /></Private>}></Route>
                     <Route path="/cadastro-obra" element={<Private><CadastroObra /></Private>}></Route>
+                    <Route path="/compras-exper" element={<Private><ComprasExper /></Private>}></Route>
                 </Routes>
             </AuthProvider>
         </BrowserRouter>
