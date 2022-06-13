@@ -122,8 +122,6 @@ function DashBoardInterface() {
         handlePesquisarCliente()
     }
 
-    const busca = clientes.toLowerCase(); // DEFINE O QUE SERÁ BUSCADO
-
     function findOcc(arr, key) {
         let arr2 = [];
 
@@ -148,7 +146,11 @@ function DashBoardInterface() {
         return arr2;
     }
 
-    const dataFiltrado = data.filter(v => JSON.stringify(v.obras_cliente.obras_nomeDaObra).replaceAll('"', '').toLowerCase().includes(busca)); // RETORNA OS DADOS REFERENTES A BUSCA
+    const busca = clientes.toLowerCase(); // DEFINE O QUE SERÁ BUSCADO
+
+    const busca2 = clientes.toLowerCase();
+
+    const dataFiltrado = data.filter(v => JSON.stringify(v.obras_cliente.obras_nomeDaObra).replaceAll('"', '').toLowerCase().includes(busca.split(' - ')[1])); // RETORNA OS DADOS REFERENTES A BUSCA
 
     // FIXME PRÉDIOS ESTÃO SENDO DUPLICADOS, ARRUMAR O FILTRO DE BUSCA... É NECESSÁRIO MANDAR PRO DB UM NOME DO PRÉDIO COM O NOME DO CLIENTE PRA FILTRAR CORRETAMENTE
     
@@ -258,12 +260,12 @@ function DashBoardInterface() {
                             <button
                                 id={value}
                                 type="submit"
-                                value={value.split(' - ')[1]}
+                                value={value}
                                 className="btn btn-outline-dark text-uppercase"
                                 onClick={handleFiltrar}
                                 style={{ width: "17rem", fontSize: '1.1rem', fontFamily: 'Raleway' }}
                             >
-                                { value }
+                                { value.toString().substring(0, value.length - 1) }
                             </button>
                         </div>
                     ))}

@@ -526,12 +526,10 @@ const SECRET = 'experconsult'
     app.post('/obracadastrada', upload.single() , async (req, res) => {
 
         const dataToInsert = {
-            obras_nomeDaObra: req.body.obras_nomeDaObra,
+            obras_nomeDaObra: req.body.obras_nomeDaObra + req.body.obras_cliente,
             obras_premissasDaObra: req.body.obras_premissasDaObra,
             obras_cliente: req.body.obras_cliente
         }
-
-        console.log(dataToInsert)
 
         try{
             const dbResponse = await PostObras.create(dataToInsert);
@@ -647,11 +645,11 @@ const SECRET = 'experconsult'
 
         try{
             const dbResponse = await PostDoed.create(dataToInsert)
-            res.redirect('http://expertestes:3000/dashboard') //FIXME TO IP SERVER
+            res.redirect('http://expertestes:3000/dashboard'); //FIXME TO IP SERVER
         }catch{
-            res.render('erro')
+            res.render('erro');
         }
-    })
+    });
 
     // ROTA - FAZ O EDIT DOS EVENTOS (DOED)
 

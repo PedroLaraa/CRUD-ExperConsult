@@ -156,9 +156,8 @@ export default function FormDialogAddEvent(value) {
                     style={{ width: '100%' }}
                     onChange={handleChangeValue}
                     type="text"
-                    fullWidth
                     variant="standard"
-                    multiline
+                    multiline='true'
                     minRows={6}
                     maxRows={8}
                 />

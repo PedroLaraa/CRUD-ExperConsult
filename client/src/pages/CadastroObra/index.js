@@ -40,8 +40,6 @@ function CadastroObra() {
         getInfosObras();
     }, [])
 
-    console.log(obras)
-
     return (
         <div>
             <NotificacoesSetor />
