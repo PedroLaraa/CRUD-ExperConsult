@@ -12,7 +12,7 @@ import botaoComprasStyle from "../css/botaoCompras.js";
 
 import FormDialogAddCompras from "../../dialog/ComprasDialog";
 
-function ComprasExper(){
+function ComprasExper() {
 
     const { logout } = useContext(AuthContext);
 
@@ -22,7 +22,7 @@ function ComprasExper(){
 
     useEffect(() => {
         handleAlterImage()
-    } , []);
+    }, []);
 
     const [open, setOpen] = useState(false);
 
@@ -39,35 +39,49 @@ function ComprasExper(){
             })
     };
 
-    useEffect(() => {
-        getInfosPredios()
-    }, [open]);
-
     const dataFiltradoTech = data.filter(v => v.lista_categoria === 'Tech');
 
     const dataFiltradoCafe = data.filter(v => v.lista_categoria === 'Cafe');
 
     const dataFiltradPapelaria = data.filter(v => v.lista_categoria === 'Papelaria');
 
-    function handleAddItem(e){
+    function handleAddItem(e) {
         e.preventDefault();
         setOpen(!false);
         setCategoria(e.target.value);
     }
 
-    function handleSumItem(e){
+    function handleSumItem(e) {
+
         e.preventDefault();
         const values = {
             id: e.target.value,
-            
         }
 
-        api.put('compras-update', values)
+        api.put('compras-updateSoma', values);
+
+        document.location.reload();
+
     }
 
-    //TODO ADICIONAR A FUNÇÃO DE AUMENTAR A QUANTIDADE DE ITEM E FUNÇÃO DE DELETAR ITEM
+    function handleSubtraiItem(e) {
 
-    return(
+        e.preventDefault();
+        const values = {
+            id: e.target.value,
+        }
+
+        api.put('compras-updateSubtrai', values);
+
+        document.location.reload();
+
+    }
+
+    useEffect(() => {
+        getInfosPredios()
+    }, [open]);
+
+    return (
         <div className="">
             <NotificacoesSetor />
             <div className="row w-100 d-flex justify-content-center">
@@ -78,8 +92,8 @@ function ComprasExper(){
                         </p>
                         {dataFiltradoTech.map(v => (
                             <li key={v.id}>Item: {v.lista_item} | Quantidade: {v.lista_quantidade}
-                            <button className="btn btn-outline-dark" value={v.id}>+</button>
-                            <button className="btn btn-outline-dark" value={v.id}>-</button>  
+                                <button className="btn btn-outline-dark" value={v.id} onClick={handleSumItem}>+</button>
+                                <button className="btn btn-outline-dark" value={v.id} onClick={handleSubtraiItem}>-</button>
                             </li>
                         ))}
                         <div className="d-flex justify-content-start pt-4">
@@ -94,8 +108,8 @@ function ComprasExper(){
                         </p>
                         {dataFiltradPapelaria.map(v => (
                             <li key={v.id}>Item: {v.lista_item} | Quantidade: {v.lista_quantidade}
-                            <button className="btn btn-outline-dark" value={v.id}>+</button>
-                            <button className="btn btn-outline-dark" value={v.id}>-</button> 
+                                <button className="btn btn-outline-dark" value={v.id} onClick={handleSumItem}>+</button>
+                                <button className="btn btn-outline-dark" value={v.id} onClick={handleSubtraiItem}>-</button>
                             </li>
                         ))}
                         <div className="d-flex justify-content-start pt-4">
@@ -109,9 +123,9 @@ function ComprasExper(){
                             Compras Café:
                         </p>
                         {dataFiltradoCafe.map(v => (
-                            <li key={v.id}>Item: {v.lista_item} | Quantidade: {v.lista_quantidade} 
-                            <button className="btn btn-outline-dark" value={v.id}>+</button> 
-                            <button className="btn btn-outline-dark" value={v.id}>-</button> 
+                            <li key={v.id}>Item: {v.lista_item} | Quantidade: {v.lista_quantidade}
+                                <button className="btn btn-outline-dark" value={v.id} onClick={handleSumItem}>+</button>
+                                <button className="btn btn-outline-dark" value={v.id} onClick={handleSubtraiItem}>-</button>
                             </li>
                         ))}
                         <div className="d-flex justify-content-start pt-4">
@@ -120,10 +134,10 @@ function ComprasExper(){
                     </ul>
                 </div>
             </div>
-            <FormDialogAddCompras 
-            open={open}
-            setOpen={setOpen}
-            categoriaItem={categoria}
+            <FormDialogAddCompras
+                open={open}
+                setOpen={setOpen}
+                categoriaItem={categoria}
             />
         </div>
     )
