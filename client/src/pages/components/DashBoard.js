@@ -412,7 +412,6 @@ function DashBoardInterface() {
                                                                                     title="Deletar Evento"
                                                                                 >❌
                                                                                 </button>
-                                                                                
                                                                                 : '' 
                                                                         }
                                                                     </div>

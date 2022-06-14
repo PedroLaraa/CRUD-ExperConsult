@@ -938,6 +938,7 @@ const SECRET = 'experconsult'
             lista_item: req.body.lista_item,
             lista_quantidade: req.body.lista_quantidade,
             lista_categoria: req.body.lista_categoria,
+            lista_setorDaCompra: req.body.lista_setorDaCompra,
         }
 
         try{
@@ -998,6 +999,16 @@ const SECRET = 'experconsult'
             console.log(err)
             res.render('erro')
         }
+    })
+
+    // ROTA - DELETAR COMPRAS NO DB
+
+    app.delete('/compras-delete/:id', async function(req, res) {
+            
+            const {id} = req.params
+    
+            const dbResponse = await PostCompras.destroy({where:{id: id}})
+    
     })
 
     // ROTA - LISTAGEM DE COMPRAS

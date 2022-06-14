@@ -30,6 +30,7 @@ export default function FormDialogAddCompras(value) {
         categoriaItem: value.categoriaItem,
         nomeItem: value.nomeItem,
         quantidade: value.quantidade,
+        usuario: value.usuario,
 
     });
 
@@ -38,9 +39,10 @@ export default function FormDialogAddCompras(value) {
             lista_item: editValue.nomeItem,
             lista_categoria: value.categoriaItem,
             lista_quantidade: editValue.quantidade,
+            lista_setorDaCompra: value.usuario,
         });
         handleClose();
-        alert('Setor cadastrado com sucesso!')
+        alert('Item adicionado com sucesso!')
     };
 
     const handleClose = () => {
