@@ -56,6 +56,7 @@ const { json } = require('body-parser')
 const mysql = require('mysql2')
 
 const jwt = require('jsonwebtoken')
+const { where } = require('sequelize/types')
 
 const SECRET = 'experconsult'
 
@@ -946,6 +947,34 @@ const SECRET = 'experconsult'
             console.log(err)
             res.render('erro')
         }   
+    })
+
+    // ROTA - ATUALIZA AS COMPRAS NO DB
+
+    app.put('/compras-update', async (req, res) => {
+
+        const id = req.body.id
+
+        const lista_quantidade = PostCompras.findAll({
+            attributes: {
+                where: {id: id},
+                
+            }
+        })
+
+        const dataToInsert = {
+            lista_quantidade
+        }
+
+        try{
+            const dbResponse = await PostCompras.update(dataToInsert, {
+                where: {
+                    id: id
+                }})
+        }catch(err){
+            console.log(err)
+            res.render('erro')
+        }
     })
 
     // ROTA - LISTAGEM DE COMPRAS

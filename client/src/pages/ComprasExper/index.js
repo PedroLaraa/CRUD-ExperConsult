@@ -55,6 +55,16 @@ function ComprasExper(){
         setCategoria(e.target.value);
     }
 
+    function handleSumItem(e){
+        e.preventDefault();
+        const values = {
+            id: e.target.value,
+            
+        }
+
+        api.put('compras-update', values)
+    }
+
     //TODO ADICIONAR A FUNÇÃO DE AUMENTAR A QUANTIDADE DE ITEM E FUNÇÃO DE DELETAR ITEM
 
     return(
