@@ -1,61 +1,61 @@
 
-const express = require('express')
+const express = require('express');
 
-const app = express()
+const app = express();
 
-const handlebars = require('express-handlebars')
+const handlebars = require('express-handlebars');
 
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 
-const post = require ('./models/Post')
+const post = require ('./models/Post');
 
-const Post = require('./models/Post')
+const Post = require('./models/Post');
 
-const PostFornec = require('./models/PostFornec')
+const PostFornec = require('./models/PostFornec');
 
-const PostRep = require('./models/PostRep')
+const PostRep = require('./models/PostRep');
 
-const PostClientes = require('./models/PostClientes')
+const PostClientes = require('./models/PostClientes');
 
-const PostPredios = require('./models/PostPredios')
+const PostPredios = require('./models/PostPredios');
 
-const PostDoed = require('./models/PostDoed')
+const PostDoed = require('./models/PostDoed');
 
-const PostUser = require('./models/PostUser')
+const PostUser = require('./models/PostUser');
 
-const PostPermissoesUser = require('./models/PostPermissoesUser')
+const PostPermissoesUser = require('./models/PostPermissoesUser');
 
-const PostSetorUser = require('./models/PostSetorUser')
+const PostSetorUser = require('./models/PostSetorUser');
 
-const PostNotificaUser = require('./models/PostNotificaUser')
+const PostNotificaUser = require('./models/PostNotificaUser');
 
-const PostMarcasEqp = require('./models/PostMarcasEqp')
+const PostMarcasEqp = require('./models/PostMarcasEqp');
 
-const PostNotificaSetor = require('./models/PostNotificaSetor')
+const PostNotificaSetor = require('./models/PostNotificaSetor');
 
-const PostObras = require('./models/PostObras')
+const PostObras = require('./models/PostObras');
 
-const PostCompras = require('./models/PostCompras')
+const PostCompras = require('./models/PostCompras');
 
-const path = require('path')
+const path = require('path');
 
-const upload = require('./middleware/uploadimg')
+const upload = require('./middleware/uploadimg');
 
-const res = require('express/lib/response')
+const res = require('express/lib/response');
 
-const req = require('express/lib/request')
+const req = require('express/lib/request');
 
-const multer = require('multer')
+const multer = require('multer');
 
 var cors = require('cors');
 
-const db = require('./models/db')
+const db = require('./models/db');
 
-const { json } = require('body-parser')
+const { json } = require('body-parser');
 
-const mysql = require('mysql2')
+const mysql = require('mysql2');
 
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
 
 const SECRET = 'experconsult'
 
@@ -497,7 +497,6 @@ const SECRET = 'experconsult'
             console.error(ex);
             res.render('erro')
         }
-        
     });
 
     app.delete('/cliente-deletado/:id', async function(req, res) {
@@ -505,7 +504,8 @@ const SECRET = 'experconsult'
         const {id} = req.params
 
         const dbResponse = await PostClientes.destroy({where:{id: id}})
-    })
+    
+    });
 
     // ROTA - RECEBE REQ DO FRONT (INFOS CLIENTES)
 
@@ -516,7 +516,8 @@ const SECRET = 'experconsult'
                 clientes_logo,
                 url: "http://192.168.10.122:1212/files/" //FIXME TO IP SERVER
             })  
-        }).catch(() =>{
+        }).catch((err) => {
+            console.log(err)
             res.render('erro')
         })
     })
@@ -1024,12 +1025,10 @@ const SECRET = 'experconsult'
             console.log(err)
             res.render('erro')
         })
-
-    })
+    }) 
 
     // PORTA QUE O BACK-END ESTÁ SENDO EXECUTADO
 
-app.listen(1212, function(){
-    console.log('Servidor rodando na porta: 1212'.toUpperCase())
+app.listen(1212, function() {
+    console.log('Servidor rodando na porta: 1212'.toUpperCase());
 });
-

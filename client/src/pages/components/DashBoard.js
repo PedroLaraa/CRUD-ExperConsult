@@ -282,9 +282,6 @@ function DashBoardInterface() {
                                 style={cabecalhoTableDashboard}
                                 className="container row text-uppercase m-0"
                             >
-                                {/* <div id="topo" className="col-2">
-                                    <p>Data:</p>
-                                </div> */}
                                 <div className="col-8 ">
                                     <p>Setor / Assunto:</p>
                                 </div>
@@ -313,7 +310,6 @@ function DashBoardInterface() {
                                             className="container overflow-auto"
                                             style={{ maxHeight: "30rem", width: "100%" }}
                                         >
-                                            {/* <h1>{value.obras_cliente.obras_nomeDaObra}</h1> */}
                                             <div
                                                 style={paragrafoDivStyle}
                                             >
@@ -322,12 +318,6 @@ function DashBoardInterface() {
                                                     style={paragrafoDashboardStyle}
                                                     id={(value.predios_nomeDosPredios + value.id).toLowerCase()}
                                                 >
-                                                    {/* <div className="col-2 col-md-2">
-                                                        <p>{value.updatedAt.split('-').reverse().join('/')}</p>
-                                                    </div> */}
-                                                    {/* <div className="col-1">
-                                                        <p style={{ background: 'rgba(50,50,50,0.5)', height: '95%', width: '.5rem', border: "1px solid whitesmoke", borderRadius: "1rem" }} />
-                                                    </div> */}
                                                     <div className="col-4 col-md-6">
                                                         <p
                                                             className="d-flex justify-content-between">{value.predios_nomeDosPredios}
@@ -337,7 +327,7 @@ function DashBoardInterface() {
                                                                     onClick={idDoed}
                                                                     className="btn btn-outline-dark "
                                                                     style={{ fontSize: '1rem', fontFamily: 'Raleway' }}>
-                                                                    Listar Eventos
+                                                                    Listar Eventos 
                                                                 </button>
                                                                 <button
                                                                     value={value.id}
@@ -381,12 +371,6 @@ function DashBoardInterface() {
                                                                     style={paragrafoDoedStyle}
                                                                     className="row justify-content-md-center"
                                                                 >
-                                                                    {/* <div className="col-1 col-md-2">
-                                                                        <p>{value.createdAt.split('-').reverse().join('/')}</p>
-                                                                    </div>
-                                                                    <div className="col-1">
-                                                                        <p style={{ background: 'rgba(50,50,50,0.5)', height: '100%', width: '.5rem', border: "1px solid whitesmoke", borderRadius: "1rem" }} />
-                                                                    </div> */}
                                                                     <div className="col-6">
                                                                         <p>{value.doed_eventos}</p>
                                                                     </div>
