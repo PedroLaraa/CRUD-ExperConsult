@@ -241,8 +241,7 @@ function DashBoardInterface() {
     }, []);
 
     return (
-        <div
-            className="container vh-100">
+        <div className="container vh-100">
             <NotificacoesSetor />
             <div className="row h-auto position-relative pt-5 d-flex justify-content-center">
                 <div
@@ -270,7 +269,7 @@ function DashBoardInterface() {
                         style={{ maxHeight: "40rem", width: "60rem", paddingLeft: "2rem" }}
                     >
                         <div className="d-flex d-inline justify-content-around p-3 bg-opacity-25 border border-dark border-1 rounded-3 " style={{ background: "ghostwhite" }}>
-                            <h1 className="text-uppercase w-100">• {clientes}</h1>
+                            <h1 className="text-uppercase w-100">• {clientes.toString().substring(0, clientes.length - 1)}</h1>
                             <button
                                 className="btn btn-outline-dark"
                                 onClick={() => handleClickAdd()}
