@@ -425,11 +425,9 @@ const SECRET = 'experconsult'
         }).catch(() => {
             res.render('erro')
         })
-    })
-
+    });
 
     //CLIENTES:
-
 
     // ROTA - FORMULÁRIO DE CLIENTES
 
@@ -511,7 +509,7 @@ const SECRET = 'experconsult'
 
     app.get('/list-infosClientes', async (req, res) =>{
         await PostClientes.findAll()
-        .then((clientes_logo) =>{
+        .then((clientes_logo) => {
             return res.json({
                 clientes_logo,
                 url: "http://192.168.10.122:1212/files/" //FIXME TO IP SERVER
@@ -926,7 +924,6 @@ const SECRET = 'experconsult'
             console.log(err)
             res.render('erro')
         })
-
     })
 
     // ROTAS - COMPRAS EXPER
@@ -948,6 +945,7 @@ const SECRET = 'experconsult'
             console.log(err)
             res.render('erro')
         }   
+
     })
 
     // ROTA - ATUALIZA AS COMPRAS NO DB

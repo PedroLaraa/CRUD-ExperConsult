@@ -79,8 +79,8 @@ function DashBoardInterface() {
             }).catch((err) => {
                 console.log(err)
             })
-    }
-    
+    };
+
     const getInfosPredios = async (req, res) => {
         api.get('list-infosPredios')
             .then((response) => {
@@ -89,7 +89,7 @@ function DashBoardInterface() {
             }).catch((err) => {
                 console.log(err)
             })
-    }
+    };
 
     // FAZ UMA REQUISIÇÃO PARA O BACK E RETORNAR O DATABASE COM DADOS (DOED)
 
@@ -101,26 +101,26 @@ function DashBoardInterface() {
             }).catch((err) => {
                 console.log(err)
             })
-    }
+    };
 
     // FUNÇÃO PARA DEFINIR OS CLIENTES
 
     function handleSetClientes(e) {
         setClientes(e.target.value)
-    }
+    };
 
     // FUNÇÃO PARA EXECUTAR AS BUSCAS
 
     function handlePesquisarCliente() {
         setPesquisarCliente(clientes)
-    }
+    };
 
     // FUNÇÃO PARA DISPARAR OS FILTROS
 
     function handleFiltrar(e) {
         handleSetClientes(e)
         handlePesquisarCliente()
-    }
+    };
 
     function findOcc(arr, key) {
         let arr2 = [];
@@ -144,27 +144,27 @@ function DashBoardInterface() {
             }
         })
         return arr2;
-    }
+    };
 
     const busca = clientes.toLowerCase(); // DEFINE O QUE SERÁ BUSCADO
 
     const dataFiltrado = data.filter(v => JSON.stringify(v.obras_cliente.obras_nomeDaObra).replaceAll('"', '').toLowerCase().includes(busca.split(' - ')[1])); // RETORNA OS DADOS REFERENTES A BUSCA
 
-    const contadorDeEventos = findOcc(data2, 'predios_clientes')
+    const contadorDeEventos = findOcc(data2, 'predios_clientes');
 
-    const nomesFiltrados = obras.map(v => JSON.stringify(v.clientes_obra.clientes_apelido + ' - ' + v.obras_nomeDaObra).toLowerCase().replaceAll('"', '')).filter((elem, index, self) => index === self.indexOf(elem)).sort() // RETORNA OS APELIDOS SEM REPETIR
+    const nomesFiltrados = obras.map(v => JSON.stringify(v.clientes_obra.clientes_apelido + ' - ' + v.obras_nomeDaObra).toLowerCase().replaceAll('"', '')).filter((elem, index, self) => index === self.indexOf(elem)).sort(); // RETORNA OS APELIDOS SEM REPETIR
 
-    clientesEditados = nomesFiltrados
+    clientesEditados = nomesFiltrados;
 
-    const doedFiltrado = data2.filter(v => v.predios_clientes == idsDoed).reverse() // FILRA OS DOEDS POR PREDIO E COLOCA EM ORDEM CRESCENTE
+    const doedFiltrado = data2.filter(v => v.predios_clientes == idsDoed).reverse(); // FILRA OS DOEDS POR PREDIO E COLOCA EM ORDEM CRESCENTE
 
     const verificacaoDeBusca = doedFiltrado.some(el => data2.map((value) => (value)).includes(el)); // VERIFICA SE AQUELE SETOR POSSUI EVENTOS 
 
-    const nomeDoPredio = dataFiltrado.filter(v => JSON.stringify(v.id) == (idsDoed)).map(v => v.predios_nomeDosPredios).toString() // RETORNA O NOME DO PREDIO
+    const nomeDoPredio = dataFiltrado.filter(v => JSON.stringify(v.id) == (idsDoed)).map(v => v.predios_nomeDosPredios).toString(); // RETORNA O NOME DO PREDIO
 
-    const prediosFiltrados = data.map(v => JSON.stringify(v.predios_nomeDosPredios).toLowerCase().replaceAll('"', '') + v.id)
+    const prediosFiltrados = data.map(v => JSON.stringify(v.predios_nomeDosPredios).toLowerCase().replaceAll('"', '') + v.id);
 
-    prediosEditados = prediosFiltrados
+    prediosEditados = prediosFiltrados;
 
     // FUNÇÃO PARA ABRIR O DIALOG DE ADIÇÃO DE ASSUNTO
 
@@ -217,7 +217,7 @@ function DashBoardInterface() {
     };
 
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
-        
+
         getInfosPredios();
 
         getInfosDoed();
@@ -241,7 +241,7 @@ function DashBoardInterface() {
     }, []);
 
     return (
-        <div className="container vh-100">
+        <div className="container ">
             <NotificacoesSetor />
             <div className="row h-auto position-relative pt-5 d-flex justify-content-center">
                 <div
@@ -258,7 +258,7 @@ function DashBoardInterface() {
                                 onClick={handleFiltrar}
                                 style={{ width: "17rem", fontSize: '1.1rem', fontFamily: 'Raleway' }}
                             >
-                                { value.toString().substring(0, value.length - 1) }
+                                {value.toString().substring(0, value.length - 1)}
                             </button>
                         </div>
                     ))}
@@ -327,7 +327,7 @@ function DashBoardInterface() {
                                                                     onClick={idDoed}
                                                                     className="btn btn-outline-dark "
                                                                     style={{ fontSize: '1rem', fontFamily: 'Raleway' }}>
-                                                                    Listar Eventos 
+                                                                    Listar Eventos
                                                                 </button>
                                                                 <button
                                                                     value={value.id}
@@ -340,7 +340,8 @@ function DashBoardInterface() {
                                                                                     return <p>{v.occurrence}</p>
                                                                                 }
                                                                             }
-                                                                            )}</p>
+                                                                            )}
+                                                                            </p>
                                                                         </div>
                                                                     )}
                                                                     {contadorDeEventos.map(v => v.predios_clientes).includes(value.id) == false && (
@@ -379,23 +380,22 @@ function DashBoardInterface() {
                                                                     </div>
                                                                     <div className="col-3 d-flex justify-content-end">
                                                                         <p className="col-3 d-flex justify-content-end">{value.doed_autor}
-                                                                            <button type="button" style={{height: '2.4rem'}} className="btn btn-secondary" data-toggle="tooltip" data-placement="top" title={`Data: ${value.createdAt.split('-').reverse().join('/')}`}>
+                                                                            <button type="button" style={{ height: '2.4rem' }} className="btn btn-secondary" data-toggle="tooltip" data-placement="top" title={`Data: ${value.createdAt.split('-').reverse().join('/')}`}>
                                                                                 🛈
                                                                             </button>
                                                                         </p>
-                                                                        {value.doed_autor === recoveredUsers.usuario.user_nomeUser || recoveredUsers.usuario.user_permissoes === 2 || recoveredUsers.usuario.user_permissoes === 1 ?  
-                                                                        
-                                                                        <button
-                                                                                    className="btn btn-outline-danger"
-                                                                                    value={value.id}
-                                                                                    onClick={handleRemoveEvent}
-                                                                                    style={{ fontSize: '1rem', fontFamily: 'Raleway', width: '2.8rem', height: '2.4rem', paddingRight: '.6rem' }}
-                                                                                    data-toggle="tooltip"
-                                                                                    data-placement="right"
-                                                                                    title="Deletar Evento"
-                                                                                >❌
-                                                                                </button>
-                                                                                : '' 
+                                                                        {value.doed_autor === recoveredUsers.usuario.user_nomeUser || recoveredUsers.usuario.user_permissoes === 2 || recoveredUsers.usuario.user_permissoes === 1 ?
+                                                                            <button
+                                                                                className="btn btn-outline-danger"
+                                                                                value={value.id}
+                                                                                onClick={handleRemoveEvent}
+                                                                                style={{ fontSize: '1rem', fontFamily: 'Raleway', width: '2.8rem', height: '2.4rem', paddingRight: '.6rem' }}
+                                                                                data-toggle="tooltip"
+                                                                                data-placement="right"
+                                                                                title="Deletar Evento"
+                                                                            >❌
+                                                                            </button>
+                                                                            : ''
                                                                         }
                                                                     </div>
                                                                 </div>
@@ -442,6 +442,14 @@ function DashBoardInterface() {
                         ))}
                     </div>
                 )}
+                <div className="m-4" >
+                    <div className="p-1" style={{ border: '4px solid rgba(168,208,213,1)', borderRadius: '.3rem' }}>
+                        <iframe title="Teste" src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23a9d2d7&ctz=America%2FSao_Paulo&mode=WEEK&showTabs=1&src=Y281b2YxbWhvZm1lcHBibnA4cWdmcmhzbzhAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&src=cHQuYnJhemlsaWFuI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23D81B60&color=%230B8043" style={{ border: "solid 1px #777", width: "100%", height: "50vh", frameborder: "0", scrolling: "no", position: 'relative', top: '.2rem' }}></iframe>
+                    </div>
+                    <div className="pt-2">
+                        <a href="https://calendar.google.com"><button className="btn btn-outline-dark w-25 text-uppercase">Adicionar Evento</button></a>
+                    </div>
+                </div>
             </div>
         </div>
     )
@@ -449,4 +457,4 @@ function DashBoardInterface() {
 
 export { clientesEditados, prediosEditados }
 
-export default DashBoardInterface
+export default DashBoardInterface;
