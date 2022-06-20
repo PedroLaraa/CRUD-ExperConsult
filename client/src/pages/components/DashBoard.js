@@ -278,10 +278,7 @@ function DashBoardInterface() {
                             </button>
                         </div>
                         <div className="position-relative p-2">
-                            <div
-                                style={cabecalhoTableDashboard}
-                                className="container row text-uppercase m-0"
-                            >
+                            <div style={cabecalhoTableDashboard} className="container row text-uppercase m-0">
                                 <div className="col-8 ">
                                     <p>Setor / Assunto:</p>
                                 </div>
@@ -339,8 +336,7 @@ function DashBoardInterface() {
                                                                                 if (JSON.stringify(v.predios_clientes) == (value.id)) {
                                                                                     return <p>{v.occurrence}</p>
                                                                                 }
-                                                                            }
-                                                                            )}
+                                                                            })}
                                                                             </p>
                                                                         </div>
                                                                     )}
@@ -368,10 +364,7 @@ function DashBoardInterface() {
                                                     <div>
                                                         {doedFiltrado.map(value => (
                                                             <div key={value.id}>
-                                                                <div
-                                                                    style={paragrafoDoedStyle}
-                                                                    className="row justify-content-md-center"
-                                                                >
+                                                                <div style={paragrafoDoedStyle} className="row justify-content-md-center">
                                                                     <div className="col-6">
                                                                         <p>{value.doed_eventos}</p>
                                                                     </div>
@@ -443,8 +436,8 @@ function DashBoardInterface() {
                     </div>
                 )}
                 <div className="m-4" >
-                    <div className="p-1" style={{ border: '4px solid rgba(168,208,213,1)', borderRadius: '.3rem' }}>
-                        <iframe title="Teste" src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23a9d2d7&ctz=America%2FSao_Paulo&mode=WEEK&showTabs=1&src=Y281b2YxbWhvZm1lcHBibnA4cWdmcmhzbzhAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&src=cHQuYnJhemlsaWFuI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23D81B60&color=%230B8043" style={{ border: "solid 1px #777", width: "100%", height: "50vh", frameborder: "0", scrolling: "no", position: 'relative', top: '.2rem' }}></iframe>
+                    <div className="p-1" style={{ border: '4px solid rgba(168,208,213,1)', borderRadius: '.3rem', backgroundColor: 'rgba(168,208,213,1)' }}>
+                        <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23a9d2d7&ctz=America%2FSao_Paulo&mode=WEEK&src=Y281b2YxbWhvZm1lcHBibnA4cWdmcmhzbzhAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&src=cHQuYnJhemlsaWFuI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%230B8043&color=%233F51B5" style={{width: "100%", height: "50vh", frameborder: "0", scrolling: "no", position: 'relative', top: '.2rem' }}></iframe>
                     </div>
                     <div className="pt-2">
                         <a href="https://calendar.google.com"><button className="btn btn-outline-dark w-25 text-uppercase">Adicionar Evento</button></a>

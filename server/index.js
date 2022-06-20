@@ -1003,7 +1003,7 @@ const SECRET = 'experconsult'
     // ROTA - DELETAR COMPRAS NO DB
 
     app.delete('/compras-delete/:id', async function(req, res) {
-            
+    
             const {id} = req.params
     
             const dbResponse = await PostCompras.destroy({where:{id: id}})
