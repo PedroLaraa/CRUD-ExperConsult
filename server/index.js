@@ -1044,7 +1044,7 @@ const SECRET = 'experconsult'
         }
 
         try{
-            const dbResponse = await PostTodo.create(dataToInsert)
+            const dbResponse = await PostToDo.create(dataToInsert)
         }catch(err){
             console.log(err)
             res.render('erro')
@@ -1064,6 +1064,39 @@ const SECRET = 'experconsult'
             console.log(err)
             res.render('erro')
         })
+    })
+
+    // ROTA - ATUALIZA O STATUS DE TODO NO DB
+
+    app.put('/todo-updateStatus', async (req, res) => {
+
+        const id = req.body.id
+
+        const dataToInsert = {
+            todo_status: req.body.todo_status,
+            todo_andamento: req.body.todo_andamento
+        }
+
+        try{
+            const dbResponse = await PostToDo.update(dataToInsert, {
+                where: {
+                    id: parseInt(id)
+                }})
+        }catch(err){
+            console.log(err)
+            res.render('erro')
+        }
+
+    })
+
+    //ROTA - DELETAR TODO NO DB
+
+    app.delete('/todo-deletado/:id', async function(req, res) {
+        
+                const {id} = req.params
+        
+                const dbResponse = await PostToDo.destroy({where:{id: id}})
+        
     })
 
     // PORTA QUE O BACK-END ESTÁ SENDO EXECUTADO

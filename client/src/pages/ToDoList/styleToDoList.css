@@ -1,0 +1,15 @@
+#rangeInputTodo{
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 15px;
+}
+
+#containerBgTodo{
+    background-color: rgba(169, 210, 215, 0.5);
+    border: 2px solid white ;
+    border-radius: 6px;
+}
+
+#containerInfosTodo{
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.1rem;
+}
