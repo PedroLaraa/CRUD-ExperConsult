@@ -37,6 +37,8 @@ const PostObras = require('./models/PostObras');
 
 const PostCompras = require('./models/PostCompras');
 
+const PostToDo = require('./models/PostToDo');
+
 const path = require('path');
 
 const upload = require('./middleware/uploadimg');
@@ -1024,6 +1026,45 @@ const SECRET = 'experconsult'
             res.render('erro')
         })
     }) 
+
+    // ROTAS - ToDoList
+
+    // ROTA - INSERE ToDo NO DB
+
+    app.post('/todo-cadastrada', async (req, res) => {
+
+        const dataToInsert = {
+            todo_tarefa: req.body.todo_tarefa,
+            todo_dataConclusao: req.body.todo_dataConclusao,
+            todo_autor: req.body.todo_autor,
+            todo_status: req.body.todo_status,
+            todo_andamento: req.body.todo_andamento,
+            todo_destinatario: req.body.todo_destinatario,
+            todo_setor: req.body.todo_setor,
+        }
+
+        try{
+            const dbResponse = await PostTodo.create(dataToInsert)
+        }catch(err){
+            console.log(err)
+            res.render('erro')
+        }
+    })
+
+    // ROTA - RECEBE REQ DO FRONT E LISTA DADOS 
+
+    app.get('/listTodo-infos', async (req, res) => {
+
+        PostToDo.findAll({})
+        .then((value) => {
+            res.json({
+                value
+            })
+        }).catch((err) => {
+            console.log(err)
+            res.render('erro')
+        })
+    })
 
     // PORTA QUE O BACK-END ESTÁ SENDO EXECUTADO
 

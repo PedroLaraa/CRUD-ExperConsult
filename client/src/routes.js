@@ -48,6 +48,8 @@ import CadastroObra from "./pages/CadastroObra";
 
 import ComprasExper from "./pages/ComprasExper";
 
+import ToDoList from "./pages/ToDoList";
+
 import { AuthProvider, AuthContext } from "./contexts/auth";
 
 // CRIA AS ROTA DE NAVEGAÇÃO DE BROWSER
@@ -187,6 +189,7 @@ function Rotas(){
                     <Route path="/notificacoes-setores" element={<Private><NotificacoesSetores /></Private>}></Route>
                     <Route path="/cadastro-obra" element={<Private><CadastroObra /></Private>}></Route>
                     <Route path="/compras-exper" element={<Private><ComprasExper /></Private>}></Route>
+                    <Route path="/todo-list" element={<Private><ToDoList /></Private>}></Route>
                 </Routes>
             </AuthProvider>
         </BrowserRouter>
