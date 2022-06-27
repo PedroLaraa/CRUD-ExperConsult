@@ -803,6 +803,18 @@ const SECRET = 'experconsult'
     })
 
     // LISTAGEM DE DADOS DOS USUÁRIOS
+
+    app.get('/list-infosUser', async (req, res) =>{
+        await PostUser.findAll({})
+        .then((value) => {
+            res.json({
+                value,
+            })
+        }).catch((err) => {
+                console.log(err)
+                res.render('erro')
+            });
+    });
     
     app.get('/list-infosUserPerm', async (req, res) => {
         await PostUser.findAll({
@@ -974,8 +986,8 @@ const SECRET = 'experconsult'
         }catch(err){
             console.log(err)
             res.render('erro')
-        }
-    })
+        };
+    });
 
     app.put('/compras-updateSubtrai', async (req, res) => {
 
@@ -999,8 +1011,8 @@ const SECRET = 'experconsult'
         }catch(err){
             console.log(err)
             res.render('erro')
-        }
-    })
+        };
+    });
 
     // ROTA - DELETAR COMPRAS NO DB
 
@@ -1010,7 +1022,7 @@ const SECRET = 'experconsult'
     
             const dbResponse = await PostCompras.destroy({where:{id: id}})
     
-    })
+    });
 
     // ROTA - LISTAGEM DE COMPRAS
 
@@ -1024,14 +1036,14 @@ const SECRET = 'experconsult'
         }).catch((err) => {
             console.log(err)
             res.render('erro')
-        })
-    }) 
+        });
+    });
 
     // ROTAS - ToDoList
 
     // ROTA - INSERE ToDo NO DB
 
-    app.post('/todo-cadastrada', async (req, res) => {
+    app.post('/todo-cadastrado', async (req, res) => {
 
         const dataToInsert = {
             todo_tarefa: req.body.todo_tarefa,
@@ -1040,7 +1052,6 @@ const SECRET = 'experconsult'
             todo_status: req.body.todo_status,
             todo_andamento: req.body.todo_andamento,
             todo_destinatario: req.body.todo_destinatario,
-            todo_setor: req.body.todo_setor,
         }
 
         try{
@@ -1048,8 +1059,8 @@ const SECRET = 'experconsult'
         }catch(err){
             console.log(err)
             res.render('erro')
-        }
-    })
+        };
+    });
 
     // ROTA - RECEBE REQ DO FRONT E LISTA DADOS 
 
@@ -1063,8 +1074,8 @@ const SECRET = 'experconsult'
         }).catch((err) => {
             console.log(err)
             res.render('erro')
-        })
-    })
+        });
+    });
 
     // ROTA - ATUALIZA O STATUS DE TODO NO DB
 
@@ -1085,9 +1096,8 @@ const SECRET = 'experconsult'
         }catch(err){
             console.log(err)
             res.render('erro')
-        }
-
-    })
+        };
+    });
 
     //ROTA - DELETAR TODO NO DB
 

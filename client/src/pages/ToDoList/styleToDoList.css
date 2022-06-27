@@ -1,15 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+
 #rangeInputTodo{
     border: 2px solid rgb(0, 0, 0);
     border-radius: 15px;
+    background-color: rgb(220, 227, 233);
 }
 
 #containerBgTodo{
-    background-color: rgba(169, 210, 215, 0.5);
+    background-color: rgba(169, 210, 215, 0.749);
     border: 2px solid white ;
     border-radius: 6px;
 }
 
 #containerInfosTodo{
-    font-family: 'Raleway', sans-serif;
-    font-size: 1.1rem;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1.5rem;
+}
+
+#titlesDoed{
+    font-family: 'Roboto Mono', monospace;
+    color: rgb(0, 0, 0);
 }

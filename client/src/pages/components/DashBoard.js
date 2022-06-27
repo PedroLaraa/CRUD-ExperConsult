@@ -258,7 +258,7 @@ function DashBoardInterface() {
                                 onClick={handleFiltrar}
                                 style={{ width: "17rem", fontSize: '1.1rem', fontFamily: 'Raleway' }}
                             >
-                                {value.toString().substring(0, value.length - 1)}
+                                { value.split('-')[0].toString()+ ' - ' + value.split('-')[1].toString().replace(/[0-9]/g, '') }
                             </button>
                         </div>
                     ))}

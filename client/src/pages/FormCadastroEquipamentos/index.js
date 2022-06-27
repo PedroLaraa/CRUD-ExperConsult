@@ -40,7 +40,7 @@ function FormEquipamentos() {
         <div className="">
             <NotificacoesSetor />
             <form
-                className="was-validated "
+                className="was-validated"
                 id="formulario"
                 autoComplete="off"
                 encType="multipart/form-data"
