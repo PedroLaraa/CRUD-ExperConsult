@@ -27,6 +27,9 @@ const PostToDo = db.sequelize.define('todo_list',{
     },
     todo_setor: {
         type: db.Sequelize.STRING
+    },
+    todo_obraCliente: {
+        type: db.Sequelize.STRING
     }
 });
 

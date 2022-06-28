@@ -563,7 +563,6 @@ const SECRET = 'experconsult'
             console.error(err);
             res.render('erro');
         })
-
     })
 
     // ROTA - FAZ OS CADASTROS DOS EVENTOS NO BD (PREDIOS)
@@ -1052,6 +1051,7 @@ const SECRET = 'experconsult'
             todo_status: req.body.todo_status,
             todo_andamento: req.body.todo_andamento,
             todo_destinatario: req.body.todo_destinatario,
+            todo_obraCliente: req.body.todo_obraCliente,
         }
 
         try{

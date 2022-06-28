@@ -33,11 +33,16 @@ export default function FormDialogToDo(value){
         todo_destinatario: value.todo_destinatario,
         todo_setor: value.todo_setor,
         todo_autor: value.todo_autor,
+        todo_obraCliente: value.todo_obraCliente,
     });
 
     const [user, setUser] = useState([]);
 
     const [userNotificado, setUserNotificado] = useState('');
+
+    const [obraTodo, setObraTodo] = useState('');
+
+    const [obras, setObras] = useState([]);
 
     const handleClose = () => {
         value.setOpen(false);
@@ -57,14 +62,17 @@ export default function FormDialogToDo(value){
             todo_destinatario: userNotificado,
             todo_setor: editValue.todo_setor,
             todo_autor: value.todo_autor,
-            todo_status: 'ToDo',
+            todo_status: 'Executando',
             todo_andamento: 0,
+            todo_obraCliente: obraTodo,
         });
 
         alert('Tarefa cadastrada com sucesso!');
         handleClose();
         document.location.reload();
     };
+
+    console.log(obraTodo)
 
     const getUsersList = async () => {
         api.get('list-infosUser')
@@ -75,14 +83,39 @@ export default function FormDialogToDo(value){
             });
     };
 
+    const getObrasList = async () => {
+        api.get('list-infosObras')
+            .then(response => {
+                setObras(response.data.value);
+            }).catch((err) => {
+                console.log(err);
+            });
+    };
+
     useEffect(() => {
         getUsersList();
+        getObrasList();
     }, []);
 
     return(
         <Dialog open={value.open} onClose={handleClose}>
             <DialogTitle>Novo To-Do: </DialogTitle>
                 <DialogContent >
+                    <InputLabel>Cliente: </InputLabel>
+                    <Select 
+                        autoComplete='off'
+                        required
+                        margin="dense"
+                        id="todo_obraCliente"
+                        style={{ width: '100%' }}
+                        onChange={(e) => setObraTodo(e.target.value)}
+                    >
+                        {obras.map((v) => (
+                            <MenuItem key={v.id} value={v.clientes_obra.clientes_apelido + ' - ' + v.obras_nomeDaObra.toString().replace(/[0-9]/g, '')} readOnly>
+                                <ListItemText primary={v.clientes_obra.clientes_apelido + ' - ' + v.obras_nomeDaObra.toString().replace(/[0-9]/g, '')} />
+                            </MenuItem>
+                        ))}
+                    </Select>
                     <InputLabel >Tarefa: </InputLabel>
                     <TextareaAutosize
                         autoComplete='off'
