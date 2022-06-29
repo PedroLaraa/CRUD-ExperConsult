@@ -99,7 +99,7 @@ export default function FormDialogToDo(value){
 
     return(
         <Dialog open={value.open} onClose={handleClose}>
-            <DialogTitle>Novo To-Do: </DialogTitle>
+            <DialogTitle>Nova Tarefa: </DialogTitle>
                 <DialogContent >
                     <InputLabel>Cliente: </InputLabel>
                     <Select 
@@ -159,7 +159,7 @@ export default function FormDialogToDo(value){
                 </DialogContent>
                 <DialogActions>
                 <Button onClick={handleClose}>Cancelar</Button>
-                <Button onClick={handleCriarEvento}>Cadastrar Evento</Button>
+                <Button onClick={handleCriarEvento}>Cadastrar Tarefa</Button>
             </DialogActions>
         </Dialog>
     )
