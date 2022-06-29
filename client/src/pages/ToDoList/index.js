@@ -338,7 +338,7 @@ function ToDoList() {
                             {todoArquivado.map(v => (
                                 <div id="containerInfosTodo" key={v.id} className="col-11 p-2">
                                     <p>• Tarefa: {v.todo_tarefa}</p>
-                                    <p>• Concluído: {v.updatedAt.split('-').reverse().join('/')}</p>
+                                    <p>• Arquivado em: {v.updatedAt.split('-').reverse().join('/')}</p>
                                     <div className="col-12">
                                         <hr />
                                         <section className="d-flex justify-content-around">

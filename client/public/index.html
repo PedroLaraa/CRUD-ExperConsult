@@ -26,9 +26,6 @@
 </header>
 
 <body>
-    <!-- <div id="videoControl">
-        <video autoplay muted loop type="video/mp4" src="./img/logo-icones.mp4"></video>
-    </div> -->
     <nav id="navbarOculta" class="navbar navbar-expand-lg navbar-dark sticky-top px-2"
         style="background-color: #A9D2D7">
         <a class="navbar-brand" href="/dashboard">EXPER CONSULT</a>
@@ -47,9 +44,9 @@
                         Infraestrutura
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" id="redirectPage" href="" >Planilha de Padrões</a>
-                        <a class="dropdown-item" href="/compras-exper" >Compras Exper</a> 
-                        <a class="dropdown-item" href="/todo-list" >To-Do</a>
+                        <a class="dropdown-item" id="redirectPage" href="">Planilha de Padrões</a>
+                        <a class="dropdown-item" href="/compras-exper">Compras Exper</a>
+                        <a class="dropdown-item" href="/todo-list">To-Do</a>
                         <div class="dropdown-divider"></div>
                     </div>
                 </li>
@@ -108,7 +105,7 @@
                         <!-- <a class="dropdown-item" href="/usuarios">Consulta</a> -->
                         <div class="dropdown-divider"></div>
                     </div>
-                </li>                
+                </li>
             </ul>
             <div class="w-100" id="topo">
                 <ul class="navbar-nav w-100 float-right ">
@@ -118,22 +115,24 @@
                 </ul>
             </div>
             <div class="" style="width: 90%; position: relative; right: 3rem;">
-                <ul class="navbar-nav float-right justify-content-end" >
+                <ul class="navbar-nav float-right justify-content-end">
                     <li class="p-1">
-                        <button class="btn btn-dark" id="notificacoesBtn" href="" >
+                        <button class="btn btn-dark" id="notificacoesBtn" href="">
                             <i id="iconeNotificacao">🔔</i>
                         </button>
                     </li>
                     <li>
-                        <img src="./img/userImgPadrao.jpg" alt="logo" class="img-fluid border border-white rounded-circle" style="width: 45px;" id="imgLoggedUser">
+                        <img src="./img/userImgPadrao.jpg" alt="logo"
+                            class="img-fluid border border-white rounded-circle" style="width: 45px;"
+                            id="imgLoggedUser">
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="nomeUserLogado" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Usuário
                         </a>
-                        <div class="dropdown-menu " aria-labelledby="navbarDropdown" >
-                            <a  class="btn btn-outline-dark" id="logoutBtn">Logout</a>
+                        <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+                            <a class="btn btn-outline-dark" id="logoutBtn">Logout</a>
                             <div class="dropdown-divider"></div>
                         </div>
                     </li>
@@ -187,7 +186,7 @@
             <a class="text-dark" href="">Exper Consult Ltda</a>
         </div>
         <div class="text-center text-dark p-3 text-uppercase" style="background-color: rgba(0, 0, 0, 0.2);">
-            <!-- Versão do sistema:--> v5.0 em Desenvolvimento 
+            <!-- Versão do sistema:--> v5.0
         </div>
         <!-- Copyright -->
         <div class="logo-exper">
@@ -211,7 +210,7 @@
 
 <script>
 
-    document.getElementById('redirectPage').addEventListener('click', function(e) {
+    document.getElementById('redirectPage').addEventListener('click', function (e) {
         // e.preventDefault();
         window.open('https://docs.google.com/spreadsheets/d/1y_6N6MMqnLV6nJVfRLvdDGUPdXSTtkDH/edit?usp=sharing&ouid=100532539000319060348&rtpof=true&sd=true')
     });
@@ -304,15 +303,14 @@
         height: 3rem;
     }
 
-    #logoutBtn{
+    #logoutBtn {
         display: flex;
         justify-content: center;
     }
 
-    #ulUser{
+    #ulUser {
         width: 90%;
     }
-
 </style>
 
 </html>
