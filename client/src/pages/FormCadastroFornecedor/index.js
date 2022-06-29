@@ -1,10 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useContext } from "react";
+
+import { AuthContext } from "../../contexts/auth";
 
 import './fornecedoresStyle.css'
 
 import NotificacoesSetor from "../NotificacoesSetores";
 
 function FormFornecedores() {
+
+    const { logout } = useContext(AuthContext);
+
+    const element = document.getElementById('logoutBtn');
+
+    element.addEventListener('click', logout, false);
 
     return(
 

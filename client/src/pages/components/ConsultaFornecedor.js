@@ -1,6 +1,8 @@
 // IMPORTA FUNÇÕES, API's, E O REACT
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+
+import { AuthContext } from "../../contexts/auth";
 
 import api from '../../config/configApi';
 
@@ -19,6 +21,12 @@ import NotificacoesSetor from "../NotificacoesSetores";
 // FUNÇÃO PARA CONSULTA DE DADOS DOS EQUIPAMENTOS
 
 function FiltraFornecedores() {
+
+    const { logout } = useContext(AuthContext);
+
+    const element = document.getElementById('logoutBtn');
+
+    element.addEventListener('click', logout, false);
 
     const [data, setData] = useState([]); // DEFINE O DATABASE
     const [url, setUrl] = useState(''); // DEFINE AS URL's

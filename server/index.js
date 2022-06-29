@@ -1085,7 +1085,7 @@ const SECRET = 'experconsult'
 
         const dataToInsert = {
             todo_status: req.body.todo_status,
-            todo_andamento: req.body.todo_andamento
+            todo_andamento: req.body.todo_andamento,
         }
 
         try{

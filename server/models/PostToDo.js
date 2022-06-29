@@ -30,7 +30,7 @@ const PostToDo = db.sequelize.define('todo_list',{
     },
     todo_obraCliente: {
         type: db.Sequelize.STRING
-    }
+    },
 });
 
 // EXPORTA A FUNÇÃO PostToDo()

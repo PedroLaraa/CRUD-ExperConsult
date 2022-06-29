@@ -1,8 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+
+import { AuthContext } from "../../contexts/auth";
 
 import NotificacoesSetor from "../NotificacoesSetores";
 
 function SuporteSistema() {
+
+    const { logout } = useContext(AuthContext);
+
+    const element = document.getElementById('logoutBtn');
+
+    element.addEventListener('click', logout, false);
 
     const [user, setUser] = useState([]);
     const [username, setUsername] = useState('');

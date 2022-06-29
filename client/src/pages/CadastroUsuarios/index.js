@@ -4,11 +4,15 @@ import { AuthContext } from "../../contexts/auth";
 
 import api from '../../config/configApi';
 
-import { handleAlterImage } from "../components/function/recuperaUserImg";
-
 import NotificacoesSetor from "../NotificacoesSetores";
 
 function FormUsuario(){
+
+    const { logout } = useContext(AuthContext);
+
+    const element = document.getElementById('logoutBtn');
+
+    element.addEventListener('click', logout, false);
 
     const [data, setData] = useState([]);
     const [url, setUrl] = useState('');
@@ -39,14 +43,7 @@ function FormUsuario(){
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
         getInfosUser()
         getInfosPerm()
-        handleAlterImage()
     }, []);
-
-    const { logout } = useContext(AuthContext);
-
-    const element = document.getElementById('logoutBtn');
-
-    element.addEventListener('click', logout, false);
 
     return (
         <div className="">

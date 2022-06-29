@@ -11,15 +11,11 @@ import DialogActions from '@mui/material/DialogActions';
 
 import DialogContent from '@mui/material/DialogContent';
 
-import OutlinedInput from '@mui/material/OutlinedInput';
-
 import ListItemText from '@mui/material/ListItemText';
-
-import Checkbox from '@mui/material/Checkbox';
 
 import DialogTitle from '@mui/material/DialogTitle';
 
-import { FormControl, InputLabel, MenuItem, Select, TextareaAutosize } from '@mui/material';
+import { InputLabel, MenuItem, Select, TextareaAutosize } from '@mui/material';
 
 import api from '../config/configApi';
 
@@ -52,7 +48,7 @@ export default function FormDialogToDo(value){
         setEditValue(prevValues => ({
             ...prevValues,
             [value.target.id]: value.target.value,
-        }));
+        })); 
     };
 
     const handleCriarEvento = () => {
@@ -71,8 +67,6 @@ export default function FormDialogToDo(value){
         handleClose();
         document.location.reload();
     };
-
-    console.log(obraTodo)
 
     const getUsersList = async () => {
         api.get('list-infosUser')

@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+
+import { AuthContext } from "../../contexts/auth";
 
 import api from '../../config/configApi';
 
@@ -7,6 +9,12 @@ import './representanteStyle.css'
 import NotificacoesSetor from "../NotificacoesSetores";
 
 function FormRepresentante(){
+
+    const { logout } = useContext(AuthContext);
+
+    const element = document.getElementById('logoutBtn');
+
+    element.addEventListener('click', logout, false);
 
     const [data, setData] = useState([]);
     const [url, setUrl] = useState('');

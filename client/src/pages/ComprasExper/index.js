@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 
 import NotificacoesSetor from "../NotificacoesSetores";
+
+import { AuthContext } from "../../contexts/auth";
 
 import api from '../../config/configApi';
 
@@ -11,6 +13,12 @@ import FormDialogAddCompras from "../../dialog/ComprasDialog";
 import './comprasStyle.css';
 
 function ComprasExper() {
+
+    const { logout } = useContext(AuthContext);
+
+    const element = document.getElementById('logoutBtn');
+
+    element.addEventListener('click', logout, false);
 
     const [open, setOpen] = useState(false);
 

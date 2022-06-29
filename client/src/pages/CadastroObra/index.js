@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 
 import { useContext } from "react";
 
-import { AuthContext, AuthProvider } from "../../contexts/auth";
+import { AuthContext } from "../../contexts/auth";
 
 import { handleAlterImage } from "../components/function/recuperaUserImg";
 

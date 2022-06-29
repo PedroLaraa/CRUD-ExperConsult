@@ -1,9 +1,11 @@
 
 //REALIZA OS IMPORTS NECESSÁRIOS (ESTILOS, MÉTODOS...)
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 
 import api from '../../config/configApi';
+
+import { AuthContext } from "../../contexts/auth";
 
 import paragrafoDashboardStyle from "../css/paragrafoDashboard.js";
 
@@ -26,6 +28,12 @@ var clientesEditados
 var prediosEditados
 
 function DashBoardInterface() {
+
+    const { logout } = useContext(AuthContext);
+
+    const element = document.getElementById('logoutBtn');
+
+    element.addEventListener('click', logout, false);
 
     const [data, setData] = useState([]);
     const [url, setUrl] = useState('');

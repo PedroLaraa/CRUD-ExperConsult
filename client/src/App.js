@@ -12,29 +12,18 @@ import { handleAlterImage } from "./pages/components/function/recuperaUserImg";
 
 function App() {
 
-    const logout = useContext(AuthContext);
-
-    const element = document.getElementById('logoutBtn');
-
-    element.addEventListener('click', logout, false);
-
-    const [user, setUser] = useState();
-
   useEffect(() => {
 
-    setUser(JSON.parse(localStorage.getItem('user'))); // Recupera o usuário logado
-
-    if(user != undefined){
+    if(localStorage.getItem('user') != undefined){
       handleAlterImage()
     }
 
   }, [])
 
   return (
-
     <div>
-      <Rotas>
-      </Rotas>
+        <Rotas>
+        </Rotas>
     </div>
   );
 }
