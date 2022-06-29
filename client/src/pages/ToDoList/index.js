@@ -301,7 +301,7 @@ function ToDoList() {
                                     <div className="progress col-6">
                                         <div className="progress-bar progress-bar-striped progress-bar-animated bg-success " role="progressbar" aria-valuenow={v.todo_andamento} aria-valuemin="0" aria-valuemax="100" style={{ width: `${v.todo_andamento}%` }}> {v.todo_andamento}% </div>
                                     </div>
-                                    <button className="btn btn-dark w-25" value={v.todo_andamento + '-' + v.id} onClick={handleMinAndamento}>ToDo</button>
+                                    <button className="btn btn-outline-dark w-25" value={v.todo_andamento + '-' + v.id} onClick={handleMinAndamento}>ToDo</button>
                                 </section>
                             </div>
                             <hr />
@@ -342,7 +342,7 @@ function ToDoList() {
                                 <div >
                                     {user.usuario.user_permissoes == 2 || user.usuario.user_permissoes == 1 ?
                                         <div className="d-flex justify-content-around p-1">
-                                            <button value={v.todo_andamento + '-' + v.id} onClick={handleMinAndamento} className="btn btn-success w-25">Execução</button>
+                                            <button value={v.todo_andamento + '-' + v.id} onClick={handleMinAndamento} className="btn btn-warning w-25">Execução</button>
                                             <button value={v.id} onClick={handleDeleteTodo} className="btn btn-danger w-25">Deletar</button>
                                         </div>
                                         : ''
