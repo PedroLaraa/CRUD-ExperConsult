@@ -2,6 +2,10 @@
 
 import React, { useEffect, useState } from "react";
 
+import { useContext } from "react";
+
+import { AuthContext, AuthProvider } from "../../contexts/auth";
+
 import api from '../../config/configApi';
 
 import paragrafoStyle from "../css/paragrafo";
@@ -13,6 +17,8 @@ import formStyle from "../css/FormStyleEqp";
 import inputStyle from "../css/inputStyle";
 
 import containerStyle from "../css/container";
+
+import { handleAlterImage } from "./function/recuperaUserImg";
 
 import NotificacoesSetor from "../NotificacoesSetores";
 
@@ -89,6 +95,7 @@ function FiltraEquipamentos() {
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
         getInfosEqp();
         getInfosMarcas();
+        handleAlterImage();
     }, []);
 
     useEffect(() => {
@@ -105,6 +112,12 @@ function FiltraEquipamentos() {
         }
         
     }, [pesquisarFornecedor, pesquisarEquipamento]);
+
+    const { logout } = useContext(AuthContext);
+
+    const element = document.getElementById('logoutBtn');
+
+    element.addEventListener('click', logout, false);
 
     let increment = 0
 

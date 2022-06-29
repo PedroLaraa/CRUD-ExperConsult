@@ -2,6 +2,10 @@
 
 import React, { useEffect, useState } from "react";
 
+import { useContext } from "react";
+
+import { AuthContext, AuthProvider } from "../../contexts/auth";
+
 import api from '../../config/configApi';
 
 import paragrafoStyle from "../css/paragrafo";
@@ -13,6 +17,10 @@ import inputStyle from "../css/inputStyle";
 import imagemFornecStyle from "../css/imagem";
 
 import containerStyle from "../css/container";
+
+import botaoStyle from "../css/botaoEdit";
+
+import {handleAlterImage} from "./function/recuperaUserImg";
 
 import NotificacoesSetor from "../NotificacoesSetores";
 
@@ -49,6 +57,7 @@ function FiltraFornecedores() {
 
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
         getImagesFornec()
+        handleAlterImage()
     }, []);
 
     useEffect(() => {
@@ -58,6 +67,12 @@ function FiltraFornecedores() {
             }
         }
     }, [pesquisarFornecedor])
+
+    const { logout } = useContext(AuthContext);
+
+    const element = document.getElementById('logoutBtn');
+
+    element.addEventListener('click', logout, false);
 
     return (
 

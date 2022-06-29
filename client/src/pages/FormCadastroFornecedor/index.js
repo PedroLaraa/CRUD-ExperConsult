@@ -1,10 +1,24 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useContext } from "react";
+
+import { AuthContext } from "../../contexts/auth";
 
 import './fornecedoresStyle.css'
 
+import { handleAlterImage } from "../components/function/recuperaUserImg";
+
 import NotificacoesSetor from "../NotificacoesSetores";
 
-function FormFornecedores() {
+function FormFornecedores() {    
+
+    const { logout } = useContext(AuthContext);
+
+    const element = document.getElementById('logoutBtn');
+
+    element.addEventListener('click', logout, false);
+
+    useEffect(() => {
+        handleAlterImage()
+    } , []);
 
     return(
 

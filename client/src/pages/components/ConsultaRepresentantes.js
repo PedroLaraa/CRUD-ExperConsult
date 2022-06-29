@@ -16,9 +16,12 @@ import inputStyle from "../css/inputStyle";
 
 import containerStyle from "../css/container";
 
+import botaoStyle from "../css/botaoEdit";
+
 import {handleAlterImage} from "./function/recuperaUserImg";
 
 import NotificacoesSetor from "../NotificacoesSetores";
+import { valueToPercent } from "@mui/base";
 
 // FUNÇÃO PARA CONSULTA DE DADOS DOS EQUIPAMENTOS
 
@@ -78,6 +81,7 @@ function FiltraRepresentantes() {
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
         getInfosRepresentante()
         getInfosFornecedores()
+        handleAlterImage()
     }, []);
 
     useEffect(() => {
@@ -87,6 +91,12 @@ function FiltraRepresentantes() {
             }
         }
     }, [pesquisarFornecedor])
+
+    const { logout } = useContext(AuthContext);
+
+    const element = document.getElementById('logoutBtn');
+
+    element.addEventListener('click', logout, false);
 
     var empresasFinais = [];
 

@@ -2,6 +2,10 @@
 
 import React, { useEffect, useState } from "react";
 
+import { useContext } from "react";
+
+import { AuthContext, AuthProvider } from "../../contexts/auth";
+
 import api from '../../config/configApi';
 
 import paragrafoStyle from "../css/paragrafo";
@@ -13,6 +17,10 @@ import formStyle from "../css/formStyle";
 import inputStyle from "../css/inputStyle";
 
 import containerStyle from "../css/container";
+
+import botaoStyle from "../css/botaoEdit";
+
+import {handleAlterImage} from "./function/recuperaUserImg";
 
 import NotificacoesSetor from "../NotificacoesSetores";
 
@@ -52,6 +60,7 @@ function FiltraClientes() {
 
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
         getInfosCliente()
+        handleAlterImage()
     }, []);
 
     useEffect(() => {
@@ -61,6 +70,12 @@ function FiltraClientes() {
             }
         }
     }, [pesquisarCliente])
+
+    const { logout } = useContext(AuthContext);
+
+    const element = document.getElementById('logoutBtn');
+
+    element.addEventListener('click', logout, false);
 
     return (
 

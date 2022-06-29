@@ -1,6 +1,8 @@
-import React, { useState, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 
 import { AuthContext } from "../../contexts/auth";
+
+import api from '../../config/configApi';
 
 import './loginStyle.css'
 

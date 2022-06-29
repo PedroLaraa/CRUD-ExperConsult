@@ -1,8 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+
+import { AuthContext } from "../../contexts/auth";
 
 import api from '../../config/configApi';
 
 import './equipamentosStyle.css'
+
+import { handleAlterImage } from "../components/function/recuperaUserImg";
 
 import NotificacoesSetor from "../NotificacoesSetores";
 
@@ -23,7 +27,14 @@ function FormEquipamentos() {
 
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
         getImagesFornec()
+        handleAlterImage()
     }, []);
+
+    const { logout } = useContext(AuthContext);
+
+    const element = document.getElementById('logoutBtn');
+
+    element.addEventListener('click', logout, false);
 
     return (
         <div className="">
