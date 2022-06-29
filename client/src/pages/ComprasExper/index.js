@@ -1,8 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
-
-import { AuthContext } from "../../contexts/auth";
-
-import { handleAlterImage } from "../components/function/recuperaUserImg";
+import React, { useEffect, useState } from "react";
 
 import NotificacoesSetor from "../NotificacoesSetores";
 
@@ -15,16 +11,6 @@ import FormDialogAddCompras from "../../dialog/ComprasDialog";
 import './comprasStyle.css';
 
 function ComprasExper() {
-
-    const { logout } = useContext(AuthContext);
-
-    const element = document.getElementById('logoutBtn');
-
-    element.addEventListener('click', logout, false);
-
-    useEffect(() => {
-        handleAlterImage()
-    }, []);
 
     const [open, setOpen] = useState(false);
 
