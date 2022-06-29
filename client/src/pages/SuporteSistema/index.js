@@ -1,10 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
-
-import { AuthContext } from "../../contexts/auth";
-
-import api from '../../config/configApi';
-
-import { handleAlterImage } from "../components/function/recuperaUserImg";
+import React, { useEffect, useState } from "react";
 
 import NotificacoesSetor from "../NotificacoesSetores";
 
@@ -21,7 +15,6 @@ function SuporteSistema() {
     
     useEffect(() => {
         recuperaLocalStorage()
-        handleAlterImage()
     }, []);
 
     return (

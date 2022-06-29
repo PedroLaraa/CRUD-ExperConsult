@@ -3,10 +3,6 @@
 
 import React, { useEffect, useState } from "react";
 
-import { useContext } from "react";
-
-import { AuthContext, AuthProvider } from "../../contexts/auth";
-
 import api from '../../config/configApi';
 
 import paragrafoDashboardStyle from "../css/paragrafoDashboard.js";
@@ -22,8 +18,6 @@ import FormDialogAddEvent from "../../dialog/DoedEvent";
 import paragrafoDoedStyle from "../css/paragrafoDoed";
 
 import paragrafoDivStyle from "../css/paragrafoDiv";
-
-import { handleAlterImage } from "./function/recuperaUserImg";
 
 import NotificacoesSetor from "../NotificacoesSetores";
 
@@ -63,12 +57,6 @@ function DashBoardInterface() {
     const idsInteiros = parseInt(idsDosClientes);
 
     const idsDoedInt = parseInt(idsDoed);
-
-    const { authenticaded, logout } = useContext(AuthContext);
-
-    const element = document.getElementById('logoutBtn');
-
-    element.addEventListener('click', logout, false);
 
     // FAZ UMA REQUISIÇÃO PARA O BACK E RETORNAR O DATABASE COM DADOS (PRÉDIOS)
 
@@ -210,12 +198,6 @@ function DashBoardInterface() {
         document.location.reload(true);
     };
 
-    function handleLogoutUser(e) {
-
-        logout();
-
-    };
-
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
 
         getInfosPredios();
@@ -235,8 +217,6 @@ function DashBoardInterface() {
     useEffect(() => {
 
         setRecoveredUsers(JSON.parse(localStorage.getItem('user')));
-
-        handleAlterImage();
 
     }, []);
 

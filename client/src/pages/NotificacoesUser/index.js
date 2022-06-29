@@ -1,10 +1,6 @@
-import React, { useEffect, useState, useContext } from "react";
-
-import { AuthContext } from "../../contexts/auth";
+import React, { useEffect, useState } from "react";
 
 import api from '../../config/configApi';
-
-import { handleAlterImage } from "../components/function/recuperaUserImg";
 
 import paragrafoDoedStyle from "../css/paragrafoDoed";
 
@@ -13,12 +9,6 @@ import paragrafoDashboardStyle from "../css/paragrafoDashboard.js";
 import NotificacoesSetor from "../NotificacoesSetores";
 
 function NotificacoesUser() {
-
-    const { logout } = useContext(AuthContext);
-
-    const element = document.getElementById('logoutBtn');
-
-    element.addEventListener('click', logout, false);
 
     const [data, setData] = useState([]); // DEFINE O DATABASE
 
@@ -66,7 +56,6 @@ function NotificacoesUser() {
     }
 
     useEffect(() => {
-        handleAlterImage()
         getNotificacoes()
     }, [])
 

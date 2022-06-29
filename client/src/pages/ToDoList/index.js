@@ -1,8 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
-
-import { AuthContext } from "../../contexts/auth";
-
-import { handleAlterImage } from "../components/function/recuperaUserImg";
+import React, { useState, useEffect } from "react";
 
 import api from '../../config/configApi';
 
@@ -14,15 +10,7 @@ import NotificacoesSetor from "../NotificacoesSetores";
 
 function ToDoList() {
 
-    const { logout } = useContext(AuthContext);
-
-    const element = document.getElementById('logoutBtn');
-
-    element.addEventListener('click', logout, false);
-
-    useEffect(() => {
-        handleAlterImage();
-    }, []);
+    const [data, setData] = useState([]);
 
     const [tasks, setTasks] = useState([]); // Tarefas gerais
 
@@ -30,7 +18,9 @@ function ToDoList() {
 
     const [open, setOpen] = useState(false); // Altera o estado do FormDialogToDo
 
-    const [aguardando, setAguardando] = useState(false);
+    const [aguardando, setAguardando] = useState(false); // Coloca um delay em algumas renderizações para não ter erros
+
+    const [buscaUser, setBuscaUser] = useState(''); // Busca de usuário
 
     // Função que faz a requisição para o backend 
 
@@ -43,11 +33,22 @@ function ToDoList() {
             })
     }
 
+    const getUsersList = async () => {
+        api.get('list-infosUser')
+            .then(response => {
+                setData(response.data.value);
+            }).catch((err) => {
+                console.log(err);
+            });
+    };
+
     // Realiza requisições para o backend e retorna os dados
 
     useEffect(() => {
 
         getInfosToDo();
+
+        getUsersList();
 
         setUser(JSON.parse(localStorage.getItem('user'))); // Recupera o usuário logado
 
@@ -55,7 +56,11 @@ function ToDoList() {
 
     }, []);
 
-    const todoUserFiltrado = tasks.filter(v => v.todo_destinatario == user.usuario.user_nomeUser);
+    if(user != undefined && buscaUser == ''){
+        setBuscaUser(user.usuario.user_nomeUser);
+    }
+
+    const todoUserFiltrado =  tasks.filter(v => v.todo_destinatario == buscaUser);
 
     const todoAndamento = todoUserFiltrado.filter(v => v.todo_status == 'Executando' || v.todo_status == 'Pausado' || v.todo_status == 'Atrasado');
 
@@ -131,7 +136,7 @@ function ToDoList() {
         };
     }
 
-    function handlePausaTarefa(e){
+    function handlePausaTarefa(e) {
 
         const status = (e.target.value).split('-')[1];
 
@@ -142,11 +147,11 @@ function ToDoList() {
             todo_status: status != 'Pausado' ? 'Pausado' : 'Executando',
         };
 
-        if(status != 'Pausado'){
+        if (status != 'Pausado') {
             api.put('todo-updateStatus', values);
             alert('Tarefa pausada com sucesso!!!');
             document.location.reload();
-        }else{
+        } else {
             api.put('todo-updateStatus', values);
             alert('Tarefa em execução!!!');
             document.location.reload();
@@ -154,19 +159,19 @@ function ToDoList() {
 
     }
 
-    function handleArquivarTodo(e){
-    
+    function handleArquivarTodo(e) {
+
         const id = parseInt(e.target.value);
-    
+
         const values = {
             id: id,
             todo_status: 'Arquivado',
         };
-    
+
         api.put('todo-updateStatus', values);
-    
+
         alert('Tarefa arquivada com sucesso!!!');
-    
+
         document.location.reload();
     }
 
@@ -188,8 +193,8 @@ function ToDoList() {
 
     const today = new Date(timeElapsed).toLocaleDateString().split('/').reverse().join('-');
 
-    for(let i = 0; i < todoAndamento.length; i++){
-        if(todoAndamento[i].todo_dataConclusao < today && todoAndamento[i].todo_status != 'Atrasado' && todoAndamento[i].todo_status != 'Pausado'){
+    for (let i = 0; i < todoAndamento.length; i++) {
+        if (todoAndamento[i].todo_dataConclusao < today && todoAndamento[i].todo_status != 'Atrasado' && todoAndamento[i].todo_status != 'Pausado') {
             todoAndamento[i].todo_status = 'Atrasado';
             api.put('todo-updateStatus', todoAndamento[i]);
         }
@@ -197,6 +202,22 @@ function ToDoList() {
 
     return (
 
+        <div>
+            {aguardando && (
+                <div className="d-flex justify-content-center p-2">
+                    {user.usuario.user_permissoes == 2 || user.usuario.user_permissoes == 1 ?
+                        <>
+                            <select id="selectUserTodo" onClick={(e) => setBuscaUser(e.target.value)}>
+                                <option value={user.usuario.user_nomeUser}>Busque um usuário:</option>
+                                {data.map(v => (
+                                    <option value={v.user_nomeUser}>{v.user_nomeUser}</option>
+                                ))}
+                            </select>
+                        </>
+                        : ''
+                    }
+                </div>
+            )}
         <div className="row d-flex flex-row justify-content-center h-100 vw-100">
             <NotificacoesSetor />
             <div className="col-6 p-4">
@@ -208,49 +229,49 @@ function ToDoList() {
                                 {aguardando && (
                                     <>
                                         {user.usuario.user_permissoes == 2 || user.usuario.user_permissoes == 1 ?
-                                            <button onClick={() => setOpen(!open)} className="btn btn-outline-dark w-100 h-50 text-uppercase text-bold">Adicionar Tarefa para Usuário</button> 
-                                            :''
+                                            <button onClick={() => setOpen(!open)} className="btn btn-outline-dark w-100 h-50 text-uppercase text-bold">Adicionar Tarefa para Usuário</button>
+                                            : ''
                                         }
                                     </>
                                 )}
                                 <hr />
                             </div>
                             {todoAndamento.reverse().map(v => (
-                                <div id="containerInfosTodo" key={v.id} style={{backgroundColor: v.todo_status == 'Atrasado' ? 'rgba(230, 30, 0, 0.5)' : 'rgba(169, 210, 215, 0.8)'}} className="col-11 p-2">
+                                <div id="containerInfosTodo" key={v.id} style={{ backgroundColor: v.todo_status == 'Atrasado' ? 'rgba(230, 30, 0, 0.5)' : 'rgba(169, 210, 215, 0.8)' }} className="col-11 p-2">
                                     {incrementTarefas + 'º | ' + v.todo_obraCliente}
                                     <p className="pt-2">• Tarefa: {v.todo_tarefa}</p>
                                     <p>• Início: {v.createdAt.split('-').reverse().join('/')} - Concluir: {v.todo_dataConclusao.split('-').reverse().join('/')}</p>
                                     <div className="col-12 ">
-                                        <hr/>
-                                            {v.todo_status == 'Executando' || v.todo_status == 'Atrasado' ?
+                                        <hr />
+                                        {v.todo_status == 'Executando' || v.todo_status == 'Atrasado' ?
                                             <section className="d-flex justify-content-around">
-                                            <p>• Andamento:</p>
+                                                <p>• Andamento:</p>
                                                 <div className="progress col-6">
-                                                    <div className="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow={v.todo_andamento} aria-valuemin="0" aria-valuemax="100" style={{width: `${v.todo_andamento > 0 ? v.todo_andamento : 5}%`}}> {v.todo_andamento}% </div>
+                                                    <div className="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow={v.todo_andamento} aria-valuemin="0" aria-valuemax="100" style={{ width: `${v.todo_andamento > 0 ? v.todo_andamento : 5}%` }}> {v.todo_andamento}% </div>
                                                 </div>
-                                                <button style={{width: 'auto', height: '1.2rem', fontSize: '.8rem', display: 'flex', alignItems: 'center'}} className="btn btn-outline-dark" data-toggle="tooltip" data-placement="top" title={`Última atualização: ${v.updatedAt.split('-').reverse().join('/')}. Status: ${v.todo_status} `}>🛈</button>
-                                                <button style={{width: 'auto', height: '1.2rem', fontSize: '.8rem', display: 'flex', alignItems: 'center'}} className="btn btn-outline-dark" value={v.todo_andamento + '-' + v.id} onClick={handleSumAndamento}>➕</button>
-                                                <button style={{width: 'auto', height: '1.2rem', fontSize: '.8rem', display: 'flex', alignItems: 'center'}} className="btn btn-outline-dark" value={v.todo_andamento + '-' + v.id} onClick={handleMinAndamento}>➖</button>
-                                            </section>                                            
-                                            : 
+                                                <button style={{ width: 'auto', height: '1.2rem', fontSize: '.8rem', display: 'flex', alignItems: 'center' }} className="btn btn-outline-dark" data-toggle="tooltip" data-placement="top" title={`Última atualização: ${v.updatedAt.split('-').reverse().join('/')}. Status: ${v.todo_status} `}>🛈</button>
+                                                <button style={{ width: 'auto', height: '1.2rem', fontSize: '.8rem', display: 'flex', alignItems: 'center' }} className="btn btn-outline-dark" value={v.todo_andamento + '-' + v.id} onClick={handleSumAndamento}>➕</button>
+                                                <button style={{ width: 'auto', height: '1.2rem', fontSize: '.8rem', display: 'flex', alignItems: 'center' }} className="btn btn-outline-dark" value={v.todo_andamento + '-' + v.id} onClick={handleMinAndamento}>➖</button>
+                                            </section>
+                                            :
                                             <section className="d-flex justify-content-around">
-                                            <p>• Andamento:</p>
+                                                <p>• Andamento:</p>
                                                 <div className="progress col-6">
-                                                    <div className="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow={v.todo_andamento} aria-valuemin="0" aria-valuemax="100" style={{width: `${v.todo_andamento > 0 ? v.todo_andamento : 5}%`, backgroundColor: 'rgba(255,131,0, 1)', color: 'black'}}> {v.todo_andamento}% </div>
+                                                    <div className="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow={v.todo_andamento} aria-valuemin="0" aria-valuemax="100" style={{ width: `${v.todo_andamento > 0 ? v.todo_andamento : 5}%`, backgroundColor: 'rgba(255,131,0, 1)', color: 'black' }}> {v.todo_andamento}% </div>
                                                 </div>
-                                                <button style={{width: 'auto', height: '1.2rem', fontSize: '.8rem', display: 'flex', alignItems: 'center'}} className="btn btn-outline-dark" data-toggle="tooltip" data-placement="top" title={`Última atualização: ${v.updatedAt.split('-').reverse().join('/')}. Status: ${v.todo_status} `}>🛈</button>
+                                                <button style={{ width: 'auto', height: '1.2rem', fontSize: '.8rem', display: 'flex', alignItems: 'center' }} className="btn btn-outline-dark" data-toggle="tooltip" data-placement="top" title={`Última atualização: ${v.updatedAt.split('-').reverse().join('/')}. Status: ${v.todo_status} `}>🛈</button>
                                             </section>}
                                     </div>
-                                    <hr/>
+                                    <hr />
                                     <div>
-                                        {user.usuario.user_permissoes == 2 || user.usuario.user_permissoes == 1 ? 
+                                        {user.usuario.user_permissoes == 2 || user.usuario.user_permissoes == 1 ?
                                             <div className="d-flex justify-content-around p-1">
-                                                {v.todo_status == 'Executando' || v.todo_status == 'Atrasado' ? 
-                                                <button value={v.id + '-' + v.todo_status} onClick={handlePausaTarefa} className="btn btn-dark w-25">Pausar</button>
-                                                : <button value={v.id + '-' + v.todo_status} onClick={handlePausaTarefa} className="btn btn-dark w-25">Execução</button>}
+                                                {v.todo_status == 'Executando' || v.todo_status == 'Atrasado' ?
+                                                    <button value={v.id + '-' + v.todo_status} onClick={handlePausaTarefa} className="btn btn-dark w-25">Pausar</button>
+                                                    : <button value={v.id + '-' + v.todo_status} onClick={handlePausaTarefa} className="btn btn-dark w-25">Execução</button>}
                                                 <button value={v.id} onClick={handleDeleteTodo} className="btn btn-danger w-25">Deletar</button>
                                             </div>
-                                        :
+                                            :
                                             ''
                                         }
                                     </div>
@@ -264,9 +285,9 @@ function ToDoList() {
                 </div>
             </div>
             <div className="col-6 p-4">
-                <div id="containerBgTodo" className="row d-flex flex-row justify-content-center overflow-auto" style={{ maxHeight: '55rem'}}>
+                <div id="containerBgTodo" className="row d-flex flex-row justify-content-center overflow-auto" style={{ maxHeight: '55rem' }}>
                     <div className="col-12">
-                        <h1 id='titlesDoed' style={{fontSize: '2.4rem'}} className="text-center text-uppercase">Tarefas Concluídas</h1>
+                        <h1 id='titlesDoed' style={{ fontSize: '2.4rem' }} className="text-center text-uppercase">Tarefas Concluídas</h1>
                         <hr />
                     </div>
                     {todoFeito.map(v => (
@@ -274,22 +295,22 @@ function ToDoList() {
                             <p>• Tarefa: {v.todo_tarefa}</p>
                             <p>• Concluído: {v.updatedAt.split('-').reverse().join('/')}</p>
                             <div className="col-12">
-                            <hr/>
+                                <hr />
                                 <section className="d-flex justify-content-around">
                                     <p>• Andamento:</p>
                                     <div className="progress col-6">
-                                        <div className="progress-bar progress-bar-striped progress-bar-animated bg-success " role="progressbar" aria-valuenow={v.todo_andamento} aria-valuemin="0" aria-valuemax="100" style={{width: `${v.todo_andamento}%`}}> {v.todo_andamento}% </div>
+                                        <div className="progress-bar progress-bar-striped progress-bar-animated bg-success " role="progressbar" aria-valuenow={v.todo_andamento} aria-valuemin="0" aria-valuemax="100" style={{ width: `${v.todo_andamento}%` }}> {v.todo_andamento}% </div>
                                     </div>
                                     <button className="btn btn-dark w-25" value={v.todo_andamento + '-' + v.id} onClick={handleMinAndamento}>ToDo</button>
                                 </section>
                             </div>
-                            <hr/>
+                            <hr />
                             <div >
-                                {user.usuario.user_permissoes == 2 || user.usuario.user_permissoes == 1 ? 
+                                {user.usuario.user_permissoes == 2 || user.usuario.user_permissoes == 1 ?
                                     <div className="d-flex justify-content-around p-1">
                                         <button value={v.id} onClick={handleArquivarTodo} className="btn btn-warning w-25">Arquivar</button>
                                         <button value={v.id} onClick={handleDeleteTodo} className="btn btn-danger w-25">Deletar</button>
-                                    </div>                                
+                                    </div>
                                     : ''
                                 }
                             </div>
@@ -299,9 +320,9 @@ function ToDoList() {
             </div>
             {todoArquivado.length > 0 && (
                 <div className="col-11 p-4">
-                    <div id="containerBgTodo" className="row d-flex flex-row justify-content-center overflow-auto" style={{ maxHeight: '55rem'}}>
+                    <div id="containerBgTodo" className="row d-flex flex-row justify-content-center overflow-auto" style={{ maxHeight: '55rem' }}>
                         <div className="col-12">
-                            <h1 id='titlesDoed' style={{fontSize: '2.4rem'}} className="text-center text-uppercase">Tarefas Arquivadas</h1>
+                            <h1 id='titlesDoed' style={{ fontSize: '2.4rem' }} className="text-center text-uppercase">Tarefas Arquivadas</h1>
                             <hr />
                         </div>
                         {todoArquivado.map(v => (
@@ -309,21 +330,21 @@ function ToDoList() {
                                 <p>• Tarefa: {v.todo_tarefa}</p>
                                 <p>• Concluído: {v.updatedAt.split('-').reverse().join('/')}</p>
                                 <div className="col-12">
-                                <hr/>
+                                    <hr />
                                     <section className="d-flex justify-content-around">
                                         <p>• Andamento:</p>
                                         <div className="progress col-6">
-                                            <div className="progress-bar progress-bar-striped progress-bar-animated bg-success " role="progressbar" aria-valuenow={v.todo_andamento} aria-valuemin="0" aria-valuemax="100" style={{width: `${v.todo_andamento}%`}}> {v.todo_andamento}% </div>
+                                            <div className="progress-bar progress-bar-striped progress-bar-animated bg-success " role="progressbar" aria-valuenow={v.todo_andamento} aria-valuemin="0" aria-valuemax="100" style={{ width: `${v.todo_andamento}%` }}> {v.todo_andamento}% </div>
                                         </div>
                                     </section>
                                 </div>
-                                <hr/>
+                                <hr />
                                 <div >
-                                    {user.usuario.user_permissoes == 2 || user.usuario.user_permissoes == 1 ? 
+                                    {user.usuario.user_permissoes == 2 || user.usuario.user_permissoes == 1 ?
                                         <div className="d-flex justify-content-around p-1">
                                             <button value={v.todo_andamento + '-' + v.id} onClick={handleMinAndamento} className="btn btn-success w-25">Execução</button>
                                             <button value={v.id} onClick={handleDeleteTodo} className="btn btn-danger w-25">Deletar</button>
-                                        </div>                                
+                                        </div>
                                         : ''
                                     }
                                 </div>
@@ -340,6 +361,7 @@ function ToDoList() {
                 />
             )}
         </div>
+    </div>
 
     )
 

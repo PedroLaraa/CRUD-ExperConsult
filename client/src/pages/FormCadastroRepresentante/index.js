@@ -1,22 +1,12 @@
-import React, { useEffect, useState, useContext } from "react";
-
-import { AuthContext } from "../../contexts/auth";
+import React, { useEffect, useState } from "react";
 
 import api from '../../config/configApi';
 
 import './representanteStyle.css'
 
-import { handleAlterImage } from "../components/function/recuperaUserImg";
-
 import NotificacoesSetor from "../NotificacoesSetores";
 
 function FormRepresentante(){
-
-    const { logout } = useContext(AuthContext);
-
-    const element = document.getElementById('logoutBtn');
-
-    element.addEventListener('click', logout, false);
 
     const [data, setData] = useState([]);
     const [url, setUrl] = useState('');
@@ -33,7 +23,6 @@ function FormRepresentante(){
 
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
         getImagesFornec()
-        handleAlterImage()
     }, []);
 
     return (

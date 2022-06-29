@@ -1,28 +1,12 @@
-import React, { useEffect, useState, useContext } from "react";
-
-import { AuthContext } from "../../contexts/auth";
+import React, { useEffect, useState } from "react";
 
 import api from '../../config/configApi';
 
-import { handleAlterImage } from "../components/function/recuperaUserImg";
-
-import paragrafoDoedStyle from "../css/paragrafoDoed";
-
-import paragrafoDashboardStyle from "../css/paragrafoDashboard.js.js";
-
 import './setoresNot.css';
 
-import { clientesEditados, prediosEditados } from "../components/DashBoard";
+import { clientesEditados } from "../components/DashBoard";
 
 function NotificacoesSetor() {
-
-    // Contexto de autenticação
-
-    const { logout } = useContext(AuthContext);
-
-    const element = document.getElementById('logoutBtn');
-
-    element.addEventListener('click', logout, false);
 
     const notificacoesBtn = document.getElementById('notificacoesBtn');
 
@@ -43,8 +27,6 @@ function NotificacoesSetor() {
     }
 
     useEffect(() => { // CARREGA AS NOTIFICAÇÕES E ETC
-
-        handleAlterImage();
 
         setRecoveredUsers(JSON.parse(localStorage.getItem('user')));
 

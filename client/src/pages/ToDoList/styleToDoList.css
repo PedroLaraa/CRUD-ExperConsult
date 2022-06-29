@@ -25,3 +25,13 @@
     font-family: 'Roboto Mono', monospace;
     color: rgb(0, 0, 0);
 }
+
+#selectUserTodo{
+    width: 20rem;
+    height: 2.5rem;
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    font-family: 'Roboto Mono', monospace;
+}
