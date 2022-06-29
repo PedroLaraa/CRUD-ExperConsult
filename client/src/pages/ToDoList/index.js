@@ -340,7 +340,7 @@ function ToDoList() {
                                     <p>• Tarefa: {v.todo_tarefa}</p>
                                     <p>• Arquivado em: {v.updatedAt.split('-').reverse().join('/')}</p>
                                     <div className="col-12">
-                                        <hr />
+                                        <hr/>
                                         <section className="d-flex justify-content-around">
                                             <p>• Andamento:</p>
                                             <div className="progress col-6">
@@ -349,7 +349,7 @@ function ToDoList() {
                                         </section>
                                     </div>
                                     <hr />
-                                    <div >
+                                    <div>
                                         {user.usuario.user_permissoes == 2 || user.usuario.user_permissoes == 1 ?
                                             <div className="d-flex justify-content-around p-1">
                                                 <button value={v.todo_andamento + '-' + v.id} onClick={handleMinAndamento} className="btn btn-warning w-25">Execução</button>
@@ -365,7 +365,7 @@ function ToDoList() {
                 )}
                 {aguardando && (
                     <FormDialogToDo
-                        open={open}
+                        open={open} 
                         setOpen={setOpen}
                         todo_autor={user.usuario.user_nomeUser}
                     />
