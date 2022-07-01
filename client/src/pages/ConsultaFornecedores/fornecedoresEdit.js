@@ -24,7 +24,7 @@ function EditarFornecedor(){
             })
     }, [id])
 
-    const fornecedorFiltrado = fornecedor.filter(v => JSON.stringify(v.id).includes(id))
+    const fornecedorFiltrado = fornecedor.filter(v => JSON.stringify(v.id) == id)
 
     const initialValue = {
         fornec_nivelfornecedor: '',

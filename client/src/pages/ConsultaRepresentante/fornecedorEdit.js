@@ -24,7 +24,7 @@ function EditarRepresentante(){
             })
     }, [id])
 
-    const representanteFiltrado = representante.filter(v => JSON.stringify(v.id).includes(id))
+    const representanteFiltrado = representante.filter(v => JSON.stringify(v.id) == id)
     
     const initialValue = {
         representante_nome: '',

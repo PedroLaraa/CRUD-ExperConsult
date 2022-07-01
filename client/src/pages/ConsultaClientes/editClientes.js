@@ -24,7 +24,7 @@ function EditarCliente(){
             })
     }, [id])
 
-    const clienteFiltrado = cliente.filter(v => JSON.stringify(v.id).includes(id))
+    const clienteFiltrado = cliente.filter(v => JSON.stringify(v.id) == id)
 
     const initialValue = {
         clientes_razaosocial: '',

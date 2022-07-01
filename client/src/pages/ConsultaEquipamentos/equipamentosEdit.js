@@ -24,7 +24,7 @@ function EditarEquipamentos(){
     })
     }, [id])
 
-    const equipamentoFiltrado = equipamento.filter(v => JSON.stringify(v.id).includes(id))
+    const equipamentoFiltrado = equipamento.filter(v => JSON.stringify(v.id) == id)
 
     const initialValue = {
         id: id,
