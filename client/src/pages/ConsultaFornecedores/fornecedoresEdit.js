@@ -26,16 +26,26 @@ function EditarFornecedor(){
 
     const fornecedorFiltrado = fornecedor.filter(v => JSON.stringify(v.id) == id)
 
-    const initialValue = {
-        fornec_nivelfornecedor: '',
-        fornec_razaosocial: '',
-        fornec_telefone: '',
-        fornec_email: '',
-        fornec_site: '',
-        id: id
+    let initialValue
+
+    if(fornecedorFiltrado.length > 0){
+        initialValue = {
+            fornec_nivelfornecedor: fornecedorFiltrado[0].fornec_nivelfornecedor,
+            fornec_razaosocial: fornecedorFiltrado[0].fornec_razaosocial,
+            fornec_telefone: fornecedorFiltrado[0].fornec_telefone,
+            fornec_email: fornecedorFiltrado[0].fornec_email,
+            fornec_site: fornecedorFiltrado[0].fornec_site,
+            id: id
+        }
     }
 
-    const [values, setValues] = useState(initialValue)
+    const valoresIniciais = initialValue
+
+    const [values, setValues] = useState()
+
+    if(values == undefined && valoresIniciais != undefined){
+        setValues(valoresIniciais)
+    }
 
     function handleChangeValues(ev){
         const {name, value} = ev.target

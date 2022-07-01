@@ -99,7 +99,7 @@ function FiltraClientes() {
                             <div style={containerStyle}>
                                 <div style={paragrafoStyle}>
                                     <div >
-                                        <img src={url + value.clientes_logo} alt={value.clientes_logo.id} style={imagemClienteStyle}></img>
+                                        <img src={url + value.clientes_logo} alt={value.clientes_logo} style={imagemClienteStyle}></img>
                                     </div>
                                     <div style={{padding: '1.7rem'}}>
                                         <p style={{ fontWeight: 'bold'}}>Razão social: <label>{value.clientes_razaosocial}</label></p>

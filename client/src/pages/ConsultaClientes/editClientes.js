@@ -26,21 +26,31 @@ function EditarCliente(){
 
     const clienteFiltrado = cliente.filter(v => JSON.stringify(v.id) == id)
 
-    const initialValue = {
-        clientes_razaosocial: '',
-        clientes_nomefantasia: '',
-        clientes_apelido: '',
-        clientes_cnpj: '',
-        clientes_endereco: '',
-        clientes_ie: '',
-        clientes_nomeResponsavel: '',
-        clientes_telefone: '',
-        clientes_email: '',
-        clientes_premissasDeProjeto: '',
-        id: id
+    let initialValue
+
+    if(clienteFiltrado.length > 0){
+        initialValue = {
+            clientes_razaosocial: clienteFiltrado[0].clientes_razaosocial,
+            clientes_nomefantasia: clienteFiltrado[0].clientes_nomefantasia,
+            clientes_apelido: clienteFiltrado[0].clientes_apelido,
+            clientes_cnpj: clienteFiltrado[0].clientes_cnpj,
+            clientes_endereco: clienteFiltrado[0].clientes_endereco,
+            clientes_ie: clienteFiltrado[0].clientes_ie,
+            clientes_nomeResponsavel: clienteFiltrado[0].clientes_nomeResponsavel,
+            clientes_telefone: clienteFiltrado[0].clientes_telefone,
+            clientes_email: clienteFiltrado[0].clientes_email,
+            clientes_premissasDeProjeto: clienteFiltrado[0].clientes_premissasDeProjeto,
+            id: id
+        }
     }
 
-    const [values, setValues] = useState(initialValue)
+    const valoresIniciais = initialValue
+
+    const [values, setValues] = useState()
+
+    if(values == undefined && valoresIniciais != undefined){
+        setValues(valoresIniciais)
+    }
 
     function handleChangeValues(ev){
         const {name, value} = ev.target

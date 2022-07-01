@@ -26,22 +26,35 @@ function EditarEquipamentos(){
 
     const equipamentoFiltrado = equipamento.filter(v => JSON.stringify(v.id) == id)
 
-    const initialValue = {
-        id: id,
-        desceqp_nomeeqp: '',
-        desceqp_modelo: '',
-        desceqp_marca: '',
-        desceqp_consumoene: '',
-        desceqp_consumotipo: '',
-        desceqp_precoeqp: '',
-        desceqp_dataultpreco: '',
-        desceqp_capacidadeprod: '',
-        desceqp_comentario: '',
+    let initialValue
+
+    if(equipamentoFiltrado.length > 0){
+        initialValue = {
+            id: id,
+            desceqp_nomeeqp: equipamentoFiltrado[0].desceqp_nomeeqp,
+            desceqp_modelo: equipamentoFiltrado[0].desceqp_modelo,
+            desceqp_marca: equipamentoFiltrado[0].desceqp_marca,
+            desceqp_consumoene: equipamentoFiltrado[0].desceqp_consumoene,
+            desceqp_consumotipo: equipamentoFiltrado[0].desceqp_consumotipo,
+            desceqp_precoeqp: equipamentoFiltrado[0].desceqp_precoeqp,
+            desceqp_dataultpreco: equipamentoFiltrado[0].desceqp_dataultpreco,
+            desceqp_capacidadeprod: equipamentoFiltrado[0].desceqp_capacidadeprod,
+            desceqp_comentario: equipamentoFiltrado[0].desceqp_comentario,
+        }
     }
 
-    const [values, setValues] = useState(initialValue)
+    const valoresIniciais = initialValue
+
+    const [values, setValues] = useState()
+
+    if(values == undefined && valoresIniciais != undefined){
+        setValues(valoresIniciais)
+    }
+
+    console.log(values)
 
     function handleChangeValues(ev){
+
         const {name, value} = ev.target
 
         setValues({...values, [name]: value})

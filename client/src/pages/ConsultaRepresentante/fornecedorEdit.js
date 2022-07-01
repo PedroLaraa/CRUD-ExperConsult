@@ -26,18 +26,28 @@ function EditarRepresentante(){
 
     const representanteFiltrado = representante.filter(v => JSON.stringify(v.id) == id)
     
-    const initialValue = {
-        representante_nome: '',
-        representante_empresasrep: ''.replaceAll('"[]{}', ''),
-        representante_telefone: '',
-        representante_comentarios: '',
-        representante_site: '',
-        representante_estadoatuacao: '',
-        representante_status: '',
-        id: id
+    let initialValue
+
+    if(representanteFiltrado.length > 0){
+        initialValue = {
+            representante_nome: representanteFiltrado[0].representante_nome,
+            representante_empresasrep: representanteFiltrado[0].representante_empresasrep.replaceAll('"[]{}', ''),
+            representante_telefone: representanteFiltrado[0].representante_telefone,
+            representante_comentarios: representanteFiltrado[0].representante_comentarios,
+            representante_site: representanteFiltrado[0].representante_site,
+            representante_estadoatuacao: representanteFiltrado[0].representante_estadoatuacao,
+            representante_status: representanteFiltrado[0].representante_status,
+            id: id
+        }
     }
 
-    const [values, setValues] = useState(initialValue)
+    const valoresIniciais = initialValue
+
+    const [values, setValues] = useState()
+
+    if(values == undefined && valoresIniciais != undefined){
+        setValues(valoresIniciais)
+    }
 
     function handleChangeValues(ev){
         const {name, value} = ev.target
