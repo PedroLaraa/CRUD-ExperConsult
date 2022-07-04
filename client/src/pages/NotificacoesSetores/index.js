@@ -24,7 +24,7 @@ function NotificacoesSetor() {
             }).catch((err) => {
                 console.log(err)
             })
-    }
+    };
 
     useEffect(() => { // CARREGA AS NOTIFICAÇÕES E ETC
 
@@ -86,6 +86,31 @@ function NotificacoesSetor() {
         api.put('notificacao-lida', values)
 
         document.location.reload()
+    }
+
+    function handleClearUniqueNotification(e) { // FUNÇÃO PARA LIMPAR AS NOTIFICAÇÕES
+
+        setShow(!show)
+
+        let idTask = e.target.value
+
+        if (localStorage.getItem('notificacoesLidas')){
+            
+            idTask = localStorage.getItem('notificacoesLidas') + ',' + idTask
+
+            localStorage.removeItem('notificacoesLidas')
+
+            localStorage.setItem('notificacoesLidas', idTask)
+
+            const values = {
+                user_notificacoesLidas: idTask,
+                id: recoveredUsers.usuario.id
+            }
+
+            api.put('notificacao-lida', values)
+
+            document.location.reload()
+        }
     }
 
     const idsLocalStorageLidos = localStorage.getItem('notificacoesLidas').split(',') // RECUPERA OS IDS LIDOS
@@ -159,6 +184,9 @@ function NotificacoesSetor() {
                                     </div>
                                     <div className="col-12 ">
                                         <p>• Evento: {v.notificacoes_mensagem}</p>
+                                    </div>
+                                    <div>
+                                        <button value={v.id} onClick={handleClearUniqueNotification} className="btn btn-outline-dark m-1">❌</button>
                                     </div>
                                     <div className="col-12 " style={{ backgroundColor: '#A2A2A2', height: '4px' }}>
                                         <p></p>
