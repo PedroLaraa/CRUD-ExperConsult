@@ -1,10 +1,8 @@
 // IMPORTA O REACT E AS ROTAS
 
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect } from "react";
 
 import Rotas from './routes'
-
-import { AuthContext } from "./contexts/auth";
 
 import { handleAlterImage } from "./pages/components/function/recuperaUserImg";
 
