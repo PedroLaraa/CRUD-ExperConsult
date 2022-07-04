@@ -21,7 +21,7 @@ function NotificacoesSetor() {
         api.get('list-notificacoesSetor')
             .then((response) => {
                 setData(response.data.value)
-            }).catch((err) => {
+            }).catch((err) => { 
                 console.log(err)
             })
     };
