@@ -23,9 +23,9 @@ import paragrafoDivStyle from "../css/paragrafoDiv";
 
 import NotificacoesSetor from "../NotificacoesSetores";
 
-var clientesEditados
+var clientesEditados;
 
-var prediosEditados
+var prediosEditados;
 
 function DashBoardInterface() {
 
@@ -231,7 +231,6 @@ function DashBoardInterface() {
         setRecoveredUsers(JSON.parse(localStorage.getItem('user')));
 
     }, []);
-
 
     return (
         <div className="container ">
