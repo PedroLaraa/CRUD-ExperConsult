@@ -235,8 +235,10 @@ function DashBoardInterface() {
 
     return (
         <div className="container ">
+            {/* Renderiza o componente de notificações */}
             <NotificacoesSetor />
             <div className="row h-auto position-relative pt-5 d-flex justify-content-center">
+                {/* Local onde será efetuada as pesquisas Cliente - Obra através de botões */}
                 <div
                     className="list-group col-4 p-1 overflow-auto"
                     style={botaoDashboardStyle}>
@@ -256,6 +258,7 @@ function DashBoardInterface() {
                         </div>
                     ))}
                 </div>
+                {/* Cabeçalho padrão para as buscas de eventos */}
                 {clientes && (
                     <div
                         className="col-8 overflow-auto vh-100"
@@ -263,6 +266,7 @@ function DashBoardInterface() {
                     >
                         <div className="d-flex d-inline justify-content-around p-3 bg-opacity-25 border border-dark border-1 rounded-3 " style={{ background: "ghostwhite" }}>
                             <h1 className="text-uppercase w-100">• {clientes.toString().replace(/[0-9]/g, '')}</h1>
+                            {/* Adiciona um novo setor / assunto naquele cliente - obra */}
                             <button
                                 className="btn btn-outline-dark"
                                 onClick={() => handleClickAdd()}
@@ -280,6 +284,7 @@ function DashBoardInterface() {
                                 </div>
                             </div>
                         </div>
+                        {/* Responsável por gerar os quadros de eventos naquela obra */}
                         {dataFiltrado.map(value => (
                             <div key={value.id}>
                                 <FormDialog
@@ -303,7 +308,7 @@ function DashBoardInterface() {
                                             <div
                                                 style={paragrafoDivStyle}
                                             >
-                                                <div // ID ESTÁ AQUI
+                                                <div // ID ÚNICO PARA CADA DIV ALTERAR SUA COR AO GERAR NOTIFICAÇÃO !!!
                                                     className="row justify-content-around"
                                                     style={paragrafoDashboardStyle}
                                                     id={(value.predios_nomeDosPredios + value.id).toLowerCase()}
@@ -319,6 +324,7 @@ function DashBoardInterface() {
                                                                     style={{ fontSize: '1rem', fontFamily: 'Raleway' }}>
                                                                     Listar Eventos
                                                                 </button>
+                                                                {/* Exibe a quantidade de eventos naquele Setor / Assunto */}
                                                                 <button
                                                                     value={value.id}
                                                                     onClick={idDoed}
@@ -355,6 +361,7 @@ function DashBoardInterface() {
                                                 </div>
                                                 {idsDoedInt === value.id && (
                                                     <div>
+                                                        {/* Lista os eventos daquele Setor / Prédio */}
                                                         {doedFiltrado.map(value => (
                                                             <div key={value.id}>
                                                                 <div style={paragrafoDoedStyle} className="row justify-content-md-center">
@@ -370,6 +377,7 @@ function DashBoardInterface() {
                                                                                 🛈
                                                                             </button>
                                                                         </p>
+                                                                        {/* Da permissão para deletar o evento somente ao autor ou supervisores / developers */}
                                                                         {value.doed_autor === recoveredUsers.usuario.user_nomeUser || recoveredUsers.usuario.user_permissoes === 2 || recoveredUsers.usuario.user_permissoes === 1 ?
                                                                             <button
                                                                                 className="btn btn-outline-danger"
@@ -387,6 +395,7 @@ function DashBoardInterface() {
                                                                 </div>
                                                             </div>
                                                         ))}
+                                                        {/* Adiciona novos eventos */} 
                                                         <div className="d-flex d-inline justify-content-around ">
                                                             <div className="p-2 ">
                                                                 <button
@@ -398,8 +407,8 @@ function DashBoardInterface() {
                                                                 </button>
                                                             </div>
                                                             <div className="p-2 ">
-                                                                <a className="btn btn-outline-dark" href={`edit-predio/${value.id}`} style={{ fontSize: '1.1rem', fontFamily: 'Raleway' }}>Editar SETOR / ASSUNTO</a>
                                                                 {/* GERA UMA ROTA PARA CADA SETOR SER EDITADO OU DELETADO */}
+                                                                <a className="btn btn-outline-dark" href={`edit-predio/${value.id}`} style={{ fontSize: '1.1rem', fontFamily: 'Raleway' }}>Editar SETOR / ASSUNTO</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -410,6 +419,7 @@ function DashBoardInterface() {
                                 </div>
                             </div>
                         ))}
+                        {/* FormDialog para adicionar eventos com valores padrões */}
                         {data2.map(value => (
                             <div key={value.id}>
                                 <FormDialogAddEvent
@@ -428,6 +438,7 @@ function DashBoardInterface() {
                         ))}
                     </div>
                 )}
+                {/* Calendário de agendamentos - renderizado pela API do Google */}
                 <div className="m-4" >
                     <div className="p-1" style={{ border: '4px solid rgba(168,208,213,1)', borderRadius: '.3rem', backgroundColor: 'rgba(168,208,213,1)' }}>
                         <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23a9d2d7&ctz=America%2FSao_Paulo&mode=WEEK&src=Y281b2YxbWhvZm1lcHBibnA4cWdmcmhzbzhAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&src=cHQuYnJhemlsaWFuI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%230B8043&color=%233F51B5" style={{width: "100%", height: "50vh", frameborder: "0", scrolling: "no", position: 'relative', top: '.2rem' }}></iframe>
@@ -449,6 +460,6 @@ function DashBoardInterface() {
     )
 }
 
-export { clientesEditados, prediosEditados }
+export { clientesEditados, prediosEditados } // Exportação de variáveis para uso das notificações
 
-export default DashBoardInterface;
+export default DashBoardInterface; // Exportação da função / component DashBoardInterface
