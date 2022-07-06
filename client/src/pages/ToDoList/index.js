@@ -51,7 +51,7 @@ function ToDoList() {
                 console.log(err);
             });
     };
-
+    
     function getUsersAndInfos(){
         getUsersList();
         getInfosToDo();
