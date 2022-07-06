@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import Button from '@mui/material/Button';
 
@@ -40,6 +40,8 @@ export default function FormDialogToDo(value){
 
     const [obras, setObras] = useState([]);
 
+    const [atualizar, setAtualizar] = useState(false);
+
     const handleClose = () => {
         value.setOpen(false);
     };
@@ -51,9 +53,7 @@ export default function FormDialogToDo(value){
         })); 
     };
 
-    var close = false
-
-    const handleCriarEvento = async() => {
+    const handleCriarEvento = async(params, callback, err) => {
         
         const values = {
             todo_tarefa: editValue.todo_tarefa,
@@ -68,16 +68,12 @@ export default function FormDialogToDo(value){
         
         try{
             api.post('todo-cadastrado', values);
-            alert('Tarefa criada com sucesso!');
-            close = true;
+            setTimeout(() => {
+                setAtualizar(true);
+            }, 300)
         }catch{
             alert('Erro ao criar evento');
         }
-
-        if(close === true){
-            handleClose();
-        }
-
     };
 
     const getUsersList = async () => {
@@ -102,6 +98,11 @@ export default function FormDialogToDo(value){
         getUsersList();
         getObrasList();
     }, []);
+
+    if(atualizar === true){
+        setAtualizar(false);
+        value.setOpen(false);
+    }
 
     return(
         <Dialog open={value.open} onClose={handleClose}>

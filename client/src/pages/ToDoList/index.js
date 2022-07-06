@@ -30,6 +30,8 @@ function ToDoList() {
 
     const [buscaUser, setBuscaUser] = useState(''); // Busca de usuário
 
+    const [novoTodo, setNovoTodo] = useState(false); // Altera o estado do FormDialogToDo
+
     // Função que faz a requisição para o backend 
 
     const getInfosToDo = async () => {
@@ -50,15 +52,18 @@ function ToDoList() {
             });
     };
 
+    function getUsersAndInfos(){
+        getUsersList();
+        getInfosToDo();
+    }
+
     // Realiza requisições para o backend e retorna os dados
 
     useEffect(() => {
 
-        getUsersList();
+        getUsersAndInfos();
 
-        getInfosToDo();
-
-    }, [open])
+    }, [open]);
 
     useEffect(() => {
 
@@ -67,7 +72,6 @@ function ToDoList() {
         setAguardando(!aguardando); // Utilizado para evitar bugs de renderização
 
     }, []);
-
 
     if (user != undefined && buscaUser == '') {
         setBuscaUser(user.usuario.user_nomeUser);
@@ -373,6 +377,7 @@ function ToDoList() {
                         open={open} 
                         setOpen={setOpen}
                         todo_autor={user.usuario.user_nomeUser}
+                        setNovoTodo = {setNovoTodo}
                     />
                 )}
             </div>
