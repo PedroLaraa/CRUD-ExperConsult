@@ -440,7 +440,7 @@ function DashBoardInterface() {
                 {/* Calendário de agendamentos - renderizado pela API do Google */}
                 <div className="m-4" >
                     <div className="p-1" style={{ border: '4px solid rgba(168,208,213,1)', borderRadius: '.3rem', backgroundColor: 'rgba(168,208,213,1)' }}>
-                        <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23a9d2d7&ctz=America%2FSao_Paulo&mode=WEEK&src=Y281b2YxbWhvZm1lcHBibnA4cWdmcmhzbzhAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&src=cHQuYnJhemlsaWFuI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%230B8043&color=%233F51B5" style={{width: "100%", height: "50vh", frameborder: "0", scrolling: "no", position: 'relative', top: '.2rem' }}></iframe>
+                        <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=America%2FSao_Paulo&src=dmRiZzk2M3QyYWZzdjZqNWk4dGpuM3NpaTRAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&src=Y281b2YxbWhvZm1lcHBibnA4cWdmcmhzbzhAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&src=cHQuYnJhemlsaWFuI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23F6BF26&color=%230B8043&color=%233F51B5" style={{width: "100%", height: "50vh", frameborder: "0", scrolling: "no", position: 'relative', top: '.2rem' }}></iframe>
                     </div>
                     {recoveredUsers.usuario && (
                         <>
