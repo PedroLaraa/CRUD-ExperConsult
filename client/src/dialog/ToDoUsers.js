@@ -21,8 +21,8 @@ import api from '../config/configApi';
 
 import './doedStyle.css';
 
-export default function FormDialogToDo(value){
-    
+export default function FormDialogToDo(value) {
+
     const [editValue, setEditValue] = useState({
         todo_tarefa: value.todo_tarefa,
         todo_dataConclusao: value.todo_dataConclusao,
@@ -50,11 +50,11 @@ export default function FormDialogToDo(value){
         setEditValue(prevValues => ({
             ...prevValues,
             [value.target.id]: value.target.value,
-        })); 
+        }));
     };
 
-    const handleCriarEvento = async(params, callback, err) => {
-        
+    const handleCriarEvento = async (params, callback, err) => {
+
         const values = {
             todo_tarefa: editValue.todo_tarefa,
             todo_dataConclusao: editValue.todo_dataConclusao,
@@ -65,13 +65,13 @@ export default function FormDialogToDo(value){
             todo_andamento: 0,
             todo_obraCliente: obraTodo,
         };
-        
-        try{
+
+        try {
             api.post('todo-cadastrado', values);
             setTimeout(() => {
                 setAtualizar(true);
             }, 300)
-        }catch{
+        } catch {
             alert('Erro ao criar evento');
         }
     };
@@ -99,72 +99,76 @@ export default function FormDialogToDo(value){
         getObrasList();
     }, []);
 
-    if(atualizar === true){
+    if (atualizar === true) {
         setAtualizar(false);
         value.setOpen(false);
     }
 
-    return(
+    return (
         <Dialog open={value.open} onClose={handleClose}>
             <DialogTitle>Novo To-Do: </DialogTitle>
-                <DialogContent >
-                    <InputLabel>Cliente: </InputLabel>
-                    <Select 
-                        autoComplete='off'
-                        required
-                        margin="dense"
-                        id="todo_obraCliente"
-                        style={{ width: '100%' }}
-                        onChange={(e) => setObraTodo(e.target.value)}
-                    >
-                        {obras.map((v) => (
-                            <MenuItem key={v.id} value={v.clientes_obra.clientes_apelido + ' - ' + v.obras_nomeDaObra.toString().replace(/[0-9]/g, '')} readOnly>
-                                <ListItemText primary={v.clientes_obra.clientes_apelido + ' - ' + v.obras_nomeDaObra.toString().replace(/[0-9]/g, '')} />
-                            </MenuItem>
-                        ))}
-                    </Select>
-                    <InputLabel >Tarefa: </InputLabel>
-                    <TextareaAutosize
-                        autoComplete='off'
-                        required
-                        margin="dense"
-                        id="todo_tarefa"
-                        label="Evento: "
-                        style={{ width: '100%' }}
-                        onChange={handleChangeValue}
-                        type="text"
-                        variant="standard"
-                        multiline='true'
-                        minRows={6}
-                        maxRows={8}
-                    />
-                    <InputLabel>Usuário: </InputLabel>
-                    <Select 
-                        autoComplete='off'
-                        required
-                        margin="dense"
-                        id="todo_destinatario"
-                        style={{ width: '100%' }}
-                        onChange={(e) => setUserNotificado(e.target.value)}
-                    >
-                        {user.map((v) => (
-                            <MenuItem key={v.id} value={v.user_nomeUser} readOnly>
-                                <ListItemText primary={v.user_nome} />
-                            </MenuItem>
-                        ))}
-                    </Select>
-                    <InputLabel>Data para conclusão: </InputLabel>
-                    <TextField 
-                        type ="date"
-                        required
-                        id="todo_dataConclusao"
-                        onChange={handleChangeValue}
-                        variant="standard"
-                        margin="dense"
-                        style={{ width: '100%' }}
-                    />
-                </DialogContent>
-                <DialogActions>
+            <DialogContent >
+                <InputLabel>Cliente: </InputLabel>
+                <Select
+                    autoComplete='off'
+                    required
+                    margin="dense"
+                    id="todo_obraCliente"
+                    style={{ width: '100%' }}
+                    onChange={(e) => setObraTodo(e.target.value)}
+                >
+                    {obras.sort(function (a, b) {
+                        return a.clientes_obra.clientes_apelido < b.clientes_obra.clientes_apelido ? -1 : a.clientes_obra.clientes_apelido > b.clientes_obra.clientes_apelido ? 1 : 0;
+                    }).map((v) => (
+                        <MenuItem key={v.id} value={v.clientes_obra.clientes_apelido + ' - ' + v.obras_nomeDaObra.toString().replace(/[0-9]/g, '')} readOnly>
+                            <ListItemText primary={v.clientes_obra.clientes_apelido + ' - ' + v.obras_nomeDaObra.toString().replace(/[0-9]/g, '')} />
+                        </MenuItem>
+                    ))}
+                </Select>
+                <InputLabel >Tarefa: </InputLabel>
+                <TextareaAutosize
+                    autoComplete='off'
+                    required
+                    margin="dense"
+                    id="todo_tarefa"
+                    label="Evento: "
+                    style={{ width: '100%' }}
+                    onChange={handleChangeValue}
+                    type="text"
+                    variant="standard"
+                    multiline='true'
+                    minRows={6}
+                    maxRows={8}
+                />
+                <InputLabel>Usuário: </InputLabel>
+                <Select
+                    autoComplete='off'
+                    required
+                    margin="dense"
+                    id="todo_destinatario"
+                    style={{ width: '100%' }}
+                    onChange={(e) => setUserNotificado(e.target.value)}
+                >
+                    {user.sort(function (a, b) {
+                        return a.user_nome < b.user_nome ? -1 : a.user_nome > b.user_nome ? 1 : 0;
+                    }).map((v) => (
+                        <MenuItem key={v.id} value={v.user_nomeUser} readOnly>
+                            <ListItemText primary={v.user_nome} />
+                        </MenuItem>
+                    ))}
+                </Select>
+                <InputLabel>Data para conclusão: </InputLabel>
+                <TextField
+                    type="date"
+                    required
+                    id="todo_dataConclusao"
+                    onChange={handleChangeValue}
+                    variant="standard"
+                    margin="dense"
+                    style={{ width: '100%' }}
+                />
+            </DialogContent>
+            <DialogActions>
                 <Button onClick={handleClose}>Cancelar</Button>
                 <Button onClick={handleCriarEvento}>Cadastrar Evento</Button>
             </DialogActions>

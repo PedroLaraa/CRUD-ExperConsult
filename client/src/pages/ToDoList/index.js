@@ -51,8 +51,8 @@ function ToDoList() {
                 console.log(err);
             });
     };
-    
-    function getUsersAndInfos(){
+
+    function getUsersAndInfos() {
         getUsersList();
         getInfosToDo();
     }
@@ -143,15 +143,16 @@ function ToDoList() {
             alert('Não é possível subtrair uma tarefa com menos de 0%!!!');
         } else if (andamentoConvertido == 100) {
             alert(`Tarefa transferida de volta para ToDo!!!`);
-            api.put('todo-updateStatus',  {
+            api.put('todo-updateStatus', {
                 id: id,
                 todo_status: 'Executando',
-                todo_andamento: 0});
+                todo_andamento: 0
+            });
             document.location.reload();
         }
         else {
             alert(`Tarefa ${andamento}% concluída!!!`);
-            api.put('todo-updateStatus',values);
+            api.put('todo-updateStatus', values);
             document.location.reload();
         };
     }
@@ -228,7 +229,9 @@ function ToDoList() {
                         <>
                             <select id="selectUserTodo" onClick={(e) => setBuscaUser(e.target.value)}>
                                 <option value={user.usuario.user_nomeUser}>Busque um usuário:</option>
-                                {data.map(v => (
+                                {data.sort(function (a, b) {
+                                    return a.user_nomeUser < b.user_nomeUser ? -1 : a.user_nomeUser > b.user_nomeUser ? 1 : 0;
+                                }).map(v => (
                                     <option key={v.id} value={v.user_nomeUser}>{v.user_nomeUser}</option>
                                 ))}
                             </select>
@@ -349,7 +352,7 @@ function ToDoList() {
                                     <p>• Tarefa: {v.todo_tarefa}</p>
                                     <p>• Arquivado em: {v.updatedAt.split('-').reverse().join('/')}</p>
                                     <div className="col-12">
-                                        <hr/>
+                                        <hr />
                                         <section className="d-flex justify-content-around">
                                             <p>• Andamento:</p>
                                             <div className="progress col-6">
@@ -374,10 +377,10 @@ function ToDoList() {
                 )}
                 {aguardando && (
                     <FormDialogToDo
-                        open={open} 
+                        open={open}
                         setOpen={setOpen}
                         todo_autor={user.usuario.user_nomeUser}
-                        setNovoTodo = {setNovoTodo}
+                        setNovoTodo={setNovoTodo}
                     />
                 )}
             </div>
