@@ -51,8 +51,11 @@ export default function FormDialogToDo(value){
         })); 
     };
 
-    const handleCriarEvento = () => {
-        api.post('todo-cadastrado', {
+    var close = false
+
+    const handleCriarEvento = async() => {
+        
+        const values = {
             todo_tarefa: editValue.todo_tarefa,
             todo_dataConclusao: editValue.todo_dataConclusao,
             todo_destinatario: userNotificado,
@@ -61,11 +64,20 @@ export default function FormDialogToDo(value){
             todo_status: 'Executando',
             todo_andamento: 0,
             todo_obraCliente: obraTodo,
-        });
+        };
+        
+        try{
+            api.post('todo-cadastrado', values);
+            alert('Tarefa criada com sucesso!');
+            close = true;
+        }catch{
+            alert('Erro ao criar evento');
+        }
 
-        alert('Tarefa cadastrada com sucesso!');
-        handleClose();
-        document.location.reload();
+        if(close === true){
+            handleClose();
+        }
+
     };
 
     const getUsersList = async () => {

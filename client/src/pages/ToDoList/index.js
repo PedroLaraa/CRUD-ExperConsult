@@ -54,15 +54,20 @@ function ToDoList() {
 
     useEffect(() => {
 
+        getUsersList();
+
         getInfosToDo();
 
-        getUsersList();
+    }, [open])
+
+    useEffect(() => {
 
         setUser(JSON.parse(localStorage.getItem('user'))); // Recupera o usuário logado
 
         setAguardando(!aguardando); // Utilizado para evitar bugs de renderização
 
     }, []);
+
 
     if (user != undefined && buscaUser == '') {
         setBuscaUser(user.usuario.user_nomeUser);
