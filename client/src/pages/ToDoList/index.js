@@ -277,7 +277,7 @@ function ToDoList() {
                                                 </section>
                                                 :
                                                 <section className="d-flex justify-content-around">
-                                                    <p>• Andamento:</p>
+                                                    <p>• Andamento:</p> 
                                                     <div className="progress col-6">
                                                         <div className="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow={v.todo_andamento} aria-valuemin="0" aria-valuemax="100" style={{ width: `${v.todo_andamento > 0 ? v.todo_andamento : 5}%`, backgroundColor: 'rgba(255,131,0, 1)', color: 'black' }}> {v.todo_andamento}% </div>
                                                     </div>
