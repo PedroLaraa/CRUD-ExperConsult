@@ -39,6 +39,8 @@ const PostCompras = require('./models/PostCompras');
 
 const PostToDo = require('./models/PostToDo');
 
+const PostAtasReuniao = require('./models/PostAtasReuniao');
+
 const path = require('path');
 
 const upload = require('./middleware/uploadimg');
@@ -1108,6 +1110,50 @@ const SECRET = 'experconsult'
                 const dbResponse = await PostToDo.destroy({where:{id: id}})
         
     })
+
+    // ROTAS - ATAS DE REUNIÃO
+
+    app.post('/atas-cadastrada', upload.single('') ,async (req, res) => {
+
+        const dataToInsert = {
+            atas_reuniao: req.body.atas_reuniao,
+            atas_objetivo: req.body.atas_objetivo,
+            atas_liderReuniao: req.body.atas_liderReuniao,
+            atas_dataReuniao: req.body.atas_dataReuniao,
+            atas_horarioReuniao: req.body.atas_horarioReuniao,
+            atas_localReuniao: req.body.atas_localReuniao,
+            atas_participantesReuniao: req.body.atas_participantesReuniao,
+            atas_participantesAusentes: req.body.atas_participantesAusentes,
+            atas_assuntos: req.body.atas_assuntos,
+            atas_pendencias: req.body.atas_pendencias,
+            atas_responsavel: req.body.atas_responsavel,
+            atas_prazo: req.body.atas_prazo,
+        }
+
+        try{
+            const dbResponse = await PostAtasReuniao.create(dataToInsert)
+            res.redirect('http://expertestes:3000/atas-de-reuniao') // FIXME TO IP SERVER
+        }catch(err){
+            console.log(err)
+            res.render('erro')
+        }
+
+    })
+
+    // Rota - Recebe req do front e retorna os dados do DB
+
+    app.get('/listAtas-infos', async (req, res) => {
+            
+            PostAtasReuniao.findAll({})
+            .then((value) => {
+                res.json({
+                    value
+                })
+            }).catch((err) => {
+                console.log(err)
+                res.render('erro')
+            });
+        });
 
     // PORTA QUE O BACK-END ESTÁ SENDO EXECUTADO
 

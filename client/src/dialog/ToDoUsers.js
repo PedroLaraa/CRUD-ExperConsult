@@ -125,7 +125,7 @@ export default function FormDialogToDo(value) {
                         </MenuItem>
                     ))}
                 </Select>
-                <InputLabel >Tarefa: </InputLabel>
+                <InputLabel>Tarefa: </InputLabel>
                 <TextareaAutosize
                     autoComplete='off'
                     required
