@@ -1,0 +1,11 @@
+#atasAdicionaisInput{
+    display: flex ;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    columns: 12;
+}
+
+#containerRowAta{
+    columns: 2;
+}

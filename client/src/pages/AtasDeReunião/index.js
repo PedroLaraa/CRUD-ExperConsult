@@ -14,18 +14,19 @@ function AtasDeReuniao() {
             `
             <hr />
             <div id="atasAdicionaisInput" className=" row d-flex flex-row justify-content-around">
-                        <div className="p-2 col-md-2 mb-3 form-group">
+                        <div id="containerRowAta" className="p-2 col-md-2 mb-3 form-group">
                             <label htmlFor="customControlValidation1">Pendências: </label>
-                            <input
+                            <textarea
                                 className="form-control is-valid"
                                 id="validationInput"
-                                placeholder="Campo opcional"
+                                placeholder="Campo obrigatório"
                                 required
                                 name="atas_pendencias"
+                                rows='6'
                             >
-                            </input>
+                            </textarea>
                         </div>
-                        <div className="p-2 col-md-2 mb-3 form-group">
+                        <div id="containerRowAta" className="p-2 col-md-2 mb-3 form-group">
                             <label htmlFor="customControlValidation1">Responsável(Nome e Empresa): </label>
                             <input
                                 className="form-control is-valid"
@@ -36,7 +37,7 @@ function AtasDeReuniao() {
                             >
                             </input>
                         </div>
-                        <div className="p-2 col-md-2 mb-3 form-group">
+                        <div id="containerRowAta" className="p-2 col-md-2 mb-3 form-group">
                             <label htmlFor="customControlValidation1">Prazo: </label>
                             <input
                                 className="form-control is-valid"
@@ -47,7 +48,8 @@ function AtasDeReuniao() {
                             >
                             </input>
                         </div>
-                    </div>`
+                    </div>
+            `
         )
     }
 
@@ -63,7 +65,7 @@ function AtasDeReuniao() {
 
         divAtas.append(div);
 
-    }
+    };
 
     return (
         <div>
@@ -78,7 +80,6 @@ function AtasDeReuniao() {
                 onSubmit={(e) => alert('EQUIPAMENTO CADASTRADO COM SUCESSO!!!')}
             >
                 <div id='atasAddNewAta'>
-
                     <h1>Atas de Reunião:</h1>
                     <hr />
                     <div className=" row d-flex flex-row justify-content-around">
@@ -163,7 +164,7 @@ function AtasDeReuniao() {
                             >
                             </input>
                         </div>
-                        <div className="p-2 col-md-2 mb-3 form-group">
+                        <div className="p-2 col-md-3 mb-3 form-group">
                             <label htmlFor="customControlValidation1">Ausentes: </label>
                             <input
                                 className="form-control is-valid"
@@ -178,28 +179,32 @@ function AtasDeReuniao() {
                     <div className=" row d-flex flex-row justify-content-around">
                         <div className="p-2 col-md-6 mb-3 form-group">
                             <label htmlFor="customControlValidation1">Assuntos tratados: </label>
-                            <input
+                            <textarea
                                 className="form-control is-valid"
                                 id="validationInput"
                                 placeholder="Campo obrigatório"
                                 required
                                 name="atas_assuntos"
+                                rows={6}
                             >
-                            </input>
+                            </textarea>
                         </div>
                     </div>
                     <div className=" row d-flex flex-row justify-content-around">
-                        <div className="p-2 col-md-2 mb-3 form-group">
+                        <div className="p-2 col-md-6 mb-3 form-group">
                             <label htmlFor="customControlValidation1">Pendências: </label>
-                            <input
+                            <textarea
                                 className="form-control is-valid"
                                 id="validationInput"
                                 placeholder="Campo obrigatório"
                                 required
                                 name="atas_pendencias"
+                                rows={6}
                             >
-                            </input>
+                            </textarea>
                         </div>
+                    </div>
+                    <div className=" row d-flex flex-row justify-content-around">
                         <div className="p-2 col-md-2 mb-3 form-group">
                             <label htmlFor="customControlValidation1">Responsável(Nome e Empresa): </label>
                             <input
