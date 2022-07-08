@@ -77,13 +77,23 @@ function ToDoList() {
         setBuscaUser(user.usuario.user_nomeUser);
     }
 
+    function atualizaOsDados(){
+        let cont = 0;
+        setInterval(() => {
+            while (cont < 1) {
+                getUsersAndInfos();
+                cont++
+            };
+        }, 200);
+    };
+
     const todoUserFiltrado = tasks.filter(v => v.todo_destinatario == buscaUser);
 
     const todoAndamento = todoUserFiltrado.filter(v => v.todo_status == 'Executando' || v.todo_status == 'Pausado' || v.todo_status == 'Atrasado');
 
     const todoFeito = todoUserFiltrado.filter(v => v.todo_status == 'Feito');
 
-    const todoArquivado = todoUserFiltrado.filter(v => v.todo_status == 'Arquivado');
+    const todoArquivado = todoUserFiltrado.filter(v => v.todo_status == 'Arquivado'); 
 
     // Função para incrementar o andamento da tarefa
 
@@ -110,17 +120,17 @@ function ToDoList() {
         if (andamento == 100) {
             alert('Tarefa concluída com sucesso!!!');
             api.put('todo-updateStatus', valuesConcluido);
+            atualizaOsDados()
         }
         else {
             alert(`Tarefa ${andamento}% concluída!!!`);
             api.put('todo-updateStatus', values);
+            atualizaOsDados()
         };
 
         if (andamento > 100) {
             alert('Não é possível realizar a tarefa acima de 100%!!!');
         };
-
-        document.location.reload();
     };
 
     // Função para subtrair o andamento da tarefa
@@ -148,12 +158,12 @@ function ToDoList() {
                 todo_status: 'Executando',
                 todo_andamento: 0
             });
-            document.location.reload();
+            atualizaOsDados()
         }
         else {
             alert(`Tarefa ${andamento}% concluída!!!`);
             api.put('todo-updateStatus', values);
-            document.location.reload();
+            atualizaOsDados()
         };
     }
 
@@ -171,11 +181,11 @@ function ToDoList() {
         if (status != 'Pausado') {
             api.put('todo-updateStatus', values);
             alert('Tarefa pausada com sucesso!!!');
-            document.location.reload();
+            atualizaOsDados()
         } else {
             api.put('todo-updateStatus', values);
             alert('Tarefa em execução!!!');
-            document.location.reload();
+            atualizaOsDados()
         };
     };
 
@@ -192,7 +202,7 @@ function ToDoList() {
 
         alert('Tarefa arquivada com sucesso!!!');
 
-        document.location.reload();
+        atualizaOsDados()
     };
 
     //Função para deletar tarefa
@@ -204,7 +214,7 @@ function ToDoList() {
 
         alert('Tarefa deletada com sucesso!!!');
 
-        document.location.reload();
+        atualizaOsDados()
     };
 
     var incrementTarefas = 1;

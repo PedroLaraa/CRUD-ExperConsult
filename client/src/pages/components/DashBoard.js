@@ -146,6 +146,22 @@ function DashBoardInterface() {
         return arr2;
     };
 
+    function recebeDadosDoDB(){
+        getInfosObras();
+        getInfosPredios();
+        getInfosDoed();
+    }
+
+    function atualizaOsDados(){
+        let cont = 0;
+        setInterval(() => {
+            while (cont < 1) {
+                recebeDadosDoDB()
+                cont++
+            };
+        }, 200);
+    };
+
     const busca = clientes.toLowerCase(); // DEFINE O QUE SERÁ BUSCADO
 
     const dataFiltrado = data.filter(v => JSON.stringify(v.obras_cliente.obras_nomeDaObra).replaceAll('"', '').toLowerCase().includes(busca.split(' - ')[1])); // RETORNA OS DADOS REFERENTES A BUSCA
@@ -207,15 +223,13 @@ function DashBoardInterface() {
         const id = e.target.value;
         api.delete(`doed-deletado/${id}`);
         alert('Evento deletado');
-        document.location.reload(true);
+        atualizaOsDados()
     };
 
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
 
         getInfosPredios();
-
         getInfosDoed();
-
         getInfosObras();
 
     }, [openDialog1, openDialog2]); // PARAMETROS PARA ATUALIZAR OS DADOS SEM ATUALIZAR A PÁGINA

@@ -36,7 +36,7 @@ export default function FormDialogAddEvent(value) {
         id: value.id,
         nomeDoPredio: value.nomeDoPredio,
         nomeDoCliente: value.nomeDoCliente,
-        notificacoes_motivo: ''
+        notificacoes_motivo: '',
     });
 
     const [data, setData] = useState([]);
@@ -60,7 +60,9 @@ export default function FormDialogAddEvent(value) {
             notificacoes_clienteNotificado: value.nomeDoCliente,
             notificacoes_predioNotificado: value.nomeDoPredio.toLowerCase() + value.predios_clientes,
         });
-        handleClose();
+        setInterval(() => {
+            handleClose();
+        }, 150);
         alert('Evento cadastrado com sucesso e notificação enviada!');
     };
 
