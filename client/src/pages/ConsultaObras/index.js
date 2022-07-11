@@ -84,7 +84,10 @@ function ConsultaObras(){
                                     <div style={paragrafoStyle}>
                                         <p>•<label>{v.clientes_obra.clientes_apelido + ' - ' + v.obras_nomeDaObra.replace(/[0-9]/g, '')}</label></p>
                                         <p>• Premissas: <label>{v.obras_premissasDaObra}</label></p>
-                                    </div> 
+                                        <div className="p-2 d-flex justify-content-end">
+                                            <a className="btn btn-outline-dark" href={`edit-obra/${v.id}`}>Editar</a>
+                                        </div> 
+                                    </div>
                                 </div>
                             ))}
                         </>

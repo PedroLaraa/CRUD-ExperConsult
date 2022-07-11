@@ -567,6 +567,26 @@ const SECRET = 'experconsult'
         })
     })
 
+    app.put('/obra-editada', async function(req, res){
+            
+            const dataToInsert = {
+                obras_premissasDaObra: req.body.obras_premissasDaObra,
+            }
+
+            const {id} = req.body
+            
+            try{
+                const dbResponse = await PostObras.update(dataToInsert, {
+                    where: {
+                        id: id
+                    }
+                })
+            } catch (err) {
+                console.error(err);
+                res.render('erro')
+            }
+    })
+
     // ROTA - FAZ OS CADASTROS DOS EVENTOS NO BD (PREDIOS)
 
     app.post('/predio-cadastrado', async (req, res) => {

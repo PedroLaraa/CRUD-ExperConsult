@@ -51,8 +51,6 @@ function EditarEquipamentos(){
         setValues(valoresIniciais)
     }
 
-    console.log(values)
-
     function handleChangeValues(ev){
 
         const {name, value} = ev.target

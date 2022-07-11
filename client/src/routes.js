@@ -28,6 +28,8 @@ import EditarRepresentante from "./pages/ConsultaRepresentante/fornecedorEdit";
 
 import EditarCliente from "./pages/ConsultaClientes/editClientes";
 
+import EditarObra from "./pages/ConsultaObras/editObras";
+
 import FormClientes from "./pages/FormCadastroClientes.js";
 
 import FormFornecedores from "./pages/FormCadastroFornecedor";
@@ -183,6 +185,7 @@ function Rotas(){
                     <Route path="/edit-equipamento/:id" element={<Private><EditarEquipamentos /></Private>}></Route>
                     <Route path="/edit-representante/:id" element={<Private><EditarRepresentante /></Private>}></Route>
                     <Route path="/edit-cliente/:id" element={<Private><EditarCliente /></Private>}></Route>
+                    <Route path="/edit-obra/:id" element={<Private><EditarObra /></Private>}></Route>
                     <Route path="/cadastro-clientes" element={<Private><FormClientes /></Private>}></Route>
                     <Route path="/cadastro-fornecedores" element={<Private><FormFornecedores /></Private>}></Route>
                     <Route path="/cadastro-equipamentos" element={<Private><FormEquipamentos /></Private>}></Route>
