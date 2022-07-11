@@ -32,9 +32,11 @@ function FiltraClientes() {
     const [url, setUrl] = useState(''); // DEFINE AS URL's
 
     const [clientes, setClientes] = useState('');
-    const [pesquisarCliente, setPesquisarCliente] = useState('')
+    const [pesquisarCliente, setPesquisarCliente] = useState('');
 
-    const getInfosCliente = async (res, req) => { // REQUISIÇÃO DAS IMAGENS
+    const [obras, setObras] = useState([]);
+
+    const getInfosCliente = async (res, req) => { 
         await api.get("list-infosClientes")
             .then((response) => {
                 setData(response.data.clientes_logo);
@@ -44,7 +46,14 @@ function FiltraClientes() {
             })
     }
 
-    console.log(url)
+    const getInfosObras = async (res, req) => {
+        await api.get("list-infosObras")
+            .then((response) => {
+                setObras(response.data.value);
+            }).catch((err) => {
+                console.log(err);
+            })
+    } 
 
     function handleFiltrar(e) {
         setPesquisarCliente(clientes)
@@ -56,10 +65,10 @@ function FiltraClientes() {
 
     const dataFiltrado = data.filter(v => v.clientes_razaosocial.toLowerCase().includes(busca));
 
-    const verificacaoDeBusca = data.some(el => dataFiltrado.map((value) => (value)).includes(el))
+    const verificacaoDeBusca = data.some(el => dataFiltrado.map((value) => (value)).includes(el));
 
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
-        getInfosCliente()
+        getInfosCliente();
     }, []);
 
     useEffect(() => {
@@ -111,7 +120,7 @@ function FiltraClientes() {
                                         </div>
                                         <p style={{ fontFamily: 'Arial', fontWeight: 'bold'}}>IE: <label>{value.clientes_ie + ''}</label></p>
                                         <p style={{ fontWeight: 'bold'}}>Responsável: <label>{value.clientes_nomeResponsavel + ''}</label></p>
-                                        <p style={{ fontFamily: 'Arial', fontWeight: 'bold' }}>Telefone (Respoonsável): <label> {value.clientes_telefone + ''}</label> </p>
+                                        <p style={{ fontFamily: 'Arial', fontWeight: 'bold' }}>Telefone (Responsável): <label> {value.clientes_telefone + ''}</label> </p>
                                         <p style={{ fontFamily: 'Arial', fontWeight: 'bold'}}>Email (Responsável): <label>{value.clientes_email + ''}</label></p>
                                         <div className="breakText">
                                             <p style={{ fontWeight: 'bold'}}>Premissas de projeto: <label>{value.clientes_premissasDeProjeto + ''}</label></p>

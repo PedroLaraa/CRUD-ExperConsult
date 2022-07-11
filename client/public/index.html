@@ -44,7 +44,7 @@
                         Infraestrutura
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" id="redirectPage" href="">Planilha de Padrões</a>
+                        <a class="dropdown-item" id="redirectPagePlanilhas" href="">Planilha de Padrões</a>
                         <a class="dropdown-item" href="/compras-exper">Compras Exper</a>
                         <a class="dropdown-item" href="/todo-list">To-Do</a>
                         <a class="dropdown-item" href="/atas-de-reuniao">Atas De Reunião</a>
@@ -90,10 +90,11 @@
                         Clientes
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/cadastro-clientes">Cadastro</a>
-                        <a class="dropdown-item" href="/clientes">Consulta</a>
+                        <a class="dropdown-item" href="/cadastro-clientes">Cadastrar Cliente</a>
+                        <a class="dropdown-item" href="/clientes">Consultar Cliente</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/cadastro-obra">Cadastrar Obra</a>
+                        <a class="dropdown-item" href="/obras">Consultar Obra</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown" id="usuariosBtn">
@@ -103,7 +104,6 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/cadastro-usuario">Cadastro</a>
-                        <!-- <a class="dropdown-item" href="/usuarios">Consulta</a> -->
                         <div class="dropdown-divider"></div>
                     </div>
                 </li>
@@ -211,9 +211,9 @@
 
 <script>
 
-    document.getElementById('redirectPage').addEventListener('click', function (e) {
+    document.getElementById('redirectPagePlanilhas').addEventListener('click', function (e) {
         // e.preventDefault();
-        window.open('https://docs.google.com/spreadsheets/d/1y_6N6MMqnLV6nJVfRLvdDGUPdXSTtkDH/edit?usp=sharing&ouid=100532539000319060348&rtpof=true&sd=true')
+        window.open('https://docs.google.com/spreadsheets/d/1bG6FW6oJJjJn9d5CHuc2QhrnrKS6rY05CY1LV3zxoss/edit?usp=sharing')
     });
 
 </script>
@@ -221,7 +221,6 @@
 <style>
     @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap');
-
 
     #videoControl {
         position: fixed;

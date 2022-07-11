@@ -166,7 +166,7 @@ function FiltraEquipamentos() {
                         <div key={value.id}>
                             <div style={containerStyle}>
                                 <div style={paragrafoStyle}>
-                                    <div >
+                                    <div>
                                         <img src={url + value.desceqp_imagem} alt={value.desceqp_imagem.id} style={imagemEqpStyle}></img>
                                     </div>
                                     <a href={url + value.desceqp_pdf} download='pdf' style={{ color: 'red' }}>DOWNLOAD PDF ⤓</a>

@@ -14,6 +14,8 @@ import ConsultaEquipamentos from './pages/ConsultaEquipamentos';
 
 import ConsultaClientes from "./pages/ConsultaClientes";
 
+import ConsultaObras from "./pages/ConsultaObras";
+
 import DashBoard from "./pages/DashBoardHome";
 
 import Setores from "./pages/DashBoardHome/setores";
@@ -193,6 +195,7 @@ function Rotas(){
                     <Route path="/compras-exper" element={<Private><ComprasExper /></Private>}></Route>
                     <Route path="/atas-de-reuniao" element={<Private><AtasDeReuniao /></Private>}></Route>
                     <Route path="/todo-list" element={<Private><ToDoList /></Private>}></Route>
+                    <Route path="/obras" element={<Private><ConsultaObras /></Private>}></Route>
                 </Routes>
             </AuthProvider>
         </BrowserRouter>

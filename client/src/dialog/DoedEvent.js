@@ -136,7 +136,7 @@ export default function FormDialogAddEvent(value) {
                     >
                         {names.map((name) => (
                             <MenuItem key={name} value={name.charAt(name.length - 1)}>
-                                <Checkbox checked={personName.indexOf(name.charAt(name.length - 1)) > -1} />
+                                <Checkbox checked={personName.indexOf(name.charAt(name.length - 1)) > - 1} />
                                 <ListItemText primary={name} />
                             </MenuItem>
                         ))}

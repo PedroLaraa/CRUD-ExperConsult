@@ -539,7 +539,7 @@ const SECRET = 'experconsult'
         try{
             const dbResponse = await PostObras.create(dataToInsert);
             res.redirect('http://expertestes:3000/cadastro-obra') // FIXME TO IP SERVER
-        }
+        }   
         catch(err){
             console.error(err);
             res.render('erro')
@@ -1067,7 +1067,6 @@ const SECRET = 'experconsult'
     // ROTA - RECEBE REQ DO FRONT E LISTA DADOS 
 
     app.get('/listTodo-infos', async (req, res) => {
-
         PostToDo.findAll({})
         .then((value) => {
             res.json({
