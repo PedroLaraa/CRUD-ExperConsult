@@ -558,7 +558,8 @@ const SECRET = 'experconsult'
         })
         .then((value) => {
             return res.json({
-                value
+                value,
+                url: "http://192.168.10.122:1212/files/" //FIXME TO IP SERVER
             })
         })
         .catch((err) => {

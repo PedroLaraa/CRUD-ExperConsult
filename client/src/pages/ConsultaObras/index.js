@@ -12,6 +12,8 @@ import inputStyle from "../css/inputStyle";
 
 import paragrafoStyle from "../css/paragrafo";
 
+import imagemObraStyle from "../css/imagemObraStyle";
+
 function ConsultaObras(){
 
     const { logout } = useContext(AuthContext);
@@ -27,6 +29,7 @@ function ConsultaObras(){
     const [ buscaObra, setBuscaObra ] = useState('');
 
     const [clientes, setClientes] = useState([]);
+
     const [url, setUrl] = useState('');
 
     const getInfosObras = async(req, res) => {
@@ -55,8 +58,6 @@ function ConsultaObras(){
     if(obrasFiltradas.length === 0 && pesquisarObra != ''){
         alert('Nenhuma obra encontrada');
     };
-
-    console.log(obras)
 
     return(
         <>
@@ -88,6 +89,9 @@ function ConsultaObras(){
                             {obrasFiltradas.map(v => (
                                 <div key={v.id} className="p-2">
                                     <div style={paragrafoStyle}>
+                                        <div>
+                                            <img src={url + v.clientes_obra.clientes_logo} alt={v.clientes_obra.clientes_logo} style={imagemObraStyle}></img>
+                                        </div>
                                         <p>• <label>{v.clientes_obra.clientes_apelido + ' - ' + v.obras_nomeDaObra.replace(/[0-9]/g, '')}</label></p>
                                         <p>• Premissas: <label>{v.obras_premissasDaObra}</label></p>
                                         <div className="p-2 d-flex justify-content-end">
