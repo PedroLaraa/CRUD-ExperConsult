@@ -584,8 +584,18 @@ const SECRET = 'experconsult'
             } catch (err) {
                 console.error(err);
                 res.render('erro')
-            }
-    })
+            };
+    });
+
+    // ROTA - FAZ O DELETE DOS DADOS DE OBRAS
+
+    app.delete('/obra-deletada/:id', async function(req, res) {
+
+        const {id} = req.params
+
+        const dbResponse = await PostClientes.destroy({where:{id: id}})
+    
+    });
 
     // ROTA - FAZ OS CADASTROS DOS EVENTOS NO BD (PREDIOS)
 
@@ -602,8 +612,8 @@ const SECRET = 'experconsult'
             res.redirect('192.168.10.122:3000/dashboard') //FIXME TO IP SERVER
         }catch{
             res.render('erro')
-        }
-    })
+        };
+    });
 
     // ROTA - FAZ O EDIT DOS EVENTOS (PREDIOS)
 

@@ -65,9 +65,12 @@ function EditarEquipamentos(){
     };
 
     const handleDelete = () => {
-        api.delete(`equipamento-deletado/${id}`)
-        alert('Deletado com sucesso!')
-        navigate("/dashboard")
+        api.delete(`equipamento-deletado/${id}`);
+        
+        alert('Deletado com sucesso!');
+        
+        navigate("/dashboard");
+        
     };
 
     return(

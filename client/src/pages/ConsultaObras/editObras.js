@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from "react";
 
-import { useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom';
 
 import api from '../../config/configApi';
 
@@ -24,24 +24,24 @@ function EditarObra() {
             })
     }, [id])
 
-    const obraFiltrada = obra.filter(v => JSON.stringify(v.id) == id)
+    const obraFiltrada = obra.filter(v => JSON.stringify(v.id) == id);
 
-    let initialValue
+    let initialValue;
 
     if (obraFiltrada.length > 0) {
         initialValue = {
             id: id,
             obras_premissasDaObra: obraFiltrada[0].obras_premissasDaObra,
-        }
-    }
+        };
+    };
 
-    const valoresIniciais = initialValue
+    const valoresIniciais = initialValue;
 
-    const [values, setValues] = useState()
+    const [values, setValues] = useState();
 
     if (values == undefined && valoresIniciais != undefined) {
         setValues(valoresIniciais)
-    }
+    };
 
     function handleChangeValues(ev) {
 
@@ -51,9 +51,21 @@ function EditarObra() {
     };
 
     function handleSubmit() {
+
         api.put('obra-editada', values);
+
         alert('Editado com sucesso!');
+
         document.location.reload(true);
+    };
+
+    function handleDelete(){
+
+        api.delete(`obra-deletada/${id}`);
+
+        alert('Deletado com sucesso!');
+
+        navigate("/dashboard");
     };
 
     return (
@@ -93,6 +105,12 @@ function EditarObra() {
                                     className="btn btn-success"
                                     >Salvar
                                     </button>
+                                    {/* <button 
+                                    type="submit" 
+                                    onClick={handleDelete}
+                                    className="btn btn-outline-danger"
+                                    >Deletar
+                                    </button> */}
                                 </div>
                             </form>
                         </div>
