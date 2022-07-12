@@ -553,7 +553,7 @@ const SECRET = 'experconsult'
         await PostObras.findAll({
             include: [{
                 model: PostClientes,
-                attributes: ['clientes_apelido', 'id']
+                attributes: ['clientes_apelido', 'clientes_logo' ,'id']
             }]
         })
         .then((value) => {

@@ -26,31 +26,37 @@ function ConsultaObras(){
 
     const [ buscaObra, setBuscaObra ] = useState('');
 
+    const [clientes, setClientes] = useState([]);
+    const [url, setUrl] = useState('');
+
     const getInfosObras = async(req, res) => {
         api.get('/list-infosObras')
             .then((response) => {
                 setObras(response.data.value);
+                setUrl(response.data.url);
             }).catch((err) => {
                 console.log(err);
-            })
-    }
+            });
+    };
 
     useEffect(() => {
         getInfosObras();
-    }, [])
+    }, []);
 
     function handleFiltraObras(e){
 
         e.preventDefault();
 
         setBuscaObra(pesquisarObra);
-    }
+    };
 
     const obrasFiltradas = obras.filter(v => v.clientes_obra.clientes_apelido.toString().toLowerCase().includes(pesquisarObra) || v.obras_nomeDaObra.toString().toLowerCase().includes(pesquisarObra));
 
     if(obrasFiltradas.length === 0 && pesquisarObra != ''){
         alert('Nenhuma obra encontrada');
-    }
+    };
+
+    console.log(obras)
 
     return(
         <>
@@ -82,7 +88,7 @@ function ConsultaObras(){
                             {obrasFiltradas.map(v => (
                                 <div key={v.id} className="p-2">
                                     <div style={paragrafoStyle}>
-                                        <p>•<label>{v.clientes_obra.clientes_apelido + ' - ' + v.obras_nomeDaObra.replace(/[0-9]/g, '')}</label></p>
+                                        <p>• <label>{v.clientes_obra.clientes_apelido + ' - ' + v.obras_nomeDaObra.replace(/[0-9]/g, '')}</label></p>
                                         <p>• Premissas: <label>{v.obras_premissasDaObra}</label></p>
                                         <div className="p-2 d-flex justify-content-end">
                                             <a className="btn btn-outline-dark" href={`edit-obra/${v.id}`}>Editar</a>
