@@ -16,42 +16,48 @@ import imagemObraStyle from "../css/imagemObraStyle";
 
 function ConsultaObras(){
 
+    // REALIZA O LOGOUT DO USUÁRIO
+
     const { logout } = useContext(AuthContext);
 
     const element = document.getElementById('logoutBtn');
 
     element.addEventListener('click', logout, false);
 
+    // DECLARAÇÃO DE VARIÁVEIS
+
     const [obras, setObras] = useState([]);
 
-    const [pesquisarObra, setPesquisarObra] = useState('');
+    const [pesquisarObra, setPesquisarObra] = useState(''); // PESQUISA DE OBRA
 
-    const [ buscaObra, setBuscaObra ] = useState('');
+    const [ buscaObra, setBuscaObra ] = useState(''); // PESQUISA DE OBRA AUXILIAR
 
-    const [clientes, setClientes] = useState([]);
+    const [url, setUrl] = useState(''); // LOCAL ONDE OS ARQUIVOS FICAM SALVOS
 
-    const [url, setUrl] = useState('');
+    // FUNÇÃO PARA REQUISIÇÃO AO BACK-END DOS DADOS DA OBRA
 
     const getInfosObras = async(req, res) => {
         api.get('/list-infosObras')
             .then((response) => {
-                setObras(response.data.value);
-                setUrl(response.data.url);
+                setObras(response.data.value); // VARIAVEL QUE RECEBE OS DADOS
+                setUrl(response.data.url); // VARIAVEL QUE RECEBE O LOCAL ONDE OS AQUIVOS FICAM SALVOS
             }).catch((err) => {
                 console.log(err);
             });
     };
 
     useEffect(() => {
-        getInfosObras();
+        getInfosObras(); // EXECUTA A FUNÇÃO SEMPRE QUE A PÁGINA É CARREGADA
     }, []);
 
     function handleFiltraObras(e){
 
         e.preventDefault();
 
-        setBuscaObra(pesquisarObra);
+        setBuscaObra(pesquisarObra); // PESQUISA DE OBRA AUXILIAR
     };
+
+    // FILTRA AS OBRAS CONFORME 
 
     const obrasFiltradas = obras.filter(v => v.clientes_obra.clientes_apelido.toString().toLowerCase().includes(pesquisarObra) || v.obras_nomeDaObra.toString().toLowerCase().includes(pesquisarObra));
 
