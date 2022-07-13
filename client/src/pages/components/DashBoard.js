@@ -242,7 +242,7 @@ function DashBoardInterface() {
 
     useEffect(() => {
 
-        setRecoveredUsers(JSON.parse(localStorage.getItem('user')));
+        setRecoveredUsers(JSON.parse(localStorage.getItem('user'))); // RECUPERA OS DADOS DO USUÁRIO LOGADO
 
     }, []);
 

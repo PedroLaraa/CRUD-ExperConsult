@@ -53,13 +53,15 @@ function ConsultaObras(){
     function handleFiltraObras(e){
 
         e.preventDefault();
-
+        
         setBuscaObra(pesquisarObra); // PESQUISA DE OBRA AUXILIAR
     };
 
-    // FILTRA AS OBRAS CONFORME 
+    // FILTRA AS OBRAS CONFORME
 
     const obrasFiltradas = obras.filter(v => v.clientes_obra.clientes_apelido.toString().toLowerCase().includes(pesquisarObra) || v.obras_nomeDaObra.toString().toLowerCase().includes(pesquisarObra));
+
+    // VERIFICA SE A BUSCA NÃO RETORNA NADA
 
     if(obrasFiltradas.length === 0 && pesquisarObra != ''){
         alert('Nenhuma obra encontrada');
@@ -72,6 +74,7 @@ function ConsultaObras(){
                 <form>
                     <div className="w-100 m-0 row d-flex flex-row justify-content-around">
                         <div className="p-2 col-md-3 mb-3">
+                            {/* Inmput para busca de obra */}
                             <input
                                 style={inputStyle}
                                 type='search'
@@ -92,6 +95,7 @@ function ConsultaObras(){
                 <div>
                     {pesquisarObra && (
                         <>
+                        {/* Listagem dos dados de obras */}
                             {obrasFiltradas.map(v => (
                                 <div key={v.id} className="p-2">
                                     <div style={paragrafoStyle}>
