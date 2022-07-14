@@ -105,12 +105,6 @@ function EditarObra() {
                                     className="btn btn-success"
                                     >Salvar
                                     </button>
-                                    {/* <button 
-                                    type="submit" 
-                                    onClick={handleDelete}
-                                    className="btn btn-outline-danger"
-                                    >Deletar
-                                    </button> */}
                                 </div>
                             </form>
                         </div>
