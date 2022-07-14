@@ -61,6 +61,8 @@ const mysql = require('mysql2');
 
 const jwt = require('jsonwebtoken');
 
+const bcrypt = require('bcrypt');
+
 const SECRET = 'experconsult'
 
 // PERMITE ACESSO DO BROWSER AO SISTEMA
@@ -88,7 +90,6 @@ app.engine('handlebars', handlebars.engine({
     }
 }))
 app.set("view engine", "handlebars")
-
 
 // CONFIGS DO BODY PARSER
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -789,6 +790,15 @@ app.post('/login-auth', async (req, res) => {
 
 app.post('/usuariocadastrado', upload.single('user_foto'), async (req, res) => {
 
+    const saltRounds = 10;
+    const myPlaintextPassword = req.body.user_senha;
+
+    const senhaEcriptada = bcrypt.genSalt(saltRounds, function(err, salt) {
+        bcrypt.hash(myPlaintextPassword, salt, function(err, hash) {
+            return hash;
+        });
+    });
+
     const dataToInsert = {
         user_nome: req.body.user_nome,
         user_nomeUser: req.body.user_nomeUser,
@@ -803,10 +813,10 @@ app.post('/usuariocadastrado', upload.single('user_foto'), async (req, res) => {
         user_cargo: req.body.user_cargo,
         user_endereco: req.body.user_endereco,
         user_foto: (typeof req.file !== 'undefined') ? req.file.filename : '',
-    }
-
+    };
+    
     try {
-        const dbResponse = await PostUser.create(dataToInsert)
+        const dbResponse = await PostUser.create(dataToInsert)        
         res.redirect('http://expertestes:3000/dashboard') //FIXME TO IP SERVER
     } catch (err) {
         console.log(err)
