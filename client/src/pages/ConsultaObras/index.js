@@ -74,7 +74,7 @@ function ConsultaObras(){
                 <form>
                     <div className="w-100 m-0 row d-flex flex-row justify-content-around">
                         <div className="p-2 col-md-3 mb-3">
-                            {/* Inmput para busca de obra */}
+                            {/* Input para busca de obra */}
                             <input
                                 style={inputStyle}
                                 type='search'

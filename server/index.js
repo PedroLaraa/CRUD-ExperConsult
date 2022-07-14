@@ -811,6 +811,31 @@ const SECRET = 'experconsult'
         }
     })
 
+    //ROTA - FAZ O EDIT DE USUÁRIO
+
+    app.put('/user-editado', async function(req, res){
+
+        const dataToInsert = {
+            user_senha: req.body.user_senha,
+            user_emailPessoal: req.body.user_emailPessoal,
+        }
+
+        const id = req.body.id
+
+        try{
+            const dbResponse = await PostUser.update(dataToInsert, {
+                where: {
+                    id: id
+                }
+            })
+        }catch(err){
+            console.log(err)
+            res.render('erro')
+        }
+
+    })
+
+
     // ROTA - DESTINADA A DEFINIR AS NOTIFICAÇÕES LIDAS PELO USUÁRIO
 
     app.put('/notificacao-lida', async function(req, res){
@@ -841,6 +866,7 @@ const SECRET = 'experconsult'
         .then((value) => {
             res.json({
                 value,
+                url: "http://192.168.10.122:1212/files/" //FIXME TO IP SERVER
             })
         }).catch((err) => {
                 console.log(err)

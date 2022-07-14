@@ -56,6 +56,8 @@ import ToDoList from "./pages/ToDoList";
 
 import AtasDeReuniao from "./pages/AtasDeReunião";
 
+import User from "./pages/UserData";
+
 import { AuthProvider, AuthContext } from "./contexts/auth";
 
 // CRIA AS ROTA DE NAVEGAÇÃO DE BROWSER
@@ -199,6 +201,7 @@ function Rotas(){
                     <Route path="/atas-de-reuniao" element={<Private><AtasDeReuniao /></Private>}></Route>
                     <Route path="/todo-list" element={<Private><ToDoList /></Private>}></Route>
                     <Route path="/obras" element={<Private><ConsultaObras /></Private>}></Route>
+                    <Route path="/user" element={<Private><User/></Private>}></Route>
                 </Routes>
             </AuthProvider>
         </BrowserRouter>
