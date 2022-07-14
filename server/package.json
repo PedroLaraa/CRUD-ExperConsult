@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "-": "^0.0.1",
+    "bcrypt": "^5.0.1",
     "body-parser": "^1.19.2",
     "cors": "^2.8.5",
     "express": "^4.17.3",
@@ -13,8 +14,7 @@
     "mysql2": "^2.3.3",
     "node": "^17.7.2",
     "nodemon": "^2.0.16",
-    "sequelize": "^6.17.0",
-    "type": "module"
+    "sequelize": "^6.17.0"
   },
   "scripts": {
     "start": "nodemon index.js"

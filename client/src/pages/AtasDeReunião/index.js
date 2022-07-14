@@ -70,7 +70,7 @@ function AtasDeReuniao() {
     return (
         <div>
             <NotificacoesSetor />
-            <form
+            <form 
                 className="was-validated"
                 id="formulario"
                 autoComplete="off"
