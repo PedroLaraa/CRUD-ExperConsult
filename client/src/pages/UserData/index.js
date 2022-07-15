@@ -6,6 +6,8 @@ import { AuthContext } from "../../contexts/auth";
 
 import api from '../../config/configApi';
 
+import NotificacoesSetor from "../NotificacoesSetores";
+
 function User() {
 
     // REALIZA O LOGOUT DO USUÁRIO
@@ -55,7 +57,7 @@ function User() {
 
     const idUser = userAtual.map(v => v.id);
 
-    let initialValue
+    let initialValue;
 
     if (userAtual.length > 0) {
         initialValue = {
@@ -70,7 +72,7 @@ function User() {
     const [values, setValues] = useState();
 
     if (values == undefined && valoresIniciais != undefined) {
-        setValues(valoresIniciais)
+        setValues(valoresIniciais);
     };
 
     function handleChangeValues(ev) {
@@ -90,6 +92,7 @@ function User() {
 
     return (
         <div>
+            <NotificacoesSetor />
             {userAtual.map(v => (
                 <div>
                     <div className="w-100 m-0 row d-flex flex-row justify-content-around">
