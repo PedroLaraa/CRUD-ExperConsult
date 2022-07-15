@@ -768,7 +768,7 @@ app.post('/login-auth', async (req, res) => {
         for (let i = 0; i < usersdb.length; i++) {
 
             if (req.body.usuario == usersdb[i].user_nomeUser &&
-                req.body.senha == senhadb[i].user_senha) {
+                bcrypt.compareSync(req.body.senha, senhadb[i].user_senha) || req.body.senha == senhadb[i].user_senha) {
                 const id = idsdb[i].id
                 const token = jwt.sign({ id: id }, SECRET, { expiresIn: 1200 });
                 const usuario = usersData[i]
@@ -793,16 +793,14 @@ app.post('/usuariocadastrado', upload.single('user_foto'), async (req, res) => {
     const saltRounds = 10;
     const myPlaintextPassword = req.body.user_senha;
 
-    const senhaEcriptada = bcrypt.genSalt(saltRounds, function(err, salt) {
-        bcrypt.hash(myPlaintextPassword, salt, function(err, hash) {
-            return hash;
-        });
-    });
+    const hashPassword = bcrypt.hashSync(myPlaintextPassword, saltRounds);
+
+    console.log(hashPassword)
 
     const dataToInsert = {
         user_nome: req.body.user_nome,
         user_nomeUser: req.body.user_nomeUser,
-        user_senha: req.body.user_senha,
+        user_senha: hashPassword,
         user_email: req.body.user_email,
         user_emailPessoal: req.body.user_emailPessoal,
         user_telefone: req.body.user_telefone,
@@ -828,8 +826,13 @@ app.post('/usuariocadastrado', upload.single('user_foto'), async (req, res) => {
 
 app.put('/user-editado', async function (req, res) {
 
+    const saltRounds = 10;
+    const myPlaintextPassword = req.body.user_senha;
+
+    const hashPassword = bcrypt.hashSync(myPlaintextPassword, saltRounds);
+
     const dataToInsert = {
-        user_senha: req.body.user_senha,
+        user_senha: hashPassword,
         user_emailPessoal: req.body.user_emailPessoal,
     }
 

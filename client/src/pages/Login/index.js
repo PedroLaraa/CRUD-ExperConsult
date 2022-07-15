@@ -82,7 +82,7 @@ function Login(){
                                     name="senha"
                                     type={passwordShow ? "text" : "password"}
                                     onChange={(e) => setSenha(e.target.value)}
-                                    maxLength="12"
+                                    
                                     >
                                     </input>
                                     <p 

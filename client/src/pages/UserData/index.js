@@ -170,17 +170,6 @@ function User() {
                         </div>
                         <div className="w-100 m-0 row d-flex flex-row justify-content-around">
                             <div className="p-2 col-4 mb-3">
-                                <label htmlFor="customControlValidation1">Senha:</label>
-                                <input
-                                    className="form-control "
-                                    id="validationInput"
-                                    disabled
-                                    type={passwordShow ? "text" : "password"}
-                                    defaultValue={v.user_senha}
-                                ></input>
-                                <p onClick={passwordShowHandler}>👀</p>
-                            </div>
-                            <div className="p-2 col-4 mb-3">
                                 <label htmlFor="customControlValidation1">Alterar Senha:</label>
                                 <input
                                     className="form-control"
