@@ -770,7 +770,7 @@ app.post('/login-auth', async (req, res) => {
         for (let i = 0; i < usersdb.length; i++) {
 
             if (req.body.usuario == usersdb[i].user_nomeUser &&
-                bcrypt.compareSync(req.body.senha, senhadb[i].user_senha) || req.body.senha == senhadb[i].user_senha) {
+                bcrypt.compareSync(req.body.senha, senhadb[i].user_senha)) {
                 const id = idsdb[i].id;
                 const token = jwt.sign({ id: id }, SECRET, { expiresIn: 1200 });
                 const usuario = usersData[i];
