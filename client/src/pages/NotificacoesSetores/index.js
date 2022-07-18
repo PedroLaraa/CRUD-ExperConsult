@@ -38,11 +38,13 @@ function NotificacoesSetor() {
 
     const setoresIdArray = setoresId.map(v => v.split(',')) // TRANSFORMA O STRING EM ARRAY
 
+    const autoresNotificacao = data.map(v => v.notificacoes_autor) // RECUPERA OS AUTORES DAS NOTIFICAÇÕES
+
     const dataFiltrado = []
 
     for (let i = 0; i < setoresIdArray.length; i++) { // FILTRA OS DADOS PARA RETORNAR APENAS AS NOTIFICAÇÕES DE SETORES QUE O USUARIO TEM ACESSO
         for (let j = 0; j < setoresIdArray[i].length; j++) {
-            if (setoresIdArray[i][j] == recoveredUsers.usuario.user_setor) {
+            if (setoresIdArray[i][j] == recoveredUsers.usuario.user_setor && recoveredUsers.usuario.user_nomeUser != autoresNotificacao[i] ) {
                 dataFiltrado.push(data[i])
             } else {
                 continue
