@@ -788,6 +788,15 @@ app.post('/login-auth', async (req, res) => {
 
 });
 
+    // CONVERSOR DE SENHAS PARA CRYPT
+
+    // const saltRounds = 10;
+    // const myPlaintextPassword = 'pedroLara157'
+
+    // const hashPassword = bcrypt.hashSync(myPlaintextPassword, saltRounds);
+
+    // console.log(hashPassword);
+
 //ROTA - FAZ O CADASTRO DE USUÁRIO
 
 app.post('/usuariocadastrado', upload.single('user_foto'), async (req, res) => {
