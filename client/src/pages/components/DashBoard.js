@@ -75,20 +75,20 @@ function DashBoardInterface() {
     const getInfosObras = async (req, res) => {
         api.get('list-infosObras')
             .then((response) => {
-                setObras(response.data.value)
+                setObras(response.data.value);
             }).catch((err) => {
-                console.log(err)
-            })
+                console.log(err);
+            });
     };
 
     const getInfosPredios = async (req, res) => {
         api.get('list-infosPredios')
             .then((response) => {
-                setData(response.data.value)
-                setUrl(response.data.url)
+                setData(response.data.value);
+                setUrl(response.data.url);
             }).catch((err) => {
-                console.log(err)
-            })
+                console.log(err);
+            });
     };
 
     // FAZ UMA REQUISIÇÃO PARA O BACK E RETORNAR O DATABASE COM DADOS (DOED)
@@ -96,30 +96,30 @@ function DashBoardInterface() {
     const getInfosDoed = async (req, res) => {
         api.get('list-infosDoed')
             .then((response) => {
-                setData2(response.data.value)
-                setUrl2(response.data.url)
+                setData2(response.data.value);
+                setUrl2(response.data.url);
             }).catch((err) => {
-                console.log(err)
-            })
+                console.log(err);
+            });
     };
 
     // FUNÇÃO PARA DEFINIR OS CLIENTES
 
     function handleSetClientes(e) {
-        setClientes(e.target.value)
+        setClientes(e.target.value);
     };
 
     // FUNÇÃO PARA EXECUTAR AS BUSCAS
 
     function handlePesquisarCliente() {
-        setPesquisarCliente(clientes)
+        setPesquisarCliente(clientes);
     };
 
     // FUNÇÃO PARA DISPARAR OS FILTROS
 
     function handleFiltrar(e) {
-        handleSetClientes(e)
-        handlePesquisarCliente()
+        handleSetClientes(e);
+        handlePesquisarCliente();
     };
 
     function findOcc(arr, key) {
