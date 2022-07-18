@@ -136,7 +136,6 @@ function DashBoardInterface() {
                 })
 
             } else {
-
                 let a = {}
                 a[key] = x[key]
                 a["occurrence"] = 1
