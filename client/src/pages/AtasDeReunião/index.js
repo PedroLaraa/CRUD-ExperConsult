@@ -100,7 +100,7 @@ function AtasDeReuniao() {
                                 className="form-control is-valid"
                                 id="validationInput"
                                 placeholder="Campo obrigatório"
-                                required
+                                required 
                                 name="atas_objetivo"
                             >
                             </input>
