@@ -65,6 +65,12 @@ const bcrypt = require('bcrypt');
 
 const SECRET = 'experconsult';
 
+const PDFKit = require('pdfkit');
+
+const fs = require('fs');
+
+const pdf = new PDFKit();
+
 // PERMITE ACESSO DO BROWSER AO SISTEMA
 
 app.use((req, res, next) => {
@@ -806,8 +812,6 @@ app.post('/usuariocadastrado', upload.single('user_foto'), async (req, res) => {
 
     const hashPassword = bcrypt.hashSync(myPlaintextPassword, saltRounds);
 
-    console.log(hashPassword);
-
     const dataToInsert = {
         user_nome: req.body.user_nome,
         user_nomeUser: req.body.user_nomeUser,
@@ -1199,7 +1203,7 @@ app.delete('/todo-deletado/:id', async function (req, res) {
 
 app.post('/atas-cadastrada', upload.single(''), async (req, res) => {
 
-    const dataToInsert = {
+    const data = {
         atas_reuniao: req.body.atas_reuniao,
         atas_objetivo: req.body.atas_objetivo,
         atas_liderReuniao: req.body.atas_liderReuniao,
@@ -1214,8 +1218,16 @@ app.post('/atas-cadastrada', upload.single(''), async (req, res) => {
         atas_prazo: req.body.atas_prazo,
     };
 
+    pdf.text(data.atas_assuntos);
+
+    pdf.text(data.atas_pendencias);
+
+    pdf.pipe(fs.createWriteStream(data.atas_reuniao + '.pdf'));
+
+    pdf.end();
+
     try {
-        const dbResponse = await PostAtasReuniao.create(dataToInsert);
+        const dbResponse = await PostAtasReuniao.create(data);
         res.redirect('http://expertestes:3000/atas-de-reuniao'); // FIXME TO IP SERVER
     } catch (err) {
         console.log(err);
