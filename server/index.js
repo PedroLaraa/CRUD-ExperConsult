@@ -1218,13 +1218,13 @@ app.post('/atas-cadastrada', upload.single(''), async (req, res) => {
         atas_prazo: req.body.atas_prazo,
     };
 
-    pdf.text(data.atas_assuntos);
+    // pdf.text(data.atas_assuntos);
 
-    pdf.text(data.atas_pendencias);
+    // pdf.text(data.atas_pendencias);
 
-    pdf.pipe(fs.createWriteStream(data.atas_reuniao + '.pdf'));
+    // pdf.pipe(fs.createWriteStream(data.atas_reuniao + '.pdf'));
 
-    pdf.end();
+    // pdf.end();
 
     try {
         const dbResponse = await PostAtasReuniao.create(data);
@@ -1233,7 +1233,6 @@ app.post('/atas-cadastrada', upload.single(''), async (req, res) => {
         console.log(err);
         res.render('erro');
     };
-
 });
 
 // Rota - Recebe req do front e retorna os dados do DB
