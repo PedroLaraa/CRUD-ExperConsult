@@ -6,7 +6,6 @@ import NotificacoesSetor from "../NotificacoesSetores";
 
 import './atasStyle.css'
 
-
 function AtasDeReuniao() {
 
     function ataComponent() {
