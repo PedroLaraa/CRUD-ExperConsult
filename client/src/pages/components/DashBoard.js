@@ -246,7 +246,7 @@ function DashBoardInterface() {
     }, []);
 
     return (
-        <div className="container ">
+        <div className="container">
             {/* Renderiza o componente de notificações */}
             <NotificacoesSetor />
             <div className="row h-auto position-relative pt-5 d-flex justify-content-center">
@@ -254,7 +254,7 @@ function DashBoardInterface() {
                 <div
                     className="list-group col-4 p-1 overflow-auto"
                     style={botaoDashboardStyle}>
-                    <h3>• Cliente / Obra :</h3>
+                    <h3> Cliente / Obra :</h3>
                     {nomesFiltrados.map(value => (
                         <div className="p-1" key={value}>
                             <button
@@ -276,8 +276,8 @@ function DashBoardInterface() {
                         className="col-8 overflow-auto vh-100"
                         style={{ maxHeight: "40rem", width: "60rem", paddingLeft: "2rem" }}
                     >
-                        <div className="d-flex d-inline justify-content-around p-3 bg-opacity-25 border border-dark border-1 rounded-3 " style={{ background: "ghostwhite" }}>
-                            <h1 className="text-uppercase w-100">• {clientes.toString().replace(/[0-9]/g, '')}</h1>
+                        <div className="d-flex d-inline justify-content-around p-3 bg-opacity-25 border border-dark border-1 rounded-3 " style={{ backgroundColor: "rgba(236, 237, 245, 0.9)"}}>
+                            <h1 className="text-uppercase w-100"> {clientes.toString().replace(/[0-9]/g, '')}</h1>
                             {/* Adiciona um novo setor / assunto naquele cliente - obra */}
                             <button
                                 className="btn btn-outline-dark"
@@ -381,7 +381,7 @@ function DashBoardInterface() {
                                                                         <p>{value.doed_eventos}</p>
                                                                     </div>
                                                                     <div className="col-1">
-                                                                        <p style={{ background: 'rgba(50,50,50,0.5)', height: '100%', width: '.5rem', border: "1px solid whitesmoke", borderRadius: "1rem" }} />
+                                                                        <p style={{ background: 'rgba(50,50,50,0.5)', height: '98%', width: '.5rem', border: "1px solid whitesmoke", borderRadius: "1rem" }} />
                                                                     </div>
                                                                     <div className="col-3 d-flex justify-content-end">
                                                                         <p className="col-3 d-flex justify-content-end">{value.doed_autor}

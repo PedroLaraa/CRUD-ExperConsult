@@ -7,7 +7,7 @@ const cabecalhoTableDashboard ={
     borderRadius: '.4rem',
     height: '3rem',
     width: '100%',
-    background: 'rgba(248,248,255,0.8)',
+    background: 'rgba(248,248,255,0.75)',
 }
 
 export default cabecalhoTableDashboard
