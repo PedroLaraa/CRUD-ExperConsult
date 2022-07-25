@@ -61,7 +61,6 @@ import User from "./pages/UserData";
 import { AuthProvider, AuthContext } from "./contexts/auth";
 
 // CRIA AS ROTA DE NAVEGAÇÃO DE BROWSER
-
 function Rotas(){
 
     const [permissoes, setPermissoes] = useState([]);
@@ -72,6 +71,7 @@ function Rotas(){
 
     const notificacoesDeveloper = document.getElementById('notificacoesBtn');
 
+    // DEFINE UMA FUNÇÃO PARA PRIVAR ROTAS - USUÁRIOS SEM AUTENTICAÇÃO PODEM ACESSAR
     const Public =({children}) => {
 
         const navbar = document.getElementById('navbarOculta');
@@ -82,6 +82,7 @@ function Rotas(){
 
     }
 
+    // DEFINE UMA FUNÇÃO PARA PRIVAR ROTAS - QUALQUER USER AUTENTICADO
     const Private = ({children}) =>{
 
         const { authenticated, loading } = useContext(AuthContext);
@@ -126,6 +127,7 @@ function Rotas(){
 
     };
 
+    // DEFINE UMA FUNÇÃO PARA PRIVAR ROTAS - DEVELOPER
     const PrivatePermsDeveloper = ({children}) =>{
 
         const { authenticated, loading } = useContext(AuthContext);
@@ -147,6 +149,7 @@ function Rotas(){
         };
     };
 
+    // DEFINE UMA FUNÇÃO PARA PRIVAR ROTAS - SUPERVISOR
     const PrivatePermsSupervisor = ({children}) => {
 
         const { authenticated, loading } = useContext(AuthContext);

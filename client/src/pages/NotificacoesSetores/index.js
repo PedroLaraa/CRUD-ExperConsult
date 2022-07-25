@@ -8,6 +8,7 @@ import { clientesEditados } from "../components/DashBoard";
 
 function NotificacoesSetor() {
 
+    // Pega o botão de notificações no HTML
     const notificacoesBtn = document.getElementById('notificacoesBtn');
 
     const [data, setData] = useState([]); // DEFINE O DATABASE
@@ -17,6 +18,7 @@ function NotificacoesSetor() {
 
     const [show, setShow] = useState(false);
 
+    // Manda a requisição para o backend e retorna os dados das notificações
     const getNotificacoesSetores = async (req, res) => { // RECUPERA AS NOTIFICAÇÕES DO BANCO DE DADOS POR UMA ROTA BACK-END
         api.get('list-notificacoesSetor')
             .then((response) => {
@@ -26,6 +28,7 @@ function NotificacoesSetor() {
             });
     };
 
+    //  Hook de efeito para executar a função de requisição ao carregar a página
     useEffect(() => { // CARREGA AS NOTIFICAÇÕES E ETC
 
         setRecoveredUsers(JSON.parse(localStorage.getItem('user')));
@@ -42,7 +45,8 @@ function NotificacoesSetor() {
 
     const dataFiltrado = [];
 
-    for (let i = 0; i < setoresIdArray.length; i++) { // FILTRA OS DADOS PARA RETORNAR APENAS AS NOTIFICAÇÕES DE SETORES QUE O USUARIO TEM ACESSO
+    // FILTRA OS DADOS PARA APARECER SOMENTE OS SETORES QUE O USUÁRIO ESTÁ LOGADO
+    for (let i = 0; i < setoresIdArray.length; i++) { 
         for (let j = 0; j < setoresIdArray[i].length; j++) {
             if (setoresIdArray[i][j] == recoveredUsers.usuario.user_setor && recoveredUsers.usuario.user_nomeUser != autoresNotificacao[i] ) {
                 dataFiltrado.push(data[i]);
@@ -52,7 +56,8 @@ function NotificacoesSetor() {
         }
     }
 
-    function handleShowNotification() { // FUNÇÃO PARA MOSTRAR / OCULTAR A NOTIFICAÇÃO
+    // FUNÇÃO PARA MOSTRAR / OCULTAR A NOTIFICAÇÃO
+    function handleShowNotification() { 
 
         setShow(!show);
 
@@ -66,7 +71,7 @@ function NotificacoesSetor() {
 
     const idsLidos = dataFiltrado.map(v => v.id); // RECUPERA OS IDS DAS NOTIFICÇÕES
 
-    function handleClearNotification() { // FUNÇÃO PARA LIMPAR AS NOTIFICAÇÕES
+    function handleClearNotification() { // FUNÇÃO PARA LIMPAR TODAS AS NOTIFICAÇÕES
 
         setShow(!show);
 
@@ -90,7 +95,7 @@ function NotificacoesSetor() {
         document.location.reload();
     };
 
-    function handleClearUniqueNotification(e) { // FUNÇÃO PARA LIMPAR AS NOTIFICAÇÕES
+    function handleClearUniqueNotification(e) { // FUNÇÃO PARA LIMPAR UMA NOTIFICAÇÃO ÚNICA
 
         setShow(!show);
 
@@ -133,7 +138,7 @@ function NotificacoesSetor() {
 
     const clientesNotificados = dataFiltrado.map(v => (v.notificacoes_clienteNotificado).toLowerCase()).filter(v => v != null); // RECUPERA OS CLIENTES NOTIFICADOS
 
-    const prediosNotificados = dataFiltrado.map(v => (v.notificacoes_predioNotificado).toLowerCase()).filter(v => v != null);
+    const prediosNotificados = dataFiltrado.map(v => (v.notificacoes_predioNotificado).toLowerCase()).filter(v => v != null); // RECUPERA OS PREDIOS NOTIFICADOS
 
     function botoesNotificados() { // VERIFICA SE OS CLIENTES E PRÉDIOS FORAM EDITADOS E MUDA A COR DO BOTÃO
         for (let i = 0; i < clientesNotificados.length; i++) {

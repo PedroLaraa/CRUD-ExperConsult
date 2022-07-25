@@ -51,6 +51,7 @@ function EditarEquipamentos(){
         setValues(valoresIniciais)
     }
 
+    // FUNÇÃO PARA ARMAZENAR OS DADOS ALTERADOS
     function handleChangeValues(ev){
 
         const {name, value} = ev.target
