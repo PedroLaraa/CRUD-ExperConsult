@@ -240,9 +240,7 @@ function DashBoardInterface() {
     }, [idsDoed]); // VERIFICA A BUSCA SEMPRE QUE OS IDSDOED ALTERAM
 
     useEffect(() => {
-
         setRecoveredUsers(JSON.parse(localStorage.getItem('user'))); // RECUPERA OS DADOS DO USUÁRIO LOGADO
-
     }, []);
 
     return (
