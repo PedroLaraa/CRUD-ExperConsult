@@ -194,6 +194,7 @@ function NotificacoesSetor() {
                                         <p>• Evento: {v.notificacoes_mensagem}</p>
                                     </div>
                                     <div className="d-flex justify-content-end">
+                                        <button className="btn btn-outline-dark m-1" data-toggle="tooltip" data-placement="top" title={`Autor: ${v.notificacoes_autor}`}>ℹ️</button>
                                         <button value={v.id} onClick={handleClearUniqueNotification} className="btn btn-outline-dark m-1">❌</button>
                                     </div>
                                     <div className="col-12 " style={{ backgroundColor: '#A2A2A2', height: '4px' }}>

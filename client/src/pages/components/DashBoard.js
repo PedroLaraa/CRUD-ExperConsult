@@ -132,7 +132,7 @@ function DashBoardInterface() {
                 arr2.forEach((k) => {
                     if (k[key] === x[key]) {
                         k["occurrence"]++
-                    }
+                    };
                 })
 
             } else {
@@ -140,7 +140,7 @@ function DashBoardInterface() {
                 a[key] = x[key]
                 a["occurrence"] = 1
                 arr2.push(a);
-            }
+            };
         })
         return arr2;
     };
@@ -149,7 +149,7 @@ function DashBoardInterface() {
         getInfosObras();
         getInfosPredios();
         getInfosDoed();
-    }
+    };
 
     function atualizaOsDados(){
         let cont = 0;
@@ -200,11 +200,11 @@ function DashBoardInterface() {
     const idDoed = function (e) {
         setIdsDoed(e.target.value);
         if (idsDoed == e.target.value) {
-            setShowEvents(false)
-            setIdsDoed('')
+            setShowEvents(false);
+            setIdsDoed('');
         } else {
-            setShowEvents(true)
-            setIdsDoed(e.target.value)
+            setShowEvents(true);
+            setIdsDoed(e.target.value);
         };
     };
 
@@ -222,7 +222,7 @@ function DashBoardInterface() {
         const id = e.target.value;
         api.delete(`doed-deletado/${id}`);
         alert('Evento deletado');
-        atualizaOsDados()
+        atualizaOsDados();
     };
 
     useEffect(() => { // INVOCA AS FUNÇÕES INDICADAS AO ENTRAR NO ENDEREÇO
@@ -236,7 +236,7 @@ function DashBoardInterface() {
     useEffect(() => {
         if (verificacaoDeBusca === false && idsDoed !== '') {
             alert("Nenhum evento registrado!")
-        }
+        };
     }, [idsDoed]); // VERIFICA A BUSCA SEMPRE QUE OS IDSDOED ALTERAM
 
     useEffect(() => {
