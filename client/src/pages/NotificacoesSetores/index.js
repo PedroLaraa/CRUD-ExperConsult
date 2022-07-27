@@ -144,7 +144,7 @@ function NotificacoesSetor() {
         for (let i = 0; i < clientesNotificados.length; i++) {
             for (let j = 0; j < clientesEditados.length; j++) {
                 if (clientesNotificados[i] == clientesEditados[j]) {
-                    document.getElementById(clientesNotificados[i]).style.backgroundColor = 'rgba(255, 255, 0, 0.5)';
+                    document.getElementById(clientesNotificados[i]).style.backgroundColor = 'rgba(255, 255, 0, 0.5)'; // CLIENTE QUE SERÁ ALTERADA DE COR PARA INDICAR UM EVENTO NOVO
                 };
             };
         };
@@ -152,7 +152,7 @@ function NotificacoesSetor() {
             if(document.getElementById(prediosNotificados[i]) === null){
                 continue;
             }else{
-                document.getElementById(prediosNotificados[i]).style.backgroundColor = 'rgba(255, 255, 0, 0.5)';
+                document.getElementById(prediosNotificados[i]).style.backgroundColor = 'rgba(255, 255, 0, 0.5)'; // PRÉDIO QUE SERÁ ALTERADA DE COR PARA INDICAR UM EVENTO NOVO
             };
         };
     };

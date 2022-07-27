@@ -55,7 +55,7 @@ export default function FormDialogAddEvent(value) {
         api.post('notificacoes-setores', {
             notificacoes_destinatario: personName,
             notificacoes_autor: value.doed_autor,
-            notificacoes_motivo: `Novo evento cadastrado no prédio "${value.nomeDoPredio}" do cliente "${value.nomeDoCliente}"`,
+            notificacoes_motivo: `Novo evento cadastrado no prédio "${value.nomeDoPredio}" do cliente "${value.nomeDoCliente}"`.replace(/[0-9]/g, ''),
             notificacoes_mensagem: editValue.doed_eventos,
             notificacoes_clienteNotificado: value.nomeDoCliente,
             notificacoes_predioNotificado: value.nomeDoPredio.toLowerCase() + value.predios_clientes,
