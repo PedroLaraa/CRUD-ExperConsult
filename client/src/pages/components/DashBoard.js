@@ -390,7 +390,7 @@ function DashBoardInterface() {
                                                                                 onClick={handleRemoveEvent}
                                                                                 style={{ fontSize: '1rem', fontFamily: 'Raleway', width: '2.8rem', height: '2.4rem', paddingRight: '.6rem' }}
                                                                                 data-toggle="tooltip"
-                                                                                data-placement="right"
+                                                                                data-placement="right" 
                                                                                 title="Deletar Evento"
                                                                             >❌
                                                                             </button>
