@@ -1,12 +1,12 @@
 // CSS PARA APLICAR NOS PARÁGRAFOS
 
 const paragrafoDivStyle= {
-    paddingTop:'.4rem',
-    paddingLeft: '1.3rem',
+    
+    paddingLeft: '1.5rem',
     fontSize: '1.1rem',
     fontFamily: 'Raleway',
     height: '100%',
-    width: '45rem',
+    width: '99%',
     fontWeight: '100'
 }
 

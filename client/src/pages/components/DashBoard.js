@@ -272,9 +272,9 @@ function DashBoardInterface() {
                 {clientes && (
                     <div
                         className="col-8 overflow-auto vh-100"
-                        style={{ maxHeight: "40rem", width: "60rem", paddingLeft: "2rem" }}
-                    >
-                        <div className="d-flex d-inline justify-content-around p-3 bg-opacity-25 border border-dark border-1 rounded-3 " style={{ backgroundColor: "rgba(236, 237, 245, 0.9)"}}>
+                        style={{ maxHeight: "40rem", width: "60rem", padding: "2rem", backgroundColor: 'rgba(232,234,242,0.9)', 
+                        border: '4px solid rgba(169,210,215,1 )', borderRadius: '.4rem' }}>
+                        <div className="d-flex d-inline justify-content-around p-3 bg-opacity-25 " style={{ backgroundColor: "rgba(236, 237, 245, 0.9)", border: '4px solid rgba(169,210,215,1 )', borderRadius: '.4rem'}}>
                             <h1 className="text-uppercase w-100"> {clientes.toString().replace(/[0-9]/g, '')}</h1>
                             {/* Adiciona um novo setor / assunto naquele cliente - obra */}
                             <button
@@ -307,14 +307,9 @@ function DashBoardInterface() {
                                     data={value.data}
                                     setData={value.setData}
                                 />
-                                <div
-                                    className="container pb-1"
-                                >
+                                <div>
                                     <div>
-                                        <div
-                                            className="container overflow-auto"
-                                            style={{ maxHeight: "30rem", width: "100%" }}
-                                        >
+                                        <div className="container overflow-auto" style={{ maxHeight: "30rem", width: "100%" }}>
                                             <div
                                                 style={paragrafoDivStyle}
                                             >
@@ -373,7 +368,7 @@ function DashBoardInterface() {
                                                     <div>
                                                         {/* Lista os eventos daquele Setor / Prédio */}
                                                         {doedFiltrado.map(value => (
-                                                            <div key={value.id}>
+                                                            <div key={value.id} className='pt-1'>
                                                                 <div style={paragrafoDoedStyle} className="row justify-content-md-center">
                                                                     <div className="col-6">
                                                                         <p>{value.doed_eventos}</p>
