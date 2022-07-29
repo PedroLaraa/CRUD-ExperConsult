@@ -149,21 +149,21 @@ export default function FormDialogAddEvent(value) {
     return (
         <Dialog open={value.open} onClose={handleClose}>
             <DialogTitle>Novo evento: </DialogTitle>
-            <DialogContent >
+            <DialogContent>
                 <TextareaAutosize
-                    autoComplete='off'
+                    autoComplete="off"
                     margin="dense"
                     id="doed_eventos"
                     label="Evento: "
-                    style={{ width: '100%' }}
+                    style={{ width: "100%" }}
                     onChange={handleChangeValue}
                     type="text"
                     variant="standard"
-                    multiline='true'
+                    multiline="true"
                     minRows={6}
-                    maxRows={8}
                 />
-                <h5 className='pt-5'>Notificar: </h5>
+                {/* FIXME TELA FICANDO PRETA QUANDO ADICIONA EVENTO MOTIVOS: MULTILINE ROW PROPERTY AND CSS MUI DIALOG */}
+                <h5 className="pt-5">Notificar: </h5>
                 <MultipleSelectCheckmarks />
             </DialogContent>
             <DialogActions>
