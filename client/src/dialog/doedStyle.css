@@ -8,6 +8,7 @@
     position: fixed;
     display: flex;
     justify-content: center;
+    z-index: 100;
 }
 
 .css-yiavyu-MuiBackdrop-root-MuiDialog-backdrop{
@@ -29,4 +30,5 @@
     position: fixed;
     display: none;
     justify-content: center;
+    z-index: 100;
 }
