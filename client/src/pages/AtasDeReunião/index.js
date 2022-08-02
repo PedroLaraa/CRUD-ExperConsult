@@ -75,7 +75,7 @@ function AtasDeReuniao() {
                 autoComplete="off"
                 encType="multipart/form-data"
                 method="POST"
-                action="http://192.168.10.122:1212/atas-cadastrada" // FIXME TO IP SERVER
+                action="http://192.168.10.127:1212/atas-cadastrada" // FIXME TO IP SERVER
                 onSubmit={(e) => alert('EQUIPAMENTO CADASTRADO COM SUCESSO!!!')}
             >
                 <div id='atasAddNewAta'>

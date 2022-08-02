@@ -42,7 +42,7 @@ function FormEquipamentos() {
                 autoComplete="off"
                 encType="multipart/form-data"
                 method="POST"
-                action="http://192.168.10.122:1212/equipamentocadastrado" // FIXME TO IP SERVER
+                action="http://192.168.10.127:1212/equipamentocadastrado" // FIXME TO IP SERVER
                 onSubmit={(e) => alert('EQUIPAMENTO CADASTRADO COM SUCESSO!!!')}
             >
                 <h1 className="text-uppercase" style={{width: '20rem'}}>Cadastro de Equipamento</h1>
@@ -144,7 +144,7 @@ function FormEquipamentos() {
                         </input>
                     </div>
                     <div className="p-2 col-md-5 mb-3">
-                        <label htmlFor="customControlValidation1">Preço do equipamento (R$):</label>
+                        <label htmlFor="customControlValidation1">Preço do equipamento:</label>
                         <input
                             className="form-control is-invalid"
                             id="validationInput"
@@ -165,6 +165,19 @@ function FormEquipamentos() {
                             name="desceqp_dataultpreco"
                         >
                         </input>
+                    </div>
+                    <div className="p-2 col-md-5 mb-3">
+                        <label htmlFor="customControlValidation1">Moeda:</label>
+                        <select
+                            className="form-select form-select-lg mb-3 overflow-auto"
+                            id="validationInput" 
+                            name="desceqp_moeda"
+                        >
+                            <option value='N/A'>Selecione...</option>
+                            <option value='Real'>• Real</option>
+                            <option value='Dólar'>• Dólar</option>
+                            <option value='Euro'>• Euro</option>
+                        </select>
                     </div>
                 </div>
                 <hr />

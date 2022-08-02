@@ -50,7 +50,7 @@ function CadastroObra() {
                     autoComplete="off"
                     encType="multipart/form-data"
                     method="POST"
-                    action="http://192.168.10.122:1212/obracadastrada" // FIXME TO IP SERVER
+                    action="http://192.168.10.127:1212/obracadastrada" // FIXME TO IP SERVER
                     onSubmit={(e) => alert('OBRA CADASTRADA COM SUCESSO!!!')}
                 >
                     <h1 className="text-uppercase">Cadastro de Obra</h1>

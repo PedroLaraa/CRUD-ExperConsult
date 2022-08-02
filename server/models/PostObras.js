@@ -4,6 +4,8 @@ const db = require('./db')
 
 const PostPredios = require('./PostPredios')
 
+const PostSetorObra = require('./PostSetorObra')
+
 // Post() = Insere dados na table
 
 // DEFINE A TABLE PARA INSERÇÃO DE DADOS E OS TIPOS DE DADOS DE CADA COLUMN
@@ -23,6 +25,12 @@ const PostObras = db.sequelize.define('obras_clientes',{
 
 PostPredios.belongsTo(PostObras, {
     foreignKey: 'idCliente',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE'
+})
+
+PostSetorObra.belongsTo(PostObras, {
+    foreignKey: 'setor_obraDoSetor',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE'
 })

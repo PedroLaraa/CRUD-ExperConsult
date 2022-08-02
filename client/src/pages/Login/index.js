@@ -33,7 +33,7 @@ function Login(){
 
         var img = document.getElementById('imgLoggedUser');
 
-        const urlUser = 'http://192.168.10.122:1212/files/' // FIXME TO IP SERVER
+        const urlUser = 'http://192.168.10.127:1212/files/' // FIXME TO IP SERVER
 
         const user = JSON.parse(localStorage.getItem('user'))
 

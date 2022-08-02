@@ -41,6 +41,10 @@ const PostToDo = require('./models/PostToDo');
 
 const PostAtasReuniao = require('./models/PostAtasReuniao');
 
+const PostSetorObra = require('./models/PostSetorObra');
+
+const PostSetorEqp = require('./models/PostSetorEqp');
+
 const path = require('path');
 
 const upload = require('./middleware/uploadimg');
@@ -218,7 +222,7 @@ app.get('/list-imgf', async (req, res) => {
         .then((fornec_foto) => {
             return res.json({
                 fornec_foto,
-                url: "http://192.168.10.122:1212/files/" //FIXME TO IP SERVER
+                url: "http://192.168.10.127:1212/files/" //FIXME TO IP SERVER
             })
         }).catch(() => {
             res.render('erro');
@@ -250,6 +254,7 @@ app.post('/equipamentocadastrado', upload.fields([{ name: 'desceqp_imagem', maxC
         desceqp_dataultpreco: req.body.desceqp_dataultpreco,
         desceqp_marca: req.body.desceqp_marca,
         fornecedor_idfk: req.body.fornecedor_idfk,
+        desceqp_moeda: req.body.desceqp_moeda,
         desceqp_imagem: (typeof req.files.desceqp_imagem !== 'undefined') ? req.files['desceqp_imagem'][0].filename : '',
         desceqp_pdf: (typeof req.files.desceqp_pdf !== 'undefined') ? req.files['desceqp_pdf'][0].filename : '',
     };
@@ -260,7 +265,7 @@ app.post('/equipamentocadastrado', upload.fields([{ name: 'desceqp_imagem', maxC
     try {
         if (nomeEquipamento.map((v) => (v.desceqp_nomeeqp).toLowerCase()) != desceqp_nomeeqp.toLowerCase()) {
             const dbResponse = await Post.create(dataToInsert);
-            res.redirect('http://192.168.10.122:3000/cadastro-equipamentos'); // FIXME TO IP SERVER
+            res.redirect('http://192.168.10.127:3000/cadastro-equipamentos'); // FIXME TO IP SERVER
         } else {
             res.json('Equipamento já cadastrado no sistema!');
         };
@@ -283,6 +288,7 @@ app.put('/equipamento-editado', async function (req, res) {
         desceqp_dataultpreco: req.body.desceqp_dataultpreco,
         desceqp_capacidadeprod: req.body.desceqp_capacidadeprod,
         desceqp_comentario: req.body.desceqp_comentario,
+        desceqp_moeda: req.body.desceqp_moeda,
     };
 
     const { id } = req.body;
@@ -322,7 +328,7 @@ app.get('/list-infosequipamentos', async (req, res) => {
         .then((value) => {
             return res.json({
                 value,
-                url: "http://192.168.10.122:1212/files/" //FIXME TO IP SERVER
+                url: "http://192.168.10.127:1212/files/" //FIXME TO IP SERVER
             })
         }).catch(() => {
             res.render('erro');
@@ -339,7 +345,7 @@ app.get('/list-infosequipamentosMarcas', async (req, res) => {
         .then((value) => {
             return res.json({
                 value,
-                url: "http://192.168.10.122:1212/files/" //FIXME TO IP SERVER
+                url: "http://192.168.10.127:1212/files/" //FIXME TO IP SERVER
             })
         }).catch(() => {
             res.render('erro');
@@ -435,7 +441,7 @@ app.get('/list-img', async (req, res) => {
         .then((representante_imagem) => {
             return res.json({
                 representante_imagem,
-                url: "http://192.168.10.122:1212/files/" //FIXME TO IP SERVER
+                url: "http://192.168.10.127:1212/files/" //FIXME TO IP SERVER
             });
         }).catch(() => {
             res.render('erro')
@@ -528,7 +534,7 @@ app.get('/list-infosClientes', async (req, res) => {
         .then((clientes_logo) => {
             return res.json({
                 clientes_logo,
-                url: "http://192.168.10.122:1212/files/" //FIXME TO IP SERVER
+                url: "http://192.168.10.127:1212/files/" //FIXME TO IP SERVER
             })
         }).catch((err) => {
             console.log(err);
@@ -571,7 +577,7 @@ app.get('/list-infosObras', async (req, res) => {
         .then((value) => {
             return res.json({
                 value,
-                url: "http://192.168.10.122:1212/files/" //FIXME TO IP SERVER
+                url: "http://192.168.10.127:1212/files/" //FIXME TO IP SERVER
             })
         })
         .catch((err) => {
@@ -622,7 +628,7 @@ app.post('/predio-cadastrado', async (req, res) => {
 
     try {
         const dbResponse = await PostPredios.create(dataToInsert);
-        res.redirect('192.168.10.122:3000/dashboard'); //FIXME TO IP SERVER
+        res.redirect('192.168.10.127:3000/dashboard'); //FIXME TO IP SERVER
     } catch {
         res.render('erro');
     };
@@ -673,7 +679,7 @@ app.get('/list-infosPredios', async (req, res) => {
         .then((value) => {
             res.json({
                 value,
-                url: "http://192.168.10.122:1212/files/" //FIXME TO IP SERVER
+                url: "http://192.168.10.127:1212/files/" //FIXME TO IP SERVER
             })
         }).catch((err) => {
             console.log(err)
@@ -745,7 +751,7 @@ app.get('/list-infosDoed', async (req, res) => {
         .then((value) => {
             res.json({
                 value,
-                url: "http://192.168.10.122:1212/files/" //FIXME TO IP SERVER
+                url: "http://192.168.10.127:1212/files/" //FIXME TO IP SERVER
             })
         }).catch((err) => {
             console.log(err);
@@ -794,15 +800,6 @@ app.post('/login-auth', async (req, res) => {
 
 });
 
-    // CONVERSOR DE SENHAS PARA CRYPT
-
-    // const saltRounds = 10;
-    // const myPlaintextPassword = 'pedroLara157'
-
-    // const hashPassword = bcrypt.hashSync(myPlaintextPassword, saltRounds);
-
-    // console.log(hashPassword);
-
 //ROTA - FAZ O CADASTRO DE USUÁRIO
 
 app.post('/usuariocadastrado', upload.single('user_foto'), async (req, res) => {
@@ -827,9 +824,9 @@ app.post('/usuariocadastrado', upload.single('user_foto'), async (req, res) => {
         user_endereco: req.body.user_endereco,
         user_foto: (typeof req.file !== 'undefined') ? req.file.filename : '',
     };
-    
+
     try {
-        const dbResponse = await PostUser.create(dataToInsert);        
+        const dbResponse = await PostUser.create(dataToInsert);
         res.redirect('http://expertestes:3000/dashboard'); //FIXME TO IP SERVER
     } catch (err) {
         console.log(err);
@@ -897,7 +894,7 @@ app.get('/list-infosUser', async (req, res) => {
         .then((value) => {
             res.json({
                 value,
-                url: "http://192.168.10.122:1212/files/" //FIXME TO IP SERVER
+                url: "http://192.168.10.127:1212/files/" //FIXME TO IP SERVER
             })
         }).catch((err) => {
             console.log(err)
@@ -915,7 +912,7 @@ app.get('/list-infosUserPerm', async (req, res) => {
         .then((value) => {
             res.json({
                 value,
-                url: "http://192.168.10.228:1212/files/" // FIXME TO IP SERVER
+                url: "http://192.168.10.127:1212/files/" // FIXME TO IP SERVER
             })
         }).catch((err) => {
             console.log(err);
@@ -1248,6 +1245,84 @@ app.get('/listAtas-infos', async (req, res) => {
             console.log(err);
             res.render('erro');
         });
+});
+
+// SETORES DAS OBRAS
+
+// ROTA - POST SETORES DAS OBRAS
+
+app.post('/setor-de-obra-cadastrado', upload.single(''), async (req, res) => {
+
+    const data = {
+        equipamentos_setor: req.body.equipamentos_setor,
+        equipamentos_tag: req.body.equipamentos_tag,
+        equipamentos_equipamento: req.body.equipamentos_equipamento,
+    }
+
+    try {
+        const dbResponse = await PostSetorObra.create(data);
+        res.redirect('http://expertestes:3000/gerenciar-obras'); // FIXME TO IP SERVER
+    } catch (err) {
+        console.log(err);
+        res.render('erro');
+    }
+})
+
+app.get('/listSetorObras-infos', async (req, res) => {
+    PostSetorObra.findAll({
+        include: [{
+            model: PostObras,
+            attributes: ['obras_nomeDaObra']
+        }]
+    })
+        .then((value) => {
+            res.json({
+                value
+            })
+        }).catch((err) => {
+            console.log(err);
+            res.render('erro');
+        }); 
+});
+
+// EQUIPAMENTOS DAS OBRAS
+
+// ROTA - POST SETORES DAS OBRAS
+
+app.post('/equipamentoDeObraCadastrado', upload.single(''), async (req, res) => {
+
+    const data = {
+        equipamentos_setor: req.body.equipamentos_setor,
+        equipamentos_tag: req.body.equipamentos_tag,
+        equipamentos_equipamento: req.body.equipamentos_equipamento,
+    }
+
+    try {
+        const dbResponse = await PostSetorEqp.create(data);
+        res.redirect('http://expertestes:3000/gerenciar-obras'); // FIXME TO IP SERVER
+    } catch (err) {
+        console.log(err);
+        res.render('erro');
+    }
+
+})
+
+app.get('/listEqpObras-infos', async (req, res) => {
+
+    PostSetorEqp.findAll({
+        include: [{
+            model: Post,
+            attributes: ['desceqp_nomeeqp', 'desceqp_marca', 'desceqp_consumoene', 'desceqp_moeda', 'desceqp_precoeqp']
+        }]
+    })
+        .then((value) => {
+            res.json({
+                value
+            })
+        }).catch((err) => {
+            console.log(err);
+            res.render('erro');
+        }); 
 });
 
 // PORTA QUE O BACK-END ESTÁ SENDO EXECUTADO

@@ -56,6 +56,8 @@ import ToDoList from "./pages/ToDoList";
 
 import AtasDeReuniao from "./pages/AtasDeReunião";
 
+import GerenciamentoDeObras from "./pages/GerenciamentoDeObras";
+
 import User from "./pages/UserData";
 
 import { AuthProvider, AuthContext } from "./contexts/auth";
@@ -205,6 +207,7 @@ function Rotas(){
                     <Route path="/todo-list" element={<Private><ToDoList /></Private>}></Route>
                     <Route path="/obras" element={<Private><ConsultaObras /></Private>}></Route>
                     <Route path="/user" element={<Private><User/></Private>}></Route>
+                    <Route path="/gerenciar-obras" element={<Private><GerenciamentoDeObras/></Private>}></Route>
                 </Routes>
             </AuthProvider>
         </BrowserRouter>

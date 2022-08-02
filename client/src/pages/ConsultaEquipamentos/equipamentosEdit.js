@@ -40,6 +40,7 @@ function EditarEquipamentos(){
             desceqp_dataultpreco: equipamentoFiltrado[0].desceqp_dataultpreco,
             desceqp_capacidadeprod: equipamentoFiltrado[0].desceqp_capacidadeprod,
             desceqp_comentario: equipamentoFiltrado[0].desceqp_comentario,
+            desceqp_moeda: equipamentoFiltrado[0].desceqp_moeda,
         }
     }
 
@@ -73,6 +74,8 @@ function EditarEquipamentos(){
         navigate("/dashboard");
         
     };
+
+    console.log(values)
 
     return(
         <div className="container position-relative">

@@ -1,7 +1,7 @@
 // IMPORTA O SEQUELIZE DO DB PARA ENVIAR DADOS
 const db = require('./db')
 
-
+const PostSetorEqp = require('./PostSetorEqp')
 
 // Post() = Insere dados na table
 // DEFINE A TABLE PARA INSERÇÃO DE DADOS E OS TIPOS DE DADOS DE CADA COLUMN
@@ -42,10 +42,17 @@ const Post = db.sequelize.define('descricao_equipamentos', {
     },
     fornecedor_idfk: {
         type: db.Sequelize.INTEGER
+    },
+    desceqp_moeda: {
+        type: db.Sequelize.STRING
     }
 });
 
-
+PostSetorEqp.belongsTo(Post, {
+    foreignKey: 'equipamentos_equipamento',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE'
+})
 
 // EXPORTA A FUNÇÃO Post()
 module.exports = Post

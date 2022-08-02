@@ -125,7 +125,7 @@ function FiltraEquipamentos() {
             <div style={{ padding: '2rem' }}>
                 <form style={formStyle} >
                     <div className="w-100 m-0 row d-flex flex-row justify-content-around">
-                        <div className="p-2 col-md-3 mb-3">
+                        {/* <div className="p-2 col-md-3 mb-3">
                             <input
                                 style={inputStyle}
                                 type='search'
@@ -140,7 +140,7 @@ function FiltraEquipamentos() {
                             >
                                 Filtrar...
                             </button>
-                        </div>
+                        </div> */}
                         <div className="p-2 col-md-3 mb-3">
                             <input
                                 style={inputStyle}
@@ -160,7 +160,7 @@ function FiltraEquipamentos() {
                     </div>
                 </form>
             </div>
-            {pesquisarFornecedor && (
+            {/* {pesquisarFornecedor && (
                 <div>
                     {dataFiltradoFornecedor.map(value => (
                         <div key={value.id}>
@@ -176,7 +176,7 @@ function FiltraEquipamentos() {
                                     <p>• Marca: {marcas2[increment]}</p>
                                     <p>• Dados elétricos: {value.desceqp_consumoene + ''}</p>
                                     <p>• Tipo de consumo: {value.desceqp_consumotipo + ''}</p>
-                                    <p>• Preço: {value.desceqp_precoeqp + ''}</p>
+                                    <p>• Preço: {value.desceqp_precoeqp + ''} - {value.desceqp_moeda + ''}</p>
                                     <p>• Data do último preço: {value.desceqp_dataultpreco.split('-').reverse().join('/')}</p>
                                     <p>• Capacidade produtiva: {value.desceqp_capacidadeprod + ''}</p>
                                     <p>• Comentários sobre equipamento: {value.desceqp_comentario + ''}</p>
@@ -191,7 +191,7 @@ function FiltraEquipamentos() {
                         </div>
                     ))}
                 </div>
-            )}
+            )} */}
             {pesquisarEquipamento && (
                 <div>
                     {dataFiltradoNomeEqp.map(value => (
@@ -208,7 +208,7 @@ function FiltraEquipamentos() {
                                     <p>• Marca: {marcas[increment2]}</p>
                                     <p>• Consumo energético: {value.desceqp_consumoene + ''}</p>
                                     <p>• Tipo de consumo: {value.desceqp_consumotipo + ''}</p>
-                                    <p>• Preço: {value.desceqp_precoeqp + ''}</p>
+                                    <p>• Preço: {value.desceqp_precoeqp + ''} - {value.desceqp_moeda + ''}</p>
                                     <p>• Data do último preço: {value.desceqp_dataultpreco.replaceAll('-', '/')}</p>
                                     <p>• Capacidade produtiva: {value.desceqp_capacidadeprod + ''}</p>
                                     <p>• Comentários sobre equipamento: {value.desceqp_comentario + ''}</p>
