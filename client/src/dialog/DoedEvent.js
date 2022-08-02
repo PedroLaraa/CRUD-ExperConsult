@@ -121,7 +121,7 @@ export default function FormDialogAddEvent(value) {
         };
 
         return (
-            <div>
+            <>
                 <FormControl sx={{ m: 2, width: 400 }}>
                     <InputLabel id="demo-multiple-checkbox-label">Setores para notificar: </InputLabel>
                     <Select
@@ -142,7 +142,7 @@ export default function FormDialogAddEvent(value) {
                         ))}
                     </Select>
                 </FormControl>
-            </div>
+            </>
         );
     };
 
@@ -159,8 +159,8 @@ export default function FormDialogAddEvent(value) {
                     onChange={handleChangeValue}
                     type="text"
                     variant="standard"
-                    multiline="true"
-                    minRows={6}
+                    // multiline="true"
+                    // minRows={6}
                 />
                 {/* FIXME TELA FICANDO PRETA QUANDO ADICIONA EVENTO MOTIVOS: MULTILINE ROW PROPERTY AND CSS MUI DIALOG */}
                 <h5 className="pt-5">Notificar: </h5>
