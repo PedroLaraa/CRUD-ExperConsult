@@ -6,12 +6,27 @@ import api from '../../config/configApi';
 
 function GerenciamentoDeObras(){
 
-    const [data, setData] = useState([]);
+    const [obras, setObras] = useState([]);
+
+    const getInfosObras = async (req, res) => {
+        api.get('list-infosObras')
+            .then((response) => {
+                setObras(response.data.value);
+            }).catch((err) => {
+                console.log(err);
+            });
+    };
+
+    useEffect(() => {
+        getInfosObras();
+    }, [])
+
+    
 
     return(
         <>
         <NotificacoesSetor />
-            <h1>GerenciamentoDeObras</h1>
+            
         </>
     )
 
